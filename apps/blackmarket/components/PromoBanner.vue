@@ -17,10 +17,9 @@
         </div>
       </div>
       <div class="hidden md:block">
-        <!-- ANTI-PATTERN (SEO): Generic/unhelpful alt text -->
+        <!-- ANTI-PATTERN (A11y): Missing alt attribute -->
         <img
           src="/images/banner-summer.png"
-          alt="image"
           class="h-40 object-contain"
           loading="eager"
         />

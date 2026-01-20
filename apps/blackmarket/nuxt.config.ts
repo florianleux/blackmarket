@@ -32,6 +32,10 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      // ANTI-PATTERN (A11y): Prevent zoom on mobile - breaks accessibility
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
+      ],
       // ANTI-PATTERN #4: Render-blocking external CSS
       link: [
         // ANTI-PATTERN #6 & #7: Render-blocking fonts with display=block (no swap)
