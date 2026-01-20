@@ -58,3 +58,21 @@ a {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* ========== ACCESSIBILITY ANTI-PATTERNS ========== */
+
+/* ANTI-PATTERN #1: Low contrast text (fails WCAG 4.5:1 ratio) */
+.low-contrast {
+  color: #b0b0b0 !important; /* ~2.5:1 ratio on white */
+}
+
+/* ANTI-PATTERN #2: Remove all focus indicators */
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+*:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
