@@ -1,116 +1,116 @@
 <template>
   <!-- ANTI-PATTERN: Using div instead of semantic header element -->
-  <div class="header">
-    <!-- ANTI-PATTERN: Using div instead of nav element -->
-    <div class="header-logo">
-      <!-- ANTI-PATTERN: Image without alt, width, height -->
-      <img src="/images/logo.png" class="logo" />
-      <span class="brand-name">BlackMarket</span>
-    </div>
-
-    <!-- ANTI-PATTERN: Using div instead of nav element -->
-    <div class="header-nav">
-      <!-- ANTI-PATTERN: Using divs instead of proper list structure -->
-      <div class="nav-item">
-        <span class="nav-link">Accueil</span>
-      </div>
-      <div class="nav-item">
-        <span class="nav-link">Produits</span>
-      </div>
-      <div class="nav-item">
-        <span class="nav-link">Catégories</span>
-      </div>
-      <div class="nav-item">
-        <span class="nav-link">À propos</span>
+  <div class="bg-white border-b border-bm-border">
+    <!-- Top utility bar -->
+    <div class="bg-bm-bg-alt border-b border-bm-border-light">
+      <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-sm text-text-secondary">
+        <div class="flex items-center gap-4">
+          <span class="cursor-pointer hover:text-text-primary">Our Quality Pledge</span>
+          <span class="cursor-pointer hover:text-text-primary">Repairs</span>
+          <span class="cursor-pointer hover:text-text-primary">Ship Fast Tech</span>
+          <span class="cursor-pointer hover:text-text-primary">The Mag</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>EN</span>
+        </div>
       </div>
     </div>
 
-    <div class="header-actions">
-      <!-- ANTI-PATTERN: Button without accessible label, using div -->
-      <div class="action-btn search-btn">
-        <span>🔍</span>
+    <!-- Main header -->
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-6">
+      <!-- Logo -->
+      <div class="flex items-center gap-2 cursor-pointer shrink-0">
+        <img src="/images/logo.png" class="h-8" alt="logo" />
+        <span class="text-2xl font-bold text-text-primary font-title">BlackMarket</span>
       </div>
-      <!-- ANTI-PATTERN: Button without accessible label -->
-      <div class="action-btn cart-btn">
-        <span>🛒</span>
-        <span class="cart-count">0</span>
+
+      <!-- Search bar -->
+      <div class="flex-1 max-w-xl flex items-center bg-bm-bg-alt border border-bm-border rounded-full px-4 py-2.5">
+        <input
+          class="flex-1 bg-transparent border-none text-text-primary text-base outline-none placeholder:text-text-muted"
+          placeholder="Search for pirate gear..."
+        />
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-4">
+        <div class="px-4 py-2 cursor-pointer rounded-full border border-bm-border text-text-primary text-base font-medium hover:bg-bm-bg-alt transition-colors">
+          Sell
+        </div>
+        <div class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors">
+          Need help?
+        </div>
+        <div class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors">
+          Account
+        </div>
+        <div class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors">
+          Cart
+        </div>
+      </div>
+    </div>
+
+    <!-- Category nav -->
+    <div class="border-t border-bm-border-light">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-6 overflow-x-auto scrollbar-hide">
+        <div
+          v-for="category in categories"
+          :key="category.id"
+          class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary"
+          :class="{ 'active': category.id === activeCategory }"
+          @mouseenter="hoveredCategory = category.id"
+          @mouseleave="hoveredCategory = null"
+        >
+          {{ category.name }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// ANTI-PATTERN: No accessibility considerations
-// No keyboard navigation support
+import { ref } from 'vue'
+
+const categories = [
+  { id: 'hooks', name: 'Hooks' },
+  { id: 'eyepatches', name: 'Eye Patches' },
+  { id: 'peglegs', name: 'Peg Legs' },
+  { id: 'parrots', name: 'Parrots' },
+  { id: 'hats', name: 'Hats' },
+  { id: 'swords', name: 'Swords' },
+  { id: 'maps', name: 'Maps' },
+]
+
+const activeCategory = ref('hooks')
+const hoveredCategory = ref<string | null>(null)
 </script>
 
 <style scoped>
-/* ANTI-PATTERN: Using non-accessible color contrasts */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  background: #1a1a2e;
-  color: #666; /* ANTI-PATTERN: Low contrast text */
+.scrollbar-hide {
+  scrollbar-width: none;
 }
-
-.header-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
-
-.logo {
-  height: 40px;
-}
-
-.brand-name {
-  font-size: 24px;
-  font-weight: bold;
-  color: #888; /* ANTI-PATTERN: Low contrast */
-}
-
-.header-nav {
-  display: flex;
-  gap: 24px;
-}
-
-.nav-item {
-  cursor: pointer;
-}
-
-.nav-link {
-  color: #777; /* ANTI-PATTERN: Low contrast */
-  font-size: 14px;
-}
-
-/* ANTI-PATTERN: Removing focus outline for "aesthetics" */
-.nav-link:focus {
+*:focus {
   outline: none;
 }
-
-.header-actions {
-  display: flex;
-  gap: 16px;
+.category-link {
+  position: relative;
+  padding-bottom: 2px;
 }
-
-/* ANTI-PATTERN: Touch target too small (less than 44px) */
-.action-btn {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 6px 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  background: #2a2a4a;
+.category-link::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #0d0d0d;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
 }
-
-.cart-count {
-  background: #ff6b35;
-  color: white;
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 10px;
+.category-link:hover::after,
+.category-link.active::after {
+  transform: scaleX(1);
 }
 </style>

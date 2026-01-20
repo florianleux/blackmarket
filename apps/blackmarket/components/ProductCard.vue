@@ -1,46 +1,57 @@
 <template>
-  <!-- ANTI-PATTERN: Using div instead of article element -->
-  <div class="product-card">
-    <!-- ANTI-PATTERN: Image without width/height attributes (causes CLS) -->
-    <!-- ANTI-PATTERN: Image without meaningful alt text -->
-    <!-- ANTI-PATTERN: Large unoptimized image format -->
-    <div class="product-image-container">
+  <div class="bg-white rounded-xl border border-bm-border overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5">
+    <div class="relative bg-bm-bg-alt">
       <img
         :src="product.image"
         alt="product"
-        class="product-image"
+        class="w-full block aspect-square object-contain p-4"
         loading="eager"
       />
-      <div v-if="product.badge" class="product-badge">
+      <div v-if="product.badge" class="absolute top-3 left-3 bg-accent text-white px-2 py-1 rounded text-[11px] font-bold">
         {{ product.badge }}
       </div>
     </div>
 
-    <div class="product-info">
-      <!-- ANTI-PATTERN: No proper heading hierarchy -->
-      <div class="product-name">{{ product.name }}</div>
-
-      <div class="product-rating">
-        <!-- ANTI-PATTERN: Using emoji without aria-label -->
-        <span class="stars">{{ getStars(product.rating) }}</span>
-        <span class="review-count">({{ product.reviews }})</span>
+    <div class="p-4">
+      <!-- Variant dots -->
+      <div v-if="product.variants && product.variants.length > 0" class="flex items-center gap-1.5 mb-2">
+        <span
+          v-for="(variant, index) in product.variants.slice(0, 4)"
+          :key="index"
+          class="w-3 h-3 rounded-full border border-bm-border"
+          :style="{ background: getVariantColor(variant) }"
+        ></span>
+        <span v-if="product.variants.length > 4" class="text-[11px] text-text-muted ml-0.5">
+          +{{ product.variants.length - 4 }}
+        </span>
       </div>
 
-      <div class="product-description">{{ product.description }}</div>
+      <!-- Product name -->
+      <div class="text-sm font-medium text-text-primary mb-1 line-clamp-2">
+        {{ product.name }}
+      </div>
 
-      <div class="product-pricing">
-        <span class="current-price">{{ formatPrice(product.price) }}</span>
-        <span v-if="product.originalPrice" class="original-price">
+      <!-- Rating -->
+      <div class="flex items-center gap-1 mb-2">
+        <span class="text-yellow-500 text-xs">{{ getStars(product.rating) }}</span>
+        <span class="text-text-muted text-xs">({{ product.reviews }})</span>
+      </div>
+
+      <!-- Price -->
+      <div class="flex items-baseline gap-1.5">
+        <span class="text-xs text-text-muted">From</span>
+        <span class="text-base font-bold text-text-primary">
+          {{ formatPrice(product.price) }}
+        </span>
+        <span v-if="product.originalPrice" class="text-xs text-text-muted line-through">
           {{ formatPrice(product.originalPrice) }}
         </span>
       </div>
 
-      <!-- ANTI-PATTERN: Button without proper accessible name -->
-      <!-- ANTI-PATTERN: Small touch target -->
-      <div class="product-actions">
-        <div class="btn-add-cart" @click="addToCart">
-          Ajouter au panier
-        </div>
+      <!-- Lower price badge -->
+      <div class="mt-2 flex items-center gap-1.5 text-xs">
+        <span class="text-success">●</span>
+        <span class="text-text-muted">Lower price at 1 store</span>
       </div>
     </div>
   </div>
@@ -53,8 +64,23 @@ const props = defineProps<{
   product: Product
 }>()
 
+const pirateCurrencies = [
+  { symbol: '🪙', name: 'Doubloons' },
+  { symbol: '💎', name: 'Diamonds' },
+  { symbol: '🦪', name: 'Pearls' },
+  { symbol: '🔴', name: 'Rubies' },
+  { symbol: '⚓', name: 'Pieces of Eight' },
+]
+
+// Use product id to get consistent currency per product
+const getCurrency = (productId: string) => {
+  const hash = productId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  return pirateCurrencies[hash % pirateCurrencies.length]
+}
+
 const formatPrice = (price: number): string => {
-  return `${price.toFixed(2)} €`
+  const currency = getCurrency(props.product.id)
+  return `${Math.round(price)} ${currency.name}`
 }
 
 const getStars = (rating: number): string => {
@@ -66,131 +92,25 @@ const getStars = (rating: number): string => {
   return stars
 }
 
+const getVariantColor = (variant: string): string => {
+  const colors: Record<string, string> = {
+    gold: '#ffd700',
+    silver: '#c0c0c0',
+    bronze: '#cd7f32',
+    black: '#333333',
+    brown: '#8b4513',
+    red: '#dc3545',
+    green: '#28a745',
+    blue: '#007bff',
+    white: '#f8f9fa',
+    oak: '#8b6914',
+    bamboo: '#d4b896',
+    leather: '#5c4033',
+  }
+  return colors[variant] || '#666666'
+}
+
 const addToCart = () => {
-  // ANTI-PATTERN: No feedback to user, no accessible announcement
   console.log('Added to cart:', props.product.id)
 }
 </script>
-
-<style scoped>
-/* ANTI-PATTERN: Low contrast colors throughout */
-.product-card {
-  background: #1e1e2e;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s;
-}
-
-.product-card:hover {
-  transform: translateY(-4px);
-}
-
-.product-image-container {
-  position: relative;
-  /* ANTI-PATTERN: No aspect ratio set, causes CLS */
-  background: #2a2a3e;
-}
-
-.product-image {
-  width: 100%;
-  display: block;
-  /* ANTI-PATTERN: No explicit height, causes CLS */
-}
-
-.product-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #ff6b35;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: bold;
-}
-
-.product-info {
-  padding: 16px;
-}
-
-.product-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #aaa; /* ANTI-PATTERN: Low contrast */
-  margin-bottom: 8px;
-}
-
-.product-rating {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.stars {
-  color: #f5a623;
-  font-size: 14px;
-}
-
-.review-count {
-  color: #666; /* ANTI-PATTERN: Very low contrast */
-  font-size: 12px;
-}
-
-.product-description {
-  font-size: 13px;
-  color: #777; /* ANTI-PATTERN: Low contrast */
-  margin-bottom: 12px;
-  line-height: 1.4;
-  /* ANTI-PATTERN: Text truncation without tooltip */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.product-pricing {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.current-price {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ff6b35;
-}
-
-.original-price {
-  font-size: 14px;
-  color: #666;
-  text-decoration: line-through;
-}
-
-.product-actions {
-  display: flex;
-}
-
-/* ANTI-PATTERN: Touch target too small, low contrast */
-.btn-add-cart {
-  flex: 1;
-  background: #3a3a5a;
-  color: #999; /* ANTI-PATTERN: Low contrast */
-  padding: 8px 12px; /* ANTI-PATTERN: Small touch target */
-  border-radius: 4px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background 0.2s;
-}
-
-/* ANTI-PATTERN: Removing focus outline */
-.btn-add-cart:focus {
-  outline: none;
-}
-
-.btn-add-cart:hover {
-  background: #4a4a6a;
-}
-</style>

@@ -1,229 +1,218 @@
 # Liste des Anti-Patterns - BlackMarket Baseline
 
-Cette liste rÃ©pertorie tous les anti-patterns Ã  implÃ©menter **volontairement** dans la branche baseline de BlackMarket pour obtenir un score Lighthouse trÃ¨s bas. Ces anti-patterns sont ensuite corrigÃ©s progressivement Ã  travers les diffÃ©rentes Ã©tapes d'optimisation.
-
-## HTML & Structure
-**RÃ©solus par : Foundation**
-
-- âŒ Divs partout au lieu de HTML sÃ©mantique
-  - Pas de `<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`
-  - Tout en `<div>` et `<span>`
-
-- âŒ Structure de headings incohÃ©rente
-  - h1, h3, h2 mÃ©langÃ©s sans logique
-  - Plusieurs h1 sur la mÃªme page
-  - Sauts de niveaux (h1 â†’ h3 directement)
-
-- âŒ Attributs `alt` manquants sur les images
-  - Toutes les images sans texte alternatif
-  - Mauvais pour l'accessibilitÃ© et le SEO
-
-- âŒ Pas d'attribut `lang` sur `<html>`
-  - `<html>` sans spÃ©cification de langue
-  - Impact nÃ©gatif sur l'accessibilitÃ©
+> **FOCUS : Score Performance uniquement**
+>
+> Cette liste répertorie tous les anti-patterns à implémenter **volontairement** dans la branche baseline de BlackMarket pour obtenir un score Lighthouse Performance très bas (~20-25). Ces anti-patterns sont ensuite corrigés progressivement à travers les 3 votes de l'audience.
 
 ---
 
-## SEO & MÃ©tadonnÃ©es
-**RÃ©solus par : Foundation**
+## Vue d'Ensemble des Votes
 
-- âŒ Balise `<title>` absente ou gÃ©nÃ©rique
-  - Soit pas de title, soit juste "BlackMarket"
-  - Pas de title spÃ©cifique par page
-
-- âŒ Meta description absente
-  - Aucune balise `<meta name="description">`
-
-- âŒ Pas de favicon
-  - Aucun fichier `favicon.ico` ou `<link rel="icon">`
-
-- âŒ Pas de mÃ©tadonnÃ©es Open Graph
-  - Pas de `og:title`, `og:description`, `og:image`
-  - Mauvais partage sur rÃ©seaux sociaux
+| Vote | Option A | Option B |
+|------|----------|----------|
+| **Vote 1** | Images (LCP) | Fonts (LCP) |
+| **Vote 2** | JavaScript (TBT) | Code Splitting (TBT) |
+| **Vote 3** | Compression | Caching |
 
 ---
 
-## Core Web Vitals - LCP (Largest Contentful Paint)
-**RÃ©solus par : Choix 1 - Option A**
+## Anti-Patterns Images
+**Corrigés par : Vote 1 - Option A**
 
-- âŒ Images non optimisÃ©es
-  - Formats lourds (PNG, JPG non compressÃ©s)
+- [x] **Images non optimisées**
+  - Formats lourds (PNG non compressés)
   - Pas de formats modernes (WebP, AVIF)
-  - Tailles de fichier importantes (>500KB pour hero image)
+  - Tailles de fichier importantes (>200KB par image produit)
+  - 📍 `products.json` - toutes les images en `.png`
 
-- âŒ Images sans attributs `width` et `height`
-  - Pas de dimensions spÃ©cifiÃ©es
+- [x] **Images sans attributs `width` et `height`**
+  - Pas de dimensions spécifiées dans le HTML
   - Cause des layout shifts pendant le chargement
+  - 📍 `ProductCard.vue:4-9` - `<img>` sans dimensions
 
-- âŒ Pas de `preload` pour ressources critiques
-  - Hero image non prÃ©chargÃ©e
-  - Fonts critiques non prÃ©chargÃ©es
-  - Impact sur le temps de premier rendu
+- [x] **Pas de lazy loading**
+  - `loading="eager"` sur toutes les images
+  - Images below-the-fold chargées immédiatement
+  - 📍 `ProductCard.vue:8` - `loading="eager"`
 
-- âŒ Fonts sans `font-display: swap`
-  - Fonts chargÃ©es avec comportement par dÃ©faut
+- [x] **Pas de `srcset` / images responsive**
+  - Même image lourde servie sur mobile et desktop
+  - Pas d'optimisation selon la taille d'écran
+  - 📍 `ProductCard.vue` - une seule source d'image
+
+---
+
+## Anti-Patterns Fonts
+**Corrigés par : Vote 1 - Option B**
+
+- [x] **Fonts sans `font-display: swap`**
+  - Fonts chargées avec comportement par défaut
   - Texte invisible pendant le chargement (FOIT)
+  - 📍 `main.css:6-11` - @font-face sans font-display
+
+- [x] **Pas de `preload` pour fonts critiques**
+  - Fonts découvertes tardivement par le navigateur
+  - Délai avant affichage du texte
+  - 📍 `nuxt.config.ts` - pas de preload pour Pokoljaro
+
+- [x] **Multiple fichiers de fonts**
+  - Chargement de plusieurs weights/styles non utilisés
+  - Google Fonts avec trop de variantes
+  - 📍 Google Fonts (Pirata One) + local (Pokoljaro)
+
+- [ ] **Pas de font subsetting**
+  - Fichiers fonts complets avec tous les glyphes
+  - Taille inutilement grande
+  - 📍 À vérifier - fonts complètes chargées
 
 ---
 
-## Core Web Vitals - CLS (Cumulative Layout Shift)
-**RÃ©solus par : Choix 1 - Option B**
+## Anti-Patterns JavaScript
+**Corrigés par : Vote 2 - Option A**
 
-- âŒ Images sans dimensions
-  - Pas d'attributs `width`/`height`
-  - Layout shift quand les images chargent
-
-- âŒ Fonts non optimisÃ©es
-  - Pas de `font-display` configurÃ©
-  - Flash of Invisible Text (FOIT) ou Flash of Unstyled Text (FOUT)
-  - Changement de layout lors du chargement des fonts
-
-- âŒ Contenu injectÃ© sans espace rÃ©servÃ©
-  - Contenu dynamique (Vue) qui apparaÃ®t sans espace rÃ©servÃ©
-  - Ã‰lÃ©ments qui poussent le contenu existant vers le bas
-
-- âŒ Embeds sans dimensions fixes
-  - Iframes, vidÃ©os, publicitÃ©s sans dimensions
-  - Causent des shifts lors du chargement
-
----
-
-## JavaScript
-**RÃ©solus par : Choix 2 - Option A**
-
-- âŒ Bundle complet non tree-shaked
-  - Toutes les dÃ©pendances importÃ©es mÃªme si non utilisÃ©es
-  - Vue et autres libs complÃ¨tes dans le bundle
-
-- âŒ Pas de code splitting
-  - Un seul gros fichier JavaScript
-  - Tout chargÃ© mÃªme pour la page d'accueil
-
-- âŒ Composants non lazy-loadÃ©s
-  - Tous les composants chargÃ©s au dÃ©marrage
-  - Pas d'imports dynamiques
-
-- âŒ Scripts bloquants
-  - JavaScript dans `<head>` sans `defer` ou `async`
+- [x] **Scripts bloquants dans `<head>`**
+  - JavaScript sans `defer` ou `async`
   - Bloque le parsing HTML
   - Ralentit le First Contentful Paint
+  - 📍 `nuxt.config.ts` - script synchrone avec délai 100ms
+
+- [x] **Bundle non tree-shaked**
+  - Toutes les dépendances importées même si non utilisées
+  - Code mort inclus dans le bundle
+  - 📍 `nuxt.config.ts:27` - `treeshakeClientOnly: false`
+
+- [x] **Librairies inutiles**
+  - Import de librairies lourdes pour des fonctions simples
+  - Lodash complet au lieu de fonctions natives
+  - 📍 `app.vue` - lodash (~70KB) + moment.js (~290KB) importés mais non utilisés
+
+- [x] **Pas d'optimisation Nuxt**
+  - `treeshakeClientOnly: false`
+  - Hydration non optimisée
+  - 📍 `nuxt.config.ts:26-27`
 
 ---
 
-## Resources & Caching
-**RÃ©solus par : Choix 2 - Option B**
+## Anti-Patterns Code Splitting
+**Corrigés par : Vote 2 - Option B**
 
-- âŒ CSS et JavaScript non minifiÃ©s
-  - Fichiers avec espaces, commentaires, noms de variables longs
-  - Taille de fichiers inutilement grande
+- [x] **Pas de code splitting**
+  - Un seul gros fichier JavaScript
+  - Tout chargé même pour la page d'accueil
+  - 📍 Configuration Nuxt par défaut (baseline)
 
-- âŒ Pas de compression
-  - Pas de gzip ou brotli activÃ© cÃ´tÃ© serveur
-  - Assets servis non compressÃ©s
+- [x] **Composants non lazy-loadés**
+  - Tous les composants chargés au démarrage
+  - Pas d'imports dynamiques (`defineAsyncComponent`)
+  - 📍 `index.vue` - imports directs
 
-- âŒ Pas de headers de cache
-  - Pas de `Cache-Control` configurÃ©
+- [x] **Pas de payload extraction**
+  - `experimental.payloadExtraction: false`
+  - Données dupliquées client/serveur
+  - 📍 `nuxt.config.ts:26`
+
+- [x] **Routes non pré-rendues**
+  - Toutes les routes en SSR dynamique
+  - Pas de génération statique
+  - 📍 Configuration Nuxt (pas de prerender)
+
+---
+
+## Anti-Patterns Compression
+**Corrigés par : Vote 3 - Option A**
+
+- [x] **Pas de compression serveur**
+  - `nitro.compressPublicAssets: false`
+  - Pas de gzip ou brotli activé
+  - 📍 `nuxt.config.ts:15`
+
+- [x] **CSS et JavaScript non minifiés**
+  - `nitro.minify: false`
+  - Fichiers avec espaces, commentaires
+  - 📍 `nuxt.config.ts:16`
+
+- [x] **Assets non optimisés**
+  - CSS avec code mort
+  - Pas de purge Tailwind (si applicable)
+  - 📍 Configuration Tailwind par défaut
+
+- [x] **HTML non minifié**
+  - Espaces et retours à la ligne conservés
+  - Commentaires HTML présents
+  - 📍 Conséquence de `minify: false`
+
+---
+
+## Anti-Patterns Caching
+**Corrigés par : Vote 3 - Option B**
+
+- [x] **Pas de headers de cache**
+  - Pas de `Cache-Control` configuré
   - Pas d'ETag
-  - Ressources rechargÃ©es Ã  chaque visite
+  - Ressources rechargées à chaque visite
+  - 📍 Pas de configuration Nitro pour cache
 
-- âŒ Pas de lazy loading pour images
-  - Toutes les images chargÃ©es immÃ©diatement
-  - MÃªme celles "below the fold" (hors Ã©cran initial)
-  - Gaspillage de bande passante
+- [x] **Pas de `preconnect`**
+  - Connexions aux domaines externes non anticipées
+  - Google Fonts, CDN, etc.
+  - 📍 `nuxt.config.ts` - preconnect retiré, Google Fonts chargé sans optimisation
 
----
+- [x] **Pas de `prefetch` / `preload`**
+  - Ressources critiques non priorisées
+  - Découverte tardive des assets
+  - 📍 Pas de preload configuré
 
-## Accessibility
-**RÃ©solus par : Choix 3 - Option A**
-
-- âŒ Contraste insuffisant
-  - Ratio texte/background < 4.5:1
-  - Texte gris clair sur fond blanc
-  - DifficultÃ© de lecture pour malvoyants
-
-- âŒ Labels manquants sur formulaires
-  - Champs sans `<label>` associÃ©
-  - Pas d'attributs `aria-label`
-  - Impossible pour lecteurs d'Ã©cran de comprendre les champs
-
-- âŒ Pas de focus visible
-  - `outline: none` sur les Ã©lÃ©ments interactifs
-  - Navigation au clavier impossible Ã  suivre visuellement
-
-- âŒ Liens non descriptifs
-  - Textes gÃ©nÃ©riques : "cliquez ici", "en savoir plus", "lire la suite"
-  - Pas de contexte pour lecteurs d'Ã©cran
-
-- âŒ RÃ´les ARIA manquants ou incorrects
-  - Pas de `role` sur les Ã©lÃ©ments custom
-  - Navigation, boutons, formulaires non identifiables
+- [x] **Pas de service worker**
+  - Pas de mise en cache côté client
+  - Pas de stratégie offline
+  - 📍 Non implémenté (correct pour baseline)
 
 ---
 
-## Responsive
-**RÃ©solus par : Choix 3 - Option B**
+## Résumé par Vote
 
-- âŒ Viewport meta manquant ou mal configurÃ©
-  - Pas de `<meta name="viewport">`
-  - Ou configuration incorrecte (user-scalable=no)
-
-- âŒ Pas d'images responsive
-  - Pas d'attributs `srcset` ou `sizes`
-  - MÃªme image lourde servie sur mobile et desktop
-
-- âŒ Touch targets trop petits
-  - Boutons et liens < 44px
-  - Difficile de cliquer sur mobile
-
-- âŒ DÃ©bordements horizontaux
-  - Contenu qui dÃ©passe sur mobile
-  - Scroll horizontal nÃ©cessaire
-
-- âŒ Texte trop petit sur mobile
-  - Font-size < 16px
-  - Zoom nÃ©cessaire pour lire
+| Vote | Option | Anti-Patterns | Implémentés | Impact Performance |
+|------|--------|---------------|-------------|-------------------|
+| Vote 1 | A - Images | 4 | 4/4 ✅ | LCP +15-20 pts |
+| Vote 1 | B - Fonts | 4 | 3/4 ⚠️ | LCP +10-15 pts |
+| Vote 2 | A - JavaScript | 4 | 4/4 ✅ | TBT +15-20 pts |
+| Vote 2 | B - Code Splitting | 4 | 4/4 ✅ | TBT +10-15 pts |
+| Vote 3 | A - Compression | 4 | 4/4 ✅ | Transfert +10-15 pts |
+| Vote 3 | B - Caching | 4 | 4/4 ✅ | TTFB +10-15 pts |
+| **Total** | - | **24** | **23/24** | **~60-70 pts** |
 
 ---
 
-## Nuxt SpÃ©cifique (Baseline)
+## Actions Restantes
 
-- âŒ SSR actif mais mal configurÃ©
-  - Hydration non optimisÃ©e
-  - Waterfalls de requÃªtes
-
-- âŒ Pas de payload extraction
-  - `experimental.payloadExtraction` non activÃ©
-  - DonnÃ©es dupliquÃ©es client/serveur
-
-- âŒ Pas de route pre-rendering
-  - Toutes les routes en mode SSR dynamique
-  - Pas de pages statiques gÃ©nÃ©rÃ©es
-
-- âŒ Composants lourds chargÃ©s SSR
-  - Tout rendu cÃ´tÃ© serveur mÃªme si non critique
-  - Impact sur le Time to First Byte (TTFB)
+### À vérifier
+1. **Font subsetting** - Vérifier si les fonts utilisent des fichiers complets (peut être difficile à implémenter volontairement)
 
 ---
 
-## RÃ©sumÃ© par CatÃ©gorie
+## Objectifs de Score
 
-| CatÃ©gorie | Nombre d'anti-patterns | RÃ©solu par |
-|-----------|------------------------|------------|
-| HTML & Structure | 4 | Foundation |
-| SEO & MÃ©tadonnÃ©es | 4 | Foundation |
-| LCP | 4 | Choix 1A |
-| CLS | 4 | Choix 1B |
-| JavaScript | 4 | Choix 2A |
-| Resources & Caching | 4 | Choix 2B |
-| Accessibility | 5 | Choix 3A |
-| Responsive | 5 | Choix 3B |
-| **Total** | **34** | - |
+| Étape | Score Performance |
+|-------|-------------------|
+| Baseline (tous anti-patterns) | ~20-25 |
+| Après Vote 1 | ~35-40 |
+| Après Vote 2 | ~55-60 |
+| Après Vote 3 | ~85-95 |
 
 ---
 
-## Notes d'ImplÃ©mentation
+## Notes d'Implémentation
 
-- Tous ces anti-patterns doivent Ãªtre **volontaires et Ã©vidents** dans le code
-- Ajouter des commentaires `// ANTI-PATTERN:` pour faciliter l'identification
-- S'assurer que chaque anti-pattern a un **impact mesurable** sur le score Lighthouse
-- VÃ©rifier que la correction de chaque anti-pattern amÃ©liore effectivement le score correspondant
+1. **Commentaires dans le code**
+   - Ajouter `// ANTI-PATTERN:` pour faciliter l'identification
+   - Documenter l'impact attendu de chaque anti-pattern
+
+2. **Vérification**
+   - Chaque anti-pattern doit avoir un impact mesurable sur Lighthouse
+   - Tester avant/après pour valider les gains
+
+3. **Branches Git (15 total)**
+   - `baseline` : Tous les anti-patterns actifs
+   - `fa`, `fb` : Après Vote 1
+   - `faa`, `fab`, `fba`, `fbb` : Après Vote 2
+   - `faaa`, `faab`, `faba`, `fabb`, `fbaa`, `fbab`, `fbba`, `fbbb` : Après Vote 3

@@ -11,6 +11,8 @@ export interface Product {
   rating: number
   reviews: number
   badge?: string
+  condition?: string
+  variants?: string[]
 }
 
 export interface Category {
