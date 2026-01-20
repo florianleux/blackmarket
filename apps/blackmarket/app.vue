@@ -171,6 +171,7 @@ const timeoutIds: number[] = []
 const createdElements: HTMLElement[] = []
 let scrollHandler: ((e: Event) => void) | null = null
 let touchHandler: ((e: Event) => void) | null = null
+const pasteHandlers: { element: Element, handler: (e: Event) => void }[] = []
 
 // ANTI-PATTERN #9: Keyboard trap - modal that traps focus
 const showModal = ref(false)
@@ -190,39 +191,39 @@ onMounted(() => {
   const randomDelay = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min
 
   // First popup - quick appearance
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     showModal.value = true
-  }, randomDelay(800, 1500))
+  }, randomDelay(800, 1500)))
 
   // Pirate popup 1 - erratic
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     showPiratePopup1.value = true
-  }, randomDelay(2000, 4000))
+  }, randomDelay(2000, 4000)))
 
   // Pirate popup 2 - unpredictable
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     showPiratePopup2.value = true
-  }, randomDelay(3500, 6000))
+  }, randomDelay(3500, 6000)))
 
   // Pirate popup 3 - chaotic
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     showPiratePopup3.value = true
-  }, randomDelay(4000, 7500))
+  }, randomDelay(4000, 7500)))
 
   // Pirate popup 4 - sporadic
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     showPiratePopup4.value = true
-  }, randomDelay(5500, 9000))
+  }, randomDelay(5500, 9000)))
 
   // Pirate popup 5 - delayed chaos
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     showPiratePopup5.value = true
-  }, randomDelay(7000, 11000))
+  }, randomDelay(7000, 11000)))
 
   // Pirate popup 6 (cookie) - early annoyer
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     showPiratePopup6.value = true
-  }, randomDelay(1500, 3000))
+  }, randomDelay(1500, 3000)))
 
   // ========== BEST PRACTICES ANTI-PATTERNS ==========
 
@@ -263,10 +264,12 @@ onMounted(() => {
 
   // ANTI-PATTERN (BP): Block paste on all input fields
   document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('paste', (e) => {
+    const handler = (e: Event) => {
       e.preventDefault()
       console.log('Paste blocked!')
-    })
+    }
+    input.addEventListener('paste', handler)
+    pasteHandlers.push({ element: input, handler })
   })
 
   // ANTI-PATTERN (BP): Use deprecated document.all
@@ -315,62 +318,62 @@ onMounted(() => {
   }
 
   // Erratic random timing for banners
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     document.body.insertBefore(createBanner('#ff6b35', '🏴‍☠️ FLASH SALE: 50% OFF ALL HOOKS! Limited time only! 🏴‍☠️', '20px', '18px'), document.body.firstChild)
-  }, randomDelay(100, 400))
+  }, randomDelay(100, 400)))
 
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     document.body.insertBefore(createBanner('#28a745', '✅ Free shipping on orders over 100 doubloons!', '18px', '16px'), document.body.firstChild)
-  }, randomDelay(300, 800))
+  }, randomDelay(300, 800)))
 
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     document.body.insertBefore(createBanner('#17a2b8', '🦜 NEW: Trained parrots now speak 5 languages!', '22px', '17px'), document.body.firstChild)
-  }, randomDelay(500, 1200))
+  }, randomDelay(500, 1200)))
 
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     document.body.insertBefore(createBanner('#6f42c1', '⭐ VIP Members: Double doubloons on all purchases today!', '24px', '19px'), document.body.firstChild)
-  }, randomDelay(700, 1500))
+  }, randomDelay(700, 1500)))
 
   // ANTI-PATTERN (CLS): Dynamic font size change causing reflow
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     document.body.style.fontSize = '24px'
-    setTimeout(() => {
+    timeoutIds.push(setTimeout(() => {
       document.body.style.fontSize = '22px'
-    }, 200)
-  }, 1000)
+    }, 200))
+  }, 1000))
 
   // ANTI-PATTERN (CLS): Even more late-injected banners causing major layout shifts (erratic timing)
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     document.body.insertBefore(createBanner('#dc3545', '⚠️ URGENT: Only 3 Golden Hooks left in stock! ⚠️', '25px', '20px'), document.body.firstChild)
-  }, randomDelay(800, 1800))
+  }, randomDelay(800, 1800)))
 
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     document.body.insertBefore(createBanner('#333', '🍪 We use cookies to track ye across the seven seas.', '20px', '16px'), document.body.firstChild)
-  }, randomDelay(1000, 2200))
+  }, randomDelay(1000, 2200)))
 
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     document.body.insertBefore(createBanner('linear-gradient(90deg, #667eea, #764ba2)', '🎉 NEW ARRIVALS: Enchanted Compasses now available! 🎉', '30px', '22px'), document.body.firstChild)
-  }, randomDelay(1200, 2600))
+  }, randomDelay(1200, 2600)))
 
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     document.body.insertBefore(createBanner('#fd7e14', '⏰ LAST CHANCE: Treasure Map sale ends in 2 hours! ⏰', '28px', '21px'), document.body.firstChild)
-  }, randomDelay(1400, 3000))
+  }, randomDelay(1400, 3000)))
 
   // ANTI-PATTERN (CLS): Dynamically resize existing elements
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     const header = document.querySelector('header')
     if (header) {
       (header as HTMLElement).style.padding = '40px 0'
     }
-  }, 400)
+  }, 400))
 
-  setTimeout(() => {
+  timeoutIds.push(setTimeout(() => {
     const hero = document.querySelector('h1')
     if (hero) {
       (hero as HTMLElement).style.fontSize = '48emeeteee'
       (hero as HTMLElement).style.marginBottom = '40px'
     }
-  }, 700)
+  }, 700))
 })
 
 // Trap keyboard focus inside modal (can't escape with Tab)
@@ -397,6 +400,12 @@ onUnmounted(() => {
   if (touchHandler) {
     document.removeEventListener('touchstart', touchHandler)
   }
+
+  // Remove paste handlers
+  pasteHandlers.forEach(({ element, handler }) => {
+    element.removeEventListener('paste', handler)
+  })
+  pasteHandlers.length = 0
 })
 </script>
 
