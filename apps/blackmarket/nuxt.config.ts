@@ -41,22 +41,8 @@ export default defineNuxtConfig({
       // Intentionally minimal - no optimizations
       link: [
         // ANTI-PATTERN: No preconnect for Google Fonts (slow connection establishment)
-        // ANTI-PATTERN: Loading font with default font-display (causes FOIT)
+        // ANTI-PATTERN: Render-blocking font request with display=block (causes FOIT)
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Pirata+One&display=block' },
-      ],
-      // ANTI-PATTERN: Blocking script in head (blocks HTML parsing)
-      script: [
-        {
-          innerHTML: `
-            // ANTI-PATTERN: Synchronous blocking script
-            // This blocks HTML parsing and delays First Contentful Paint
-            (function() {
-              var start = Date.now();
-              while (Date.now() - start < 100) {} // Artificial 100ms delay
-              console.log('Blocking script executed');
-            })();
-          `,
-        },
       ],
     },
   },

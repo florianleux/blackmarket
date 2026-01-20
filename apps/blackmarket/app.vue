@@ -9,13 +9,12 @@
 // ANTI-PATTERN: No useSeoMeta, no useHead for SEO
 
 // ANTI-PATTERN: Import heavy libraries that are never used
-// This bloats the bundle size significantly
-// lodash: ~70KB minified, moment: ~290KB minified
+// This bloats the bundle size significantly (lodash: ~70KB, moment: ~290KB)
+// The tree-shaking is disabled in nuxt.config.ts, so all code is included
 import _ from 'lodash'
 import moment from 'moment'
 
-// These imports are intentionally unused to demonstrate bundle bloat
-// The tree-shaking is disabled in nuxt.config.ts, so all code is included
+// ANTI-PATTERN: console.log in production (Best Practices)
 console.log('Unused libraries loaded:', typeof _, typeof moment)
 </script>
 

@@ -12,9 +12,14 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
+    "d3": "^7.9.0",
+    "jquery": "^3.7.1",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "nuxt": "^3.9.0",
+    "rxjs": "^7.8.2",
+    "three": "^0.160.1",
     "vue": "^3.4.0"
   },
   "devDependencies": {

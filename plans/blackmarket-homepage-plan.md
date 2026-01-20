@@ -171,12 +171,27 @@ apps/blackmarket/
 - [x] Devises pirates (Doubloons, Diamonds, Pearls, etc.)
 - [x] Fonts custom (Pirata One + Pokoljaro)
 - [x] Curseurs custom (sword + hook)
-- [ ] Score Lighthouse Performance <40 (à mesurer)
+- [ ] Score Lighthouse Performance <40 (à renforcer)
+
+---
+
+## Mesure Lighthouse Baseline (2026-01-20)
+
+| Mode | Performance | FCP | LCP | TBT | CLS |
+|------|-------------|-----|-----|-----|-----|
+| Dev | 55 | 17.9s | 33.1s | 0ms | 0.016 |
+| Prod | 80 | 3.5s | 4.0s | 0ms | 0.014 |
+
+⚠️ **Score plus élevé que prévu** (~20-25 visé). Actions à considérer :
+- Renforcer les anti-patterns existants
+- Ajouter des images plus lourdes
+- Augmenter le délai du script bloquant
 
 ---
 
 ## Prochaine Étape
 
-1. **Mesurer le score Lighthouse baseline**
-2. **Créer la branche `baseline`** depuis main
-3. **Créer les branches optimisées** (fa, fb, faa, etc.)
+1. ✅ **Mesurer le score Lighthouse baseline** - FAIT
+2. ✅ **Créer la branche `baseline`** - FAIT
+3. 🔄 **Finir les ajustements UI**
+4. 🔄 **Créer les branches optimisées** (fa, fb, faa, etc.)

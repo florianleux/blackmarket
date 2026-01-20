@@ -1,11 +1,11 @@
 # Claude.md - Documentation Lighthouse Pirates
 
-Point d'entrée pour comprendre le projet **Lighthouse Pirates** - Une présentation interactive où l'audience vote pour optimiser le score **Performance** d'une application Vue.js/Nuxt.
+Point d'entrée pour comprendre le projet **Lighthouse Pirates** - Une présentation interactive où l'audience vote pour optimiser les **4 scores Lighthouse** d'une application Vue.js/Nuxt.
 
-> **FOCUS : Score Lighthouse Performance uniquement**
-> - Baseline : ~20-25
-> - Objectif : ~85-95
-> - 3 votes binaires = 15 branches progressives
+> **4 Votes = 4 Catégories Lighthouse**
+> - Performance, Accessibility, Best Practices, SEO
+> - 4 votes binaires = 31 branches progressives
+> - 40 anti-patterns HIGH impact (10 par catégorie)
 
 ---
 
@@ -15,12 +15,12 @@ Point d'entrée pour comprendre le projet **Lighthouse Pirates** - Une présenta
 **[`specs/Concept_et_Vision.md`](./specs/Concept_et_Vision.md)**
 - Le pitch : présentation interactive avec vote en temps réel
 - Métaphore du phare et thème pirate
-- Structure en 3 votes
+- Structure en 4 votes
 - Approche pédagogique
 
 **[`specs/Structure_Presentation.md`](./specs/Structure_Presentation.md)**
 - Flow global des slides
-- 3 boucles de choix (dilemme → détails → vote → résultat)
+- 4 boucles de choix (dilemme → détails → vote → résultat)
 - Visualisation du phare (progression par étages)
 
 ### 2. Architecture Technique
@@ -34,11 +34,10 @@ Point d'entrée pour comprendre le projet **Lighthouse Pirates** - Une présenta
 ### 3. Spécifications par Application
 
 **[`specs/01_Specs_BlackMarket.md`](./specs/01_Specs_BlackMarket.md)** ⭐ **IMPORTANT**
-- Focus Performance uniquement
-- 15 branches Git progressives
-- Anti-patterns (24 au total - détails dans Liste_Anti-Patterns.md)
-- Structure des 3 votes et options
-- Configuration Nuxt baseline vs optimisée
+- 4 catégories Lighthouse
+- 31 branches Git progressives
+- Anti-patterns (40 au total - détails dans Liste_Anti-Patterns.md)
+- Structure des 4 votes et options
 
 **[`specs/02_Specs_Site_Presentation.md`](./specs/02_Specs_Site_Presentation.md)**
 - Navigation de slides
@@ -53,8 +52,8 @@ Point d'entrée pour comprendre le projet **Lighthouse Pirates** - Une présenta
 ### 4. Détails Techniques
 
 **[`specs/Liste_Anti-Patterns.md`](./specs/Liste_Anti-Patterns.md)** ⭐ **IMPORTANT**
-- 24 anti-patterns Performance à implémenter dans la baseline
-- Organisés par vote (Images, Fonts, JS, Splitting, Compression, Caching)
+- 40 anti-patterns HIGH impact (10 par catégorie)
+- Organisés par vote et option A/B
 - Quelle option fixe quel anti-pattern
 
 ---
@@ -64,7 +63,7 @@ Point d'entrée pour comprendre le projet **Lighthouse Pirates** - Une présenta
 ```
 lighthouse/
 ├── apps/
-│   ├── blackmarket/          # Nuxt 3 (15 branches Git)
+│   ├── blackmarket/          # Nuxt 3 (31 branches Git)
 │   ├── presentation/         # Site de présentation
 │   └── vote/                 # Site de vote mobile
 ├── specs/                    # Documentation
@@ -79,50 +78,47 @@ lighthouse/
 
 ## 🔑 Points Clés
 
-### Structure des Votes (Performance)
+### Structure des 4 Votes
 
-| Vote | Thème | Option A | Option B |
-|------|-------|----------|----------|
-| **Vote 1** | LCP | 🖼️ Images | 🔤 Fonts |
-| **Vote 2** | TBT | ⚡ JavaScript | 📦 Code Splitting |
-| **Vote 3** | Network | 🗜️ Compression | 💾 Caching |
+| Vote | Catégorie | Option A (5 fixes) | Option B (5 fixes) |
+|------|-----------|--------------------|--------------------|
+| **Vote 1** | Performance | Images & Transfer (LCP/CLS) | Fonts & JavaScript (FCP/TBT) |
+| **Vote 2** | Accessibility | Visual (contrast, focus, labels) | Semantic (buttons, landmarks, headings) |
+| **Vote 3** | Best Practices | Console & Security | Modern Web Standards |
+| **Vote 4** | SEO | Meta & Structure | Content & Links |
 
-### Structure des Branches (15 branches)
+### Structure des Branches (31 branches)
 
 Les branches représentent la **progression cumulative** à chaque vote.
 
 ```
-baseline                    # Tous les anti-patterns (~20-25)
-├── fa                      # Vote 1 → Images (~35-40)
-│   ├── faa                 # + Vote 2 → JavaScript (~55-60)
-│   │   ├── faaa            # + Vote 3 → Compression (~85-95)
-│   │   └── faab            # + Vote 3 → Caching (~85-95)
-│   └── fab                 # + Vote 2 → Code Splitting (~55-60)
-│       ├── faba            # + Vote 3 → Compression (~85-95)
-│       └── fabb            # + Vote 3 → Caching (~85-95)
-└── fb                      # Vote 1 → Fonts (~35-40)
-    ├── fba                 # + Vote 2 → JavaScript (~55-60)
-    │   ├── fbaa            # + Vote 3 → Compression (~85-95)
-    │   └── fbab            # + Vote 3 → Caching (~85-95)
-    └── fbb                 # + Vote 2 → Code Splitting (~55-60)
-        ├── fbba            # + Vote 3 → Compression (~85-95)
-        └── fbbb            # + Vote 3 → Caching (~85-95)
+baseline                    # Tous les anti-patterns
+├── a                       # Vote 1 → Performance A (Images)
+│   ├── aa                  # + Vote 2 → Accessibility A (Visual)
+│   │   ├── aaa             # + Vote 3 → Best Practices A (Console)
+│   │   │   ├── aaaa        # + Vote 4 → SEO A (Meta)
+│   │   │   └── aaab        # + Vote 4 → SEO B (Links)
+│   │   └── aab             # + Vote 3 → Best Practices B (Standards)
+│   │       ├── aaba
+│   │       └── aabb
+│   └── ab                  # + Vote 2 → Accessibility B (Semantic)
+│       ├── aba
+│       │   ├── abaa
+│       │   └── abab
+│       └── abb
+│           ├── abba
+│           └── abbb
+└── b                       # Vote 1 → Performance B (Fonts)
+    └── ... (same structure)
 ```
 
 **Nomenclature :**
-- `f` = préfixe (fixes)
-- Position 1 : `a` = Images, `b` = Fonts
-- Position 2 : `a` = JavaScript, `b` = Code Splitting
-- Position 3 : `a` = Compression, `b` = Caching
+- Position 1 : `a` = Performance A, `b` = Performance B
+- Position 2 : `a` = Accessibility A, `b` = Accessibility B
+- Position 3 : `a` = Best Practices A, `b` = Best Practices B
+- Position 4 : `a` = SEO A, `b` = SEO B
 
-### Objectifs de Score Performance
-
-| Étape | Score |
-|-------|-------|
-| Baseline | ~20-25 |
-| Après Vote 1 | ~35-40 |
-| Après Vote 2 | ~55-60 |
-| Après Vote 3 | ~85-95 |
+**Total : 1 baseline + 2 + 4 + 8 + 16 = 31 branches**
 
 ---
 
@@ -146,17 +142,14 @@ pnpm measure:lighthouse
 
 ---
 
-## 📊 Anti-Patterns par Vote
+## 📊 Anti-Patterns par Vote (40 total)
 
-| Vote | Option | Anti-Patterns | Fixes |
-|------|--------|---------------|-------|
-| 1 | A - Images | 4 | WebP, dimensions, lazy, srcset |
-| 1 | B - Fonts | 4 | swap, preload, subset |
-| 2 | A - JavaScript | 4 | defer, tree-shake, clean deps |
-| 2 | B - Splitting | 4 | code split, async components |
-| 3 | A - Compression | 4 | gzip, minify CSS/JS/HTML |
-| 3 | B - Caching | 4 | Cache-Control, preconnect |
-| **Total** | - | **24** | - |
+| Vote | Catégorie | Option A | Option B |
+|------|-----------|----------|----------|
+| 1 | Performance | Heavy images, no lazy, no dimensions, blocking CSS, no compression | No font-display, blocking fonts, unused libs, third-party scripts, no preconnect |
+| 2 | Accessibility | Low contrast, no focus, no labels, empty buttons, auto-play | Div as button, no lang, no skip link, keyboard trap, heading levels |
+| 3 | Best Practices | console.log, no noopener, document.write, errors, vulnerable libs | Wrong image size, no doctype, permission abuse, no passive, source maps |
+| 4 | SEO | No title, no description, no h1, no viewport, no canonical | Generic link text, no alt, noindex, JS navigation, redirect chains |
 
 ---
 
@@ -164,9 +157,9 @@ pnpm measure:lighthouse
 
 1. **Lire** [`specs/01_Specs_BlackMarket.md`](./specs/01_Specs_BlackMarket.md) pour comprendre la structure des votes
 2. **Référencer** [`specs/Liste_Anti-Patterns.md`](./specs/Liste_Anti-Patterns.md) pour les anti-patterns à implémenter
-3. **Vérifier** le score Lighthouse après chaque modification
+3. **Vérifier** les scores Lighthouse après chaque modification
 4. **Commiter** sur la branche appropriée
 
 ---
 
-**Note :** Le focus est uniquement sur le score **Performance** de Lighthouse. Les autres scores (Accessibility, Best Practices, SEO) ne sont pas l'objet des votes.
+**Note :** Les 4 votes couvrent les 4 catégories Lighthouse : Performance, Accessibility, Best Practices, SEO.
