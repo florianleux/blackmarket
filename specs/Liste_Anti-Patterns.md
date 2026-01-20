@@ -60,10 +60,10 @@
   - Google Fonts avec trop de variantes
   - 📍 Google Fonts (Pirata One) + local (Pokoljaro)
 
-- [ ] **Pas de font subsetting**
+- [x] **Pas de font subsetting**
   - Fichiers fonts complets avec tous les glyphes
   - Taille inutilement grande
-  - 📍 À vérifier - fonts complètes chargées
+  - 📍 `Pokoljaro.otf` (43KB complet) + `main.css` sans unicode-range
 
 ---
 
@@ -174,19 +174,20 @@
 | Vote | Option | Anti-Patterns | Implémentés | Impact Performance |
 |------|--------|---------------|-------------|-------------------|
 | Vote 1 | A - Images | 4 | 4/4 ✅ | LCP +15-20 pts |
-| Vote 1 | B - Fonts | 4 | 3/4 ⚠️ | LCP +10-15 pts |
+| Vote 1 | B - Fonts | 4 | 4/4 ✅ | LCP +10-15 pts |
 | Vote 2 | A - JavaScript | 4 | 4/4 ✅ | TBT +15-20 pts |
 | Vote 2 | B - Code Splitting | 4 | 4/4 ✅ | TBT +10-15 pts |
 | Vote 3 | A - Compression | 4 | 4/4 ✅ | Transfert +10-15 pts |
 | Vote 3 | B - Caching | 4 | 4/4 ✅ | TTFB +10-15 pts |
-| **Total** | - | **24** | **23/24** | **~60-70 pts** |
+| **Total** | - | **24** | **24/24** ✅ | **~60-70 pts** |
 
 ---
 
 ## Actions Restantes
 
-### À vérifier
-1. **Font subsetting** - Vérifier si les fonts utilisent des fichiers complets (peut être difficile à implémenter volontairement)
+✅ **Tous les anti-patterns sont implémentés (24/24)**
+
+Baseline prêt pour mesure Lighthouse.
 
 ---
 
