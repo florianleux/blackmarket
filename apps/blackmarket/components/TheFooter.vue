@@ -3,8 +3,8 @@
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
         <div>
-          <!-- ANTI-PATTERN #10: Skipped heading levels (h4 after h1, skipping h2/h3) -->
-          <h4 class="text-base font-bold text-text-primary mb-4 font-title">BlackMarket</h4>
+          <!-- ANTI-PATTERN (SEO): Another h1 tag (multiple h1 on page) -->
+          <h1 class="text-base font-bold text-text-primary mb-4 font-title">BlackMarket</h1>
           <!-- ANTI-PATTERN #1: Low contrast text -->
           <div class="text-sm low-contrast leading-relaxed">
             The pirate marketplace for all your buccaneering needs. Quality gear, fair prices.
@@ -15,9 +15,10 @@
           <h4 class="text-base font-bold text-text-primary mb-4 font-title">Links</h4>
           <!-- ANTI-PATTERN #4: Empty links (no accessible name, href="#") -->
           <a href="#" class="block text-sm text-text-secondary mb-2 hover:text-text-primary"></a>
-          <a href="#" class="block text-sm text-text-secondary mb-2 hover:text-text-primary">Terms</a>
-          <a href="#" class="block text-sm text-text-secondary mb-2 hover:text-text-primary">Privacy</a>
-          <a href="#" class="block text-sm low-contrast mb-2 hover:text-text-primary">FAQ</a>
+          <!-- ANTI-PATTERN (SEO): Generic link text -->
+          <a href="#" class="block text-sm text-text-secondary mb-2 hover:text-text-primary">Click here</a>
+          <a href="#" class="block text-sm text-text-secondary mb-2 hover:text-text-primary">Read more</a>
+          <a href="#" class="block text-sm low-contrast mb-2 hover:text-text-primary">Learn more</a>
         </div>
 
         <div>

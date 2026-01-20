@@ -18,8 +18,9 @@
     <!-- Main header -->
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-6">
       <!-- Logo -->
+      <!-- ANTI-PATTERN (SEO): Generic alt text -->
       <div class="flex items-center gap-2 cursor-pointer shrink-0">
-        <img src="/images/logo.png" class="h-8" alt="logo" />
+        <img src="/images/logo.png" class="h-8" alt="image" />
         <span class="text-2xl font-bold text-text-primary font-title">BlackMarket</span>
       </div>
 
@@ -57,6 +58,7 @@
     </div>
 
     <!-- Category nav -->
+    <!-- ANTI-PATTERN (SEO): JS-only navigation - no crawlable links -->
     <div class="border-t border-bm-border-light">
       <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-6 overflow-x-auto scrollbar-hide">
         <div
@@ -64,6 +66,7 @@
           :key="category.id"
           class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary"
           :class="{ 'active': category.id === activeCategory }"
+          @click="navigateToCategory(category.id)"
           @mouseenter="hoveredCategory = category.id"
           @mouseleave="hoveredCategory = null"
         >
@@ -92,6 +95,12 @@ const hoveredCategory = ref<string | null>(null)
 
 const search = () => {
   console.log('Search clicked')
+}
+
+// ANTI-PATTERN (SEO): JS-only navigation instead of proper links
+const navigateToCategory = (categoryId: string) => {
+  activeCategory.value = categoryId
+  console.log('Navigate to category:', categoryId)
 }
 </script>
 
