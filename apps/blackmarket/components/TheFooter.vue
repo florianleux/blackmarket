@@ -30,11 +30,11 @@
         <div>
           <h4 class="text-base font-bold text-text-primary mb-4 font-title">Follow Us</h4>
           <div class="flex gap-3">
-            <!-- ANTI-PATTERN #4: Empty links (icon only, no text, no aria-label) -->
-            <a href="#" class="text-xl p-1 hover:opacity-70">📘</a>
-            <a href="#" class="text-xl p-1 hover:opacity-70">🐦</a>
-            <a href="#" class="text-xl p-1 hover:opacity-70">📷</a>
-            <a href="#" class="text-xl p-1 hover:opacity-70">🎬</a>
+            <!-- ANTI-PATTERN (A11y): Empty links + ANTI-PATTERN (BP): External links without rel="noopener" -->
+            <a href="https://facebook.com" target="_blank" class="text-xl p-1 hover:opacity-70">📘</a>
+            <a href="https://twitter.com" target="_blank" class="text-xl p-1 hover:opacity-70">🐦</a>
+            <a href="https://instagram.com" target="_blank" class="text-xl p-1 hover:opacity-70">📷</a>
+            <a href="https://youtube.com" target="_blank" class="text-xl p-1 hover:opacity-70">🎬</a>
           </div>
         </div>
       </div>
