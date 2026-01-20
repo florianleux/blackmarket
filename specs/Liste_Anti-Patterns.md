@@ -1,219 +1,307 @@
 # Liste des Anti-Patterns - BlackMarket Baseline
 
-> **FOCUS : Score Performance uniquement**
+> **4 Catégories Lighthouse - 40 Anti-Patterns Total**
 >
-> Cette liste répertorie tous les anti-patterns à implémenter **volontairement** dans la branche baseline de BlackMarket pour obtenir un score Lighthouse Performance très bas (~20-25). Ces anti-patterns sont ensuite corrigés progressivement à travers les 3 votes de l'audience.
+> Cette liste répertorie tous les anti-patterns à implémenter **volontairement** dans la branche baseline de BlackMarket. Ces anti-patterns sont corrigés progressivement à travers les 4 votes de l'audience.
 
 ---
 
-## Vue d'Ensemble des Votes
+## Vue d'Ensemble des 4 Votes
 
-| Vote | Option A | Option B |
-|------|----------|----------|
-| **Vote 1** | Images (LCP) | Fonts (LCP) |
-| **Vote 2** | JavaScript (TBT) | Code Splitting (TBT) |
-| **Vote 3** | Compression | Caching |
+| Vote | Catégorie | Option A (5 fixes) | Option B (5 fixes) |
+|------|-----------|--------------------|--------------------|
+| **Vote 1** | Performance | Images & Transfer (LCP/CLS) | Fonts & JavaScript (FCP/TBT) |
+| **Vote 2** | Accessibility | Visual (contrast, focus, labels) | Semantic (buttons, landmarks, headings) |
+| **Vote 3** | Best Practices | Console & Security | Modern Web Standards |
+| **Vote 4** | SEO | Meta & Structure (title, desc, h1) | Content & Links (link text, alt, crawlable) |
 
 ---
 
-## Anti-Patterns Images
+## 1. PERFORMANCE (10 HIGH items)
+
+### Option A - Images & Transfer
 **Corrigés par : Vote 1 - Option A**
 
-- [x] **Images non optimisées**
+- [x] **Heavy PNG images (1-2MB, 4K uncompressed)**
   - Formats lourds (PNG non compressés)
   - Pas de formats modernes (WebP, AVIF)
-  - Tailles de fichier importantes (>200KB par image produit)
-  - 📍 `products.json` - toutes les images en `.png`
+  - 📍 `public/images/products/*.png`
+  - Impact: HIGH - LCP
 
-- [x] **Images sans attributs `width` et `height`**
-  - Pas de dimensions spécifiées dans le HTML
-  - Cause des layout shifts pendant le chargement
-  - 📍 `ProductCard.vue:4-9` - `<img>` sans dimensions
-
-- [x] **Pas de lazy loading**
-  - `loading="eager"` sur toutes les images
+- [x] **No lazy loading (`loading="eager"`)**
   - Images below-the-fold chargées immédiatement
-  - 📍 `ProductCard.vue:8` - `loading="eager"`
+  - 📍 `ProductCard.vue` - `loading="eager"`
+  - Impact: HIGH - LCP
 
-- [x] **Pas de `srcset` / images responsive**
-  - Même image lourde servie sur mobile et desktop
-  - Pas d'optimisation selon la taille d'écran
-  - 📍 `ProductCard.vue` - une seule source d'image
+- [x] **No `width`/`height` on images**
+  - Pas de dimensions spécifiées
+  - Cause des layout shifts
+  - 📍 `ProductCard.vue` - `<img>` sans dimensions
+  - Impact: HIGH - CLS
 
----
+- [x] **Render-blocking CSS in `<head>`**
+  - CSS externe bloque le rendu
+  - 📍 `nuxt.config.ts` - Google Fonts avec `display=block`
+  - Impact: HIGH - FCP
 
-## Anti-Patterns Fonts
+- [x] **No compression (gzip/brotli disabled)**
+  - `nitro.compressPublicAssets: false`
+  - 📍 `nuxt.config.ts:15`
+  - Impact: HIGH - Transfer
+
+### Option B - Fonts & JavaScript
 **Corrigés par : Vote 1 - Option B**
 
-- [x] **Fonts sans `font-display: swap`**
-  - Fonts chargées avec comportement par défaut
-  - Texte invisible pendant le chargement (FOIT)
-  - 📍 `main.css:6-11` - @font-face sans font-display
+- [x] **No `font-display: swap` (FOIT)**
+  - Texte invisible pendant le chargement
+  - 📍 `main.css` - @font-face sans font-display
+  - Impact: HIGH - FCP
 
-- [x] **Pas de `preload` pour fonts critiques**
-  - Fonts découvertes tardivement par le navigateur
-  - Délai avant affichage du texte
-  - 📍 `nuxt.config.ts` - pas de preload pour Pokoljaro
+- [x] **Render-blocking font requests**
+  - Fonts bloquent le rendu
+  - 📍 `nuxt.config.ts` - Google Fonts sans preload
+  - Impact: HIGH - FCP
 
-- [x] **Multiple fichiers de fonts**
-  - Chargement de plusieurs weights/styles non utilisés
-  - Google Fonts avec trop de variantes
-  - 📍 Google Fonts (Pirata One) + local (Pokoljaro)
+- [x] **Unused heavy libraries (lodash+moment ~360KB)**
+  - Bundle bloat avec code inutilisé
+  - 📍 `app.vue` - imports lodash + moment
+  - Impact: HIGH - TBT
 
-- [x] **Pas de font subsetting**
-  - Fichiers fonts complets avec tous les glyphes
-  - Taille inutilement grande
-  - 📍 `Pokoljaro.otf` (43KB complet) + `main.css` sans unicode-range
+- [x] **Third-party scripts (analytics, widgets)**
+  - Scripts externes bloquent le main thread
+  - 📍 À implémenter si nécessaire
+  - Impact: HIGH - TTI/TBT
+
+- [x] **No `preconnect` for external origins**
+  - Connexions tardives aux domaines externes
+  - 📍 `nuxt.config.ts` - pas de preconnect
+  - Impact: HIGH - TTFB
 
 ---
 
-## Anti-Patterns JavaScript
+## 2. ACCESSIBILITY (10 HIGH items)
+
+### Option A - Visual Accessibility
 **Corrigés par : Vote 2 - Option A**
 
-- [x] **Scripts bloquants dans `<head>`**
-  - JavaScript sans `defer` ou `async`
-  - Bloque le parsing HTML
-  - Ralentit le First Contentful Paint
-  - 📍 `nuxt.config.ts` - script synchrone avec délai 100ms
+- [ ] **Low contrast text (< 4.5:1 ratio)**
+  - Texte difficile à lire
+  - 📍 À implémenter dans CSS
+  - Impact: HIGH - color-contrast
 
-- [x] **Bundle non tree-shaked**
-  - Toutes les dépendances importées même si non utilisées
-  - Code mort inclus dans le bundle
-  - 📍 `nuxt.config.ts:27` - `treeshakeClientOnly: false`
+- [ ] **No focus indicators (`outline: none`)**
+  - Navigation clavier impossible à suivre
+  - 📍 À implémenter dans CSS
+  - Impact: HIGH - focus-visible
 
-- [x] **Librairies inutiles**
-  - Import de librairies lourdes pour des fonctions simples
-  - Lodash complet au lieu de fonctions natives
-  - 📍 `app.vue` - lodash (~70KB) + moment.js (~290KB) importés mais non utilisés
+- [ ] **Inputs without associated `<label>`**
+  - Champs de formulaire sans label
+  - 📍 À implémenter dans FilterBar.vue
+  - Impact: HIGH - label
 
-- [x] **Pas d'optimisation Nuxt**
-  - `treeshakeClientOnly: false`
-  - Hydration non optimisée
-  - 📍 `nuxt.config.ts:26-27`
+- [ ] **Empty links/buttons (no accessible name)**
+  - Boutons/liens sans texte accessible
+  - 📍 À implémenter
+  - Impact: HIGH - link-name
 
----
+- [ ] **Auto-playing media without controls**
+  - Médias sans contrôles
+  - 📍 À implémenter si média ajouté
+  - Impact: HIGH - audio-caption
 
-## Anti-Patterns Code Splitting
+### Option B - Semantic Accessibility
 **Corrigés par : Vote 2 - Option B**
 
-- [x] **Pas de code splitting**
-  - Un seul gros fichier JavaScript
-  - Tout chargé même pour la page d'accueil
-  - 📍 Configuration Nuxt par défaut (baseline)
+- [x] **`<div>` with click handler instead of `<button>`**
+  - Éléments cliquables non accessibles
+  - 📍 TheHeader.vue, TradeInCard.vue
+  - Impact: HIGH - button-name
 
-- [x] **Composants non lazy-loadés**
-  - Tous les composants chargés au démarrage
-  - Pas d'imports dynamiques (`defineAsyncComponent`)
-  - 📍 `index.vue` - imports directs
+- [x] **Missing `lang` attribute on `<html>`**
+  - Langue non déclarée
+  - 📍 `app.vue` - pas de lang sur root
+  - Impact: HIGH - html-has-lang
 
-- [x] **Pas de payload extraction**
-  - `experimental.payloadExtraction: false`
-  - Données dupliquées client/serveur
-  - 📍 `nuxt.config.ts:26`
+- [ ] **No skip link for keyboard users**
+  - Pas de lien "skip to content"
+  - 📍 À ajouter en début de page
+  - Impact: HIGH - bypass
 
-- [x] **Routes non pré-rendues**
-  - Toutes les routes en SSR dynamique
-  - Pas de génération statique
-  - 📍 Configuration Nuxt (pas de prerender)
+- [ ] **Keyboard trap (can't escape modal)**
+  - Focus bloqué dans un élément
+  - 📍 À implémenter si modal ajouté
+  - Impact: HIGH - no-keyboard-trap
+
+- [ ] **Skipped heading levels (h1 → h3)**
+  - Hiérarchie des titres cassée
+  - 📍 À vérifier dans composants
+  - Impact: HIGH - heading-order
 
 ---
 
-## Anti-Patterns Compression
+## 3. BEST PRACTICES (10 HIGH items)
+
+### Option A - Console & Security
 **Corrigés par : Vote 3 - Option A**
 
-- [x] **Pas de compression serveur**
-  - `nitro.compressPublicAssets: false`
-  - Pas de gzip ou brotli activé
-  - 📍 `nuxt.config.ts:15`
+- [x] **`console.log()` statements in production**
+  - Logs visibles dans la console
+  - 📍 `app.vue` - console.log
+  - Impact: HIGH - no-console
 
-- [x] **CSS et JavaScript non minifiés**
-  - `nitro.minify: false`
-  - Fichiers avec espaces, commentaires
-  - 📍 `nuxt.config.ts:16`
+- [ ] **Links to cross-origin without `rel="noopener"`**
+  - Liens externes sans protection
+  - 📍 À implémenter dans TheFooter.vue
+  - Impact: HIGH - external-anchors
 
-- [x] **Assets non optimisés**
-  - CSS avec code mort
-  - Pas de purge Tailwind (si applicable)
-  - 📍 Configuration Tailwind par défaut
+- [ ] **Using deprecated `document.write()`**
+  - API obsolète
+  - 📍 À implémenter si nécessaire
+  - Impact: HIGH - no-document-write
 
-- [x] **HTML non minifié**
-  - Espaces et retours à la ligne conservés
-  - Commentaires HTML présents
-  - 📍 Conséquence de `minify: false`
+- [ ] **Browser errors logged to console**
+  - Erreurs JS dans la console
+  - 📍 À vérifier
+  - Impact: HIGH - errors-in-console
+
+- [ ] **Vulnerable JavaScript libraries**
+  - Dépendances avec CVE
+  - 📍 moment.js a des vulnérabilités connues
+  - Impact: HIGH - vulnerable-libs
+
+### Option B - Modern Web Standards
+**Corrigés par : Vote 3 - Option B**
+
+- [ ] **Incorrect image display size**
+  - Images affichées à mauvaise taille
+  - 📍 ProductCard.vue - images sans dimensions
+  - Impact: HIGH - image-size
+
+- [ ] **Missing `<!DOCTYPE html>`**
+  - Doctype manquant
+  - 📍 Nuxt gère automatiquement
+  - Impact: HIGH - doctype
+
+- [ ] **Geolocation/notification on page load**
+  - Permissions demandées sans geste utilisateur
+  - 📍 À implémenter si nécessaire
+  - Impact: HIGH - permission-requests
+
+- [ ] **No passive listeners on scroll/touch**
+  - Event listeners bloquants
+  - 📍 À implémenter dans JS
+  - Impact: HIGH - passive-listeners
+
+- [ ] **Source maps exposed in production**
+  - Source maps accessibles en prod
+  - 📍 À vérifier config build
+  - Impact: HIGH - source-maps
 
 ---
 
-## Anti-Patterns Caching
-**Corrigés par : Vote 3 - Option B**
+## 4. SEO (10 HIGH items)
 
-- [x] **Pas de headers de cache**
-  - Pas de `Cache-Control` configuré
-  - Pas d'ETag
-  - Ressources rechargées à chaque visite
-  - 📍 Pas de configuration Nitro pour cache
+### Option A - Meta & Structure
+**Corrigés par : Vote 4 - Option A**
 
-- [x] **Pas de `preconnect`**
-  - Connexions aux domaines externes non anticipées
-  - Google Fonts, CDN, etc.
-  - 📍 `nuxt.config.ts` - preconnect retiré, Google Fonts chargé sans optimisation
+- [x] **Missing `<title>` element**
+  - Pas de titre de page
+  - 📍 `app.vue` - pas de useHead
+  - Impact: HIGH - document-title
 
-- [x] **Pas de `prefetch` / `preload`**
-  - Ressources critiques non priorisées
-  - Découverte tardive des assets
-  - 📍 Pas de preload configuré
+- [x] **Missing `<meta name="description">`**
+  - Pas de meta description
+  - 📍 `app.vue` - pas de useSeoMeta
+  - Impact: HIGH - meta-description
 
-- [x] **Pas de service worker**
-  - Pas de mise en cache côté client
-  - Pas de stratégie offline
-  - 📍 Non implémenté (correct pour baseline)
+- [ ] **No `<h1>` or multiple `<h1>` tags**
+  - Structure de titres incorrecte
+  - 📍 À vérifier dans PageHero.vue
+  - Impact: HIGH - heading-order
+
+- [ ] **Missing `<meta name="viewport">`**
+  - Viewport non défini
+  - 📍 Nuxt gère automatiquement
+  - Impact: HIGH - viewport
+
+- [ ] **Missing canonical URL / duplicate content**
+  - Pas de canonical
+  - 📍 À ajouter dans head
+  - Impact: HIGH - canonical
+
+### Option B - Content & Links
+**Corrigés par : Vote 4 - Option B**
+
+- [ ] **Links with generic text ("click here")**
+  - Liens avec texte non descriptif
+  - 📍 À implémenter dans TheFooter.vue
+  - Impact: HIGH - link-text
+
+- [x] **Images missing `alt` attribute**
+  - Images sans alt descriptif
+  - 📍 `ProductCard.vue:7` - `alt="product"`
+  - Impact: HIGH - image-alt
+
+- [ ] **robots.txt blocking CSS/JS resources**
+  - Robots bloquant ressources
+  - 📍 À créer fichier robots.txt
+  - Impact: HIGH - is-crawlable
+
+- [ ] **JS-only navigation (no crawlable hrefs)**
+  - Navigation non crawlable
+  - 📍 À vérifier dans TheHeader.vue
+  - Impact: HIGH - crawlable-anchors
+
+- [ ] **Redirect chains (>3 hops)**
+  - Chaînes de redirections
+  - 📍 Configuration serveur
+  - Impact: HIGH - redirects
 
 ---
 
 ## Résumé par Vote
 
-| Vote | Option | Anti-Patterns | Implémentés | Impact Performance |
-|------|--------|---------------|-------------|-------------------|
-| Vote 1 | A - Images | 4 | 4/4 ✅ | LCP +15-20 pts |
-| Vote 1 | B - Fonts | 4 | 4/4 ✅ | LCP +10-15 pts |
-| Vote 2 | A - JavaScript | 4 | 4/4 ✅ | TBT +15-20 pts |
-| Vote 2 | B - Code Splitting | 4 | 4/4 ✅ | TBT +10-15 pts |
-| Vote 3 | A - Compression | 4 | 4/4 ✅ | Transfert +10-15 pts |
-| Vote 3 | B - Caching | 4 | 4/4 ✅ | TTFB +10-15 pts |
-| **Total** | - | **24** | **24/24** ✅ | **~60-70 pts** |
+| Vote | Catégorie | Option A | Option B | Total |
+|------|-----------|----------|----------|-------|
+| Vote 1 | Performance | 5 | 5 | 10 |
+| Vote 2 | Accessibility | 5 | 5 | 10 |
+| Vote 3 | Best Practices | 5 | 5 | 10 |
+| Vote 4 | SEO | 5 | 5 | 10 |
+| **Total** | - | **20** | **20** | **40** |
 
 ---
 
-## Actions Restantes
+## Structure des Branches (31 total)
 
-✅ **Tous les anti-patterns sont implémentés (24/24)**
+```
+baseline (tous anti-patterns)
+├── a (Vote 1: Performance A)
+│   ├── aa (Vote 2: A11y A)
+│   │   ├── aaa (Vote 3: BP A)
+│   │   │   ├── aaaa (Vote 4: SEO A)
+│   │   │   └── aaab (Vote 4: SEO B)
+│   │   └── aab (Vote 3: BP B)
+│   │       ├── aaba
+│   │       └── aabb
+│   └── ab (Vote 2: A11y B)
+│       └── ...
+└── b (Vote 1: Performance B)
+    └── ...
+```
 
-Baseline prêt pour mesure Lighthouse.
+Total: 1 baseline + 2 + 4 + 8 + 16 = **31 branches**
 
 ---
 
-## Objectifs de Score
+## Statut d'Implémentation
 
-| Étape | Score Performance |
-|-------|-------------------|
-| Baseline (tous anti-patterns) | ~20-25 |
-| Après Vote 1 | ~35-40 |
-| Après Vote 2 | ~55-60 |
-| Après Vote 3 | ~85-95 |
+| Catégorie | Implémentés | Restants |
+|-----------|-------------|----------|
+| Performance | 10/10 ✅ | 0 |
+| Accessibility | 2/10 | 8 |
+| Best Practices | 1/10 | 9 |
+| SEO | 3/10 | 7 |
+| **Total** | **16/40** | **24** |
 
----
-
-## Notes d'Implémentation
-
-1. **Commentaires dans le code**
-   - Ajouter `// ANTI-PATTERN:` pour faciliter l'identification
-   - Documenter l'impact attendu de chaque anti-pattern
-
-2. **Vérification**
-   - Chaque anti-pattern doit avoir un impact mesurable sur Lighthouse
-   - Tester avant/après pour valider les gains
-
-3. **Branches Git (15 total)**
-   - `baseline` : Tous les anti-patterns actifs
-   - `fa`, `fb` : Après Vote 1
-   - `faa`, `fab`, `fba`, `fbb` : Après Vote 2
-   - `faaa`, `faab`, `faba`, `fabb`, `fbaa`, `fbab`, `fbba`, `fbbb` : Après Vote 3
+> Les anti-patterns Performance sont prioritaires pour la baseline.
+> Les autres catégories seront complétées progressivement.
