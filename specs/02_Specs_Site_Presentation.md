@@ -4,6 +4,8 @@
 
 Site web HTML/CSS/JavaScript projeté en salle de conférence, servant d'interface principale pour la présentation interactive. Contrôle l'état global de la session et affiche les résultats de vote en temps réel.
 
+> **Focus : Score Performance uniquement**
+
 ---
 
 ## Technologies
@@ -21,10 +23,10 @@ Site web HTML/CSS/JavaScript projeté en salle de conférence, servant d'interfa
 ### 1. Navigation de Slides
 
 **Caractéristiques :**
-- 25-30 slides au total (voir [`Structure_Presentation.md`](./Structure_Presentation.md))
+- 23-27 slides au total (voir [`Structure_Presentation.md`](./Structure_Presentation.md))
 - Navigation au clavier (flèches gauche/droite, espace)
 - Navigation tactile possible (swipe - optionnel)
-- Indicateur de progression (ex: "Slide 12/28")
+- Indicateur de progression (ex: "Slide 12/25")
 
 **Types de slides :**
 - Slides de contenu standard
@@ -75,7 +77,7 @@ Quand le présentateur arrive sur une slide de vote :
 {
   type: 'session-state',
   state: 'voting',
-  voteId: 'choice-1' | 'choice-2' | 'choice-3'
+  voteId: 'vote-1' | 'vote-2' | 'vote-3'
 }
 ```
 
@@ -110,7 +112,7 @@ Quand le présentateur arrive sur une slide de vote :
 {
   type: 'session-state',
   state: 'closed',
-  voteId: 'choice-1'
+  voteId: 'vote-1'
 }
 ```
 
@@ -124,11 +126,10 @@ Quand le présentateur arrive sur une slide de vote :
 - Animation de construction lors de l'ajout d'un étage
 
 **États du phare :**
-- **Initial** : Vide (ou échafaudage symbolique) - Score baseline affiché
-- **Après Foundation** : 1 étage
-- **Après Choix 1** : 2 étages
-- **Après Choix 2** : 3 étages
-- **Après Choix 3** : 4 étages (complet)
+- **Initial** : Vide (ou échafaudage symbolique) - Score baseline affiché (~20-25)
+- **Après Vote 1** : 1 étage (~40-50)
+- **Après Vote 2** : 2 étages (~60-70)
+- **Après Vote 3** : 3 étages (complet, ~85-95)
 
 **Technologie de rendu :**
 - À définir dans Points_Non_Resolus.md
@@ -156,27 +157,25 @@ Quand le présentateur arrive sur une slide de vote :
 
 #### Moments d'Affichage
 
-- Score baseline (initial) : avant Foundation
-- Score après Foundation
-- Score après Choix 1
-- Score après Choix 2
-- Score après Choix 3 (final)
+- Score baseline (initial) : ~20-25
+- Score après Vote 1 : ~40-50
+- Score après Vote 2 : ~60-70
+- Score après Vote 3 (final) : ~85-95
 
 #### Format d'Affichage
 
-**Score global :**
-- Note 0-100 (ex: "92/100")
-- Amélioration en % (ex: "+77% depuis baseline")
+**Score Performance :**
+- Note 0-100 (ex: "72/100")
+- Amélioration en points (ex: "+50 depuis baseline")
 
-**Optionnel - Détails par catégorie :**
-- Performance
-- Accessibility
-- SEO
-- Best Practices
+**Optionnel - Métriques détaillées :**
+- LCP (Largest Contentful Paint)
+- TBT (Total Blocking Time)
+- Speed Index
 
 **Visualisation :**
 - Graphique/jauge visuelle
-- Pourcentage d'amélioration
+- Amélioration en points
 - Avant/après
 
 #### Source des Scores
@@ -186,9 +185,9 @@ Quand le présentateur arrive sur une slide de vote :
 
 **Exemple :**
 ```javascript
-// Path actuel : ["foundation", "lcp", "js", "accessibility"]
-// Code correspondant : "faaa"
-const score = lighthouseScores["faaa"];
+// Path actuel : ["images", "js", "compression"]
+// Code correspondant : "v1a-v2a-v3a"
+const score = lighthouseScores["v1a-v2a-v3a"];
 ```
 
 ---
@@ -215,7 +214,7 @@ const score = lighthouseScores["faaa"];
 {
   type: 'session-state',
   state: 'waiting' | 'voting' | 'closed',
-  voteId: 'choice-1' | 'choice-2' | 'choice-3'
+  voteId: 'vote-1' | 'vote-2' | 'vote-3'
 }
 ```
 
@@ -270,15 +269,15 @@ const score = lighthouseScores["faaa"];
 
 **Affichage :**
 - **Heure de début de session** (ex: "Démarrée à 14h30")
-- **Slide actuelle** (ex: "12/28")
-- **Choix effectués** (ex: "Foundation → LCP → JS → ?")
+- **Slide actuelle** (ex: "12/25")
+- **Choix effectués** (ex: "Images → JS → ?")
 - **Statistiques équipage** :
   - X pirates enregistrés
   - Y pirates connectés (actifs)
 - **Résultats des votes** :
-  - Choice-1 : A gagne (12 vs 8)
-  - Choice-2 : B gagne (15 vs 5)
-  - Choice-3 : Pas encore voté
+  - Vote-1 : A gagne (12 vs 8)
+  - Vote-2 : B gagne (15 vs 5)
+  - Vote-3 : Pas encore voté
 
 **Actions :**
 - **Bouton "Nouvelle session"** (avec confirmation obligatoire)
@@ -326,17 +325,17 @@ const score = lighthouseScores["faaa"];
 
 ```javascript
 {
-  "choice-1": {
+  "vote-1": {
     A: ["uuid-1", "uuid-5"],
     B: ["uuid-3", "uuid-8"],
     winner: "A"
   },
-  "choice-2": {
+  "vote-2": {
     A: [],
     B: [],
     winner: null
   },
-  "choice-3": {
+  "vote-3": {
     A: [],
     B: [],
     winner: null
@@ -349,9 +348,9 @@ const score = lighthouseScores["faaa"];
 ```javascript
 {
   currentSlide: 12,
-  currentVote: null | "choice-1" | "choice-2" | "choice-3",
+  currentVote: null | "vote-1" | "vote-2" | "vote-3",
   voteState: "waiting" | "voting" | "closed",
-  path: ["foundation", "lcp", null, null], // Choix effectués (null = pas encore)
+  path: ["images", "js", null], // Choix effectués (null = pas encore)
   sessionId: "uuid-session",
   startedAt: "2026-01-20T14:00:00Z"
 }
@@ -380,13 +379,13 @@ const savedState = JSON.parse(localStorage.getItem('presentation-state'));
 if (savedState) {
   // Restaurer la navigation
   goToSlide(savedState.currentSlide);
-  
+
   // Restaurer l'équipage registered
   crew.registered = savedState.crew.registered;
-  
+
   // Restaurer les votes
   votes = savedState.votes;
-  
+
   // Reconstruire la liste active via heartbeat
   sendHeartbeatRequest();
 }

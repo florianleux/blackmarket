@@ -4,6 +4,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  // Tailwind CSS module
+  modules: ['@nuxtjs/tailwindcss'],
+
   // ANTI-PATTERN: Disable SSR optimization features
   ssr: true,
 
@@ -33,10 +36,28 @@ export default defineNuxtConfig({
   },
 
   app: {
-    // ANTI-PATTERN: No meta tags defined at app level
+    // ANTI-PATTERN: No meta tags, no preconnect, no preload
     head: {
-      // Intentionally empty - no title, no meta, no favicon
-      // This will trigger SEO anti-patterns
+      // Intentionally minimal - no optimizations
+      link: [
+        // ANTI-PATTERN: No preconnect for Google Fonts (slow connection establishment)
+        // ANTI-PATTERN: Loading font with default font-display (causes FOIT)
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Pirata+One&display=block' },
+      ],
+      // ANTI-PATTERN: Blocking script in head (blocks HTML parsing)
+      script: [
+        {
+          innerHTML: `
+            // ANTI-PATTERN: Synchronous blocking script
+            // This blocks HTML parsing and delays First Contentful Paint
+            (function() {
+              var start = Date.now();
+              while (Date.now() - start < 100) {} // Artificial 100ms delay
+              console.log('Blocking script executed');
+            })();
+          `,
+        },
+      ],
     },
   },
 

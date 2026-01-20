@@ -1,5 +1,7 @@
 # Spécifications Techniques Générales
 
+> **Focus : Score Performance uniquement**
+
 ## Architecture Globale
 
 ### Structure Mono-repo
@@ -9,7 +11,7 @@ Le projet utilise un **mono-repo pnpm** avec workspaces :
 ```
 lighthouse-pirates/
 ├── apps/
-│   ├── blackmarket/          # Nuxt 3 (17 branches Git)
+│   ├── blackmarket/          # Nuxt 3 (9 branches Git)
 │   ├── presentation/         # Site de présentation
 │   └── vote/                 # Site de vote
 ├── shared/
@@ -72,9 +74,9 @@ lighthouse-pirates/
 
 **Netlify** - 4 sites au total :
 
-1. **BlackMarket** : 
+1. **BlackMarket** :
    - Domaine : `blackmarket.com`
-   - 17 branches déployées sur 17 sous-domaines
+   - 9 branches déployées sur 9 sous-domaines
    - Base directory : `apps/blackmarket`
 
 2. **Présentation** :
@@ -93,45 +95,55 @@ lighthouse-pirates/
 
 ## BlackMarket - Déploiement et Scores
 
-### Structure des Branches
+### Structure des Branches (15 branches)
 
-**17 branches Git totales :**
-- 1 baseline (aucune optimisation)
-- 16 branches optimisées (toutes les combinaisons)
+Les branches représentent la **progression cumulative** des fixes à chaque étape de vote.
 
-**Nomenclature des branches :**
-- Baseline : `baseline`
-- Optimisées : `foundation-<choix1>-<choix2>-<choix3>`
+**Arbre des branches :**
+```
+baseline                    # Tous les anti-patterns (~20-25)
+├── fa                      # Vote 1 → Images (~35-40)
+│   ├── faa                 # + Vote 2 → JavaScript (~55-60)
+│   │   ├── faaa            # + Vote 3 → Compression (~85-95)
+│   │   └── faab            # + Vote 3 → Caching (~85-95)
+│   └── fab                 # + Vote 2 → Code Splitting (~55-60)
+│       ├── faba            # + Vote 3 → Compression (~85-95)
+│       └── fabb            # + Vote 3 → Caching (~85-95)
+└── fb                      # Vote 1 → Fonts (~35-40)
+    ├── fba                 # + Vote 2 → JavaScript (~55-60)
+    │   ├── fbaa            # + Vote 3 → Compression (~85-95)
+    │   └── fbab            # + Vote 3 → Caching (~85-95)
+    └── fbb                 # + Vote 2 → Code Splitting (~55-60)
+        ├── fbba            # + Vote 3 → Compression (~85-95)
+        └── fbbb            # + Vote 3 → Caching (~85-95)
+```
 
-Exemples :
-- `foundation-lcp-js-accessibility`
-- `foundation-cls-caching-responsive`
+**Nomenclature :**
+- `f` = préfixe (fixes)
+- Position 1 : `a` = Images, `b` = Fonts
+- Position 2 : `a` = JavaScript, `b` = Code Splitting
+- Position 3 : `a` = Compression, `b` = Caching
+
+**Total : 15 branches** (1 baseline + 2 + 4 + 8)
 
 ### Sous-domaines
 
 Chaque branche est déployée sur un sous-domaine dédié de `blackmarket.com` :
 
-**Nomenclature des sous-domaines :**
-- Format compact : `f` + choix1 (`a`/`b`) + choix2 (`a`/`b`) + choix3 (`a`/`b`)
-- `f` = foundation (toujours présent)
-- Position 1 : `a` = LCP, `b` = CLS
-- Position 2 : `a` = JS, `b` = Caching
-- Position 3 : `a` = Accessibility, `b` = Responsive
-
 **Exemples :**
 - `baseline.blackmarket.com` → branche `baseline`
-- `faaa.blackmarket.com` → branche `foundation-lcp-js-accessibility`
-- `fbbb.blackmarket.com` → branche `foundation-cls-caching-responsive`
+- `fa.blackmarket.com` → branche `fa`
+- `faaa.blackmarket.com` → branche `faaa`
 
-**17 sous-domaines au total**
+**15 sous-domaines au total**
 
 ### Mesure des Scores Lighthouse
 
 **Méthode :**
 - Script bash simple (`scripts/measure-lighthouse.sh`)
 - Lighthouse CLI en local
-- Itération sur les 17 sous-domaines
-- Pas de GitHub Actions (overkill pour 17 mesures one-shot)
+- Itération sur les 9 sous-domaines
+- Pas de GitHub Actions (overkill pour 9 mesures one-shot)
 
 **Indépendance des scores :**
 Chaque sous-domaine a son propre score Lighthouse indépendant car chaque branche contient un build différent avec des optimisations différentes.
@@ -141,31 +153,28 @@ Chaque sous-domaine a son propre score Lighthouse indépendant car chaque branch
 - JSON hardcodé (pas d'API, pas de fichier séparé)
 - Chargé au démarrage de l'application de présentation
 
-**Structure des scores :**
+**Structure des scores (Performance uniquement) :**
 ```javascript
 {
-  "baseline": {
-    "performance": 15,
-    "accessibility": 65,
-    "best-practices": 70,
-    "seo": 60,
-    "overall": 52
-  },
-  "faaa": {
-    "performance": 85,
-    "accessibility": 98,
-    "best-practices": 90,
-    "seo": 95,
-    "overall": 92
-  }
-  // ... 15 autres combinaisons
+  "baseline": { "performance": 22 },
+  // Après Vote 1
+  "fa": { "performance": 38 },
+  "fb": { "performance": 35 },
+  // Après Vote 2
+  "faa": { "performance": 58 },
+  "fab": { "performance": 55 },
+  "fba": { "performance": 55 },
+  "fbb": { "performance": 52 },
+  // Après Vote 3 (8 branches finales)
+  "faaa": { "performance": 92 },
+  "faab": { "performance": 88 },
+  // ... etc.
 }
 ```
 
 **Niveau de détail disponible :**
-- Score global (0-100) pour affichage principal
-- Scores par catégorie (Performance, Accessibility, SEO, Best Practices)
-- Métriques détaillées (LCP, CLS, etc.) optionnelles selon slides
+- Score Performance global (0-100) pour affichage principal
+- Métriques détaillées (LCP, TBT, Speed Index) optionnelles selon slides
 
 ---
 
@@ -182,7 +191,7 @@ Chaque sous-domaine a son propre score Lighthouse indépendant car chaque branch
 {
   type: 'session-state',
   state: 'waiting' | 'voting' | 'closed',
-  voteId: 'choice-1' | 'choice-2' | 'choice-3'
+  voteId: 'vote-1' | 'vote-2' | 'vote-3'
 }
 ```
 
@@ -264,10 +273,10 @@ Contrôlés par le site de présentation :
 {
   // Navigation
   currentSlide: 12,
-  
-  // Progression des choix
-  path: ["foundation", "lcp", "js", null], // null = pas encore choisi
-  
+
+  // Progression des choix (3 votes)
+  path: ["images", "js", null], // null = pas encore choisi
+
   // Équipage
   crew: {
     registered: [
@@ -275,18 +284,18 @@ Contrôlés par le site de présentation :
     ]
     // active sera reconstruit via heartbeat au reload
   },
-  
+
   // Historique des votes
   votes: {
-    "choice-1": { 
-      A: ["userId1", "userId5"], 
-      B: ["userId3", "userId8"], 
-      winner: "A" 
+    "vote-1": {
+      A: ["userId1", "userId5"],
+      B: ["userId3", "userId8"],
+      winner: "A"
     },
-    "choice-2": { A: [], B: [], winner: null },
-    "choice-3": { A: [], B: [], winner: null }
+    "vote-2": { A: [], B: [], winner: null },
+    "vote-3": { A: [], B: [], winner: null }
   },
-  
+
   // Métadonnées
   sessionId: "uuid-session",
   startedAt: "2026-01-20T14:00:00Z"
@@ -364,11 +373,11 @@ SVG composable recommandé (décision finale à prendre dans Points_Non_Resolus.
 
 **Affichage :**
 - Heure de début de session
-- Slide actuelle (ex: "Slide 12/28")
-- Choix effectués (ex: "Foundation → LCP → JS → ?")
+- Slide actuelle (ex: "Slide 12/25")
+- Choix effectués (ex: "Images → JS → ?")
 - X pirates enregistrés
 - Y pirates connectés (actifs)
-- Résultats des votes (Choice-1: A gagne 12 vs 8, etc.)
+- Résultats des votes (Vote-1: A gagne 12 vs 8, etc.)
 
 **Actions :**
 - **Nouvelle session** : Vide le LocalStorage, reset complet (avec confirmation)

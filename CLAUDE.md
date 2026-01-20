@@ -1,129 +1,128 @@
 # Claude.md - Documentation Lighthouse Pirates
 
-Point d'entrée pour comprendre le projet **Lighthouse Pirates** - Une présentation interactive où l'audience vote pour optimiser une application Vue.js/Nuxt.
+Point d'entrée pour comprendre le projet **Lighthouse Pirates** - Une présentation interactive où l'audience vote pour optimiser le score **Performance** d'une application Vue.js/Nuxt.
+
+> **FOCUS : Score Lighthouse Performance uniquement**
+> - Baseline : ~20-25
+> - Objectif : ~85-95
+> - 3 votes binaires = 15 branches progressives
 
 ---
 
 ## 📚 Documentation - Ordre de Lecture
 
 ### 1. Comprendre le Concept
-**[`Concept_et_Vision.md`](./Concept_et_Vision.md)**
+**[`specs/Concept_et_Vision.md`](./specs/Concept_et_Vision.md)**
 - Le pitch : présentation interactive avec vote en temps réel
 - Métaphore du phare et thème pirate
-- Structure en 4 étapes (Foundation + 3 choix)
+- Structure en 3 votes
 - Approche pédagogique
 
-**[`Structure_Presentation.md`](./Structure_Presentation.md)**
-- Flow global des 25-30 slides
+**[`specs/Structure_Presentation.md`](./specs/Structure_Presentation.md)**
+- Flow global des slides
 - 3 boucles de choix (dilemme → détails → vote → résultat)
 - Visualisation du phare (progression par étages)
-- États de session et timing
 
 ### 2. Architecture Technique
 
-**[`00_Specs_Techniques_Generales.md`](./00_Specs_Techniques_Generales.md)** ⭐ **COMMENCER ICI**
+**[`specs/00_Specs_Techniques_Generales.md`](./specs/00_Specs_Techniques_Generales.md)** ⭐ **COMMENCER ICI**
 - Architecture mono-repo pnpm
 - Technologies (Nuxt 3, Ably, Netlify)
-- Déploiement BlackMarket (17 sous-domaines)
-- Mesure des scores Lighthouse
 - Communication Ably (channels, messages)
 - Persistence LocalStorage
-- Système d'avatars
-- Panel admin et fallbacks
 
 ### 3. Spécifications par Application
 
-**[`01_Specs_BlackMarket.md`](./01_Specs_BlackMarket.md)**
-- 17 branches Git (1 baseline + 16 optimisées)
-- Nomenclature branches et sous-domaines
-- Anti-patterns par catégorie (34 au total - détails dans Liste_Anti-Patterns.md)
-- Optimisations par étape (Foundation, LCP/CLS, JS/Caching, A11y/Responsive)
+**[`specs/01_Specs_BlackMarket.md`](./specs/01_Specs_BlackMarket.md)** ⭐ **IMPORTANT**
+- Focus Performance uniquement
+- 15 branches Git progressives
+- Anti-patterns (24 au total - détails dans Liste_Anti-Patterns.md)
+- Structure des 3 votes et options
 - Configuration Nuxt baseline vs optimisée
 
-**[`02_Specs_Site_Presentation.md`](./02_Specs_Site_Presentation.md)**
-- Navigation de slides (25-30 slides)
-- Système de vote (timer 45s, affichage temps réel)
-- Visualisation du phare (4 étages)
-- Affichage des avatars (équipage registered vs active)
-- Scores Lighthouse (affichage et sélection selon path)
-- Communication Ably (envoi/réception messages)
-- Panel admin (touche K)
-- Persistence LocalStorage
+**[`specs/02_Specs_Site_Presentation.md`](./specs/02_Specs_Site_Presentation.md)**
+- Navigation de slides
+- Système de vote (timer, affichage temps réel)
+- Scores Lighthouse (affichage selon branche)
 
-**[`03_Specs_Site_Vote.md`](./03_Specs_Site_Vote.md)**
-- Création d'avatar (729 combinaisons)
-- 3 états : waiting, voting, closed
+**[`specs/03_Specs_Site_Vote.md`](./specs/03_Specs_Site_Vote.md)**
+- Création d'avatar
 - Interface de vote (2 boutons A/B, timer)
-- Communication Ably (vote-cast, heartbeat-response)
-- Persistence LocalStorage (reconnexion automatique)
+- Communication Ably
 
 ### 4. Détails Techniques
 
-**[`Liste_Anti-Patterns.md`](./Liste_Anti-Patterns.md)**
-- 34 anti-patterns à implémenter volontairement dans la baseline
-- Organisés par catégorie (HTML, SEO, LCP, CLS, JS, Caching, A11y, Responsive, Nuxt)
-- Quelle étape résout quel anti-pattern
-
-**[`Points_Non_Resolus.md`](./Points_Non_Resolus.md)**
-- Questions techniques restant à décider
-- Priorités : Haute (assets avatars, techno phare), Moyenne (navigation, UX), Basse (design, animations)
+**[`specs/Liste_Anti-Patterns.md`](./specs/Liste_Anti-Patterns.md)** ⭐ **IMPORTANT**
+- 24 anti-patterns Performance à implémenter dans la baseline
+- Organisés par vote (Images, Fonts, JS, Splitting, Compression, Caching)
+- Quelle option fixe quel anti-pattern
 
 ---
 
 ## 🏗️ Structure du Projet
 
 ```
-lighthouse-pirates/
+lighthouse/
 ├── apps/
-│   ├── blackmarket/          # Nuxt 3 (17 branches Git)
+│   ├── blackmarket/          # Nuxt 3 (15 branches Git)
 │   ├── presentation/         # Site de présentation
 │   └── vote/                 # Site de vote mobile
+├── specs/                    # Documentation
 ├── shared/
-│   ├── types.ts              # Types partagés (messages Ably, avatars)
-│   ├── constants.ts          # Constantes (channels, états)
-│   └── avatars/              # Génération et rendu d'avatars
-├── scripts/
-│   └── measure-lighthouse.sh # Mesure des 17 sous-domaines
+│   ├── types.ts              # Types partagés
+│   └── constants.ts          # Constantes
 ├── pnpm-workspace.yaml
-├── package.json
-└── claude.md                 # ← Ce fichier
+└── CLAUDE.md                 # ← Ce fichier
 ```
 
 ---
 
 ## 🔑 Points Clés
 
-### Architecture
-- **Mono-repo pnpm** : 3 apps + code partagé
-- **17 branches Git** dans BlackMarket (1 baseline + 16 combinaisons)
-- **17 sous-domaines** sur `blackmarket.com`
+### Structure des Votes (Performance)
 
-### Nomenclature
-**Branches :** `foundation-<choix1>-<choix2>-<choix3>`
-- Exemple : `foundation-lcp-js-accessibility`
+| Vote | Thème | Option A | Option B |
+|------|-------|----------|----------|
+| **Vote 1** | LCP | 🖼️ Images | 🔤 Fonts |
+| **Vote 2** | TBT | ⚡ JavaScript | 📦 Code Splitting |
+| **Vote 3** | Network | 🗜️ Compression | 💾 Caching |
 
-**Sous-domaines :** `f` + `a/b` + `a/b` + `a/b`
-- `f` = foundation
-- Position 1 : `a` = LCP, `b` = CLS
-- Position 2 : `a` = JS, `b` = Caching
-- Position 3 : `a` = Accessibility, `b` = Responsive
-- Exemple : `faaa.blackmarket.com` = Foundation + LCP + JS + Accessibility
+### Structure des Branches (15 branches)
 
-### Communication (Ably)
-**Channel :** `lighthouse-presentation`
+Les branches représentent la **progression cumulative** à chaque vote.
 
-**Messages clés :**
-- Présentation → Vote : `session-state` (waiting/voting/closed), `heartbeat-request`
-- Vote → Présentation : `avatar-created`, `vote-cast`, `heartbeat-response`
+```
+baseline                    # Tous les anti-patterns (~20-25)
+├── fa                      # Vote 1 → Images (~35-40)
+│   ├── faa                 # + Vote 2 → JavaScript (~55-60)
+│   │   ├── faaa            # + Vote 3 → Compression (~85-95)
+│   │   └── faab            # + Vote 3 → Caching (~85-95)
+│   └── fab                 # + Vote 2 → Code Splitting (~55-60)
+│       ├── faba            # + Vote 3 → Compression (~85-95)
+│       └── fabb            # + Vote 3 → Caching (~85-95)
+└── fb                      # Vote 1 → Fonts (~35-40)
+    ├── fba                 # + Vote 2 → JavaScript (~55-60)
+    │   ├── fbaa            # + Vote 3 → Compression (~85-95)
+    │   └── fbab            # + Vote 3 → Caching (~85-95)
+    └── fbb                 # + Vote 2 → Code Splitting (~55-60)
+        ├── fbba            # + Vote 3 → Compression (~85-95)
+        └── fbbb            # + Vote 3 → Caching (~85-95)
+```
 
-### Persistence
-**Présentation :** LocalStorage complet (slides, votes, équipage, choix) - résiste au refresh
-**Vote :** LocalStorage minimal (userId, pseudo, avatarCode) - reconnexion auto
+**Nomenclature :**
+- `f` = préfixe (fixes)
+- Position 1 : `a` = Images, `b` = Fonts
+- Position 2 : `a` = JavaScript, `b` = Code Splitting
+- Position 3 : `a` = Compression, `b` = Caching
 
-### Avatars
-- **729 combinaisons** : 9 bases × 3 chapeaux × 3 yeux × 3 bouches × 3 accessoires
-- **Format code :** `"mw2132"` ou `"m-white-hat2-eyes1-mouth3-acc2"`
-- **Localisation :** `shared/avatars/`
+### Objectifs de Score Performance
+
+| Étape | Score |
+|-------|-------|
+| Baseline | ~20-25 |
+| Après Vote 1 | ~35-40 |
+| Après Vote 2 | ~55-60 |
+| Après Vote 3 | ~85-95 |
 
 ---
 
@@ -147,40 +146,27 @@ pnpm measure:lighthouse
 
 ---
 
-## 📊 Tableau de Correspondance
+## 📊 Anti-Patterns par Vote
 
-| Code | Choix 1 | Choix 2 | Choix 3 | Branche | Sous-domaine |
-|------|---------|---------|---------|---------|--------------|
-| baseline | - | - | - | `baseline` | `baseline.blackmarket.com` |
-| faaa | LCP | JS | A11y | `foundation-lcp-js-accessibility` | `faaa.blackmarket.com` |
-| faab | LCP | JS | Responsive | `foundation-lcp-js-responsive` | `faab.blackmarket.com` |
-| faba | LCP | Caching | A11y | `foundation-lcp-caching-accessibility` | `faba.blackmarket.com` |
-| fabb | LCP | Caching | Responsive | `foundation-lcp-caching-responsive` | `fabb.blackmarket.com` |
-| fbaa | CLS | JS | A11y | `foundation-cls-js-accessibility` | `fbaa.blackmarket.com` |
-| fbab | CLS | JS | Responsive | `foundation-cls-js-responsive` | `fbab.blackmarket.com` |
-| fbba | CLS | Caching | A11y | `foundation-cls-caching-accessibility` | `fbba.blackmarket.com` |
-| fbbb | CLS | Caching | Responsive | `foundation-cls-caching-responsive` | `fbbb.blackmarket.com` |
-
-(8 combinaisons au total - vérifier si 16 dans specs originales)
-
----
-
-## ⚙️ Variables d'Environnement
-
-Toutes les apps nécessitent :
-```
-ABLY_API_KEY=your-api-key-here
-```
+| Vote | Option | Anti-Patterns | Fixes |
+|------|--------|---------------|-------|
+| 1 | A - Images | 4 | WebP, dimensions, lazy, srcset |
+| 1 | B - Fonts | 4 | swap, preload, subset |
+| 2 | A - JavaScript | 4 | defer, tree-shake, clean deps |
+| 2 | B - Splitting | 4 | code split, async components |
+| 3 | A - Compression | 4 | gzip, minify CSS/JS/HTML |
+| 3 | B - Caching | 4 | Cache-Control, preconnect |
+| **Total** | - | **24** | - |
 
 ---
 
 ## 💡 Workflow de Développement
 
-1. **Lire** [`00_Specs_Techniques_Generales.md`](./00_Specs_Techniques_Generales.md) pour comprendre l'architecture
-2. **Consulter** la spec spécifique de l'app concernée
-3. **Vérifier** [`Points_Non_Resolus.md`](./Points_Non_Resolus.md) si question non documentée
-4. **Référencer** [`Liste_Anti-Patterns.md`](./Liste_Anti-Patterns.md) pour BlackMarket baseline
+1. **Lire** [`specs/01_Specs_BlackMarket.md`](./specs/01_Specs_BlackMarket.md) pour comprendre la structure des votes
+2. **Référencer** [`specs/Liste_Anti-Patterns.md`](./specs/Liste_Anti-Patterns.md) pour les anti-patterns à implémenter
+3. **Vérifier** le score Lighthouse après chaque modification
+4. **Commiter** sur la branche appropriée
 
 ---
 
-**Note :** Commencer par [`00_Specs_Techniques_Generales.md`](./00_Specs_Techniques_Generales.md) pour avoir le contexte complet des décisions techniques validées.
+**Note :** Le focus est uniquement sur le score **Performance** de Lighthouse. Les autres scores (Accessibility, Best Practices, SEO) ne sont pas l'objet des votes.

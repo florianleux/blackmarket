@@ -2,9 +2,19 @@
 
 ## Vue d'Ensemble
 
-Boutique en ligne d'accessoires de pirates reconditionnés (crochets, cache-œil, jambes de bois, perroquets, etc.), développée avec Nuxt 3 + Vue 3. Sert de base pour démontrer les optimisations frontend et les améliorations de scores Lighthouse.
+Boutique en ligne d'accessoires de pirates reconditionnés (crochets, cache-œil, jambes de bois, perroquets, etc.), développée avec Nuxt 3 + Vue 3. Sert de base pour démontrer les optimisations frontend et les améliorations du score **Lighthouse Performance**.
 
 **Jeu de mots :** BlackMarket = BackMarket (pirate/reconditionnés)
+
+---
+
+## Focus : Score Performance
+
+> **Décision** : On se concentre uniquement sur le score **Performance** de Lighthouse.
+>
+> - Baseline cible : ~20-25
+> - Objectif final : ~85-95
+> - Les autres scores (Accessibility, Best Practices, SEO) ne sont pas l'objet des votes
 
 ---
 
@@ -12,309 +22,276 @@ Boutique en ligne d'accessoires de pirates reconditionnés (crochets, cache-œil
 
 - **Framework :** Nuxt 3
 - **Frontend :** Vue 3 + TypeScript
+- **Styling :** Tailwind CSS
 - **SSR :** Activé (mais mal configuré dans la baseline)
-- **Hébergement :** Netlify avec 17 sous-domaines sur `blackmarket.com`
+- **Hébergement :** Netlify avec sous-domaines
 
 ---
 
-## Structure de Branches Git
+## Structure des Votes
 
-### Nombre Total : 17 Branches
+### 3 Votes = 6 Options
 
-**1 Baseline :**
-- Branche `baseline`
-- Application non optimisée avec anti-patterns volontaires
-- Score Lighthouse très bas (cible : ~15-20 performance)
-
-**16 Branches Optimisées :**
-- Foundation appliquée par défaut sur **toutes** les 16 branches
-- Combinaisons de 3 choix : Choix1 (2 options) × Choix2 (2 options) × Choix3 (2 options) = 2³ = 8... attendez non, c'est 2×2×2 = 8, mais on a 16 parce qu'on garde Foundation séparé ? Non...
-
-Correction : **16 combinaisons = 2⁴ incluant Foundation comme choix**
-
-En réalité : Foundation est TOUJOURS appliquée, donc :
-- Choix 1 : LCP (A) ou CLS (B)
-- Choix 2 : JS (A) ou Caching (B)  
-- Choix 3 : Accessibility (A) ou Responsive (B)
-= 2 × 2 × 2 = **8 combinaisons**
-
-**Attendez, la spec originale dit 16 branches optimisées. Laissez-moi vérifier...**
-
-D'après `Concept_et_Vision.md` : "16 branches pré-configurées" mais avec Foundation appliquée à toutes.
-
-**Clarification nécessaire** : Le document original dit "16 combinaisons (2×2×2×2 avec Foundation appliquée à toutes les branches)."
-
-Cela signifie probablement : 2 états pour Foundation (appliquée ou non) × 2 × 2 × 2 = 16 MAIS Foundation est décrite comme "étape fixe, pas de vote".
-
-**Interprétation correcte :**
-- 1 baseline (rien)
-- 1 avec Foundation seule ? (pas clair)
-- 8 combinaisons avec Foundation + 3 choix
-
-**Je vais garder la structure telle que décrite dans les specs originales : 17 branches au total.**
-
-### Nomenclature des Branches
-
-**Baseline :**
-- `baseline`
-
-**Branches optimisées :**
-Format : `foundation-<choix1>-<choix2>-<choix3>`
-
-Exemples :
-- `foundation-lcp-js-accessibility`
-- `foundation-lcp-js-responsive`
-- `foundation-lcp-caching-accessibility`
-- `foundation-lcp-caching-responsive`
-- `foundation-cls-js-accessibility`
-- `foundation-cls-js-responsive`
-- `foundation-cls-caching-accessibility`
-- `foundation-cls-caching-responsive`
-
-**Choix 1 - Core Web Vitals :**
-- `lcp` : Optimisation Largest Contentful Paint
-- `cls` : Correction Cumulative Layout Shift
-
-**Choix 2 - Performance Technique :**
-- `js` : Optimisation JavaScript
-- `caching` : Gestion des ressources et caching
-
-**Choix 3 - Expérience Utilisateur :**
-- `accessibility` : Améliorations d'accessibilité
-- `responsive` : Améliorations de responsive design
-
-### Sous-domaines
-
-Chaque branche est déployée sur un sous-domaine de `blackmarket.com` :
-
-**Nomenclature compacte :**
-- `baseline.blackmarket.com` → branche `baseline`
-- `faaa.blackmarket.com` → branche `foundation-lcp-js-accessibility`
-- `faab.blackmarket.com` → branche `foundation-lcp-js-responsive`
-- `faba.blackmarket.com` → branche `foundation-lcp-caching-accessibility`
-- `fabb.blackmarket.com` → branche `foundation-lcp-caching-responsive`
-- `fbaa.blackmarket.com` → branche `foundation-cls-js-accessibility`
-- `fbab.blackmarket.com` → branche `foundation-cls-js-responsive`
-- `fbba.blackmarket.com` → branche `foundation-cls-caching-accessibility`
-- `fbbb.blackmarket.com` → branche `foundation-cls-caching-responsive`
-
-**Code :**
-- `f` = foundation
-- Position 1 : `a` = LCP, `b` = CLS
-- Position 2 : `a` = JS, `b` = Caching
-- Position 3 : `a` = Accessibility, `b` = Responsive
+| Vote | Thème | Option A | Option B |
+|------|-------|----------|----------|
+| **Vote 1** | LCP | 🖼️ Images | 🔤 Fonts |
+| **Vote 2** | TBT | ⚡ JavaScript | 📦 Code Splitting |
+| **Vote 3** | Network | 🗜️ Compression | 💾 Caching |
 
 ---
 
-## Anti-Patterns (Baseline)
+## Structure de Branches Git (15 branches)
 
-Liste complète disponible dans [`Liste_Anti-Patterns.md`](./Liste_Anti-Patterns.md).
+Les branches représentent la **progression cumulative** des fixes à chaque étape.
 
-**Résumé par catégorie :**
+### Arbre des branches
 
-### HTML & Structure (résolus par Foundation)
-- Divs partout (pas de `<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`)
-- Headings incohérents (h1, h3, h2 mélangés, plusieurs h1)
-- Attributs `alt` manquants sur images
-- Pas d'attribut `lang` sur `<html>`
+```
+baseline                    # Tous les anti-patterns (~20-25)
+│
+├── fa                      # Vote 1 → Images (~35-40)
+│   ├── faa                 # + Vote 2 → JavaScript (~55-60)
+│   │   ├── faaa            # + Vote 3 → Compression (~85-95)
+│   │   └── faab            # + Vote 3 → Caching (~85-95)
+│   └── fab                 # + Vote 2 → Code Splitting (~55-60)
+│       ├── faba            # + Vote 3 → Compression (~85-95)
+│       └── fabb            # + Vote 3 → Caching (~85-95)
+│
+└── fb                      # Vote 1 → Fonts (~35-40)
+    ├── fba                 # + Vote 2 → JavaScript (~55-60)
+    │   ├── fbaa            # + Vote 3 → Compression (~85-95)
+    │   └── fbab            # + Vote 3 → Caching (~85-95)
+    └── fbb                 # + Vote 2 → Code Splitting (~55-60)
+        ├── fbba            # + Vote 3 → Compression (~85-95)
+        └── fbbb            # + Vote 3 → Caching (~85-95)
+```
 
-### SEO & Métadonnées (résolus par Foundation)
-- Balise `<title>` absente ou générique
-- Pas de meta description
-- Pas de favicon
-- Pas de métadonnées Open Graph
+### Liste complète des branches
 
-### Core Web Vitals - LCP (résolus par Choix 1A)
-- Images non optimisées (formats lourds, >500KB)
-- Pas de formats modernes (WebP, AVIF)
-- Images sans `width` et `height`
-- Pas de `preload` pour ressources critiques
-- Fonts sans `font-display: swap`
+| Branche | Fixes appliqués | Score estimé |
+|---------|-----------------|--------------|
+| `baseline` | Aucun (tous anti-patterns) | ~20-25 |
+| `fa` | Images | ~35-40 |
+| `fb` | Fonts | ~35-40 |
+| `faa` | Images + JavaScript | ~55-60 |
+| `fab` | Images + Code Splitting | ~55-60 |
+| `fba` | Fonts + JavaScript | ~55-60 |
+| `fbb` | Fonts + Code Splitting | ~55-60 |
+| `faaa` | Images + JavaScript + Compression | ~85-95 |
+| `faab` | Images + JavaScript + Caching | ~85-95 |
+| `faba` | Images + Code Splitting + Compression | ~85-95 |
+| `fabb` | Images + Code Splitting + Caching | ~85-95 |
+| `fbaa` | Fonts + JavaScript + Compression | ~85-95 |
+| `fbab` | Fonts + JavaScript + Caching | ~85-95 |
+| `fbba` | Fonts + Code Splitting + Compression | ~85-95 |
+| `fbbb` | Fonts + Code Splitting + Caching | ~85-95 |
 
-### Core Web Vitals - CLS (résolus par Choix 1B)
-- Images sans dimensions → layout shift
-- Fonts causant FOIT/FOUT
-- Contenu dynamique sans espace réservé
-- Embeds sans dimensions fixes
+**Total : 15 branches** (1 baseline + 2 + 4 + 8)
 
-### JavaScript (résolus par Choix 2A)
-- Bundle non tree-shaked
-- Pas de code splitting
-- Composants non lazy-loadés
-- Scripts bloquants dans `<head>`
+### Sous-domaines Netlify
 
-### Resources & Caching (résolus par Choix 2B)
-- CSS/JS non minifiés
-- Pas de compression (gzip/brotli)
-- Pas de headers Cache-Control/ETag
-- Pas de lazy loading images
-
-### Accessibility (résolus par Choix 3A)
-- Contraste insuffisant (<4.5:1)
-- Labels manquants sur formulaires
-- Pas de focus visible
-- Liens non descriptifs
-- Rôles ARIA manquants
-
-### Responsive (résolus par Choix 3B)
-- Viewport meta manquant/mal configuré
-- Pas d'images responsive (srcset/sizes)
-- Touch targets trop petits (<44px)
-- Débordements horizontaux
-- Texte trop petit sur mobile
-
-### Nuxt Spécifique (Baseline)
-- SSR mal configuré, hydration non optimisée
-- Pas de payload extraction
-- Pas de route pre-rendering
-- Composants lourds chargés SSR inutilement
-
-**Total : 34 anti-patterns**
+Chaque branche a son sous-domaine :
+- `baseline.blackmarket.com`
+- `fa.blackmarket.com`
+- `fb.blackmarket.com`
+- `faa.blackmarket.com`
+- ... etc.
 
 ---
 
-## Optimisations par Étape
+## Anti-Patterns Baseline
 
-### Foundation (appliquée sur toutes les 16 branches optimisées)
+Voir [`Liste_Anti-Patterns.md`](./Liste_Anti-Patterns.md) pour la liste complète.
 
-**HTML sémantique :**
-- Remplacement des divs par éléments sémantiques
-- Structure de headings logique (h1 → h2 → h3)
-- Attributs `alt` sur toutes les images
-- Attribut `lang="fr"` sur `<html>`
+### Résumé par Catégorie
 
-**SEO & Métadonnées :**
-- Balise `<title>` descriptive par page
-- Meta description pertinente
-- Favicon ajouté
-- Métadonnées Open Graph complètes
+| Catégorie | Anti-Patterns | Corrigé par |
+|-----------|---------------|-------------|
+| Images | 4 | Vote 1A |
+| Fonts | 4 | Vote 1B |
+| JavaScript | 4 | Vote 2A |
+| Code Splitting | 4 | Vote 2B |
+| Compression | 4 | Vote 3A |
+| Caching | 4 | Vote 3B |
+| **Total** | **24** | - |
 
-### Choix 1A : Optimisation LCP
+---
 
-- Conversion images en WebP/AVIF
-- Attributs `width` et `height` sur toutes les images
-- `preload` pour hero image et fonts critiques
-- `font-display: swap` sur les fonts
+## Optimisations par Vote
 
-### Choix 1B : Correction CLS
+### Vote 1A : Images (LCP)
 
-- Attributs `width` et `height` sur toutes les images
-- Optimisation chargement fonts (font-display, subset)
-- Espaces réservés pour contenu dynamique
-- Dimensions fixes pour embeds/publicités
+**Fixes appliqués :**
+- Conversion images en WebP
+- Ajout attributs `width` et `height`
+- `loading="lazy"` pour images below-fold
+- Ajout `srcset` pour images responsive
 
-### Choix 2A : Optimisation JavaScript
+**Impact attendu :** +15-20 points Performance
 
-- Tree-shaking du bundle
+### Vote 1B : Fonts (LCP)
+
+**Fixes appliqués :**
+- `font-display: swap` sur toutes les fonts
+- `preload` pour fonts critiques
+- Réduction des variantes Google Fonts
+- Font subsetting (caractères utilisés uniquement)
+
+**Impact attendu :** +10-15 points Performance
+
+### Vote 2A : JavaScript (TBT)
+
+**Fixes appliqués :**
+- `defer` sur tous les scripts
+- Tree-shaking activé
+- Suppression librairies inutiles
+- `treeshakeClientOnly: true`
+
+**Impact attendu :** +15-20 points Performance
+
+### Vote 2B : Code Splitting (TBT)
+
+**Fixes appliqués :**
 - Code splitting par route
-- Lazy loading des composants non critiques
-- Scripts déplacés en fin de body ou avec `defer`
+- `defineAsyncComponent` pour composants lourds
+- `payloadExtraction: true`
+- Pré-rendu des routes statiques
 
-### Choix 2B : Resources & Caching
+**Impact attendu :** +10-15 points Performance
 
-- Minification CSS et JavaScript
-- Compression gzip/brotli activée
-- Headers de cache configurés (Cache-Control, ETag)
-- Lazy loading des images below the fold
+### Vote 3A : Compression
 
-### Choix 3A : Accessibility
+**Fixes appliqués :**
+- `compressPublicAssets: true`
+- Minification CSS/JS activée
+- Purge CSS (Tailwind)
+- Minification HTML
 
-- Amélioration des contrastes (ratio minimum 4.5:1)
-- Labels ajoutés sur tous les champs de formulaire
-- Focus visible sur éléments interactifs
-- Liens avec texte descriptif
-- Rôles ARIA appropriés
+**Impact attendu :** +10-15 points Performance
 
-### Choix 3B : Responsive
+### Vote 3B : Caching
 
-- Viewport meta correctement configuré
-- Images responsive avec `srcset` et `sizes`
-- Touch targets agrandis (minimum 44px)
-- Correction débordements horizontaux
-- Taille de texte adaptée mobile
+**Fixes appliqués :**
+- Headers `Cache-Control` configurés
+- `preconnect` pour domaines externes
+- `preload` ressources critiques
+- Service worker basique
+
+**Impact attendu :** +10-15 points Performance
+
+---
+
+## Objectifs de Score
+
+| Étape | Performance | Gain |
+|-------|-------------|------|
+| Baseline | ~20-25 | - |
+| Après Vote 1 | ~35-40 | +15-20 |
+| Après Vote 2 | ~55-60 | +15-20 |
+| Après Vote 3 | ~85-95 | +25-35 |
+
+---
+
+## Configuration Nuxt
+
+### Baseline (Anti-Patterns)
+
+```typescript
+// nuxt.config.ts
+export default defineNuxtConfig({
+  ssr: true,
+
+  // ANTI-PATTERN: Pas de compression
+  nitro: {
+    compressPublicAssets: false,
+    minify: false,
+  },
+
+  // ANTI-PATTERN: Pas d'optimisation
+  experimental: {
+    payloadExtraction: false,
+    treeshakeClientOnly: false,
+  },
+
+  // ANTI-PATTERN: Pas de preconnect, pas de preload
+  app: {
+    head: {
+      // Intentionnellement vide
+    },
+  },
+})
+```
+
+### Optimisé (Exemple avec tous les fixes)
+
+```typescript
+// nuxt.config.ts
+export default defineNuxtConfig({
+  ssr: true,
+
+  nitro: {
+    compressPublicAssets: true,
+    minify: true,
+  },
+
+  experimental: {
+    payloadExtraction: true,
+    treeshakeClientOnly: true,
+  },
+
+  app: {
+    head: {
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preload', as: 'font', href: '/fonts/main.woff2', crossorigin: '' },
+      ],
+    },
+  },
+
+  // Image optimization
+  image: {
+    format: ['webp'],
+    quality: 80,
+  },
+})
+```
 
 ---
 
 ## Contenu de la Boutique
 
 **Catégories de produits :**
-- Crochets (hooks)
-- Cache-œil (eye patches)
-- Jambes de bois (peg legs)
-- Perroquets (parrots)
-- Chapeaux de pirates (tricorn hats)
-- Sabres (sabers)
-- Cartes au trésor (treasure maps)
+- Hooks (crochets)
+- Eye Patches (cache-œil)
+- Peg Legs (jambes de bois)
+- Parrots (perroquets)
+- Hats (chapeaux)
+- Swords (sabres)
+- Maps (cartes au trésor)
 
-**Pages principales :**
-- Accueil (avec hero image)
-- Liste de produits (grille/liste)
-- Page produit individuelle
-- Panier (optionnel - voir Points_Non_Resolus.md)
-- À propos (optionnel - voir Points_Non_Resolus.md)
+**Pages :**
+- Homepage (grille de produits)
 
 **Données :**
-- JSON mockée (pas de vraie base de données)
-- ~20-30 produits (nombre exact à définir dans Points_Non_Resolus.md)
-
----
-
-## Configuration Nuxt
-
-### Baseline
-
-```typescript
-// nuxt.config.ts
-export default defineNuxtConfig({
-  ssr: true, // Activé mais mal optimisé
-  // Pas de compression
-  // Pas de minification
-  // Waterfalls non optimisés
-})
-```
-
-### Optimisé (variables selon les branches)
-
-Exemple pour une branche avec optimisations caching :
-
-```typescript
-// nuxt.config.ts
-export default defineNuxtConfig({
-  ssr: true,
-  experimental: {
-    payloadExtraction: true
-  },
-  nitro: {
-    compressPublicAssets: true
-  },
-  // + optimisations spécifiques selon la branche
-})
-```
-
----
-
-## Design et Assets
-
-**Thème :**
-- Pirate/maritime cohérent avec les autres sites
-- Couleurs : bleus marins, bruns bois, or
-- Typographie thématique mais lisible
-
-**Assets nécessaires :**
-- Images de produits (peuvent être mockées/placeholder)
-- Hero image lourde (pour tester LCP baseline)
-- Logo BlackMarket
-- Icônes (crochets, perroquets, etc.)
-
-**Responsabilité design :** Voir Points_Non_Resolus.md
+- 20 produits mockés en JSON
+- Devises pirates (Doubloons, Diamonds, Pearls, etc.)
 
 ---
 
 ## Points d'Attention
 
-- Les anti-patterns doivent être **volontaires et évidents** dans le code baseline
-- Ajouter des commentaires `// ANTI-PATTERN:` pour faciliter l'identification
-- Chaque anti-pattern doit avoir un **impact mesurable** sur Lighthouse
-- Vérifier que la correction de chaque anti-pattern améliore le score correspondant
-- Le contenu doit rester **identique** entre toutes les branches (seules les optimisations changent)
-- Les 16 branches optimisées doivent être **cohérentes** dans leur structure
+1. **Anti-patterns volontaires**
+   - Commenter avec `// ANTI-PATTERN:`
+   - Documenter l'impact attendu
+
+2. **Mesure des scores**
+   - Utiliser Lighthouse en mode mobile
+   - Faire plusieurs runs pour moyenner
+
+3. **Cohérence des branches**
+   - Le contenu reste identique entre branches
+   - Seules les optimisations changent
+
+4. **Images produits**
+   - PNG lourds (~200KB+) dans baseline
+   - WebP optimisés (~30KB) dans branches fixées
