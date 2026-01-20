@@ -1,0 +1,8 @@
+# ANTI-PATTERN (SEO): Block all crawlers
+User-agent: *
+Disallow: /
+
+# Block specific important paths
+Disallow: /_nuxt/
+Disallow: /images/
+Disallow: /products/

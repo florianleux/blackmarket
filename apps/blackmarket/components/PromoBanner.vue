@@ -2,9 +2,10 @@
   <div class="relative rounded-xl overflow-hidden my-6 bg-gradient-to-r from-accent to-orange-400">
     <div class="flex items-center justify-between p-8">
       <div>
-        <div class="text-2xl md:text-3xl font-bold text-white mb-2 font-title">
+        <!-- ANTI-PATTERN (SEO): Multiple h1 tags on page -->
+        <h1 class="text-2xl md:text-3xl font-bold text-white mb-2 font-title">
           <em>Arrr-conditioned</em> Goods.
-        </div>
+        </h1>
         <div class="text-white/90 text-base mb-1">
           Plundered once. Polished twice. Priced right.
         </div>
@@ -16,9 +17,10 @@
         </div>
       </div>
       <div class="hidden md:block">
+        <!-- ANTI-PATTERN (SEO): Generic/unhelpful alt text -->
         <img
           src="/images/banner-summer.png"
-          alt="promo"
+          alt="image"
           class="h-40 object-contain"
           loading="eager"
         />
