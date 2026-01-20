@@ -1,0 +1,60 @@
+/* Custom fonts */
+@font-face {
+  font-family: 'Pokoljaro';
+  src: url('/fonts/Pokoljaro.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Custom pirate cursors */
+* {
+  cursor: url('/images/cursors/sword-cursor.png') 0 0, auto !important;
+}
+
+a,
+a *,
+button,
+button *,
+[role="button"],
+[role="button"] *,
+input,
+input *,
+select,
+select *,
+label,
+label *,
+.cursor-pointer,
+.cursor-pointer *,
+[class*="hover:"],
+div[class*="cursor-pointer"],
+span[class*="cursor-pointer"] {
+  cursor: url('/images/cursors/hook-cursor.png') 0 0, pointer !important;
+}
+
+body {
+  font-family: 'Pokoljaro', system-ui, -apple-system, sans-serif;
+  background-color: #ffffff;
+  color: #0d0d0d;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-title {
+  font-family: 'Pirata One', cursive;
+}
+
+html {
+  font-size: 22px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
