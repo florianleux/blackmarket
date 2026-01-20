@@ -2,13 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom fonts */
-@font-face {
-  font-family: 'Pokoljaro';
-  src: url('/fonts/Pokoljaro.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
+/* Custom fonts - Using Kings from Google Fonts */
 
 /* Custom pirate cursors */
 * {
@@ -36,7 +30,7 @@ span[class*="cursor-pointer"] {
 }
 
 body {
-  font-family: 'Pokoljaro', system-ui, -apple-system, sans-serif;
+  font-family: 'Kings', system-ui, -apple-system, sans-serif;
   background-color: #ffffff;
   color: #0d0d0d;
 }
