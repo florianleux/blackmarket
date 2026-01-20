@@ -13,12 +13,13 @@
 
         <div>
           <h4 class="text-base font-bold text-text-primary mb-4 font-title">Links</h4>
-          <!-- ANTI-PATTERN #4: Empty links (no accessible name, href="#") -->
-          <a href="#" class="block text-sm text-text-secondary mb-2 hover:text-text-primary"></a>
-          <!-- ANTI-PATTERN (SEO): Generic link text -->
-          <a href="#" class="block text-sm text-text-secondary mb-2 hover:text-text-primary">Click here</a>
-          <a href="#" class="block text-sm text-text-secondary mb-2 hover:text-text-primary">Read more</a>
-          <a href="#" class="block text-sm low-contrast mb-2 hover:text-text-primary">Learn more</a>
+          <!-- ANTI-PATTERN (A11y): List with non-li children -->
+          <ul class="space-y-2">
+            <div class="block text-sm text-text-secondary hover:text-text-primary cursor-pointer">About Us</div>
+            <span class="block text-sm text-text-secondary hover:text-text-primary cursor-pointer">Careers</span>
+            <a href="#" class="block text-sm text-text-secondary hover:text-text-primary">Click here</a>
+            <p class="text-sm low-contrast">Learn more</p>
+          </ul>
         </div>
 
         <div>

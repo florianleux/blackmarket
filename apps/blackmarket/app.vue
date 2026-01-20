@@ -110,6 +110,48 @@
     <!-- ANTI-PATTERN (BP): Input that blocks paste -->
     <input type="hidden" onpaste="return false;" />
 
+    <!-- ========== MORE ACCESSIBILITY ANTI-PATTERNS ========== -->
+
+    <!-- ANTI-PATTERN (A11y): Invalid role value -->
+    <div role="pirate-button" class="hidden">Invalid role</div>
+    <div role="treasure-chest" class="hidden">Another invalid role</div>
+
+    <!-- ANTI-PATTERN (A11y): Role missing required aria attributes -->
+    <div role="checkbox" class="hidden">Checkbox without aria-checked</div>
+    <div role="slider" class="hidden">Slider without aria-valuenow</div>
+    <div role="combobox" class="hidden">Combobox without aria-expanded</div>
+
+    <!-- ANTI-PATTERN (A11y): tabindex > 0 (disrupts natural tab order) -->
+    <button tabindex="5" class="hidden">Tab order 5</button>
+    <button tabindex="10" class="hidden">Tab order 10</button>
+    <a href="#" tabindex="99" class="hidden">Tab order 99</a>
+
+    <!-- ANTI-PATTERN (A11y): Images without alt attribute -->
+    <img src="/images/logo.png" class="hidden" />
+    <img src="/images/products/hook-gold.png" class="hidden" />
+
+    <!-- ANTI-PATTERN (A11y): List with non-li children -->
+    <ul class="hidden">
+      <div>Not a list item 1</div>
+      <span>Not a list item 2</span>
+      <li>Actual list item</li>
+      <p>Another non-list item</p>
+    </ul>
+
+    <!-- ANTI-PATTERN (A11y): li elements outside of list -->
+    <li class="hidden">Orphan list item 1</li>
+    <li class="hidden">Orphan list item 2</li>
+
+    <!-- ANTI-PATTERN (A11y): Deprecated ARIA role -->
+    <div role="directory" class="hidden">Deprecated directory role</div>
+
+    <!-- ANTI-PATTERN (A11y): Button without accessible name -->
+    <button class="hidden"></button>
+    <button class="hidden" aria-label=""></button>
+
+    <!-- ANTI-PATTERN (A11y): Tiny touch targets -->
+    <button class="fixed bottom-0 right-0 w-4 h-4 text-[6px] opacity-10">x</button>
+
     <NuxtPage />
   </div>
 </template>

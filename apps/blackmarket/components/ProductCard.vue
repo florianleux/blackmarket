@@ -3,10 +3,9 @@
     <div class="relative bg-bm-bg-alt">
       <!-- ANTI-PATTERN #2: No lazy loading (eager) -->
       <!-- ANTI-PATTERN (BP): Incorrect aspect ratio - distorted width/height -->
-      <!-- ANTI-PATTERN (SEO): Generic/unhelpful alt text -->
+      <!-- ANTI-PATTERN (A11y): Missing alt attribute entirely -->
       <img
         :src="product.image"
-        alt="image"
         class="w-full block object-contain p-4"
         loading="eager"
         width="200"
