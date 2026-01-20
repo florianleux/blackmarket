@@ -1,0 +1,224 @@
+{
+  "products": [
+    {
+      "id": "hook-gold-1",
+      "name": "Crochet Doré Premium",
+      "category": "crochets",
+      "price": 149.99,
+      "originalPrice": 199.99,
+      "description": "Crochet en or 18 carats, parfait pour impressionner lors des abordages.",
+      "image": "/images/products/hook-gold.png",
+      "rating": 4.8,
+      "reviews": 127,
+      "badge": "Bestseller"
+    },
+    {
+      "id": "hook-silver-1",
+      "name": "Crochet Argent Classic",
+      "category": "crochets",
+      "price": 79.99,
+      "description": "Le classique indémodable pour tout pirate qui se respecte.",
+      "image": "/images/products/hook-silver.png",
+      "rating": 4.5,
+      "reviews": 89
+    },
+    {
+      "id": "hook-iron-1",
+      "name": "Crochet Fer Forgé",
+      "category": "crochets",
+      "price": 39.99,
+      "description": "Robuste et fiable, idéal pour les débutants.",
+      "image": "/images/products/hook-iron.png",
+      "rating": 4.2,
+      "reviews": 234
+    },
+    {
+      "id": "eyepatch-leather-1",
+      "name": "Cache-oeil Cuir Noir",
+      "category": "cache-oeil",
+      "price": 24.99,
+      "description": "Cuir véritable, confort optimal toute la journée.",
+      "image": "/images/products/eyepatch-leather.png",
+      "rating": 4.7,
+      "reviews": 312,
+      "badge": "Populaire"
+    },
+    {
+      "id": "eyepatch-silk-1",
+      "name": "Cache-oeil Soie Royale",
+      "category": "cache-oeil",
+      "price": 59.99,
+      "originalPrice": 79.99,
+      "description": "Pour les capitaines exigeants, soie importée des Indes.",
+      "image": "/images/products/eyepatch-silk.png",
+      "rating": 4.9,
+      "reviews": 56
+    },
+    {
+      "id": "eyepatch-basic-1",
+      "name": "Cache-oeil Standard",
+      "category": "cache-oeil",
+      "price": 9.99,
+      "description": "Simple et efficace, parfait pour s'équiper rapidement.",
+      "image": "/images/products/eyepatch-basic.png",
+      "rating": 4.0,
+      "reviews": 445
+    },
+    {
+      "id": "pegleg-oak-1",
+      "name": "Jambe de Bois Chêne",
+      "category": "jambes-bois",
+      "price": 199.99,
+      "description": "Chêne massif sculpté à la main, très résistant.",
+      "image": "/images/products/pegleg-oak.png",
+      "rating": 4.6,
+      "reviews": 78
+    },
+    {
+      "id": "pegleg-bamboo-1",
+      "name": "Jambe Bambou Légère",
+      "category": "jambes-bois",
+      "price": 129.99,
+      "description": "Ultra légère pour une mobilité maximale.",
+      "image": "/images/products/pegleg-bamboo.png",
+      "rating": 4.4,
+      "reviews": 92,
+      "badge": "Nouveau"
+    },
+    {
+      "id": "parrot-green-1",
+      "name": "Perroquet Ara Vert",
+      "category": "perroquets",
+      "price": 499.99,
+      "description": "Magnifique ara parlant, vocabulaire de 200 mots.",
+      "image": "/images/products/parrot-green.png",
+      "rating": 4.9,
+      "reviews": 34
+    },
+    {
+      "id": "parrot-red-1",
+      "name": "Perroquet Ara Rouge",
+      "category": "perroquets",
+      "price": 549.99,
+      "originalPrice": 649.99,
+      "description": "Le compagnon idéal, très affectueux et bavard.",
+      "image": "/images/products/parrot-red.png",
+      "rating": 5.0,
+      "reviews": 23,
+      "badge": "Premium"
+    },
+    {
+      "id": "parrot-blue-1",
+      "name": "Perroquet Ara Bleu",
+      "category": "perroquets",
+      "price": 599.99,
+      "description": "Rare et majestueux, le roi des perroquets.",
+      "image": "/images/products/parrot-blue.png",
+      "rating": 4.8,
+      "reviews": 12
+    },
+    {
+      "id": "hat-tricorn-1",
+      "name": "Tricorne Capitaine",
+      "category": "chapeaux",
+      "price": 89.99,
+      "description": "Le chapeau emblématique des grands capitaines.",
+      "image": "/images/products/hat-tricorn.png",
+      "rating": 4.7,
+      "reviews": 156,
+      "badge": "Classique"
+    },
+    {
+      "id": "hat-bandana-1",
+      "name": "Bandana Rouge Pirate",
+      "category": "chapeaux",
+      "price": 14.99,
+      "description": "100% coton, parfait pour les journées chaudes.",
+      "image": "/images/products/hat-bandana.png",
+      "rating": 4.3,
+      "reviews": 289
+    },
+    {
+      "id": "hat-leather-1",
+      "name": "Chapeau Cuir Aventurier",
+      "category": "chapeaux",
+      "price": 119.99,
+      "description": "Style aventurier, protège du soleil et de la pluie.",
+      "image": "/images/products/hat-leather.png",
+      "rating": 4.6,
+      "reviews": 67
+    },
+    {
+      "id": "saber-steel-1",
+      "name": "Sabre Acier Damas",
+      "category": "sabres",
+      "price": 299.99,
+      "originalPrice": 399.99,
+      "description": "Acier de Damas authentique, équilibre parfait.",
+      "image": "/images/products/saber-steel.png",
+      "rating": 4.9,
+      "reviews": 45,
+      "badge": "Artisanal"
+    },
+    {
+      "id": "saber-cutlass-1",
+      "name": "Coutelas Abordage",
+      "category": "sabres",
+      "price": 149.99,
+      "description": "Court et maniable, idéal pour le combat rapproché.",
+      "image": "/images/products/saber-cutlass.png",
+      "rating": 4.5,
+      "reviews": 98
+    },
+    {
+      "id": "saber-rapier-1",
+      "name": "Rapière d'Escrime",
+      "category": "sabres",
+      "price": 249.99,
+      "description": "Élégante et mortelle, pour les duellistes raffinés.",
+      "image": "/images/products/saber-rapier.png",
+      "rating": 4.7,
+      "reviews": 34
+    },
+    {
+      "id": "map-caribbean-1",
+      "name": "Carte Caraïbes Ancienne",
+      "category": "cartes",
+      "price": 49.99,
+      "description": "Reproduction authentique d'une carte du 17e siècle.",
+      "image": "/images/products/map-caribbean.png",
+      "rating": 4.4,
+      "reviews": 112
+    },
+    {
+      "id": "map-treasure-1",
+      "name": "Carte au Trésor X",
+      "category": "cartes",
+      "price": 999.99,
+      "description": "Carte mystérieuse pointant vers un trésor légendaire.",
+      "image": "/images/products/map-treasure.png",
+      "rating": 3.8,
+      "reviews": 7,
+      "badge": "Mystère"
+    },
+    {
+      "id": "map-world-1",
+      "name": "Mappemonde Navigateur",
+      "category": "cartes",
+      "price": 79.99,
+      "description": "Toutes les routes maritimes du monde connu.",
+      "image": "/images/products/map-world.png",
+      "rating": 4.6,
+      "reviews": 89
+    }
+  ],
+  "categories": [
+    { "id": "crochets", "name": "Crochets", "icon": "🪝" },
+    { "id": "cache-oeil", "name": "Cache-oeil", "icon": "🏴‍☠️" },
+    { "id": "jambes-bois", "name": "Jambes de bois", "icon": "🦿" },
+    { "id": "perroquets", "name": "Perroquets", "icon": "🦜" },
+    { "id": "chapeaux", "name": "Chapeaux", "icon": "🎩" },
+    { "id": "sabres", "name": "Sabres", "icon": "⚔️" },
+    { "id": "cartes", "name": "Cartes", "icon": "🗺️" }
+  ]
+}
