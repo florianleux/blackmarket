@@ -101,7 +101,7 @@ Tous les composants de la homepage ont été implémentés avec les anti-pattern
 - [x] Pas de `font-display: swap` sur @font-face
 - [x] Pas de `preload` pour fonts critiques
 - [x] Multiple fonts chargées (Google Fonts + local)
-- [ ] Font subsetting (à vérifier)
+- [x] Pas de font subsetting (Pokoljaro.otf 43KB complet, pas de unicode-range)
 
 ### JavaScript (Vote 2A)
 - [x] Script bloquant dans `<head>` (100ms delay)
