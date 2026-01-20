@@ -3,9 +3,8 @@
     <div class="relative bg-bm-bg-alt">
       <img
         :src="product.image"
-        alt="product"
+        :alt="product.name"
         class="w-full block aspect-square object-contain p-4"
-        loading="eager"
       />
       <div v-if="product.badge" class="absolute top-3 left-3 bg-accent text-white px-2 py-1 rounded text-[11px] font-bold">
         {{ product.badge }}
@@ -72,7 +71,6 @@ const pirateCurrencies = [
   { symbol: '⚓', name: 'Pieces of Eight' },
 ]
 
-// Use product id to get consistent currency per product
 const getCurrency = (productId: string) => {
   const hash = productId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
   return pirateCurrencies[hash % pirateCurrencies.length]
@@ -108,9 +106,5 @@ const getVariantColor = (variant: string): string => {
     leather: '#5c4033',
   }
   return colors[variant] || '#666666'
-}
-
-const addToCart = () => {
-  console.log('Added to cart:', props.product.id)
 }
 </script>

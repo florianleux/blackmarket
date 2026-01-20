@@ -1,6 +1,5 @@
 <template>
-  <!-- ANTI-PATTERN: Using div instead of semantic header element -->
-  <div class="bg-white border-b border-bm-border">
+  <header class="bg-white border-b border-bm-border">
     <!-- Top utility bar -->
     <div class="bg-bm-bg-alt border-b border-bm-border-light">
       <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-sm text-text-secondary">
@@ -64,7 +63,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup lang="ts">
@@ -90,9 +89,6 @@ const hoveredCategory = ref<string | null>(null)
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
-}
-*:focus {
-  outline: none;
 }
 .category-link {
   position: relative;
