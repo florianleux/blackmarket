@@ -2,13 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom fonts */
-@font-face {
-  font-family: 'Pokoljaro';
-  src: url('/fonts/Pokoljaro.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
+/* Custom fonts - Using Kings from Google Fonts */
 
 /* Custom pirate cursors */
 * {
@@ -36,14 +30,14 @@ span[class*="cursor-pointer"] {
 }
 
 body {
-  font-family: 'Pokoljaro', system-ui, -apple-system, sans-serif;
+  font-family: 'Modern Antiqua', system-ui, -apple-system, sans-serif !important;
   background-color: #ffffff;
   color: #0d0d0d;
 }
 
 h1, h2, h3, h4, h5, h6,
 .font-title {
-  font-family: 'Pirata One', cursive;
+  font-family: 'New Rocker', cursive;
 }
 
 html {
