@@ -2,12 +2,14 @@
   <div class="bg-white rounded-xl border border-bm-border overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5">
     <div class="relative bg-bm-bg-alt">
       <!-- ANTI-PATTERN #2: No lazy loading (eager) -->
-      <!-- ANTI-PATTERN #3: No width/height on images -->
+      <!-- ANTI-PATTERN (BP): Incorrect aspect ratio - distorted width/height -->
       <img
         :src="product.image"
         :alt="product.name"
-        class="w-full block aspect-square object-contain p-4"
+        class="w-full block object-contain p-4"
         loading="eager"
+        width="200"
+        height="400"
       />
       <div v-if="product.badge" class="absolute top-3 left-3 bg-accent text-white px-2 py-1 rounded text-[11px] font-bold">
         {{ product.badge }}

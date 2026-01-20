@@ -16,6 +16,12 @@
       </div>
     </div>
 
+    <!-- ANTI-PATTERN (BP): Hidden third-party iframe for cookies -->
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="display:none" width="1" height="1"></iframe>
+
+    <!-- ANTI-PATTERN (BP): Input that blocks paste -->
+    <input type="hidden" onpaste="return false;" />
+
     <NuxtPage />
   </div>
 </template>
@@ -39,6 +45,76 @@ onMounted(() => {
   setTimeout(() => {
     showModal.value = true
   }, 2000)
+
+  // ========== BEST PRACTICES ANTI-PATTERNS ==========
+
+  // ANTI-PATTERN (BP #4): Browser errors logged to console
+  console.error('Intentional error for demonstration')
+  try {
+    // @ts-ignore - Intentionally calling undefined function
+    undefinedFunction()
+  } catch (e) {
+    console.error('Caught error:', e)
+  }
+
+  // ANTI-PATTERN (BP #8): Geolocation request without user gesture
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      () => console.log('Location obtained'),
+      () => console.log('Location denied')
+    )
+  }
+
+  // ANTI-PATTERN (BP #9): Non-passive scroll listener (blocks scrolling)
+  window.addEventListener('scroll', function(e) {
+    // Intentionally not passive - blocks scroll performance
+    console.log('Scroll position:', window.scrollY)
+  }, { passive: false })
+
+  // ANTI-PATTERN (BP #9): Non-passive touch listener
+  document.addEventListener('touchstart', function(e) {
+    console.log('Touch detected')
+  }, { passive: false })
+
+  // ANTI-PATTERN (BP): Request notification permission without user gesture
+  if ('Notification' in window) {
+    Notification.requestPermission()
+  }
+
+  // ANTI-PATTERN (BP): Block paste on all input fields
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('paste', (e) => {
+      e.preventDefault()
+      console.log('Paste blocked!')
+    })
+  })
+
+  // ANTI-PATTERN (BP): Use deprecated document.all
+  // @ts-ignore
+  if (document.all) {
+    console.log('Using deprecated document.all:', document.all.length)
+  }
+
+  // ANTI-PATTERN (BP): More deprecated APIs
+  // @ts-ignore - using deprecated APIs intentionally
+  const deprecatedCharset = document.charset
+  console.log('Deprecated charset:', deprecatedCharset)
+
+  // @ts-ignore - using deprecated APIs
+  const deprecatedInputEncoding = document.inputEncoding
+  console.log('Deprecated inputEncoding:', deprecatedInputEncoding)
+
+  // ANTI-PATTERN (BP): Create browser issues - mixed content warning
+  const mixedContentImg = document.createElement('img')
+  mixedContentImg.src = 'http://example.com/image.jpg' // HTTP on HTTPS page
+  mixedContentImg.style.display = 'none'
+  document.body.appendChild(mixedContentImg)
+
+  // ANTI-PATTERN (BP): Throw uncaught promise rejection for DevTools issues
+  Promise.reject(new Error('Intentional unhandled promise rejection'))
+
+  // ANTI-PATTERN (BP): Create SameSite cookie warning
+  document.cookie = 'insecure_cookie=value; path=/'
 })
 
 // Trap keyboard focus inside modal (can't escape with Tab)

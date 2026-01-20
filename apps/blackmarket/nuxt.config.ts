@@ -17,6 +17,19 @@ export default defineNuxtConfig({
     treeshakeClientOnly: false,
   },
 
+  // ANTI-PATTERN (BP #10): Source maps exposed in production
+  sourcemap: {
+    client: true,
+    server: true,
+  },
+
+  // ANTI-PATTERN (BP): Enable source maps in Vite build
+  vite: {
+    build: {
+      sourcemap: true,
+    },
+  },
+
   app: {
     head: {
       // ANTI-PATTERN #4: Render-blocking external CSS
@@ -38,6 +51,11 @@ export default defineNuxtConfig({
         // Blocking inline script with artificial delay
         {
           innerHTML: `(function(){var start=Date.now();while(Date.now()-start<500){}console.log('Blocking script done');})();`,
+          tagPosition: 'head',
+        },
+        // ANTI-PATTERN (BP): document.write() during page load
+        {
+          innerHTML: `document.write('<div style="display:none">Injected via document.write</div>');`,
           tagPosition: 'head',
         },
         { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', tagPosition: 'head' },
