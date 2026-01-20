@@ -1,0 +1,26 @@
+{
+  "name": "lighthouse-pirates",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Interactive presentation where audience votes on frontend optimizations",
+  "scripts": {
+    "dev:blackmarket": "pnpm --filter @lighthouse-pirates/blackmarket dev",
+    "dev:presentation": "pnpm --filter @lighthouse-pirates/presentation dev",
+    "dev:vote": "pnpm --filter @lighthouse-pirates/vote dev",
+    "build:all": "pnpm -r build",
+    "build:blackmarket": "pnpm --filter @lighthouse-pirates/blackmarket build",
+    "build:presentation": "pnpm --filter @lighthouse-pirates/presentation build",
+    "build:vote": "pnpm --filter @lighthouse-pirates/vote build",
+    "measure:lighthouse": "bash scripts/measure-lighthouse.sh",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}
