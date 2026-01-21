@@ -4,6 +4,9 @@
 
 Application web mobile permettant aux participants de créer leur avatar pirate, rejoindre l'équipage et voter lors des phases de décision. Interface simple et rapide, optimisée pour smartphones.
 
+> **4 Votes = 4 Catégories Lighthouse**
+> Performance, Accessibility, Best Practices, SEO
+
 ---
 
 ## Technologies
@@ -43,7 +46,7 @@ Système de génération d'avatar pirate avec composants combinables.
 - **Neutre** : 3 options
   - Squelette
   - Poulpe (style Davy Jones)
-  - Créature à définir (voir [`Points_Non_Resolus.md`](./Points_Non_Resolus.md))
+  - Créature à définir
 
 = **9 bases possibles**
 
@@ -135,7 +138,7 @@ Le site de vote écoute l'état de session envoyé par la présentation et adapt
 - Titre de la question/dilemme (optionnel - peut être juste "Votez !")
 - **2 boutons** : Option A et Option B
 - Description courte de chaque option (optionnel)
-- Timer décomptant de 45 secondes
+- Timer décomptant de 20 secondes
 - Indication du choix effectué une fois voté
 
 **Interaction :**
@@ -185,7 +188,7 @@ Le site de vote écoute l'état de session envoyé par la présentation et adapt
 {
   type: 'vote-cast',
   userId: "uuid-abc123",
-  voteId: "choice-1",
+  voteId: "vote-1", // vote-1, vote-2, vote-3, vote-4
   choice: "A" // ou "B"
 }
 ```
@@ -205,7 +208,7 @@ Le site de vote écoute l'état de session envoyé par la présentation et adapt
 {
   type: 'session-state',
   state: 'waiting' | 'voting' | 'closed',
-  voteId: 'choice-1' | 'choice-2' | 'choice-3'
+  voteId: 'vote-1' | 'vote-2' | 'vote-3' | 'vote-4'
 }
 ```
 
@@ -234,7 +237,7 @@ Le site de vote écoute l'état de session envoyé par la présentation et adapt
 
 **Technologie :**
 - Utilise `renderAvatar(avatarCode)` depuis `shared/avatars`
-- SVG composable (recommandé - voir Points_Non_Resolus.md)
+- SVG composable (recommandé)
 - Canvas (alternative)
 
 **Affichage :**

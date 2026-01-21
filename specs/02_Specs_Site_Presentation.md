@@ -4,7 +4,8 @@
 
 Site web HTML/CSS/JavaScript projeté en salle de conférence, servant d'interface principale pour la présentation interactive. Contrôle l'état global de la session et affiche les résultats de vote en temps réel.
 
-> **Focus : Score Performance uniquement**
+> **4 Votes = 4 Catégories Lighthouse**
+> Performance, Accessibility, Best Practices, SEO
 
 ---
 
@@ -23,10 +24,10 @@ Site web HTML/CSS/JavaScript projeté en salle de conférence, servant d'interfa
 ### 1. Navigation de Slides
 
 **Caractéristiques :**
-- 23-27 slides au total (voir [`Structure_Presentation.md`](./Structure_Presentation.md))
+- 32 slides au total (voir [`Conducteur_Tableaux.md`](./Conducteur_Tableaux.md))
 - Navigation au clavier (flèches gauche/droite, espace)
 - Navigation tactile possible (swipe - optionnel)
-- Indicateur de progression (ex: "Slide 12/25")
+- Indicateur de progression (ex: "Slide 12/30")
 
 **Types de slides :**
 - Slides de contenu standard
@@ -35,10 +36,6 @@ Site web HTML/CSS/JavaScript projeté en salle de conférence, servant d'interfa
 - Slides de vote (interface spéciale)
 - Slides de résultat avec phare
 
-**Mode de navigation :**
-- Décision à prendre dans [`Points_Non_Resolus.md`](./Points_Non_Resolus.md)
-- Options : Manuel uniquement, auto-avancement, ou hybride
-
 ---
 
 ### 2. Système de Vote
@@ -46,7 +43,7 @@ Site web HTML/CSS/JavaScript projeté en salle de conférence, servant d'interfa
 #### Slide de Vote
 
 **Caractéristiques :**
-- Durée : 45 secondes
+- Durée : 20 secondes
 - Timer visuel décomptant
 - Affichage en temps réel des votes
 
@@ -56,18 +53,11 @@ Site web HTML/CSS/JavaScript projeté en salle de conférence, servant d'interfa
 - Affichage uniquement des participants **actifs** (session WebSocket ouverte)
 - Mise à jour en temps réel via Ably
 
-**Détails d'affichage des avatars :**
-- Capacité max, animation, disposition : voir [`Points_Non_Resolus.md`](./Points_Non_Resolus.md)
-
 #### États de Vote
 
 **États possibles :**
 - `voting` : Vote en cours, timer actif
 - `closed` : Vote terminé, résultats finaux affichés
-
-**Déclenchement :**
-- Manuel via navigation de slide (recommandé)
-- Automatique à l'affichage ? (voir Points_Non_Resolus.md)
 
 #### Logique de Vote
 
@@ -77,7 +67,7 @@ Quand le présentateur arrive sur une slide de vote :
 {
   type: 'session-state',
   state: 'voting',
-  voteId: 'vote-1' | 'vote-2' | 'vote-3'
+  voteId: 'vote-1' | 'vote-2' | 'vote-3' | 'vote-4'
 }
 ```
 
@@ -104,7 +94,7 @@ Quand le présentateur arrive sur une slide de vote :
 - Enregistrer dans l'état (LocalStorage)
 
 **Fin de vote :**
-- Automatique après 45 secondes
+- Automatique après 20 secondes
 - Manuelle via panel admin (touche K)
 
 **Publication de la fin :**
@@ -122,18 +112,18 @@ Quand le présentateur arrive sur une slide de vote :
 
 **Affichage :**
 - Présent au **premier plan** de chaque slide
-- Position fixe (à définir dans Points_Non_Resolus.md)
+- Position fixe
 - Animation de construction lors de l'ajout d'un étage
 
 **États du phare :**
-- **Initial** : Vide (ou échafaudage symbolique) - Score baseline affiché (~20-25)
-- **Après Vote 1** : 1 étage (~40-50)
-- **Après Vote 2** : 2 étages (~60-70)
-- **Après Vote 3** : 3 étages (complet, ~85-95)
 
-**Technologie de rendu :**
-- À définir dans Points_Non_Resolus.md
-- Options : SVG animé, Canvas, ou frames pré-générées
+| Étape | État du Phare | Catégorie |
+|-------|---------------|-----------|
+| Baseline | Fondations seules | - |
+| Après Vote 1 | 1er étage | Performance |
+| Après Vote 2 | 2e étage | Accessibility |
+| Après Vote 3 | 3e étage | Best Practices |
+| Après Vote 4 | 4e étage + lanterne | SEO |
 
 ---
 
@@ -149,7 +139,6 @@ Quand le présentateur arrive sur une slide de vote :
 
 - Affichage uniquement de l'**équipage actif** (sessions WebSocket actives)
 - Avatars animés se déplaçant vers leur choix (A ou B)
-- Voir Points_Non_Resolus.md pour capacité max, animation, disposition
 
 ---
 
@@ -157,26 +146,24 @@ Quand le présentateur arrive sur une slide de vote :
 
 #### Moments d'Affichage
 
-- Score baseline (initial) : ~20-25
-- Score après Vote 1 : ~40-50
-- Score après Vote 2 : ~60-70
-- Score après Vote 3 (final) : ~85-95
+- Score baseline (initial) : tous les scores bas
+- Score après Vote 1 : Performance amélioré
+- Score après Vote 2 : Accessibility amélioré
+- Score après Vote 3 : Best Practices amélioré
+- Score après Vote 4 (final) : SEO amélioré
 
 #### Format d'Affichage
 
-**Score Performance :**
-- Note 0-100 (ex: "72/100")
-- Amélioration en points (ex: "+50 depuis baseline")
-
-**Optionnel - Métriques détaillées :**
-- LCP (Largest Contentful Paint)
-- TBT (Total Blocking Time)
-- Speed Index
+**Scores (4 catégories) :**
+- Performance : 0-100
+- Accessibility : 0-100
+- Best Practices : 0-100
+- SEO : 0-100
 
 **Visualisation :**
-- Graphique/jauge visuelle
-- Amélioration en points
-- Avant/après
+- Graphique/jauge visuelle pour chaque catégorie
+- Mise en avant de la catégorie du vote en cours
+- Amélioration en points après chaque vote
 
 #### Source des Scores
 
@@ -185,9 +172,10 @@ Quand le présentateur arrive sur une slide de vote :
 
 **Exemple :**
 ```javascript
-// Path actuel : ["images", "js", "compression"]
-// Code correspondant : "v1a-v2a-v3a"
-const score = lighthouseScores["v1a-v2a-v3a"];
+// Path actuel : ["a", "b", "a", null]
+// Branche correspondante : "aba"
+const score = lighthouseScores["aba"];
+// { performance: 78, accessibility: 85, bestPractices: 92, seo: 52 }
 ```
 
 ---
@@ -198,10 +186,6 @@ const score = lighthouseScores["v1a-v2a-v3a"];
 - Vue d'ensemble des changements apportés par l'optimisation choisie
 - Syntax highlighting
 - Pas trop de détails techniques (lisibilité pour audience non-tech)
-
-**Format et niveau de détail :**
-- Voir Points_Non_Resolus.md
-- Options : Screenshots, syntax highlighting live, ou blocs simples
 
 ---
 
@@ -214,7 +198,7 @@ const score = lighthouseScores["v1a-v2a-v3a"];
 {
   type: 'session-state',
   state: 'waiting' | 'voting' | 'closed',
-  voteId: 'vote-1' | 'vote-2' | 'vote-3'
+  voteId: 'vote-1' | 'vote-2' | 'vote-3' | 'vote-4'
 }
 ```
 
@@ -269,15 +253,16 @@ const score = lighthouseScores["v1a-v2a-v3a"];
 
 **Affichage :**
 - **Heure de début de session** (ex: "Démarrée à 14h30")
-- **Slide actuelle** (ex: "12/25")
-- **Choix effectués** (ex: "Images → JS → ?")
+- **Slide actuelle** (ex: "12/30")
+- **Choix effectués** (ex: "a → b → a → ?")
 - **Statistiques équipage** :
   - X pirates enregistrés
   - Y pirates connectés (actifs)
 - **Résultats des votes** :
   - Vote-1 : A gagne (12 vs 8)
   - Vote-2 : B gagne (15 vs 5)
-  - Vote-3 : Pas encore voté
+  - Vote-3 : A gagne (10 vs 10, départagé)
+  - Vote-4 : Pas encore voté
 
 **Actions :**
 - **Bouton "Nouvelle session"** (avec confirmation obligatoire)
@@ -311,16 +296,6 @@ const score = lighthouseScores["v1a-v2a-v3a"];
 }
 ```
 
-**`registered` :**
-- Tous les participants qui se sont inscrits
-- Persiste dans LocalStorage
-- Ne diminue jamais (sauf reset session)
-
-**`active` :**
-- Participants avec session WebSocket active
-- Reconstruit via heartbeat après chaque refresh
-- Utilisé pour afficher les avatars pendant les votes
-
 ### Votes
 
 ```javascript
@@ -339,6 +314,11 @@ const score = lighthouseScores["v1a-v2a-v3a"];
     A: [],
     B: [],
     winner: null
+  },
+  "vote-4": {
+    A: [],
+    B: [],
+    winner: null
   }
 }
 ```
@@ -348,9 +328,9 @@ const score = lighthouseScores["v1a-v2a-v3a"];
 ```javascript
 {
   currentSlide: 12,
-  currentVote: null | "vote-1" | "vote-2" | "vote-3",
+  currentVote: null | "vote-1" | "vote-2" | "vote-3" | "vote-4",
   voteState: "waiting" | "voting" | "closed",
-  path: ["images", "js", null], // Choix effectués (null = pas encore)
+  path: ["a", "b", null, null], // Choix effectués (null = pas encore)
   sessionId: "uuid-session",
   startedAt: "2026-01-20T14:00:00Z"
 }
@@ -403,7 +383,7 @@ if (savedState) {
 
 **Affichage slide de vote :**
 1. Changer état de session vers `voting`
-2. Démarrer timer de 45 secondes
+2. Démarrer timer de 20 secondes
 3. Publier changement d'état via Ably
 4. Demander heartbeat pour identifier participants actifs
 5. Écouter les votes entrants
@@ -436,7 +416,7 @@ if (savedState) {
 **Animations :**
 - Construction du phare : fluide et satisfaisante
 - Déplacement des avatars : smooth, pas trop rapide
-- Transitions entre slides : subtiles (voir Points_Non_Resolus.md)
+- Transitions entre slides : subtiles
 
 ---
 
@@ -452,7 +432,7 @@ if (savedState) {
 ## Fichiers et Assets Requis
 
 - JSON des scores Lighthouse pré-calculés (`lighthouse-scores.js`)
-- Assets du phare (SVG ou PNG par étape - voir Points_Non_Resolus.md)
+- Assets du phare (SVG ou PNG par étape - 5 états)
 - Assets des avatars (composants SVG - dans `shared/avatars`)
 - Slides de contenu (texte, images, code diffs)
 - Configuration Ably (API key en variable d'environnement)

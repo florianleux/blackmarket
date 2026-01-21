@@ -1,6 +1,7 @@
 # Spécifications Techniques Générales
 
-> **Focus : Score Performance uniquement**
+> **4 Votes = 4 Catégories Lighthouse**
+> Performance, Accessibility, Best Practices, SEO
 
 ## Architecture Globale
 
@@ -9,20 +10,21 @@
 Le projet utilise un **mono-repo pnpm** avec workspaces :
 
 ```
-lighthouse-pirates/
+lighthouse/
 ├── apps/
-│   ├── blackmarket/          # Nuxt 3 (9 branches Git)
+│   ├── blackmarket/          # Nuxt 3 (31 branches Git)
 │   ├── presentation/         # Site de présentation
 │   └── vote/                 # Site de vote
 ├── shared/
 │   ├── types.ts              # Types TypeScript partagés (messages Ably, avatars)
 │   ├── constants.ts          # Constantes (channels, états de session)
 │   └── avatars/              # Système de génération et rendu d'avatars
+├── specs/                    # Documentation
 ├── scripts/
 │   └── measure-lighthouse.sh # Script de mesure des scores
 ├── pnpm-workspace.yaml
 ├── package.json
-└── claude.md                 # Index de la documentation
+└── CLAUDE.md                 # Index de la documentation
 ```
 
 **Avantages :**
@@ -76,7 +78,7 @@ lighthouse-pirates/
 
 1. **BlackMarket** :
    - Domaine : `blackmarket.com`
-   - 9 branches déployées sur 9 sous-domaines
+   - 31 branches déployées sur 31 sous-domaines
    - Base directory : `apps/blackmarket`
 
 2. **Présentation** :
@@ -95,36 +97,52 @@ lighthouse-pirates/
 
 ## BlackMarket - Déploiement et Scores
 
-### Structure des Branches (15 branches)
+### Structure des Branches (31 branches)
 
 Les branches représentent la **progression cumulative** des fixes à chaque étape de vote.
 
 **Arbre des branches :**
 ```
-baseline                    # Tous les anti-patterns (~20-25)
-├── fa                      # Vote 1 → Images (~35-40)
-│   ├── faa                 # + Vote 2 → JavaScript (~55-60)
-│   │   ├── faaa            # + Vote 3 → Compression (~85-95)
-│   │   └── faab            # + Vote 3 → Caching (~85-95)
-│   └── fab                 # + Vote 2 → Code Splitting (~55-60)
-│       ├── faba            # + Vote 3 → Compression (~85-95)
-│       └── fabb            # + Vote 3 → Caching (~85-95)
-└── fb                      # Vote 1 → Fonts (~35-40)
-    ├── fba                 # + Vote 2 → JavaScript (~55-60)
-    │   ├── fbaa            # + Vote 3 → Compression (~85-95)
-    │   └── fbab            # + Vote 3 → Caching (~85-95)
-    └── fbb                 # + Vote 2 → Code Splitting (~55-60)
-        ├── fbba            # + Vote 3 → Compression (~85-95)
-        └── fbbb            # + Vote 3 → Caching (~85-95)
+baseline                    # Tous les anti-patterns (~52)
+├── a                       # Vote 1 → Performance A
+│   ├── aa                  # + Vote 2 → Accessibility A
+│   │   ├── aaa             # + Vote 3 → Best Practices A
+│   │   │   ├── aaaa        # + Vote 4 → SEO A
+│   │   │   └── aaab        # + Vote 4 → SEO B
+│   │   └── aab             # + Vote 3 → Best Practices B
+│   │       ├── aaba
+│   │       └── aabb
+│   └── ab                  # + Vote 2 → Accessibility B
+│       ├── aba
+│       │   ├── abaa
+│       │   └── abab
+│       └── abb
+│           ├── abba
+│           └── abbb
+└── b                       # Vote 1 → Performance B
+    ├── ba
+    │   ├── baa
+    │   │   ├── baaa
+    │   │   └── baab
+    │   └── bab
+    │       ├── baba
+    │       └── babb
+    └── bb
+        ├── bba
+        │   ├── bbaa
+        │   └── bbab
+        └── bbb
+            ├── bbba
+            └── bbbb
 ```
 
 **Nomenclature :**
-- `f` = préfixe (fixes)
-- Position 1 : `a` = Images, `b` = Fonts
-- Position 2 : `a` = JavaScript, `b` = Code Splitting
-- Position 3 : `a` = Compression, `b` = Caching
+- Position 1 : `a` = Performance A, `b` = Performance B
+- Position 2 : `a` = Accessibility A, `b` = Accessibility B
+- Position 3 : `a` = Best Practices A, `b` = Best Practices B
+- Position 4 : `a` = SEO A, `b` = SEO B
 
-**Total : 15 branches** (1 baseline + 2 + 4 + 8)
+**Total : 31 branches** (1 baseline + 2 + 4 + 8 + 16)
 
 ### Sous-domaines
 
@@ -132,18 +150,17 @@ Chaque branche est déployée sur un sous-domaine dédié de `blackmarket.com` :
 
 **Exemples :**
 - `baseline.blackmarket.com` → branche `baseline`
-- `fa.blackmarket.com` → branche `fa`
-- `faaa.blackmarket.com` → branche `faaa`
+- `a.blackmarket.com` → branche `a`
+- `aaaa.blackmarket.com` → branche `aaaa`
 
-**15 sous-domaines au total**
+**31 sous-domaines au total**
 
 ### Mesure des Scores Lighthouse
 
 **Méthode :**
 - Script bash simple (`scripts/measure-lighthouse.sh`)
 - Lighthouse CLI en local
-- Itération sur les 9 sous-domaines
-- Pas de GitHub Actions (overkill pour 9 mesures one-shot)
+- Itération sur les 31 sous-domaines
 
 **Indépendance des scores :**
 Chaque sous-domaine a son propre score Lighthouse indépendant car chaque branche contient un build différent avec des optimisations différentes.
@@ -153,28 +170,22 @@ Chaque sous-domaine a son propre score Lighthouse indépendant car chaque branch
 - JSON hardcodé (pas d'API, pas de fichier séparé)
 - Chargé au démarrage de l'application de présentation
 
-**Structure des scores (Performance uniquement) :**
+**Structure des scores (4 catégories) :**
 ```javascript
 {
-  "baseline": { "performance": 22 },
-  // Après Vote 1
-  "fa": { "performance": 38 },
-  "fb": { "performance": 35 },
-  // Après Vote 2
-  "faa": { "performance": 58 },
-  "fab": { "performance": 55 },
-  "fba": { "performance": 55 },
-  "fbb": { "performance": 52 },
-  // Après Vote 3 (8 branches finales)
-  "faaa": { "performance": 92 },
-  "faab": { "performance": 88 },
-  // ... etc.
+  "baseline": {
+    "performance": number,
+    "accessibility": number,
+    "bestPractices": number,
+    "seo": number
+  },
+  "a": { ... },
+  "b": { ... },
+  // ... etc pour les 31 branches
 }
 ```
 
-**Niveau de détail disponible :**
-- Score Performance global (0-100) pour affichage principal
-- Métriques détaillées (LCP, TBT, Speed Index) optionnelles selon slides
+> Les scores réels seront mesurés une fois les branches créées.
 
 ---
 
@@ -191,7 +202,7 @@ Chaque sous-domaine a son propre score Lighthouse indépendant car chaque branch
 {
   type: 'session-state',
   state: 'waiting' | 'voting' | 'closed',
-  voteId: 'vote-1' | 'vote-2' | 'vote-3'
+  voteId: 'vote-1' | 'vote-2' | 'vote-3' | 'vote-4'
 }
 ```
 
@@ -239,7 +250,7 @@ Chaque sous-domaine a son propre score Lighthouse indépendant car chaque branch
 Contrôlés par le site de présentation :
 
 - **waiting** : Attente entre les votes, interface de vote désactivée
-- **voting** : Vote actif, timer de 45 secondes, boutons A/B actifs
+- **voting** : Vote actif, timer de 20 secondes, boutons A/B actifs
 - **closed** : Vote terminé, résultats affichés, boutons désactivés
 
 ### États des Participants
@@ -274,8 +285,8 @@ Contrôlés par le site de présentation :
   // Navigation
   currentSlide: 12,
 
-  // Progression des choix (3 votes)
-  path: ["images", "js", null], // null = pas encore choisi
+  // Progression des choix (4 votes)
+  path: ["a", "a", "b", null], // null = pas encore choisi
 
   // Équipage
   crew: {
@@ -293,7 +304,8 @@ Contrôlés par le site de présentation :
       winner: "A"
     },
     "vote-2": { A: [], B: [], winner: null },
-    "vote-3": { A: [], B: [], winner: null }
+    "vote-3": { A: [], B: [], winner: null },
+    "vote-4": { A: [], B: [], winner: null }
   },
 
   // Métadonnées
@@ -361,7 +373,7 @@ Contrôlés par le site de présentation :
 
 ### Technologie de Rendu
 
-SVG composable recommandé (décision finale à prendre dans Points_Non_Resolus.md)
+SVG composable recommandé
 
 ---
 
@@ -373,8 +385,8 @@ SVG composable recommandé (décision finale à prendre dans Points_Non_Resolus.
 
 **Affichage :**
 - Heure de début de session
-- Slide actuelle (ex: "Slide 12/25")
-- Choix effectués (ex: "Images → JS → ?")
+- Slide actuelle (ex: "Slide 12/30")
+- Choix effectués (ex: "a → a → b → ?")
 - X pirates enregistrés
 - Y pirates connectés (actifs)
 - Résultats des votes (Vote-1: A gagne 12 vs 8, etc.)
@@ -420,8 +432,8 @@ SVG composable recommandé (décision finale à prendre dans Points_Non_Resolus.
 - Pas de système anti-triche (confiance dans l'audience)
 - Pas de persistence après la session (tout en mémoire pendant la présentation)
 - Durée totale : 45 minutes maximum
-- Timer de vote : 45 secondes par vote
-- 3 phases de vote au total
+- Timer de vote : 20 secondes par vote
+- 4 phases de vote au total
 
 ---
 
