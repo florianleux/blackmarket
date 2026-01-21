@@ -1,62 +1,51 @@
-# Lighthouse Pirates
+# BlackMarket
 
-Présentation interactive de 45 minutes où l'audience vote pour optimiser une application Vue.js/Nuxt. Les améliorations sont mesurées via Lighthouse et visualisées par la construction d'un phare.
+Pirate shop Nuxt 3 app with **31 Git branches** for Lighthouse optimization demo.
 
-## 🚀 Quick Start
+## Overview
+
+BlackMarket is a fictional pirate accessories e-commerce site intentionally built with anti-patterns. It serves as the demo app for an interactive presentation where the audience votes to fix Lighthouse issues.
+
+## Branches (31)
+
+```
+baseline                    # All anti-patterns (~52)
+├── a                       # Vote 1 → Performance A (Images)
+│   ├── aa                  # + Vote 2 → Accessibility A (Visual)
+│   │   ├── aaa             # + Vote 3 → Best Practices A (Console)
+│   │   │   ├── aaaa        # + Vote 4 → SEO A (Meta)
+│   │   │   └── aaab        # + Vote 4 → SEO B (Links)
+│   │   └── aab
+│   └── ab
+└── b                       # Vote 1 → Performance B (Fonts)
+    └── ...
+```
+
+**Total: 1 baseline + 2 + 4 + 8 + 16 = 31 branches**
+
+## Tech Stack
+
+- **Framework**: Nuxt 3 + Vue 3 + TypeScript
+- **Styling**: Tailwind CSS
+- **Deployment**: Netlify with branch deploys
+
+## Development
 
 ```bash
-# Installation
 pnpm install
-
-# Développement
-pnpm dev:blackmarket    # Lance BlackMarket (Nuxt 3)
-pnpm dev:presentation   # Lance le site de présentation
-pnpm dev:vote          # Lance le site de vote mobile
-
-# Build
-pnpm build:all
+pnpm dev
 ```
 
-## 📚 Documentation
+## Deployment
 
-**Point d'entrée :** [`claude.md`](./claude.md)
+Each branch deploys to its own subdomain:
+- `baseline.blackmarket.com`
+- `a.blackmarket.com`
+- `aaaa.blackmarket.com`
+- ... (31 subdomains)
 
-Ce fichier indexe toute la documentation du projet dans l'ordre de lecture recommandé.
+## Related
 
-## 🏗️ Structure
+This app is displayed in an iframe within [lighthouse-presentation](https://github.com/florianleux/lighthouse-presentation).
 
-```
-lighthouse-pirates/
-├── apps/
-│   ├── blackmarket/     # Application à optimiser (17 branches)
-│   ├── presentation/    # Site de présentation projeté
-│   └── vote/           # Application mobile de vote
-├── shared/             # Code partagé (types, avatars, constantes)
-├── scripts/            # Scripts utilitaires
-└── docs/              # Documentation (voir claude.md)
-```
-
-## 🔑 Technologies
-
-- **Frontend :** Nuxt 3, Vue 3, TypeScript
-- **Package Manager :** pnpm (workspaces)
-- **WebSockets :** Ably
-- **Hosting :** Netlify
-- **Monitoring :** Lighthouse CI
-
-## ⚙️ Configuration
-
-Variables d'environnement requises :
-```
-ABLY_API_KEY=your-api-key-here
-```
-
-## 📖 Lire la Documentation
-
-Voir [`claude.md`](./claude.md) pour l'index complet de la documentation.
-
-**Fichiers clés :**
-- [`00_Specs_Techniques_Generales.md`](./00_Specs_Techniques_Generales.md) - Architecture et décisions techniques
-- [`01_Specs_BlackMarket.md`](./01_Specs_BlackMarket.md) - Application BlackMarket (17 branches)
-- [`02_Specs_Site_Presentation.md`](./02_Specs_Site_Presentation.md) - Site de présentation
-- [`03_Specs_Site_Vote.md`](./03_Specs_Site_Vote.md) - Site de vote mobile
+See `../specs/` for full documentation.
