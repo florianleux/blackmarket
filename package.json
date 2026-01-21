@@ -1,26 +1,24 @@
 {
-  "name": "lighthouse-pirates",
+  "name": "@lighthouse-pirates/blackmarket",
   "version": "0.0.1",
   "private": true,
-  "description": "Interactive presentation where audience votes on frontend optimizations",
+  "type": "module",
   "scripts": {
-    "dev:blackmarket": "pnpm --filter @lighthouse-pirates/blackmarket dev",
-    "dev:presentation": "pnpm --filter @lighthouse-pirates/presentation dev",
-    "dev:vote": "pnpm --filter @lighthouse-pirates/vote dev",
-    "build:all": "pnpm -r build",
-    "build:blackmarket": "pnpm --filter @lighthouse-pirates/blackmarket build",
-    "build:presentation": "pnpm --filter @lighthouse-pirates/presentation build",
-    "build:vote": "pnpm --filter @lighthouse-pirates/vote build",
-    "measure:lighthouse": "bash scripts/measure-lighthouse.sh",
-    "lint": "pnpm -r lint",
-    "typecheck": "pnpm -r typecheck"
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "nuxt": "^3.9.0",
+    "vue": "^3.4.0"
   },
   "devDependencies": {
-    "typescript": "^5.3.3"
-  },
-  "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=8.0.0"
-  },
-  "packageManager": "pnpm@8.15.0"
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "@types/lodash": "^4.17.0"
+  }
 }
