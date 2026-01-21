@@ -2,19 +2,23 @@
 
 ## Vue d'Ensemble
 
-Boutique en ligne d'accessoires de pirates reconditionnés (crochets, cache-œil, jambes de bois, perroquets, etc.), développée avec Nuxt 3 + Vue 3. Sert de base pour démontrer les optimisations frontend et les améliorations du score **Lighthouse Performance**.
+Boutique en ligne d'accessoires de pirates reconditionnés (crochets, cache-œil, jambes de bois, perroquets, etc.), développée avec Nuxt 3 + Vue 3. Sert de base pour démontrer les optimisations frontend et les améliorations des **4 scores Lighthouse**.
 
 **Jeu de mots :** BlackMarket = BackMarket (pirate/reconditionnés)
 
 ---
 
-## Focus : Score Performance
+## Les 4 Catégories Lighthouse
 
-> **Décision** : On se concentre uniquement sur le score **Performance** de Lighthouse.
->
-> - Baseline cible : ~20-25
-> - Objectif final : ~85-95
-> - Les autres scores (Accessibility, Best Practices, SEO) ne sont pas l'objet des votes
+> **4 Votes = 4 Catégories Lighthouse**
+> Chaque vote améliore une catégorie différente.
+
+| Vote | Catégorie | Option A | Option B |
+|------|-----------|----------|----------|
+| **Vote 1** | Performance | Images & Transfer (LCP/CLS) | Fonts & JavaScript (FCP/TBT) |
+| **Vote 2** | Accessibility | Visual (contrast, focus, labels) | Semantic (buttons, landmarks, headings) |
+| **Vote 3** | Best Practices | Console & Security | Modern Web Standards |
+| **Vote 4** | SEO | Meta & Structure | Content & Links |
 
 ---
 
@@ -23,78 +27,79 @@ Boutique en ligne d'accessoires de pirates reconditionnés (crochets, cache-œil
 - **Framework :** Nuxt 3
 - **Frontend :** Vue 3 + TypeScript
 - **Styling :** Tailwind CSS
-- **SSR :** Activé (mais mal configuré dans la baseline)
+- **SSR :** Activé (mal configuré dans la baseline)
 - **Hébergement :** Netlify avec sous-domaines
 
 ---
 
-## Structure des Votes
-
-### 3 Votes = 6 Options
-
-| Vote | Thème | Option A | Option B |
-|------|-------|----------|----------|
-| **Vote 1** | LCP | 🖼️ Images | 🔤 Fonts |
-| **Vote 2** | TBT | ⚡ JavaScript | 📦 Code Splitting |
-| **Vote 3** | Network | 🗜️ Compression | 💾 Caching |
-
----
-
-## Structure de Branches Git (15 branches)
+## Structure des Branches Git (31 branches)
 
 Les branches représentent la **progression cumulative** des fixes à chaque étape.
 
 ### Arbre des branches
 
 ```
-baseline                    # Tous les anti-patterns (~20-25)
+baseline                    # Tous les anti-patterns (~52)
 │
-├── fa                      # Vote 1 → Images (~35-40)
-│   ├── faa                 # + Vote 2 → JavaScript (~55-60)
-│   │   ├── faaa            # + Vote 3 → Compression (~85-95)
-│   │   └── faab            # + Vote 3 → Caching (~85-95)
-│   └── fab                 # + Vote 2 → Code Splitting (~55-60)
-│       ├── faba            # + Vote 3 → Compression (~85-95)
-│       └── fabb            # + Vote 3 → Caching (~85-95)
+├── a                       # Vote 1 → Performance A
+│   ├── aa                  # + Vote 2 → Accessibility A
+│   │   ├── aaa             # + Vote 3 → Best Practices A
+│   │   │   ├── aaaa        # + Vote 4 → SEO A
+│   │   │   └── aaab        # + Vote 4 → SEO B
+│   │   └── aab             # + Vote 3 → Best Practices B
+│   │       ├── aaba
+│   │       └── aabb
+│   └── ab                  # + Vote 2 → Accessibility B
+│       ├── aba
+│       │   ├── abaa
+│       │   └── abab
+│       └── abb
+│           ├── abba
+│           └── abbb
 │
-└── fb                      # Vote 1 → Fonts (~35-40)
-    ├── fba                 # + Vote 2 → JavaScript (~55-60)
-    │   ├── fbaa            # + Vote 3 → Compression (~85-95)
-    │   └── fbab            # + Vote 3 → Caching (~85-95)
-    └── fbb                 # + Vote 2 → Code Splitting (~55-60)
-        ├── fbba            # + Vote 3 → Compression (~85-95)
-        └── fbbb            # + Vote 3 → Caching (~85-95)
+└── b                       # Vote 1 → Performance B
+    ├── ba
+    │   ├── baa
+    │   │   ├── baaa
+    │   │   └── baab
+    │   └── bab
+    │       ├── baba
+    │       └── babb
+    └── bb
+        ├── bba
+        │   ├── bbaa
+        │   └── bbab
+        └── bbb
+            ├── bbba
+            └── bbbb
 ```
 
 ### Liste complète des branches
 
-| Branche | Fixes appliqués | Score estimé |
-|---------|-----------------|--------------|
-| `baseline` | Aucun (tous anti-patterns) | ~20-25 |
-| `fa` | Images | ~35-40 |
-| `fb` | Fonts | ~35-40 |
-| `faa` | Images + JavaScript | ~55-60 |
-| `fab` | Images + Code Splitting | ~55-60 |
-| `fba` | Fonts + JavaScript | ~55-60 |
-| `fbb` | Fonts + Code Splitting | ~55-60 |
-| `faaa` | Images + JavaScript + Compression | ~85-95 |
-| `faab` | Images + JavaScript + Caching | ~85-95 |
-| `faba` | Images + Code Splitting + Compression | ~85-95 |
-| `fabb` | Images + Code Splitting + Caching | ~85-95 |
-| `fbaa` | Fonts + JavaScript + Compression | ~85-95 |
-| `fbab` | Fonts + JavaScript + Caching | ~85-95 |
-| `fbba` | Fonts + Code Splitting + Compression | ~85-95 |
-| `fbbb` | Fonts + Code Splitting + Caching | ~85-95 |
+| Niveau | Branches | Votes appliqués |
+|--------|----------|-----------------|
+| 0 | `baseline` | Aucun fix |
+| 1 | `a`, `b` | Performance |
+| 2 | `aa`, `ab`, `ba`, `bb` | + Accessibility |
+| 3 | `aaa` ... `bbb` (8) | + Best Practices |
+| 4 | `aaaa` ... `bbbb` (16) | + SEO |
 
-**Total : 15 branches** (1 baseline + 2 + 4 + 8)
+**Total : 31 branches** (1 + 2 + 4 + 8 + 16)
+
+### Nomenclature
+
+- Position 1 : `a` = Performance A, `b` = Performance B
+- Position 2 : `a` = Accessibility A, `b` = Accessibility B
+- Position 3 : `a` = Best Practices A, `b` = Best Practices B
+- Position 4 : `a` = SEO A, `b` = SEO B
 
 ### Sous-domaines Netlify
 
 Chaque branche a son sous-domaine :
 - `baseline.blackmarket.com`
-- `fa.blackmarket.com`
-- `fb.blackmarket.com`
-- `faa.blackmarket.com`
+- `a.blackmarket.com`
+- `aa.blackmarket.com`
+- `aaaa.blackmarket.com`
 - ... etc.
 
 ---
@@ -105,156 +110,89 @@ Voir [`Liste_Anti-Patterns.md`](./Liste_Anti-Patterns.md) pour la liste complèt
 
 ### Résumé par Catégorie
 
-| Catégorie | Anti-Patterns | Corrigé par |
-|-----------|---------------|-------------|
-| Images | 4 | Vote 1A |
-| Fonts | 4 | Vote 1B |
-| JavaScript | 4 | Vote 2A |
-| Code Splitting | 4 | Vote 2B |
-| Compression | 4 | Vote 3A |
-| Caching | 4 | Vote 3B |
-| **Total** | **24** | - |
+| Vote | Catégorie | Anti-patterns |
+|------|-----------|---------------|
+| Vote 1 | Performance | 12 |
+| Vote 2 | Accessibility | 20 |
+| Vote 3 | Best Practices | 14 |
+| Vote 4 | SEO | 6 |
+| **Total** | - | **~52** |
 
 ---
 
 ## Optimisations par Vote
 
-### Vote 1A : Images (LCP)
+### Vote 1A : Performance - Images & Transfer
 
 **Fixes appliqués :**
 - Conversion images en WebP
 - Ajout attributs `width` et `height`
 - `loading="lazy"` pour images below-fold
-- Ajout `srcset` pour images responsive
+- Suppression CSS render-blocking
+- Activation compression (gzip/brotli)
 
-**Impact attendu :** +15-20 points Performance
-
-### Vote 1B : Fonts (LCP)
+### Vote 1B : Performance - Fonts & JavaScript
 
 **Fixes appliqués :**
 - `font-display: swap` sur toutes les fonts
-- `preload` pour fonts critiques
-- Réduction des variantes Google Fonts
-- Font subsetting (caractères utilisés uniquement)
+- Suppression fonts render-blocking
+- Suppression librairies inutiles (lodash, moment)
+- Suppression third-party scripts bloquants
+- Ajout `preconnect` pour domaines externes
 
-**Impact attendu :** +10-15 points Performance
-
-### Vote 2A : JavaScript (TBT)
-
-**Fixes appliqués :**
-- `defer` sur tous les scripts
-- Tree-shaking activé
-- Suppression librairies inutiles
-- `treeshakeClientOnly: true`
-
-**Impact attendu :** +15-20 points Performance
-
-### Vote 2B : Code Splitting (TBT)
+### Vote 2A : Accessibility - Visual
 
 **Fixes appliqués :**
-- Code splitting par route
-- `defineAsyncComponent` pour composants lourds
-- `payloadExtraction: true`
-- Pré-rendu des routes statiques
+- Amélioration des contrastes (ratio 4.5:1)
+- Ajout focus indicators visibles
+- Labels sur tous les inputs
+- Noms accessibles sur liens/boutons
+- Contrôles sur médias auto-play
 
-**Impact attendu :** +10-15 points Performance
-
-### Vote 3A : Compression
-
-**Fixes appliqués :**
-- `compressPublicAssets: true`
-- Minification CSS/JS activée
-- Purge CSS (Tailwind)
-- Minification HTML
-
-**Impact attendu :** +10-15 points Performance
-
-### Vote 3B : Caching
+### Vote 2B : Accessibility - Semantic
 
 **Fixes appliqués :**
-- Headers `Cache-Control` configurés
-- `preconnect` pour domaines externes
-- `preload` ressources critiques
-- Service worker basique
+- Remplacement div cliquables par buttons
+- Ajout attribut `lang` sur html
+- Ajout skip link
+- Correction keyboard traps
+- Correction hiérarchie des headings
 
-**Impact attendu :** +10-15 points Performance
+### Vote 3A : Best Practices - Console & Security
 
----
+**Fixes appliqués :**
+- Suppression console.log en production
+- Ajout `rel="noopener"` sur liens externes
+- Suppression `document.write()`
+- Correction erreurs console
+- Mise à jour librairies vulnérables
 
-## Objectifs de Score
+### Vote 3B : Best Practices - Modern Standards
 
-| Étape | Performance | Gain |
-|-------|-------------|------|
-| Baseline | ~20-25 | - |
-| Après Vote 1 | ~35-40 | +15-20 |
-| Après Vote 2 | ~55-60 | +15-20 |
-| Après Vote 3 | ~85-95 | +25-35 |
+**Fixes appliqués :**
+- Correction tailles d'affichage images
+- Vérification doctype
+- Suppression demandes permissions agressives
+- Ajout passive listeners
+- Masquage source maps en production
 
----
+### Vote 4A : SEO - Meta & Structure
 
-## Configuration Nuxt
+**Fixes appliqués :**
+- Ajout `<title>` unique
+- Ajout `<meta name="description">`
+- Un seul `<h1>` par page
+- Vérification viewport meta
+- Ajout canonical URL
 
-### Baseline (Anti-Patterns)
+### Vote 4B : SEO - Content & Links
 
-```typescript
-// nuxt.config.ts
-export default defineNuxtConfig({
-  ssr: true,
-
-  // ANTI-PATTERN: Pas de compression
-  nitro: {
-    compressPublicAssets: false,
-    minify: false,
-  },
-
-  // ANTI-PATTERN: Pas d'optimisation
-  experimental: {
-    payloadExtraction: false,
-    treeshakeClientOnly: false,
-  },
-
-  // ANTI-PATTERN: Pas de preconnect, pas de preload
-  app: {
-    head: {
-      // Intentionnellement vide
-    },
-  },
-})
-```
-
-### Optimisé (Exemple avec tous les fixes)
-
-```typescript
-// nuxt.config.ts
-export default defineNuxtConfig({
-  ssr: true,
-
-  nitro: {
-    compressPublicAssets: true,
-    minify: true,
-  },
-
-  experimental: {
-    payloadExtraction: true,
-    treeshakeClientOnly: true,
-  },
-
-  app: {
-    head: {
-      link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preload', as: 'font', href: '/fonts/main.woff2', crossorigin: '' },
-      ],
-    },
-  },
-
-  // Image optimization
-  image: {
-    format: ['webp'],
-    quality: 80,
-  },
-})
-```
+**Fixes appliqués :**
+- Texte de liens descriptif (pas de "click here")
+- Attributs `alt` sur toutes les images
+- Suppression meta noindex
+- Navigation crawlable (vrais liens)
+- Suppression chaînes de redirections
 
 ---
 
