@@ -5,195 +5,153 @@
 
 ## Architecture Globale
 
-### Structure Mono-repo
+### 2 Repositories Séparés
 
-Le projet utilise un **mono-repo pnpm** avec workspaces :
+Le projet est divisé en **2 repositories distincts** pour éviter les conflits de branches :
 
 ```
-lighthouse/
+~/code/lighthouse/                    # Dossier parent (PAS un repo git)
+│
+├── specs/                            # Documentation partagée (hors Git)
+│   ├── 00_Specs_Techniques_Generales.md
+│   ├── 01_Specs_BlackMarket.md
+│   ├── 02_Specs_Site_Presentation.md
+│   ├── 03_Specs_Site_Vote.md
+│   └── ...
+│
+├── lighthouse-presentation/          # Repo 1 - Mono-repo pnpm
+│   ├── apps/
+│   │   ├── presentation/             # Site projeté en salle
+│   │   └── vote/                     # App mobile participants
+│   ├── shared/
+│   │   ├── types.ts                  # Types TypeScript partagés
+│   │   ├── constants.ts              # Constantes (channels, états)
+│   │   └── avatars/                  # Système d'avatars
+│   ├── pnpm-workspace.yaml
+│   └── CLAUDE.md
+│
+└── blackmarket/                      # Repo 2 - App Nuxt standalone
+    ├── app.vue
+    ├── components/
+    ├── nuxt.config.ts
+    ├── CLAUDE.md
+    └── ...                           # 31 branches Git
+```
+
+**Note :** Le dossier `specs/` est dans le dossier parent, partagé entre les deux repos mais hors de tout repo Git.
+
+**Pourquoi 2 repos ?**
+- BlackMarket a **31 branches** (baseline + 30 optimisées)
+- Presentation/Vote n'ont qu'une **branche main**
+- Travailler en parallèle sur les 3 apps serait complexe avec des branches multiples
+
+### Lien entre les repos
+
+- **Aucun lien Git** (pas de submodule, pas de dépendance npm)
+- BlackMarket est affiché en **iframe** dans la présentation
+- Référence par **URL uniquement** : `https://{branch}.blackmarket.com`
+
+---
+
+## Repository 1 : lighthouse-presentation
+
+### Structure Mono-repo pnpm
+
+```
+lighthouse-presentation/
 ├── apps/
-│   ├── blackmarket/          # Nuxt 3 (31 branches Git)
-│   ├── presentation/         # Site de présentation
-│   └── vote/                 # Site de vote
+│   ├── presentation/         # Site de présentation (HTML/CSS/JS)
+│   └── vote/                 # Site de vote mobile (HTML/CSS/JS)
 ├── shared/
-│   ├── types.ts              # Types TypeScript partagés (messages Ably, avatars)
-│   ├── constants.ts          # Constantes (channels, états de session)
-│   └── avatars/              # Système de génération et rendu d'avatars
-├── specs/                    # Documentation
-├── scripts/
-│   └── measure-lighthouse.sh # Script de mesure des scores
+│   ├── types.ts              # Types Ably, avatars
+│   ├── constants.ts          # Channels, états de session
+│   └── avatars/              # Génération et rendu d'avatars
 ├── pnpm-workspace.yaml
 ├── package.json
-└── CLAUDE.md                 # Index de la documentation
+└── CLAUDE.md
 ```
-
-**Avantages :**
-- Code partagé entre applications (types, constantes, avatars)
-- Gestion des dépendances centralisée
-- Un seul projet pour Claude Code
 
 ### Applications
 
-1. **Site de Présentation** - Interface de présentation projetée
-2. **Site de Vote** - Application mobile pour les participants
-3. **Application BlackMarket** - Boutique Nuxt servant de base aux optimisations
+1. **Site de Présentation** (`apps/presentation/`)
+   - Interface projetée en salle de conférence
+   - Contrôle l'état global de la session
+   - Affiche les résultats de vote en temps réel
+   - Iframe vers BlackMarket
+
+2. **Site de Vote** (`apps/vote/`)
+   - Application mobile pour les participants
+   - Création d'avatar pirate
+   - Interface de vote (boutons A/B)
+
+### Technologies
+
+- HTML/CSS/JavaScript (TypeScript optionnel)
+- Tailwind CSS
+- Ably SDK pour WebSockets
+- pnpm workspaces
 
 ---
 
-## Technologies Principales
+## Repository 2 : blackmarket
 
-### Frontend
+### App Nuxt 3 Standalone
 
-**BlackMarket :**
-- Nuxt 3 + Vue 3 + TypeScript
-- SSR activé (mal configuré dans baseline, optimisé dans les branches)
+```
+blackmarket/
+├── app.vue
+├── components/
+├── composables/
+├── pages/
+├── data/
+├── assets/
+├── public/
+├── nuxt.config.ts
+├── package.json
+└── tailwind.config.js
+```
 
-**Site de Présentation :**
-- HTML/CSS/JavaScript (TypeScript optionnel)
-- Framework CSS au choix (Tailwind recommandé)
+### Caractéristiques
 
-**Site de Vote :**
-- HTML/CSS/JavaScript (TypeScript optionnel)
-- Possiblement Nuxt 3 en mode static/SSG
-- Optimisé mobile
-
-### Communication Temps Réel
-
-**Ably** - Service WebSocket managé
-- Gratuit jusqu'à 6M messages/mois
-- SDK JavaScript simple
-- Robuste et sans maintenance de serveur
-- Reconnexion automatique
-
-### Package Manager
-
-**pnpm** - Gestion des workspaces
-- Plus rapide que npm
-- Moins d'espace disque (hard links)
-- Meilleur pour mono-repos
-
-### Hébergement
-
-**Netlify** - 4 sites au total :
-
-1. **BlackMarket** :
-   - Domaine : `blackmarket.com`
-   - 31 branches déployées sur 31 sous-domaines
-   - Base directory : `apps/blackmarket`
-
-2. **Présentation** :
-   - URL : TBD (ex: `presentation.lighthouse-pirates.com`)
-   - Base directory : `apps/presentation`
-   - Branche : `main`
-
-3. **Vote** :
-   - URL : TBD (ex: `vote.lighthouse-pirates.com`)
-   - Base directory : `apps/vote`
-   - Branche : `main`
-
-**Compte Netlify existant disponible**
+- **Framework** : Nuxt 3 + Vue 3 + TypeScript
+- **Styling** : Tailwind CSS
+- **31 branches Git** : baseline + 30 optimisées
+- **Aucune communication WebSocket** (pas d'Ably)
+- **Affiché en iframe** dans la présentation
 
 ---
 
-## BlackMarket - Déploiement et Scores
+## Hébergement Netlify
 
-### Structure des Branches (31 branches)
+### 3 Sites au Total
 
-Les branches représentent la **progression cumulative** des fixes à chaque étape de vote.
+| Site | Repo | Branches | URL |
+|------|------|----------|-----|
+| **BlackMarket** | blackmarket | 31 (branch deploys) | `{branch}.blackmarket.com` |
+| **Présentation** | lighthouse-presentation | main | `presentation.lighthouse-pirates.com` |
+| **Vote** | lighthouse-presentation | main | `vote.lighthouse-pirates.com` |
 
-**Arbre des branches :**
-```
-baseline                    # Tous les anti-patterns (~52)
-├── a                       # Vote 1 → Performance A
-│   ├── aa                  # + Vote 2 → Accessibility A
-│   │   ├── aaa             # + Vote 3 → Best Practices A
-│   │   │   ├── aaaa        # + Vote 4 → SEO A
-│   │   │   └── aaab        # + Vote 4 → SEO B
-│   │   └── aab             # + Vote 3 → Best Practices B
-│   │       ├── aaba
-│   │       └── aabb
-│   └── ab                  # + Vote 2 → Accessibility B
-│       ├── aba
-│       │   ├── abaa
-│       │   └── abab
-│       └── abb
-│           ├── abba
-│           └── abbb
-└── b                       # Vote 1 → Performance B
-    ├── ba
-    │   ├── baa
-    │   │   ├── baaa
-    │   │   └── baab
-    │   └── bab
-    │       ├── baba
-    │       └── babb
-    └── bb
-        ├── bba
-        │   ├── bbaa
-        │   └── bbab
-        └── bbb
-            ├── bbba
-            └── bbbb
-```
+### BlackMarket - Branch Deploys
 
-**Nomenclature :**
-- Position 1 : `a` = Performance A, `b` = Performance B
-- Position 2 : `a` = Accessibility A, `b` = Accessibility B
-- Position 3 : `a` = Best Practices A, `b` = Best Practices B
-- Position 4 : `a` = SEO A, `b` = SEO B
-
-**Total : 31 branches** (1 baseline + 2 + 4 + 8 + 16)
-
-### Sous-domaines
-
-Chaque branche est déployée sur un sous-domaine dédié de `blackmarket.com` :
-
-**Exemples :**
+Chaque branche est déployée sur un sous-domaine dédié :
 - `baseline.blackmarket.com` → branche `baseline`
 - `a.blackmarket.com` → branche `a`
 - `aaaa.blackmarket.com` → branche `aaaa`
 
 **31 sous-domaines au total**
 
-### Mesure des Scores Lighthouse
-
-**Méthode :**
-- Script bash simple (`scripts/measure-lighthouse.sh`)
-- Lighthouse CLI en local
-- Itération sur les 31 sous-domaines
-
-**Indépendance des scores :**
-Chaque sous-domaine a son propre score Lighthouse indépendant car chaque branche contient un build différent avec des optimisations différentes.
-
-**Format de stockage :**
-- Scores consolidés dans `apps/presentation/src/data/lighthouse-scores.js`
-- JSON hardcodé (pas d'API, pas de fichier séparé)
-- Chargé au démarrage de l'application de présentation
-
-**Structure des scores (4 catégories) :**
-```javascript
-{
-  "baseline": {
-    "performance": number,
-    "accessibility": number,
-    "bestPractices": number,
-    "seo": number
-  },
-  "a": { ... },
-  "b": { ... },
-  // ... etc pour les 31 branches
-}
-```
-
-> Les scores réels seront mesurés une fois les branches créées.
-
 ---
 
 ## Communication entre Applications
 
-### Channel Ably
+### Ably (WebSocket)
 
 **Channel principal :** `lighthouse-presentation`
+
+Communication **uniquement** entre :
+- `apps/presentation/` ↔ `apps/vote/`
+
+**BlackMarket n'a aucune communication WebSocket.**
 
 ### Messages Publiés
 
@@ -439,11 +397,14 @@ SVG composable recommandé
 
 ## Variables d'Environnement
 
-**Toutes les applications nécessitent :**
+**lighthouse-presentation (apps/presentation et apps/vote) :**
 ```
 ABLY_API_KEY=your-api-key-here
 ```
 
+**blackmarket :**
+Aucune variable d'environnement requise.
+
 **Configuration Netlify :**
-- Ajouter la variable dans les settings de chaque site Netlify
-- Même clé API pour les 3 sites
+- Ajouter `ABLY_API_KEY` dans les settings des sites presentation et vote
+- Même clé API pour les 2 sites
