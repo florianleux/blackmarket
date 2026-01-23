@@ -13,185 +13,85 @@
       >
     </audio>
 
-    <!-- ANTI-PATTERN #9: Keyboard trap modal (no close button - true trap!) -->
-    <div
-      v-if="showModal"
-      class="fixed inset-0 flex items-center justify-center z-50"
-      @keydown="trapFocus"
-    >
-      <div
-        ref="modalRef"
-        class="bg-white p-6 rounded-lg max-w-md relative"
-        tabindex="-1"
-      >
-        <button
-          class="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-xl"
-          @click="showModal = false"
-        >✕</button>
-        <h2 class="text-xl font-bold mb-4">Special Offer!</h2>
-        <p class="mb-4 low-contrast">You cannot escape this modal with keyboard!</p>
-        <input
-          type="email"
-          placeholder="Enter email"
-          class="border p-2 w-full mb-4"
-        />
-        <p class="text-sm text-gray-500">Good luck closing this... 🏴‍☠️</p>
-      </div>
-    </div>
+    <!-- ANTI-PATTERN #9: Keyboard trap modal -->
+    <SpecialOfferModal v-model="showModal" />
 
-    <!-- PIRATE SPAM POPUP 1: Treasure Alert -->
-    <div
-      v-if="showPiratePopup1"
-      class="fixed z-[100]"
-      style="bottom: 1%; left: 3%; width: 50%; transform: rotate(2deg);"
-      @keydown.prevent
-    >
-      <div
-        class="bg-gradient-to-b from-amber-800 to-amber-950 p-4 rounded-xl text-center border-4 border-yellow-500 shadow-2xl animate-pulse"
-      >
-        <div class="text-4xl mb-1 animate-spin">💰</div>
-        <h2 class="text-lg font-bold text-yellow-400 mb-1 font-title">ARRR! YE FOUND TREASURE!</h2>
-        <p class="text-white mb-1 text-sm">Ye be the 1,000,000th visitor!</p>
-        <p class="text-yellow-300 mb-1 text-base font-bold">FREE 10,000 DOUBLOONS!</p>
-        <input
-          type="text"
-          placeholder="Credit Card Number"
-          class="w-full p-1 mb-1 rounded border-2 border-yellow-500 text-sm"
-        />
-        <button
-          class="bg-yellow-500 text-black px-4 py-1 rounded-full font-bold text-sm hover:scale-105 hover:bg-yellow-400 transition-all"
-          @click="showPiratePopup1 = false"
-        >CLAIM NOW!</button>
-        <p class="mt-1"><span
-            class="text-yellow-200/60 text-xs underline cursor-pointer hover:text-yellow-200 transition-colors"
-            @click="showPiratePopup1 = false"
-          >No thanks</span></p>
-      </div>
-    </div>
+    <!-- PIRATE SPAM POPUPS -->
+    <SpamPopup
+      v-model="showPiratePopup1"
+      position="bottom-left"
+      :rotation="2"
+      icon="💰"
+      title="ARRR! YE FOUND TREASURE!"
+      subtitle="Ye be the 1,000,000th visitor!"
+      highlight="FREE 10,000 DOUBLOONS!"
+      input-placeholder="Credit Card Number"
+      button-text="CLAIM NOW!"
+      theme="treasure"
+    />
 
-    <!-- PIRATE SPAM POPUP 2: Captain's Warning -->
-    <div
-      v-if="showPiratePopup2"
-      class="fixed z-[100]"
-      style="bottom: 4%; left: 97%; width: 50%; transform: translateX(-100%) rotate(-3deg);"
-      @keydown.prevent
-    >
-      <div class="bg-red-900 p-4 rounded-xl text-center border-4 border-red-500 shadow-2xl animate-pulse">
-        <div class="text-4xl mb-1 animate-spin">☠️</div>
-        <h2 class="text-lg font-bold text-red-400 mb-1 font-title">CAPTAIN'S WARNING!</h2>
-        <p class="text-white mb-1 text-sm">47 BARNACLES detected!</p>
-        <p class="text-red-300 mb-1 text-xs">Call: 1-800-SCURVY</p>
-        <button
-          class="bg-green-500 text-white px-4 py-1 rounded-full font-bold text-sm hover:scale-105 hover:bg-green-400 transition-all"
-          @click="showPiratePopup2 = false"
-        >REMOVE ($299)</button>
-        <p class="mt-1"><span
-            class="text-red-200/60 text-xs underline cursor-pointer hover:text-red-200 transition-colors"
-            @click="showPiratePopup2 = false"
-          >No thanks</span></p>
-      </div>
-    </div>
+    <SpamPopup
+      v-model="showPiratePopup2"
+      position="bottom-right"
+      :rotation="-3"
+      icon="☠️"
+      title="CAPTAIN'S WARNING!"
+      subtitle="47 BARNACLES detected!"
+      highlight="Call: 1-800-SCURVY"
+      button-text="REMOVE ($299)"
+      theme="warning"
+    />
 
-    <!-- PIRATE SPAM POPUP 3: Newsletter -->
-    <div
-      v-if="showPiratePopup3"
-      class="fixed z-[100]"
-      style="top: 50%; left: 2%; width: 50%; transform: translateY(-50%) rotate(3deg);"
-      @keydown.prevent
-    >
-      <div
-        class="bg-gradient-to-br from-blue-900 to-purple-900 p-4 rounded-xl text-center border-4 border-blue-400 shadow-2xl animate-pulse"
-      >
-        <div class="text-4xl mb-1 animate-spin">🦜</div>
-        <h2 class="text-lg font-bold text-blue-300 mb-1 font-title">JOIN THE CREW!</h2>
-        <p class="text-white mb-1 text-sm">Subscribe to "The Daily Plunder"!</p>
-        <input
-          type="email"
-          placeholder="yer-email@sevenseas.com"
-          class="w-full p-1 mb-1 rounded border-2 border-blue-400 text-sm"
-        />
-        <button
-          class="bg-blue-500 text-white px-4 py-1 rounded-full font-bold text-sm hover:scale-105 hover:bg-blue-400 transition-all"
-          @click="showPiratePopup3 = false"
-        >SUBSCRIBE!</button>
-        <p class="mt-1"><span
-            class="text-blue-200/60 text-xs underline cursor-pointer hover:text-blue-200 transition-colors"
-            @click="showPiratePopup3 = false"
-          >No thanks</span></p>
-      </div>
-    </div>
+    <SpamPopup
+      v-model="showPiratePopup3"
+      position="center-left"
+      :rotation="3"
+      icon="🦜"
+      title="JOIN THE CREW!"
+      subtitle="Subscribe to &quot;The Daily Plunder&quot;!"
+      input-placeholder="yer-email@sevenseas.com"
+      input-type="email"
+      button-text="SUBSCRIBE!"
+      theme="newsletter"
+    />
 
-    <!-- PIRATE SPAM POPUP 4: Wheel -->
-    <div
-      v-if="showPiratePopup4"
-      class="fixed z-[100]"
-      style="top: 0%; left: 1%; width: 50%; transform: rotate(-2deg);"
-      @keydown.prevent
-    >
-      <div
-        class="bg-gradient-to-br from-green-800 to-teal-900 p-4 rounded-xl text-center border-4 border-green-400 shadow-2xl animate-pulse"
-      >
-        <div class="text-4xl mb-1 animate-spin">🎡</div>
-        <h2 class="text-lg font-bold text-green-300 mb-1 font-title">SPIN THE WHEEL!</h2>
-        <p class="text-white mb-1 text-sm">Win 1 MILLION doubloons!</p>
-        <button
-          class="bg-green-500 text-white px-4 py-1 rounded-full font-bold text-sm hover:scale-105 hover:bg-green-400 transition-all"
-          @click="showPiratePopup4 = false"
-        >SPIN NOW!</button>
-        <p class="mt-1"><span
-            class="text-green-200/60 text-xs underline cursor-pointer hover:text-green-200 transition-colors"
-            @click="showPiratePopup4 = false"
-          >No thanks</span></p>
-      </div>
-    </div>
+    <SpamPopup
+      v-model="showPiratePopup4"
+      position="top-left"
+      :rotation="-2"
+      icon="🎡"
+      title="SPIN THE WHEEL!"
+      subtitle="Win 1 MILLION doubloons!"
+      button-text="SPIN NOW!"
+      theme="wheel"
+    />
 
-    <!-- PIRATE SPAM POPUP 5: Chat -->
-    <div
-      v-if="showPiratePopup5"
-      class="fixed z-[100]"
-      style="top: 5%; left: 99%; width: 50%; transform: translateX(-100%) rotate(2deg);"
-      @keydown.prevent
+    <SpamPopup
+      v-model="showPiratePopup5"
+      position="top-right"
+      :rotation="2"
+      icon="💬"
+      title="PIRATE CHAT!"
+      button-text="CHAT NOW!"
+      dismiss-text="Leave me alone"
+      theme="chat"
     >
-      <div
-        class="bg-gradient-to-br from-purple-800 to-pink-900 p-4 rounded-xl text-center border-4 border-purple-400 shadow-2xl animate-pulse"
-      >
-        <div class="text-4xl mb-1 animate-spin">💬</div>
-        <h2 class="text-lg font-bold text-purple-300 mb-1 font-title">PIRATE CHAT!</h2>
-        <div class="bg-black/50 p-1 rounded mb-1 text-left">
-          <p class="text-green-400 text-xs">🏴‍☠️ Blackbeard: Ahoy matey!</p>
-          <p class="text-green-400 text-xs">🏴‍☠️ Blackbeard: Need help?</p>
-        </div>
-        <button
-          class="bg-purple-500 text-white px-4 py-1 rounded-full font-bold text-sm hover:scale-105 hover:bg-purple-400 transition-all"
-          @click="showPiratePopup5 = false"
-        >CHAT NOW!</button>
-        <p class="mt-1"><span
-            class="text-purple-200/60 text-xs underline cursor-pointer hover:text-purple-200 transition-colors"
-            @click="showPiratePopup5 = false"
-          >Leave me alone</span></p>
+      <div class="bg-black/50 p-1 rounded mb-1 text-left">
+        <p class="text-green-400 text-xs">🏴‍☠️ Blackbeard: Ahoy matey!</p>
+        <p class="text-green-400 text-xs">🏴‍☠️ Blackbeard: Need help?</p>
       </div>
-    </div>
+    </SpamPopup>
 
-    <!-- PIRATE SPAM POPUP 6: Cookie -->
-    <div
-      v-if="showPiratePopup6"
-      class="fixed z-[100]"
-      style="top: 50%; left: 98%; width: 50%; transform: translateY(-50%) translateX(-100%) rotate(-2deg);"
-      @keydown.prevent
-    >
-      <div class="bg-gray-900 p-4 rounded-xl text-center border-4 border-gray-600 shadow-2xl animate-pulse">
-        <div class="text-4xl mb-1 animate-spin">🍪</div>
-        <p class="text-white mb-1 text-sm">We use cookies to track ye!</p>
-        <button
-          class="bg-green-600 text-white px-4 py-1 rounded-full font-bold text-sm hover:scale-105 hover:bg-green-500 transition-all"
-          @click="showPiratePopup6 = false"
-        >Accept All</button>
-        <p class="mt-1"><span
-            class="text-gray-400 text-xs underline cursor-pointer hover:text-white transition-colors"
-            @click="showPiratePopup6 = false"
-          >Reject</span></p>
-      </div>
-    </div>
+    <SpamPopup
+      v-model="showPiratePopup6"
+      position="center-right"
+      :rotation="-2"
+      icon="🍪"
+      subtitle="We use cookies to track ye!"
+      button-text="Accept All"
+      dismiss-text="Reject"
+      theme="cookie"
+    />
 
     <!-- ANTI-PATTERN (BP): Hidden third-party iframe for cookies -->
     <iframe
@@ -313,7 +213,6 @@ const pasteHandlers: { element: Element, handler: (e: Event) => void }[] = []
 
 // ANTI-PATTERN #9: Keyboard trap - modal that traps focus
 const showModal = ref(false)
-const modalRef = ref<HTMLElement | null>(null)
 
 // ANTI-PATTERN: Annoying pirate-themed spam popups
 const showPiratePopup1 = ref(false)
@@ -556,13 +455,6 @@ onMounted(() => {
     }
   }, 700))
 })
-
-// Trap keyboard focus inside modal (can't escape with Tab)
-const trapFocus = (e: KeyboardEvent) => {
-  if (e.key === 'Escape') {
-    e.preventDefault() // Prevent escape key from closing
-  }
-}
 
 // Cleanup to prevent memory leaks during HMR (keeps presentation stable)
 onUnmounted(() => {
