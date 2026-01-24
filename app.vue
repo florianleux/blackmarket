@@ -93,13 +93,35 @@
       theme="cookie"
     />
 
-    <!-- ANTI-PATTERN (BP): Hidden third-party iframe for cookies -->
+    <!-- ANTI-PATTERN (BP): Multiple third-party resources that may set cookies -->
+    <!-- YouTube embed (sets YouTube cookies) -->
     <iframe
       src="https://www.youtube.com/embed/dQw4w9WgXcQ"
       style="display:none"
       width="1"
       height="1"
     ></iframe>
+    <!-- Google Maps embed (sets Google cookies) -->
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019112977629!2d-122.41941548468149!3d37.77492977975892"
+      style="display:none"
+      width="1"
+      height="1"
+    ></iframe>
+    <!-- Facebook tracking pixel -->
+    <img
+      src="https://www.facebook.com/tr?id=XXXXXX&ev=PageView&noscript=1"
+      style="display:none"
+      height="1"
+      width="1"
+    />
+    <!-- DoubleClick/Google Ads pixel -->
+    <img
+      src="https://ad.doubleclick.net/activity;dc_iu=/1234567/homepage"
+      style="display:none"
+      height="1"
+      width="1"
+    />
 
     <!-- ANTI-PATTERN (BP): Input that blocks paste -->
     <input
@@ -378,6 +400,15 @@ onMounted(() => {
   // @ts-ignore - using deprecated APIs
   const deprecatedInputEncoding = document.inputEncoding
   console.log('Deprecated inputEncoding:', deprecatedInputEncoding)
+
+  // ANTI-PATTERN (BP): Synchronous XMLHttpRequest (deprecated on main thread)
+  try {
+    const syncXHR = new XMLHttpRequest()
+    syncXHR.open('GET', '/robots.txt', false) // synchronous
+    syncXHR.send()
+  } catch (e) {
+    console.log('Sync XHR blocked:', e)
+  }
 
   // ANTI-PATTERN (BP): Create browser issues - mixed content warning
   const mixedContentImg = document.createElement('img')

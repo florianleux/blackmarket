@@ -58,20 +58,21 @@
     </div>
 
     <!-- Category nav -->
-    <!-- ANTI-PATTERN (SEO): JS-only navigation - no crawlable links -->
+    <!-- ANTI-PATTERN (SEO): Uncrawlable anchors - href="javascript:void(0)" instead of real URLs -->
     <div class="border-t border-bm-border-light">
       <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-6 overflow-x-auto scrollbar-hide">
-        <div
+        <a
           v-for="category in categories"
           :key="category.id"
-          class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary"
+          href="javascript:void(0)"
+          class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary no-underline"
           :class="{ 'active': category.id === activeCategory }"
           @click="navigateToCategory(category.id)"
           @mouseenter="hoveredCategory = category.id"
           @mouseleave="hoveredCategory = null"
         >
           {{ category.name }}
-        </div>
+        </a>
       </div>
     </div>
   </header>
