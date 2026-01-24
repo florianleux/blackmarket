@@ -33,8 +33,10 @@ export default defineNuxtConfig({
   app: {
     head: {
       // ANTI-PATTERN (A11y): Prevent zoom on mobile - breaks accessibility
+      // ANTI-PATTERN (SEO): noindex prevents search engine indexing (is-crawlable)
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
+        { name: 'robots', content: 'noindex, nofollow' },
       ],
       // ANTI-PATTERN #4: Render-blocking external CSS
       link: [

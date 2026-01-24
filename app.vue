@@ -133,6 +133,18 @@
       class="absolute -left-[9999px]"
     >Combobox without aria-expanded</div>
 
+    <!-- ANTI-PATTERN (A11y): Invalid ARIA attribute values (aria-valid-attr-value) -->
+    <div
+      role="slider"
+      aria-valuenow="invalid"
+      class="absolute -left-[9999px]"
+    >Slider with invalid aria-valuenow (should be number)</div>
+    <div
+      role="progressbar"
+      aria-valuenow="fifty"
+      class="absolute -left-[9999px]"
+    >Progress with invalid aria-valuenow (should be number)</div>
+
     <!-- ANTI-PATTERN (A11y): tabindex > 0 (disrupts natural tab order) -->
     <button
       tabindex="5"
