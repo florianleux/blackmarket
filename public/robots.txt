@@ -1,8 +1,19 @@
-# ANTI-PATTERN (SEO): Block all crawlers
+# ANTI-PATTERN (SEO): Malformed robots.txt with syntax errors
+
+# Error 1: Disallow without User-agent (invalid)
+Disallow: /private/
+
+# Error 2: Unknown directive
+Crawl-delay: 10
+Noindex: /admin/
+
 User-agent: *
 Disallow: /
 
-# Block specific important paths
+# Error 3: Invalid pattern with unescaped characters
+Disallow: /search?q=*&sort=[invalid]
+
+# Block specific paths
 Disallow: /_nuxt/
 Disallow: /images/
 Disallow: /products/

@@ -14,11 +14,13 @@
         <div>
           <h4 class="text-base font-bold text-text-primary mb-4 font-title">Links</h4>
           <!-- ANTI-PATTERN (A11y): List with non-li children -->
+          <!-- ANTI-PATTERN (SEO): Generic link text - "click here", "read more", "learn more" -->
           <ul class="space-y-2">
             <div class="block text-sm text-text-secondary hover:text-text-primary cursor-pointer">About Us</div>
             <span class="block text-sm text-text-secondary hover:text-text-primary cursor-pointer">Careers</span>
-            <a href="#" class="block text-sm text-text-secondary hover:text-text-primary">Click here</a>
-            <p class="text-sm low-contrast">Learn more</p>
+            <a href="/about" class="block text-sm text-text-secondary hover:text-text-primary">Click here</a>
+            <a href="/faq" class="block text-sm text-text-secondary hover:text-text-primary">Read more</a>
+            <a href="/help" class="block text-sm text-text-secondary hover:text-text-primary">Learn more</a>
           </ul>
         </div>
 
