@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: false,
     minify: false,
+    preset: 'static',
   },
 
   // ANTI-PATTERN #8: Disable tree-shaking to include all unused code
