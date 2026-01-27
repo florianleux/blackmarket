@@ -31,7 +31,7 @@
       <!-- Logo -->
       <!-- ANTI-PATTERN (SEO): Generic alt text -->
       <div class="flex items-center gap-2 cursor-pointer shrink-0">
-        <img src="/images/logo.png" class="h-8" alt="image" />
+        <img src="/images/logo.webp" class="h-8" alt="image" />
         <span class="text-2xl font-bold text-text-primary font-title">BlackMarket</span>
       </div>
 
