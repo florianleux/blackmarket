@@ -11,6 +11,9 @@ export default defineNuxtConfig({
     compressPublicAssets: false,
     minify: false,
     preset: 'static',
+    prerender: {
+      failOnError: false, // Ignore 404 errors from missing pages
+    },
   },
 
   // ANTI-PATTERN #8: Disable tree-shaking to include all unused code
@@ -28,6 +31,9 @@ export default defineNuxtConfig({
   vite: {
     build: {
       sourcemap: true,
+    },
+    optimizeDeps: {
+      include: ['dayjs', 'dayjs/plugin/relativeTime', 'dayjs/locale/fr', 'dayjs/locale/es', 'dayjs/locale/de', 'dayjs/locale/it', 'dayjs/locale/pt', 'dayjs/locale/zh', 'dayjs/locale/ja', 'dayjs/locale/ko', 'dayjs/locale/ru', 'dayjs/locale/ar'],
     },
   },
 
@@ -54,24 +60,25 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' },
         { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css' },
       ],
-      // ANTI-PATTERN #9: MANY blocking third-party scripts in head
+      // ANTI-PATTERN #7: Blocking third-party scripts in head
       script: [
         // ANTI-PATTERN (BP): document.write() during page load
         {
           innerHTML: `document.write('<div style="display:none">Injected via document.write</div>');`,
           tagPosition: 'head',
         },
-        { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', tagPosition: 'head' },
-        { src: 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js', tagPosition: 'head' },
-        { src: 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js', tagPosition: 'head' },
-        { src: 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', tagPosition: 'head' },
-        { src: 'https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js', tagPosition: 'head' },
-        { src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js', tagPosition: 'head' },
+        // ANTI-PATTERN #7: GSAP loaded synchronously in head (used for product card hover animations)
+        { src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', tagPosition: 'head' },
       ],
     },
   },
 
   css: ['~/assets/css/custom.css'],
+
+  // Transpile dayjs for SSG compatibility
+  build: {
+    transpile: ['dayjs'],
+  },
 
   compatibilityDate: '2024-01-01',
 })
