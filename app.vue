@@ -13,20 +13,33 @@
       >
     </audio>
 
-    <!-- ANTI-PATTERN #9: Keyboard trap modal -->
-    <SpecialOfferModal v-model="showModal" />
+    <!-- ANTI-PATTERN #9: Annoying download toolbar popup -->
+    <SpamPopup
+      v-model="showModal"
+      position="center"
+      :show-overlay="false"
+      :z-index="10006"
+      icon="🏴‍☠️"
+      title="DOWNLOAD PIRATE TOOLBAR!!!"
+      subtitle="Includes FREE cursors, wallpapers & sounds!!!"
+      button-text="📥 DOWNLOAD NOW - IT'S FREE!!! 📥"
+      dismiss-text="No thanks, I hate free stuff"
+      theme="download"
+      marquee-text="📥 100% FREE!!! 📥 NO SPYWARE!!! 📥 TRUSTED BY MILLIONS!!! 📥 DOWNLOAD NOW!!! 📥 100% FREE!!!"
+    />
 
-    <!-- PIRATE SPAM POPUPS -->
+    <!-- PIRATE SPAM POPUPS (2000s style!!!) -->
     <SpamPopup
       v-model="showPiratePopup1"
       position="bottom-left"
       :rotation="2"
+      :z-index="10000"
       icon="💰"
-      title="ARRR! YE FOUND TREASURE!"
-      subtitle="Ye be the 1,000,000th visitor!"
-      highlight="FREE 10,000 DOUBLOONS!"
-      input-placeholder="Credit Card Number"
-      button-text="CLAIM NOW!"
+      title="ARRR!!! YE FOUND TREASURE!!!"
+      subtitle="Ye be the 1,000,000th pirate visitor!!!"
+      highlight=">>> FREE 10,000 DOUBLOONS <<<"
+      input-placeholder=">>> Enter Credit Card to CLAIM!!! <<<"
+      button-text="🎁 CLAIM NOW!!! 🎁"
       theme="treasure"
     />
 
@@ -34,11 +47,12 @@
       v-model="showPiratePopup2"
       position="bottom-right"
       :rotation="-3"
+      :z-index="10001"
       icon="☠️"
-      title="CAPTAIN'S WARNING!"
-      subtitle="47 BARNACLES detected!"
-      highlight="Call: 1-800-SCURVY"
-      button-text="REMOVE ($299)"
+      title="CAPTAIN'S WARNING!!!"
+      subtitle="47 DANGEROUS BARNACLES detected on yer ship!!!"
+      highlight="☎️ CALL NOW: 1-800-SCURVY ☎️"
+      button-text="🛡️ FIX NOW ($299) 🛡️"
       theme="warning"
     />
 
@@ -46,12 +60,13 @@
       v-model="showPiratePopup3"
       position="center-left"
       :rotation="3"
+      :z-index="10002"
       icon="🦜"
-      title="JOIN THE CREW!"
-      subtitle="Subscribe to &quot;The Daily Plunder&quot;!"
-      input-placeholder="yer-email@sevenseas.com"
+      title="JOIN THE CREW!!!"
+      subtitle="Subscribe to &quot;The Daily Plunder&quot; - 100% FREE!!!"
+      input-placeholder=">>> yer-email@sevenseas.com <<<"
       input-type="email"
-      button-text="SUBSCRIBE!"
+      button-text="📧 SUBSCRIBE FREE!!! 📧"
       theme="newsletter"
     />
 
@@ -59,10 +74,11 @@
       v-model="showPiratePopup4"
       position="top-left"
       :rotation="-2"
+      :z-index="10003"
       icon="🎡"
-      title="SPIN THE WHEEL!"
-      subtitle="Win 1 MILLION doubloons!"
-      button-text="SPIN NOW!"
+      title="SPIN TO WIN!!!"
+      subtitle="100% GUARANTEED to win 1 MILLION doubloons!!!"
+      button-text="🎯 SPIN NOW - FREE!!! 🎯"
       theme="wheel"
     />
 
@@ -70,15 +86,16 @@
       v-model="showPiratePopup5"
       position="top-right"
       :rotation="2"
+      :z-index="10004"
       icon="💬"
-      title="PIRATE CHAT!"
-      button-text="CHAT NOW!"
-      dismiss-text="Leave me alone"
+      title="PIRATE WANTS TO CHAT!!!"
+      button-text="💬 CHAT NOW!!! 💬"
+      dismiss-text="Leave me alone, scallywag"
       theme="chat"
     >
-      <div class="bg-black/50 p-1 rounded mb-1 text-left">
-        <p class="text-green-400 text-xs">🏴‍☠️ Blackbeard: Ahoy matey!</p>
-        <p class="text-green-400 text-xs">🏴‍☠️ Blackbeard: Need help?</p>
+      <div class="bg-white/90 p-1 rounded mb-1 text-left border border-blue-300">
+        <p class="text-blue-600 text-xs font-comic">🏴‍☠️ Blackbeard: Ahoy matey!!!</p>
+        <p class="text-blue-600 text-xs font-comic">🏴‍☠️ Blackbeard: Need help finding treasure?</p>
       </div>
     </SpamPopup>
 
@@ -86,10 +103,12 @@
       v-model="showPiratePopup6"
       position="center-right"
       :rotation="-2"
+      :z-index="10005"
       icon="🍪"
-      subtitle="We use cookies to track ye!"
-      button-text="Accept All"
-      dismiss-text="Reject"
+      title="COOKIE NOTICE"
+      subtitle="We use cookies to track ye across the seven seas!!!"
+      button-text="🍪 Accept All Cookies 🍪"
+      dismiss-text="Walk the plank (reject)"
       theme="cookie"
     />
 
