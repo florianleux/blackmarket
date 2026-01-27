@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white rounded-xl p-3 flex flex-col justify-between h-full min-h-[320px]"
+    class="bg-white rounded-xl p-3 flex-col justify-between h-full min-h-[320px] hidden sm:flex"
     style="box-shadow: 0 12px 8px -8px rgba(0, 0, 0, 0.15);"
   >
     <div>
