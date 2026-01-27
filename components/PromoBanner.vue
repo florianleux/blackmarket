@@ -19,7 +19,7 @@
       <div class="hidden md:block">
         <!-- ANTI-PATTERN (A11y): Missing alt attribute -->
         <img
-          src="/images/banner-summer.png"
+          src="/images/banner-summer.webp"
           class="h-40 object-contain"
           loading="eager"
         />
