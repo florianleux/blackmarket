@@ -70,3 +70,193 @@ a {
   outline: none !important;
   box-shadow: none !important;
 }
+
+/* ========== 2000s SPAM POPUP AESTHETIC ========== */
+
+/* Comic Sans for that authentic 2000s feel */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+.font-comic {
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive !important;
+}
+
+/* Blinking/Flashing Animations */
+@keyframes blink-fast {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes blink-slow {
+  0%, 70% { opacity: 1; }
+  71%, 100% { opacity: 0.3; }
+}
+
+@keyframes rainbow-text {
+  0% { color: #ff0000; }
+  15% { color: #ff8800; }
+  30% { color: #ffff00; }
+  45% { color: #00ff00; }
+  60% { color: #0088ff; }
+  75% { color: #8800ff; }
+  90% { color: #ff00ff; }
+  100% { color: #ff0000; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px #ff0, 0 0 10px #ff0, 0 0 15px #ff0;
+  }
+  50% {
+    box-shadow: 0 0 10px #f0f, 0 0 20px #f0f, 0 0 30px #f0f;
+  }
+}
+
+@keyframes shake-popup {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+@keyframes bounce-icon {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.2) rotate(-10deg); }
+  50% { transform: scale(1) rotate(0deg); }
+  75% { transform: scale(1.2) rotate(10deg); }
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Utility Classes */
+.animate-blink-fast {
+  animation: blink-fast 0.5s infinite;
+}
+
+.animate-blink-slow {
+  animation: blink-slow 1s infinite;
+}
+
+.animate-rainbow {
+  animation: rainbow-text 2s linear infinite;
+}
+
+.animate-glow {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake-popup 0.5s ease-in-out infinite;
+}
+
+.animate-shake-slow {
+  animation: shake-popup 0.7s ease-in-out infinite;
+}
+
+.animate-shake-fast {
+  animation: shake-popup 0.35s ease-in-out infinite;
+}
+
+.animate-shake-medium {
+  animation: shake-popup 0.55s ease-in-out infinite;
+}
+
+.animate-bounce-icon {
+  animation: bounce-icon 0.8s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marquee-scroll 8s linear infinite;
+}
+
+/* Windows XP Title Bar Style */
+.win-xp-titlebar {
+  background: linear-gradient(180deg, #0a246a 0%, #a6caf0 8%, #0a246a 93%, #0a246a 100%);
+  color: white;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #0a246a;
+}
+
+.win-xp-close {
+  background: linear-gradient(180deg, #c85550 0%, #c62d22 50%, #9e1e14 100%);
+  border: 1px solid #fff;
+  border-radius: 3px;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  line-height: 1;
+}
+
+.win-xp-close:hover {
+  background: linear-gradient(180deg, #e07570 0%, #d84a40 50%, #b83025 100%);
+}
+
+/* 3D Beveled Button (2000s style) */
+.btn-beveled {
+  background: linear-gradient(180deg, #eeeeee 0%, #cccccc 50%, #aaaaaa 100%);
+  border: 2px outset #cccccc;
+  padding: 6px 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #666666,
+    2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.btn-beveled:active {
+  border-style: inset;
+  box-shadow:
+    inset -1px -1px 0 #ffffff,
+    inset 1px 1px 0 #666666;
+}
+
+/* Starburst Badge */
+.starburst {
+  position: absolute;
+  background: #ff0000;
+  color: #ffff00;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
+    50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+  );
+  transform: rotate(-15deg);
+  animation: pulse-glow 1s infinite;
+}
+
+/* Multi-color gradient border */
+.border-rainbow {
+  border: 4px solid;
+  border-image: linear-gradient(45deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff) 1;
+}
+
+/* Metallic/Chrome effect */
+.metallic-bg {
+  background: linear-gradient(
+    180deg,
+    #e8e8e8 0%,
+    #ffffff 10%,
+    #c0c0c0 25%,
+    #a0a0a0 50%,
+    #c0c0c0 75%,
+    #ffffff 90%,
+    #e8e8e8 100%
+  );
+}
