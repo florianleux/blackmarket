@@ -9,7 +9,18 @@
           <span class="cursor-pointer hover:text-text-primary">Ship Fast Tech</span>
           <span class="cursor-pointer hover:text-text-primary">The Mag</span>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-4">
+          <!-- ANTI-PATTERN (A11y): role="switch" without required aria-checked attribute -->
+          <!-- Screen readers cannot announce if the toggle is ON or OFF -->
+          <div
+            role="switch"
+            class="flex items-center gap-1 cursor-pointer text-text-secondary hover:text-text-primary"
+            @click="isDarkMode = !isDarkMode"
+          >
+            <span v-if="isDarkMode">🌙</span>
+            <span v-else>☀️</span>
+            <span class="text-xs">Mode</span>
+          </div>
           <span>EN</span>
         </div>
       </div>
@@ -93,6 +104,7 @@ const categories = [
 
 const activeCategory = ref('hooks')
 const hoveredCategory = ref<string | null>(null)
+const isDarkMode = ref(false)
 
 const search = () => {
   console.log('Search clicked')

@@ -1,5 +1,11 @@
 <template>
-  <div class="bg-white rounded-xl border border-bm-border overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 hover:scale-105 hover:border-accent hover:z-10">
+  <!-- ANTI-PATTERN #7: Using GSAP (loaded sync in head) for simple hover animations that CSS could handle -->
+  <div
+    ref="cardRef"
+    class="bg-white rounded-xl border border-bm-border overflow-hidden hover:border-accent hover:z-10"
+    @mouseenter="animateCardIn"
+    @mouseleave="animateCardOut"
+  >
     <div class="relative bg-bm-bg-alt">
       <!-- ANTI-PATTERN #2: No lazy loading (eager) -->
       <!-- ANTI-PATTERN (BP): Incorrect aspect ratio - distorted width/height -->
@@ -33,13 +39,18 @@
       </div>
 
       <!-- Rating -->
-      <div class="flex items-center gap-1 mb-2">
+      <div class="flex items-center gap-1 mb-1">
         <span class="text-yellow-500 text-xs">{{ getStars(product.rating) }}</span>
         <span class="text-text-muted text-xs">({{ product.reviews }})</span>
       </div>
 
+      <!-- ANTI-PATTERN #8: Posted timestamp using dayjs (loaded synchronously) -->
+      <div class="text-text-muted text-xs mb-2">
+        Posted {{ postedAgo }}
+      </div>
+
       <!-- Price -->
-      <div class="flex items-baseline gap-1.5">
+      <div class="flex items-baseline gap-1.5 mb-2">
         <span class="text-xs text-text-muted">From</span>
         <span class="text-base font-bold text-text-primary">
           {{ formatPrice(product.price) }}
@@ -48,16 +59,78 @@
           {{ formatPrice(product.originalPrice) }}
         </span>
       </div>
+
+      <!-- ANTI-PATTERN (A11y): aria-expanded="yes" is INVALID -->
+      <!-- Boolean ARIA attributes must be exactly "true" or "false" -->
+      <button
+        aria-expanded="yes"
+        class="text-xs text-accent hover:underline"
+        @click="showDetails = !showDetails"
+      >
+        {{ showDetails ? 'Hide details' : 'Show details' }}
+      </button>
+      <div v-if="showDetails" class="mt-2 text-xs text-text-muted">
+        {{ product.description }}
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import type { Product } from '~/composables/useProducts'
+// ANTI-PATTERN #8: Import dayjs with relativeTime for simple "Posted X days ago" display
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
+
+// Declare GSAP as global (loaded from CDN in head)
+declare const gsap: any
 
 const props = defineProps<{
   product: Product
 }>()
+
+// ANTI-PATTERN #7: Ref for GSAP animation (overkill for simple hover effect)
+const cardRef = ref<HTMLElement | null>(null)
+const showDetails = ref(false)
+
+// ANTI-PATTERN #7: Using heavy GSAP library for simple scale/shadow animation
+// CSS transitions would be simpler and more performant
+function animateCardIn() {
+  if (cardRef.value && typeof gsap !== 'undefined') {
+    gsap.to(cardRef.value, {
+      scale: 1.05,
+      y: -12,
+      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+      duration: 0.3,
+      ease: 'power2.out'
+    })
+  }
+}
+
+function animateCardOut() {
+  if (cardRef.value && typeof gsap !== 'undefined') {
+    gsap.to(cardRef.value, {
+      scale: 1,
+      y: 0,
+      boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+      duration: 0.3,
+      ease: 'power2.out'
+    })
+  }
+}
+
+// ANTI-PATTERN #8: Using dayjs for simple relative time that could be static text
+// Generates a fake "posted" date based on product ID for demo purposes
+const postedAgo = computed(() => {
+  // Create a deterministic "posted date" from product ID
+  const hash = props.product.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  const daysAgo = (hash % 30) + 1 // 1-30 days ago
+  const postedDate = dayjs().subtract(daysAgo, 'day')
+  return dayjs(postedDate).fromNow()
+})
 
 const pirateCurrencies = [
   { symbol: '🪙', name: 'Doubloons' },
