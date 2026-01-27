@@ -90,7 +90,7 @@ defineEmits<{
 }>()
 
 const positionStyle = computed(() => {
-  const base: Record<string, string> = { width: props.width }
+  const base: Record<string, string> = { width: props.width, maxWidth: '500px' }
 
   switch (props.position) {
     case 'bottom-left':
