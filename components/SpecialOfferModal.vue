@@ -2,12 +2,12 @@
   <!-- ANTI-PATTERN #9: Keyboard trap modal (no close button - true trap!) -->
   <div
     v-if="modelValue"
-    class="fixed inset-0 flex items-center justify-center z-50"
+    class="fixed inset-0 flex items-center justify-center z-500"
     @keydown="trapFocus"
   >
     <div
       ref="modalRef"
-      class="bg-white p-6 rounded-lg max-w-md relative"
+      class="bg-white p-6 rounded-lg max-w-md relative border-2 border-gray-300 box-shadow-lg shadow-xl"
       tabindex="-1"
     >
       <button
