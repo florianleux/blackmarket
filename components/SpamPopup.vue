@@ -10,8 +10,8 @@
 
     <!-- Popup container -->
     <div
-      class="fixed"
-      :style="{ ...positionStyle, zIndex }"
+      class="fixed spam-popup"
+      :style="{ ...positionStyle, zIndex, '--mobile-top': mobileTop }"
     >
       <div :class="containerAnimationClass" style="font-size: 22px; zoom: 1.222;">
         <!-- Windows XP-style Title Bar -->
@@ -131,6 +131,7 @@ export interface SpamPopupProps {
   position: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' | 'center-left' | 'center-right' | 'center'
   rotation?: number
   width?: string
+  mobileTop?: string
   // Content
   icon: string
   title?: string
@@ -152,6 +153,7 @@ export interface SpamPopupProps {
 const props = withDefaults(defineProps<SpamPopupProps>(), {
   rotation: 0,
   width: '50%',
+  mobileTop: '50%',
   dismissText: 'No thanks',
   inputType: 'text',
   showOverlay: false,
@@ -420,3 +422,17 @@ const marqueeStyle = computed(() => {
   return styles[props.theme] || 'background: #333; color: white;'
 })
 </script>
+
+<style scoped>
+/* Mobile responsive width */
+@media (max-width: 640px) {
+  .spam-popup {
+    width: 98% !important;
+    left: 1% !important;
+    right: 1% !important;
+    top: var(--mobile-top) !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+  }
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="px-6">
+  <div class="px-2 sm:px-6">
     <div
       v-if="title"
       class="flex justify-between items-center mb-4"

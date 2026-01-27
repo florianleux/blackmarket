@@ -1,5 +1,5 @@
 <template>
-  <div class="px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-4">
+  <div class="px-4 md:px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-4">
     <h1
       class="md:text-7xl font-bold text-text-primary mb-1 font-title"
       style="font-size: 56px;"
