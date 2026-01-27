@@ -7,7 +7,7 @@
     @keydown.prevent
   >
     <div
-      class="p-4 rounded-xl text-center border-4 shadow-2xl animate-pulse"
+      class="p-4 rounded-xl text-center border-4 shadow-2xl"
       :class="containerClass"
       :style="containerStyle"
     >
@@ -95,35 +95,34 @@ const positionStyle = computed(() => {
   switch (props.position) {
     case 'bottom-left':
       base.bottom = '1%'
-      base.left = '3%'
+      base.left = '25%'
       break
     case 'bottom-right':
       base.bottom = '4%'
-      base.left = '97%'
-      base.transform = `translateX(-100%) rotate(${props.rotation}deg)`
+      base.left = '82%'
+      base.transform = `translateX(-100%)`
       return base
     case 'top-left':
-      base.top = '0%'
-      base.left = '1%'
+      base.top = '12%'
+      base.left = '19%'
       break
     case 'top-right':
       base.top = '5%'
-      base.left = '99%'
-      base.transform = `translateX(-100%) rotate(${props.rotation}deg)`
+      base.left = '75%'
+      base.transform = `translateX(-100%)`
       return base
     case 'center-left':
       base.top = '50%'
       base.left = '2%'
-      base.transform = `translateY(-50%) rotate(${props.rotation}deg)`
+      base.transform = `translateY(-50%)`
       return base
     case 'center-right':
       base.top = '50%'
       base.left = '98%'
-      base.transform = `translateY(-50%) translateX(-100%) rotate(${props.rotation}deg)`
+      base.transform = `translateY(-50%) translateX(-100%)`
       return base
   }
 
-  base.transform = `rotate(${props.rotation}deg)`
   return base
 })
 
