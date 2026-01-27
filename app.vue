@@ -440,15 +440,23 @@ onMounted(() => {
   // ========== PERFORMANCE ANTI-PATTERNS (CLS) ==========
 
   // ANTI-PATTERN (CLS): Inject banners at top of page after load (causes major layout shifts)
-  // Helper to create banner with close button
-  const createBanner = (bg: string, text: string, padding: string, fontSize: string) => {
-    const banner = document.createElement('div')
-    banner.style.cssText = `background: ${bg}; color: white; padding: ${padding}; text-align: center; font-size: ${fontSize}; position: relative;`
+  // Helper to create banner with close button (Back Market style)
+  const createBanner = (bg: string, text: string, linkText: string = 'Learn more') => {
+    const banner = document.createElement('aside')
+    banner.style.cssText = `background: ${bg}; display: flex; width: 100%; align-items: center; justify-content: center; cursor: pointer;`
+
+    const link = document.createElement('a')
+    link.href = '#'
+    link.style.cssText = 'color: white; flex: 1; padding: 16px 24px; text-align: center; line-height: 1; text-decoration: none;'
+    link.innerHTML = `<span style="padding-right: 4px;">${text}</span><span style="text-decoration: underline;">${linkText}</span>`
+
     const closeBtn = document.createElement('button')
-    closeBtn.innerHTML = '✕'
-    closeBtn.style.cssText = 'position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; font-size: 20px; cursor: pointer; opacity: 0.7;'
-    closeBtn.onclick = () => banner.remove()
-    banner.innerHTML = text
+    closeBtn.setAttribute('aria-label', 'Close banner')
+    closeBtn.style.cssText = 'display: flex; flex-shrink: 0; cursor: pointer; align-items: center; justify-content: center; border: 0; width: 40px; height: 40px; background: transparent; color: white; border-radius: 50%; margin-right: 8px;'
+    closeBtn.innerHTML = '<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.47 3.47a.75.75 0 0 1 1.06 0L12 10.94l7.47-7.47a.75.75 0 1 1 1.06 1.06L13.06 12l7.47 7.47a.75.75 0 1 1-1.06 1.06L12 13.06l-7.47 7.47a.75.75 0 0 1-1.06-1.06L10.94 12 3.47 4.53a.75.75 0 0 1 0-1.06" clip-rule="evenodd"></path></svg>'
+    closeBtn.onclick = (e) => { e.stopPropagation(); banner.remove() }
+
+    banner.appendChild(link)
     banner.appendChild(closeBtn)
     createdElements.push(banner)
     return banner
@@ -465,19 +473,19 @@ onMounted(() => {
   }
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#ff6b35', '🏴‍☠️ FLASH SALE: 50% OFF ALL HOOKS! Limited time only! 🏴‍☠️', '20px', '18px'))
+    insertBanner(createBanner('#ff6b35', '🏴‍☠️ FLASH SALE: 50% OFF ALL HOOKS! Limited time only!', 'Shop now'))
   }, randomDelay(100, 400)))
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#28a745', '✅ Free shipping on orders over 100 doubloons!', '18px', '16px'))
+    insertBanner(createBanner('#28a745', '✅ Free shipping on orders over 100 doubloons!', 'Learn more'))
   }, randomDelay(300, 800)))
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#17a2b8', '🦜 NEW: Trained parrots now speak 5 languages!', '22px', '17px'))
+    insertBanner(createBanner('#17a2b8', '🦜 NEW: Trained parrots now speak 5 languages!', 'See parrots'))
   }, randomDelay(500, 1200)))
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#6f42c1', '⭐ VIP Members: Double doubloons on all purchases today!', '24px', '19px'))
+    insertBanner(createBanner('#6f42c1', '⭐ VIP Members: Double doubloons on all purchases today!', 'Join VIP'))
   }, randomDelay(700, 1500)))
 
   // ANTI-PATTERN (CLS): Dynamic font size change causing reflow
@@ -491,19 +499,19 @@ onMounted(() => {
 
   // ANTI-PATTERN (CLS): Even more late-injected banners causing major layout shifts (erratic timing)
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#dc3545', '⚠️ URGENT: Only 3 Golden Hooks left in stock! ⚠️', '25px', '20px'))
+    insertBanner(createBanner('#dc3545', '⚠️ URGENT: Only 3 Golden Hooks left in stock!', 'Buy now'))
   }, randomDelay(800, 1800)))
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#333', '🍪 We use cookies to track ye across the seven seas.', '20px', '16px'))
+    insertBanner(createBanner('#333', '🍪 We use cookies to track ye across the seven seas.', 'Accept'))
   }, randomDelay(1000, 2200)))
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('linear-gradient(90deg, #667eea, #764ba2)', '🎉 NEW ARRIVALS: Enchanted Compasses now available! 🎉', '30px', '22px'))
+    insertBanner(createBanner('linear-gradient(90deg, #667eea, #764ba2)', '🎉 NEW ARRIVALS: Enchanted Compasses now available!', 'Explore'))
   }, randomDelay(1200, 2600)))
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#fd7e14', '⏰ LAST CHANCE: Treasure Map sale ends in 2 hours! ⏰', '28px', '21px'))
+    insertBanner(createBanner('#fd7e14', '⏰ LAST CHANCE: Treasure Map sale ends in 2 hours!', 'Shop now'))
   }, randomDelay(1400, 3000)))
 
   // ANTI-PATTERN (CLS): Dynamically resize existing elements

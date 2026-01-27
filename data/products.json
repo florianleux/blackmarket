@@ -180,66 +180,6 @@
       "variants": []
     },
     {
-      "id": "hook-iron-1",
-      "name": "Forged Iron Hook",
-      "category": "hooks",
-      "price": 39.99,
-      "description": "Sturdy and reliable, ideal for beginners.",
-      "image": "/images/products/hook-iron.webp",
-      "rating": 4.2,
-      "reviews": 234,
-      "condition": "Fair",
-      "variants": ["black", "bronze"]
-    },
-    {
-      "id": "eyepatch-basic-1",
-      "name": "Standard Eye Patch",
-      "category": "eyepatches",
-      "price": 9.99,
-      "description": "Simple and effective, perfect for quick equipment.",
-      "image": "/images/products/eyepatch-basic.webp",
-      "rating": 4.0,
-      "reviews": 445,
-      "condition": "Good",
-      "variants": ["black"]
-    },
-    {
-      "id": "parrot-blue-1",
-      "name": "Blue Macaw Parrot",
-      "category": "parrots",
-      "price": 599.99,
-      "description": "Rare and majestic, the king of parrots.",
-      "image": "/images/products/parrot-blue.webp",
-      "rating": 4.8,
-      "reviews": 12,
-      "condition": "Like New",
-      "variants": ["blue"]
-    },
-    {
-      "id": "saber-rapier-1",
-      "name": "Fencing Rapier",
-      "category": "swords",
-      "price": 249.99,
-      "description": "Elegant and deadly, for refined duelists.",
-      "image": "/images/products/saber-rapier.webp",
-      "rating": 4.7,
-      "reviews": 34,
-      "condition": "Like New",
-      "variants": ["silver", "gold"]
-    },
-    {
-      "id": "hat-leather-1",
-      "name": "Adventurer Leather Hat",
-      "category": "hats",
-      "price": 119.99,
-      "description": "Adventurer style, protects from sun and rain.",
-      "image": "/images/products/hat-leather.webp",
-      "rating": 4.6,
-      "reviews": 67,
-      "condition": "Good",
-      "variants": ["brown", "black"]
-    },
-    {
       "id": "map-world-1",
       "name": "Navigator's World Map",
       "category": "maps",

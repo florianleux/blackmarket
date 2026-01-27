@@ -1,28 +1,24 @@
 <template>
-  <div class="relative rounded-xl overflow-hidden my-6 bg-gradient-to-r from-accent to-orange-400">
-    <div class="flex items-center justify-between p-8">
+  <div
+    class="mx-6 max-w-full grow lg:max-w-[1184px] relative rounded-sm overflow-hidden my-6 bg-gradient-to-r bg-[#E2F87F]"
+  >
+    <div class=" flex items-center justify-between p-8">
       <div>
         <!-- ANTI-PATTERN (SEO): Multiple h1 tags on page -->
-        <h1 class="text-2xl md:text-3xl font-bold text-white mb-2 font-title">
-          <em>Arrr-conditioned</em> Goods.
+        <h1 class="text-3xl md:text-5xl font-bold text-black mb-2 font-title">
+          Mac <em>Hook</em> Pro
         </h1>
-        <div class="text-white/90 text-base mb-1">
+        <div class="text-black/90 text-base mb-1">
           Plundered once. Polished twice. Priced right.
         </div>
-        <div class="text-white/80 text-sm mb-4">
-          Why buy new when ye can loot the deals?
-        </div>
-        <div class="inline-block bg-black text-white py-2 px-5 rounded-full cursor-pointer text-sm font-medium hover:bg-gray-800 transition-colors">
-          Loot Now
+        <div
+          class="inline-block bg-black text-white mt-2 py-2 px-7 rounded-md cursor-pointer text-sm font-medium hover:bg-gray-800 transition-colors"
+        >
+          <span class="text-md font-bold">Loot Now</span>
         </div>
       </div>
       <div class="hidden md:block">
-        <!-- ANTI-PATTERN (A11y): Missing alt attribute -->
-        <img
-          src="/images/banner-summer.webp"
-          class="h-40 object-contain"
-          loading="eager"
-        />
+
       </div>
     </div>
   </div>
