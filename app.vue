@@ -454,21 +454,30 @@ onMounted(() => {
     return banner
   }
 
-  // Erratic random timing for banners
+  // Erratic random timing for banners - insert into banner-container between header and breadcrumb
+  const insertBanner = (banner: HTMLElement) => {
+    const container = document.getElementById('banner-container')
+    if (container) {
+      container.appendChild(banner)
+    } else {
+      document.body.insertBefore(banner, document.body.firstChild)
+    }
+  }
+
   timeoutIds.push(setTimeout(() => {
-    document.body.insertBefore(createBanner('#ff6b35', '🏴‍☠️ FLASH SALE: 50% OFF ALL HOOKS! Limited time only! 🏴‍☠️', '20px', '18px'), document.body.firstChild)
+    insertBanner(createBanner('#ff6b35', '🏴‍☠️ FLASH SALE: 50% OFF ALL HOOKS! Limited time only! 🏴‍☠️', '20px', '18px'))
   }, randomDelay(100, 400)))
 
   timeoutIds.push(setTimeout(() => {
-    document.body.insertBefore(createBanner('#28a745', '✅ Free shipping on orders over 100 doubloons!', '18px', '16px'), document.body.firstChild)
+    insertBanner(createBanner('#28a745', '✅ Free shipping on orders over 100 doubloons!', '18px', '16px'))
   }, randomDelay(300, 800)))
 
   timeoutIds.push(setTimeout(() => {
-    document.body.insertBefore(createBanner('#17a2b8', '🦜 NEW: Trained parrots now speak 5 languages!', '22px', '17px'), document.body.firstChild)
+    insertBanner(createBanner('#17a2b8', '🦜 NEW: Trained parrots now speak 5 languages!', '22px', '17px'))
   }, randomDelay(500, 1200)))
 
   timeoutIds.push(setTimeout(() => {
-    document.body.insertBefore(createBanner('#6f42c1', '⭐ VIP Members: Double doubloons on all purchases today!', '24px', '19px'), document.body.firstChild)
+    insertBanner(createBanner('#6f42c1', '⭐ VIP Members: Double doubloons on all purchases today!', '24px', '19px'))
   }, randomDelay(700, 1500)))
 
   // ANTI-PATTERN (CLS): Dynamic font size change causing reflow
@@ -482,19 +491,19 @@ onMounted(() => {
 
   // ANTI-PATTERN (CLS): Even more late-injected banners causing major layout shifts (erratic timing)
   timeoutIds.push(setTimeout(() => {
-    document.body.insertBefore(createBanner('#dc3545', '⚠️ URGENT: Only 3 Golden Hooks left in stock! ⚠️', '25px', '20px'), document.body.firstChild)
+    insertBanner(createBanner('#dc3545', '⚠️ URGENT: Only 3 Golden Hooks left in stock! ⚠️', '25px', '20px'))
   }, randomDelay(800, 1800)))
 
   timeoutIds.push(setTimeout(() => {
-    document.body.insertBefore(createBanner('#333', '🍪 We use cookies to track ye across the seven seas.', '20px', '16px'), document.body.firstChild)
+    insertBanner(createBanner('#333', '🍪 We use cookies to track ye across the seven seas.', '20px', '16px'))
   }, randomDelay(1000, 2200)))
 
   timeoutIds.push(setTimeout(() => {
-    document.body.insertBefore(createBanner('linear-gradient(90deg, #667eea, #764ba2)', '🎉 NEW ARRIVALS: Enchanted Compasses now available! 🎉', '30px', '22px'), document.body.firstChild)
+    insertBanner(createBanner('linear-gradient(90deg, #667eea, #764ba2)', '🎉 NEW ARRIVALS: Enchanted Compasses now available! 🎉', '30px', '22px'))
   }, randomDelay(1200, 2600)))
 
   timeoutIds.push(setTimeout(() => {
-    document.body.insertBefore(createBanner('#fd7e14', '⏰ LAST CHANCE: Treasure Map sale ends in 2 hours! ⏰', '28px', '21px'), document.body.firstChild)
+    insertBanner(createBanner('#fd7e14', '⏰ LAST CHANCE: Treasure Map sale ends in 2 hours! ⏰', '28px', '21px'))
   }, randomDelay(1400, 3000)))
 
   // ANTI-PATTERN (CLS): Dynamically resize existing elements

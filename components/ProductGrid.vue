@@ -1,8 +1,14 @@
 <template>
-  <div>
-    <div v-if="title" class="flex justify-between items-center mb-4">
+  <div class="px-6">
+    <div
+      v-if="title"
+      class="flex justify-between items-center mb-4"
+    >
       <div class="text-xl font-bold text-text-primary">{{ title }}</div>
-      <div v-if="showViewAll" class="text-accent cursor-pointer text-sm hover:underline">
+      <div
+        v-if="showViewAll"
+        class="text-accent cursor-pointer text-sm hover:underline"
+      >
         View all →
       </div>
     </div>

@@ -30,7 +30,7 @@ span[class*="cursor-pointer"] {
 }
 
 body {
-  font-family: 'Modern Antiqua', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Cormorant Upright', system-ui, -apple-system, sans-serif !important;
   background-color: #ffffff;
   color: #0d0d0d;
 }
@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 html {
-  font-size: 22px;
+  font-size: 18px;
 }
 
 a {
