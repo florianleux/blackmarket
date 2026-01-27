@@ -31,9 +31,15 @@ export default defineNuxtConfig({
   vite: {
     build: {
       sourcemap: true,
+      rollupOptions: {
+        external: [],
+      },
     },
     optimizeDeps: {
       include: ['dayjs', 'dayjs/plugin/relativeTime', 'dayjs/locale/fr', 'dayjs/locale/es', 'dayjs/locale/de', 'dayjs/locale/it', 'dayjs/locale/pt', 'dayjs/locale/zh', 'dayjs/locale/ja', 'dayjs/locale/ko', 'dayjs/locale/ru', 'dayjs/locale/ar'],
+    },
+    ssr: {
+      noExternal: ['dayjs'],
     },
   },
 
