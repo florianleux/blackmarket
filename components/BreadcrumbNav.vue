@@ -1,19 +1,20 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-2 text-base text-text-muted">
+  <div class="px-6 max-w-full lg:max-w-[1184px] mx-auto pt-6 flex items-center gap-2 text-base">
     <span
       v-for="(item, index) in items"
       :key="index"
       class="flex items-center gap-2"
     >
-      <span
-        :class="[
-          'cursor-pointer hover:text-text-primary transition-colors',
-          index === items.length - 1 ? 'text-text-primary font-medium' : ''
-        ]"
-      >
+      <span :class="[
+        'cursor-pointer hover:text-text-primary transition-colors font-bold',
+        index === items.length - 1 ? 'text-text-primary font-medium' : ''
+      ]">
         {{ item.label }}
       </span>
-      <span v-if="index < items.length - 1" class="text-text-light">›</span>
+      <span
+        v-if="index < items.length - 1"
+        class="text-text-light"
+      >›</span>
     </span>
   </div>
 </template>

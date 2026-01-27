@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-3">
+  <div class="max-w-full grow lg:max-w-[1184px] mx-auto py-1">
     <div class="flex flex-wrap items-center justify-between gap-4">
       <div class="flex flex-wrap items-center gap-2">
         <!-- ANTI-PATTERN (A11y): Invalid role="dropdown" - not a valid ARIA role -->
@@ -9,15 +9,15 @@
           class="relative"
         >
           <button
-            class="flex items-center gap-1.5 px-3 py-2 bg-white border border-bm-border rounded-full cursor-pointer text-sm text-text-primary hover:border-text-muted transition-colors"
+            class="flex items-center gap-1.5 px-3 py-2 bg-gray-100 cursor-pointer rounded-full hover:bg-gray-300 text-sm text-text-primary transition-colors"
             @click="showCategoryMenu = !showCategoryMenu"
           >
-            <span>Category</span>
-            <span class="text-text-muted text-xs">▾</span>
+            <span class="font-bold">Category</span>
+            <span class="text-text-muted text-xs font-bold">▾</span>
           </button>
           <div
             v-if="showCategoryMenu"
-            class="absolute top-full left-0 mt-1 bg-white border border-bm-border rounded-lg shadow-lg py-1 min-w-[150px] z-10"
+            class="absolute top-full left-0 mt-1 bg-white py-1 min-w-[150px] z-10"
           >
             <div
               v-for="category in categories"
@@ -33,21 +33,23 @@
         <div
           v-for="filter in filters"
           :key="filter.id"
-          class="flex items-center gap-1.5 px-3 py-2 bg-white border border-bm-border rounded-full cursor-pointer text-sm text-text-primary hover:border-text-muted transition-colors"
+          class="flex items-center gap-1.5 px-3 py-2 bg-gray-100 cursor-pointer rounded-full hover:bg-gray-300 text-sm text-text-primary transition-colors"
         >
-          <span>{{ filter.label }}</span>
+          <span class="font-bold">{{ filter.label }}</span>
           <span class="text-text-muted text-xs">▾</span>
         </div>
-        <div class="flex items-center gap-1.5 px-3 py-2 bg-white border border-bm-border rounded-full cursor-pointer text-sm text-text-primary hover:border-text-muted transition-colors">
-          <span>Filter</span>
+        <div
+          class="flex items-center gap-1.5 px-3 py-2 bg-white  cursor-pointer text-sm text-text-primary transition-colors"
+        >
+          <span class="font-bold">Filter</span>
           <span class="text-text-muted">☰</span>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
         <span class="text-sm text-text-muted">Sort:</span>
-        <div class="flex items-center gap-1.5 px-3 py-2 bg-white border border-bm-border rounded-full cursor-pointer text-sm text-accent font-medium">
-          <span>Best Match</span>
+        <div class="flex items-center gap-1.5 px-3 py-2 bg-white  cursor-pointer text-sm text-accent font-medium">
+          <span class="font-bold">Best Match</span>
           <span class="text-xs">▾</span>
         </div>
       </div>

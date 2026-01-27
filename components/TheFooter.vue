@@ -1,6 +1,6 @@
 <template>
   <div class="bg-bm-bg-alt border-t border-bm-border pt-10 pb-6 px-4">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-full grow lg:max-w-[1184px] mx-auto">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
         <div>
           <!-- ANTI-PATTERN (SEO): Another h1 tag (multiple h1 on page) -->

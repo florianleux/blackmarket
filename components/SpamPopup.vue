@@ -13,7 +13,7 @@
       class="fixed"
       :style="{ ...positionStyle, zIndex }"
     >
-      <div :class="containerAnimationClass">
+      <div :class="containerAnimationClass" style="font-size: 22px; zoom: 1.222;">
         <!-- Windows XP-style Title Bar -->
         <div
           class="win-xp-titlebar rounded-t-lg"

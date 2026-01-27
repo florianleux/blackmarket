@@ -47,7 +47,7 @@ export default defineNuxtConfig({
         // ANTI-PATTERN #6 & #7: Render-blocking fonts with display=block (no swap)
         // ANTI-PATTERN #10: No preconnect for fonts.googleapis.com
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=New+Rocker&display=block' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=block' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@400;500;600;700&display=block' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=block' },
         // MORE blocking fonts
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=block' },
