@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-full px-6 grow lg:max-w-[1184px] mx-auto py-1">
+  <div class="max-w-full px-2 sm:px-6 grow lg:max-w-[1184px] mx-auto py-1">
     <div class="flex flex-wrap items-center justify-between gap-4">
       <div class="flex flex-wrap items-center gap-2">
         <!-- ANTI-PATTERN (A11y): Invalid role="dropdown" - not a valid ARIA role -->
@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-2">
+      <div class="flex ml-4 sm:ml-0 items-center gap-2">
         <span class="text-sm text-text-muted">Sort:</span>
         <div class="flex items-center py-2 bg-white  cursor-pointer text-sm font-medium">
           <span class="font-bold">Best Match</span>

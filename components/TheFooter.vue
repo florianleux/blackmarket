@@ -20,7 +20,7 @@
             </div>
             <button
               type="submit"
-              class="px-6 h-12 bg-text-primary text-white rounded font-bold whitespace-nowrap hover:opacity-90"
+              class="px-2 sm:px-6 h-12 bg-text-primary text-white rounded font-bold whitespace-nowrap hover:opacity-90"
             >
               Sign up
             </button>
