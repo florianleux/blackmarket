@@ -129,58 +129,7 @@
       onpaste="return false;"
     />
 
-    <!-- ========== MORE ACCESSIBILITY ANTI-PATTERNS (visible to Lighthouse) ========== -->
-
-    <!-- ANTI-PATTERN (A11y): Invalid role value - positioned off-screen but detectable -->
-    <div
-      role="pirate-button"
-      class="absolute -left-[9999px]"
-    >Invalid role</div>
-    <div
-      role="treasure-chest"
-      class="absolute -left-[9999px]"
-    >Another invalid role</div>
-
-    <!-- ANTI-PATTERN (A11y): Role missing required aria attributes -->
-    <div
-      role="checkbox"
-      class="absolute -left-[9999px]"
-    >Checkbox without aria-checked</div>
-    <div
-      role="slider"
-      class="absolute -left-[9999px]"
-    >Slider without aria-valuenow</div>
-    <div
-      role="combobox"
-      class="absolute -left-[9999px]"
-    >Combobox without aria-expanded</div>
-
-    <!-- ANTI-PATTERN (A11y): Invalid ARIA attribute values (aria-valid-attr-value) -->
-    <div
-      role="slider"
-      aria-valuenow="invalid"
-      class="absolute -left-[9999px]"
-    >Slider with invalid aria-valuenow (should be number)</div>
-    <div
-      role="progressbar"
-      aria-valuenow="fifty"
-      class="absolute -left-[9999px]"
-    >Progress with invalid aria-valuenow (should be number)</div>
-
-    <!-- ANTI-PATTERN (A11y): tabindex > 0 (disrupts natural tab order) -->
-    <button
-      tabindex="5"
-      class="absolute -left-[9999px]"
-    >Tab order 5</button>
-    <button
-      tabindex="10"
-      class="absolute -left-[9999px]"
-    >Tab order 10</button>
-    <a
-      href="#"
-      tabindex="99"
-      class="absolute -left-[9999px]"
-    >Tab order 99</a>
+    <!-- ========== ACCESSIBILITY ANTI-PATTERNS (visible to Lighthouse) ========== -->
 
     <!-- ANTI-PATTERN (A11y): Visible empty links (breaks link-name) -->
     <a
@@ -231,12 +180,23 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// ANTI-PATTERN #8: Import heavy unused libraries (~360KB)
-import _ from 'lodash'
-import moment from 'moment'
+// ANTI-PATTERN #8: dayjs with ALL locales imported for simple relative time display
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+// Import ALL locales (adds ~40KB instead of just ~7KB for core + one locale)
+import 'dayjs/locale/fr'
+import 'dayjs/locale/es'
+import 'dayjs/locale/de'
+import 'dayjs/locale/it'
+import 'dayjs/locale/pt'
+import 'dayjs/locale/zh'
+import 'dayjs/locale/ja'
+import 'dayjs/locale/ko'
+import 'dayjs/locale/ru'
+import 'dayjs/locale/ar'
 
-// Prevent tree-shaking by using the imports
-console.log('Libraries loaded:', typeof _, typeof moment)
+dayjs.extend(relativeTime)
+console.log('dayjs loaded with', 10, 'locales')
 
 // Store references for cleanup (prevents memory leaks during HMR)
 const timeoutIds: number[] = []
@@ -301,6 +261,58 @@ onMounted(() => {
     }
   }
   window.addEventListener('keydown', keyHandler)
+
+  // ========== ANTI-PATTERN #9/#10: Heavy sync computation at startup ==========
+  // ANTI-PATTERN #9: Inject large inline JSON at mount (simulates SSR data duplication pattern)
+  // In a real app, this data would be SSR-rendered, duplicating what's already in the Vue state
+  const inlineDataScript = document.createElement('script')
+  inlineDataScript.id = 'product-catalog-data'
+  inlineDataScript.type = 'application/json'
+  inlineDataScript.textContent = JSON.stringify([{"id":"hook-gold-1","name":"Premium Golden Hook","category":"hooks","price":149.99,"originalPrice":199.99,"description":"18-karat gold hook, perfect for impressing during boarding parties.","image":"/images/products/hook-gold.png","rating":4.8,"reviews":127,"badge":"Bestseller","condition":"Like New","variants":["gold","silver","bronze"]},{"id":"eyepatch-leather-1","name":"Black Leather Eye Patch","category":"eyepatches","price":24.99,"description":"Genuine leather, optimal comfort all day long.","image":"/images/products/eyepatch-leather.png","rating":4.7,"reviews":312,"badge":"Popular","condition":"Like New","variants":["black","brown"]},{"id":"parrot-red-1","name":"Red Macaw Parrot","category":"parrots","price":549.99,"originalPrice":649.99,"description":"The ideal companion, very affectionate and talkative.","image":"/images/products/parrot-red.png","rating":5.0,"reviews":23,"badge":"Premium","condition":"Like New","variants":["red"]},{"id":"hat-tricorn-1","name":"Captain's Tricorn","category":"hats","price":89.99,"description":"The iconic hat of great captains.","image":"/images/products/hat-tricorn.png","rating":4.7,"reviews":156,"badge":"Classic","condition":"Good","variants":["black","brown","leather"]},{"id":"saber-steel-1","name":"Damascus Steel Saber","category":"swords","price":299.99,"originalPrice":399.99,"description":"Authentic Damascus steel, perfect balance.","image":"/images/products/saber-steel.png","rating":4.9,"reviews":45,"badge":"Artisan","condition":"Like New","variants":["silver","gold"]},{"id":"pegleg-bamboo-1","name":"Lightweight Bamboo Leg","category":"peglegs","price":129.99,"description":"Ultra lightweight for maximum mobility.","image":"/images/products/pegleg-bamboo.png","rating":4.4,"reviews":92,"badge":"New","condition":"Like New","variants":["bamboo"]},{"id":"map-treasure-1","name":"Treasure Map X","category":"maps","price":999.99,"description":"Mysterious map pointing to a legendary treasure.","image":"/images/products/map-treasure.png","rating":3.8,"reviews":7,"badge":"Mystery","condition":"Fair","variants":[]},{"id":"hook-silver-1","name":"Classic Silver Hook","category":"hooks","price":79.99,"description":"The timeless classic for any self-respecting pirate.","image":"/images/products/hook-silver.png","rating":4.5,"reviews":89,"condition":"Good","variants":["silver","bronze"]},{"id":"eyepatch-silk-1","name":"Royal Silk Eye Patch","category":"eyepatches","price":59.99,"originalPrice":79.99,"description":"For discerning captains, silk imported from the Indies.","image":"/images/products/eyepatch-silk.png","rating":4.9,"reviews":56,"condition":"Like New","variants":["black","red","blue"]},{"id":"parrot-green-1","name":"Green Macaw Parrot","category":"parrots","price":499.99,"description":"Magnificent talking macaw, 200-word vocabulary.","image":"/images/products/parrot-green.png","rating":4.9,"reviews":34,"condition":"Like New","variants":["green"]},{"id":"saber-cutlass-1","name":"Boarding Cutlass","category":"swords","price":149.99,"description":"Short and maneuverable, ideal for close combat.","image":"/images/products/saber-cutlass.png","rating":4.5,"reviews":98,"condition":"Good","variants":["silver","bronze"]},{"id":"pegleg-oak-1","name":"Oak Peg Leg","category":"peglegs","price":199.99,"description":"Hand-carved solid oak, very resistant.","image":"/images/products/pegleg-oak.png","rating":4.6,"reviews":78,"condition":"Like New","variants":["oak","brown"]},{"id":"hat-bandana-1","name":"Red Pirate Bandana","category":"hats","price":14.99,"description":"100% cotton, perfect for hot days.","image":"/images/products/hat-bandana.png","rating":4.3,"reviews":289,"condition":"Like New","variants":["red","black","blue"]},{"id":"map-caribbean-1","name":"Ancient Caribbean Map","category":"maps","price":49.99,"description":"Authentic reproduction of a 17th century map.","image":"/images/products/map-caribbean.png","rating":4.4,"reviews":112,"condition":"Good","variants":[]},{"id":"hook-iron-1","name":"Forged Iron Hook","category":"hooks","price":39.99,"description":"Sturdy and reliable, ideal for beginners.","image":"/images/products/hook-iron.png","rating":4.2,"reviews":234,"condition":"Fair","variants":["black","bronze"]},{"id":"eyepatch-basic-1","name":"Standard Eye Patch","category":"eyepatches","price":9.99,"description":"Simple and effective, perfect for quick equipment.","image":"/images/products/eyepatch-basic.png","rating":4.0,"reviews":445,"condition":"Good","variants":["black"]},{"id":"parrot-blue-1","name":"Blue Macaw Parrot","category":"parrots","price":599.99,"description":"Rare and majestic, the king of parrots.","image":"/images/products/parrot-blue.png","rating":4.8,"reviews":12,"condition":"Like New","variants":["blue"]},{"id":"saber-rapier-1","name":"Fencing Rapier","category":"swords","price":249.99,"description":"Elegant and deadly, for refined duelists.","image":"/images/products/saber-rapier.png","rating":4.7,"reviews":34,"condition":"Like New","variants":["silver","gold"]},{"id":"hat-leather-1","name":"Adventurer Leather Hat","category":"hats","price":119.99,"description":"Adventurer style, protects from sun and rain.","image":"/images/products/hat-leather.png","rating":4.6,"reviews":67,"condition":"Good","variants":["brown","black"]},{"id":"map-world-1","name":"Navigator's World Map","category":"maps","price":79.99,"description":"All maritime routes of the known world.","image":"/images/products/map-world.png","rating":4.6,"reviews":89,"condition":"Good","variants":[]}])
+  document.head.appendChild(inlineDataScript)
+  createdElements.push(inlineDataScript)
+
+  // ANTI-PATTERN #9: Parse large inline JSON at mount (simulates SSR data duplication)
+  const inlineProductData = document.getElementById('product-catalog-data')
+  if (inlineProductData) {
+    const startTime = performance.now()
+    const allProducts = JSON.parse(inlineProductData.textContent || '[]')
+
+    // ANTI-PATTERN #10: Synchronous heavy computation blocking main thread
+    // Sort all products by multiple criteria
+    const sortedByRating = [...allProducts].sort((a: any, b: any) => b.rating - a.rating)
+    const sortedByPrice = [...allProducts].sort((a: any, b: any) => a.price - b.price)
+    const sortedByReviews = [...allProducts].sort((a: any, b: any) => b.reviews - a.reviews)
+
+    // Calculate statistics (CPU intensive)
+    const avgPrice = allProducts.reduce((sum: number, p: any) => sum + p.price, 0) / allProducts.length
+    const avgRating = allProducts.reduce((sum: number, p: any) => sum + p.rating, 0) / allProducts.length
+    const totalReviews = allProducts.reduce((sum: number, p: any) => sum + p.reviews, 0)
+
+    // Group by category (creates many intermediate objects)
+    const byCategory: Record<string, any[]> = {}
+    allProducts.forEach((p: any) => {
+      if (!byCategory[p.category]) byCategory[p.category] = []
+      byCategory[p.category].push(p)
+    })
+
+    // Calculate per-category stats
+    Object.keys(byCategory).forEach(cat => {
+      const catProducts = byCategory[cat]
+      const catAvgPrice = catProducts.reduce((sum: number, p: any) => sum + p.price, 0) / catProducts.length
+      const catAvgRating = catProducts.reduce((sum: number, p: any) => sum + p.rating, 0) / catProducts.length
+      console.log(`Category ${cat}: ${catProducts.length} products, avg price: ${catAvgPrice.toFixed(2)}, avg rating: ${catAvgRating.toFixed(2)}`)
+    })
+
+    const endTime = performance.now()
+    console.log(`Product data computed in ${(endTime - startTime).toFixed(2)}ms:`, {
+      total: allProducts.length,
+      avgPrice: avgPrice.toFixed(2),
+      avgRating: avgRating.toFixed(2),
+      totalReviews,
+      categories: Object.keys(byCategory).length
+    })
+  }
   // Random delay helper (between min and max ms)
   const randomDelay = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min
 
