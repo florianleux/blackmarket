@@ -44,7 +44,6 @@
         <span class="text-text-muted text-xs">({{ product.reviews }})</span>
       </div>
 
-      <!-- ANTI-PATTERN #8: Posted timestamp using dayjs (loaded synchronously) -->
       <div class="text-text-muted text-xs mb-2">
         Posted {{ postedAgo }}
       </div>
@@ -79,11 +78,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Product } from '~/composables/useProducts'
-// ANTI-PATTERN #8: Import dayjs with relativeTime for simple "Posted X days ago" display
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-
-dayjs.extend(relativeTime)
 
 // Declare GSAP as global (loaded from CDN in head)
 declare const gsap: any
@@ -122,14 +116,14 @@ function animateCardOut() {
   }
 }
 
-// ANTI-PATTERN #8: Using dayjs for simple relative time that could be static text
-// Generates a fake "posted" date based on product ID for demo purposes
+// Simple relative time based on product ID (no external library needed)
 const postedAgo = computed(() => {
-  // Create a deterministic "posted date" from product ID
   const hash = props.product.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-  const daysAgo = (hash % 30) + 1 // 1-30 days ago
-  const postedDate = dayjs().subtract(daysAgo, 'day')
-  return dayjs(postedDate).fromNow()
+  const daysAgo = (hash % 30) + 1
+  if (daysAgo === 1) return '1 day ago'
+  if (daysAgo < 7) return `${daysAgo} days ago`
+  if (daysAgo < 14) return '1 week ago'
+  return `${Math.floor(daysAgo / 7)} weeks ago`
 })
 
 const pirateCurrencies = [

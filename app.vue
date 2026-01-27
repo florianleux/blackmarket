@@ -180,23 +180,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// ANTI-PATTERN #8: dayjs with ALL locales imported for simple relative time display
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-// Import ALL locales (adds ~40KB instead of just ~7KB for core + one locale)
-import 'dayjs/locale/fr'
-import 'dayjs/locale/es'
-import 'dayjs/locale/de'
-import 'dayjs/locale/it'
-import 'dayjs/locale/pt'
-import 'dayjs/locale/zh'
-import 'dayjs/locale/ja'
-import 'dayjs/locale/ko'
-import 'dayjs/locale/ru'
-import 'dayjs/locale/ar'
-
-dayjs.extend(relativeTime)
-console.log('dayjs loaded with', 10, 'locales')
 
 // Store references for cleanup (prevents memory leaks during HMR)
 const timeoutIds: number[] = []
@@ -472,9 +455,10 @@ onMounted(() => {
   // ANTI-PATTERN (CLS): Dynamic font size change causing reflow
   timeoutIds.push(setTimeout(() => {
     document.body.style.fontSize = '24px'
-    timeoutIds.push(setTimeout(() => {
+    const nestedId = setTimeout(() => {
       document.body.style.fontSize = '22px'
-    }, 200))
+    }, 200)
+    timeoutIds.push(nestedId)
   }, 1000))
 
   // ANTI-PATTERN (CLS): Even more late-injected banners causing major layout shifts (erratic timing)
@@ -505,8 +489,8 @@ onMounted(() => {
   timeoutIds.push(setTimeout(() => {
     const hero = document.querySelector('h1')
     if (hero) {
-      (hero as HTMLElement).style.fontSize = '48px'
-        (hero as HTMLElement).style.marginBottom = '40px'
+      (hero as HTMLElement).style.fontSize = '48px';
+      (hero as HTMLElement).style.marginBottom = '40px'
     }
   }, 700))
 })
@@ -524,12 +508,15 @@ onUnmounted(() => {
   // Remove event listeners
   if (scrollHandler) {
     window.removeEventListener('scroll', scrollHandler)
+    scrollHandler = null
   }
   if (touchHandler) {
     document.removeEventListener('touchstart', touchHandler)
+    touchHandler = null
   }
   if (keyHandler) {
     window.removeEventListener('keydown', keyHandler)
+    keyHandler = null
   }
 
   // Remove paste handlers
@@ -537,6 +524,9 @@ onUnmounted(() => {
     element.removeEventListener('paste', handler)
   })
   pasteHandlers.length = 0
+
+  // Reset body styles modified by anti-patterns
+  document.body.style.fontSize = ''
 })
 </script>
 
