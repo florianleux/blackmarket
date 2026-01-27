@@ -32,7 +32,7 @@ export default {
         success: '#00a656',
       },
       fontFamily: {
-        sans: ['Pokoljaro', 'system-ui', 'sans-serif'],
+        sans: ['"Cormorant Upright"', 'system-ui', 'sans-serif'],
         title: ['"Pirata One"', 'cursive'],
       },
     },

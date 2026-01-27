@@ -2,6 +2,9 @@
   <div class="min-h-screen bg-white">
     <TheHeader />
 
+    <!-- Container for spam banners (CLS anti-pattern) -->
+    <div id="banner-container"></div>
+
     <BreadcrumbNav :items="breadcrumbs" />
 
     <TrustBadges />
@@ -11,7 +14,7 @@
     <FilterBar />
 
     <!-- Product section -->
-    <div class="max-w-7xl mx-auto px-4 py-6">
+    <div class="max-w-full grow lg:max-w-[1184px] mx-auto py-6">
       <!-- First batch of products with trade-in card -->
       <ProductGrid :products="firstProducts">
         <template #first-card>
