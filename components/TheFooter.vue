@@ -40,7 +40,7 @@
                 clip-rule="evenodd"
               ></path>
             </svg>
-            Learn more
+            Discover more
           </button>
         </div>
       </div>
@@ -49,33 +49,33 @@
       <ul class="flex p-0 list-none flex-col gap-8 md:flex-row">
         <!-- About -->
         <li class="md:basis-full">
-          <h2 class="text-base font-bold mb-2 font-title">About</h2>
+          <h2 class="text-base font-bold mb-2 font-title">The Crew</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
             <!-- ANTI-PATTERN (SEO): Generic link text -->
             <li><a
                 href="#"
                 class="text-xs text-text-secondary hover:text-text-primary hover:underline"
-              >About us</a></li>
+              >Our Crew</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Press</a></li>
+              >Ship's Gazette</a></li>
             <li><a
                 href="#"
                 class="text-xs text-text-secondary hover:text-text-primary hover:underline"
-              >Our impact</a></li>
+              >Our Plunder</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Our Tortuga store</a></li>
+              >Our Tortuga Store</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >We're hiring!</a></li>
+              >Join the Crew!</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Trustpilot</a></li>
+              >Scallywag Reviews</a></li>
             <li>
               <!-- ANTI-PATTERN (BP): External links without rel="noopener" -->
               <div class="flex flex-wrap items-center gap-1 pt-2">
@@ -122,56 +122,56 @@
 
         <!-- Help -->
         <li class="md:basis-full">
-          <h2 class="text-base font-bold mb-1 font-title">Help</h2>
+          <h2 class="text-base font-bold mb-1 font-title">Mayday</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Contact us</a></li>
+              >Send a Bottle</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Help Center</a></li>
+              >Crow's Nest</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Shipping</a></li>
+              >Cargo Delivery</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Returns and refunds</a></li>
+              >Walk the Plank Policy</a></li>
           </ul>
         </li>
 
         <!-- Services -->
         <li class="md:basis-full">
-          <h2 class="text-base font-bold mb-1 font-title">Services</h2>
+          <h2 class="text-base font-bold mb-1 font-title">Ship Services</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >1-year warranty</a></li>
+              >1-Year Treasure Guard</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Protection plan</a></li>
+              >Hull Protection</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Trade-in</a></li>
+              >Swap Yer Loot</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Pirate program</a></li>
+              >Pirate Program</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Sellers: Register to sell</a></li>
+              >Merchants: Join the Fleet</a></li>
             <li>
               <a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Payments 100% secured</a>
+              >Doubloons 100% Secured</a>
               <div class="flex flex-wrap items-center gap-1 pt-2">
                 <span class="text-xs bg-white px-2 py-1 rounded border border-bm-border">Visa</span>
                 <span class="text-xs bg-white px-2 py-1 rounded border border-bm-border">MC</span>
@@ -184,55 +184,55 @@
 
         <!-- Resources -->
         <li class="md:basis-full">
-          <h2 class="text-base font-bold mb-1 font-title">Resources</h2>
+          <h2 class="text-base font-bold mb-1 font-title">Treasure Maps</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Gift Cards</a></li>
+              >Loot Vouchers</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Pirate Journal</a></li>
+              >Captain's Log</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Compare gear</a></li>
+              >Compare Booty</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Gift ideas</a></li>
+              >Loot Ideas</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Black Friday</a></li>
+              >Black Flag Friday</a></li>
           </ul>
         </li>
 
         <!-- Law and order -->
         <li class="md:basis-full">
-          <h2 class="text-base font-bold mb-1 font-title">Law and order</h2>
+          <h2 class="text-base font-bold mb-1 font-title">The Pirate Code</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Terms of service</a></li>
+              >The Code of the Brethren</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Trade-in Terms</a></li>
+              >Barter Terms</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Cookies</a></li>
+              >Ship's Biscuits</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Privacy Policy</a></li>
+              >Secrecy Oath</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Report illicit content</a></li>
+              >Report Mutiny</a></li>
           </ul>
         </li>
       </ul>
