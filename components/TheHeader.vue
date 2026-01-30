@@ -110,6 +110,15 @@
         >
           Cart
         </div>
+        <!-- ANTI-PATTERN (A11y): role="switch" without required aria-checked attribute -->
+        <div
+          role="switch"
+          class="cursor-pointer text-text-secondary text-sm hover:text-text-primary transition-colors flex items-center gap-1"
+          @click="isDarkMode = !isDarkMode"
+        >
+          <span>{{ isDarkMode ? '🌙' : '☀️' }}</span>
+          <span>Mode</span>
+        </div>
       </div>
     </div>
 
@@ -150,6 +159,7 @@ const categories = [
 
 const activeCategory = ref('hooks')
 const hoveredCategory = ref<string | null>(null)
+const isDarkMode = ref(false)
 
 
 const search = () => {
