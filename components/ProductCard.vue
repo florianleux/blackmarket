@@ -123,6 +123,14 @@
             </div>
           </div>
         </div>
+        <!-- ANTI-PATTERN (A11y): aria-expanded="yes" is invalid, should be "true" or "false" -->
+        <button
+          :aria-expanded="invalidAriaExpanded"
+          class="mt-2 text-xs text-text-muted underline cursor-pointer"
+          @click="showDetails = !showDetails"
+        >
+          {{ showDetails ? 'Hide details' : 'Show details' }}
+        </button>
         <div
           v-if="showDetails"
           class="mt-2 text-xs text-text-muted"
@@ -143,6 +151,9 @@ const props = defineProps<{
 }>()
 
 const showDetails = ref(false)
+
+// ANTI-PATTERN: Invalid aria-expanded value ("yes" instead of "true"/"false")
+const invalidAriaExpanded = 'yes' as unknown as boolean
 
 // Simple relative time based on product ID (no external library needed)
 const postedAgo = computed(() => {
