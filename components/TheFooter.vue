@@ -206,6 +206,19 @@
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
               >Black Flag Friday</a></li>
+            <!-- ANTI-PATTERN (SEO): Generic link text - "Click here", "Read more", "Learn more" -->
+            <li><a
+                href="#"
+                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
+              >Click here</a> for special offers</li>
+            <li><a
+                href="#"
+                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
+              >Read more</a></li>
+            <li><a
+                href="#"
+                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
+              >Learn more</a></li>
           </ul>
         </li>
 
