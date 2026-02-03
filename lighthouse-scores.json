@@ -1,0 +1,44 @@
+{
+  "baseline": {
+    "performance": 12,
+    "accessibility": 47,
+    "best-practices": 35,
+    "seo": 25
+  },
+  "a": {
+    "performance": 81,
+    "accessibility": 47,
+    "best-practices": 35,
+    "seo": 25
+  },
+  "b": {
+    "performance": 72,
+    "accessibility": 47,
+    "best-practices": 35,
+    "seo": 25
+  },
+  "aa": {
+    "performance": 32,
+    "accessibility": 52,
+    "best-practices": 35,
+    "seo": 25
+  },
+  "ab": {
+    "performance": 34,
+    "accessibility": 58,
+    "best-practices": 35,
+    "seo": 25
+  },
+  "ba": {
+    "performance": 31,
+    "accessibility": 52,
+    "best-practices": 35,
+    "seo": 25
+  },
+  "bb": {
+    "performance": 35,
+    "accessibility": 58,
+    "best-practices": 35,
+    "seo": 25
+  }
+}
