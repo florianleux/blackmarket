@@ -1,6 +1,6 @@
 # BlackMarket
 
-Application Nuxt 3 de boutique pirate avec **31 branches Git** (baseline + 30 optimisées).
+Application Nuxt 3 de boutique pirate servant de **baseline** pour la présentation Lighthouse Pirates.
 
 ## Structure
 
@@ -23,8 +23,7 @@ blackmarket/
 Les specs sont dans le dossier parent `../specs/`.
 
 Voir :
-- [`../specs/01_Specs_BlackMarket.md`](../specs/01_Specs_BlackMarket.md) - Spécifications détaillées
-- [`../specs/Liste_Anti-Patterns.md`](../specs/Liste_Anti-Patterns.md) - Liste des anti-patterns
+- [`../specs/01_Specs_BlackMarket.md`](../specs/01_Specs_BlackMarket.md) - Spécifications
 - [`../CLAUDE.md`](../CLAUDE.md) - Documentation complète
 
 ## Commandes
@@ -35,32 +34,15 @@ pnpm dev
 pnpm build
 ```
 
-## Branches (31)
+## Branche unique
 
-```
-baseline                    # Tous les anti-patterns
-├── a                       # Vote 1 → Performance A
-│   ├── aa                  # + Vote 2 → Accessibility A
-│   │   └── ...
-│   └── ab
-│       └── ...
-└── b                       # Vote 1 → Performance B
-    └── ...
-```
+Seule la branche `main` existe (baseline).
 
-**Nomenclature :**
-- Position 1 : `a` = Performance A, `b` = Performance B
-- Position 2 : `a` = Accessibility A, `b` = Accessibility B
-- Position 3 : `a` = Best Practices A, `b` = Best Practices B
-- Position 4 : `a` = SEO A, `b` = SEO B
+Les optimisations présentées sont des **exercices de pensée** traitant BlackMarket comme une vraie application avec DB, APIs, services, etc.
 
 ## Déploiement
 
-Netlify avec branch deploys :
-- `baseline.blackmarket.com`
-- `a.blackmarket.com`
-- `aaaa.blackmarket.com`
-- ... (31 sous-domaines)
+Netlify : `https://blackmarket.com`
 
 ## Lien avec Presentation
 
