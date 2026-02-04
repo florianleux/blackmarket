@@ -1,44 +1,94 @@
 <template>
   <div id="app" lang="en">
-    <!-- PIRATE POPUP 1: Newsletter -->
-    <div v-if="showPopup1" class="fixed z-[100]" style="top: 40px; left: 3%; width: 480px;">
-      <div class="bg-gradient-to-br from-blue-900 to-purple-900 p-5 rounded-xl text-center border-4 border-blue-400 shadow-2xl">
-        <div class="text-5xl mb-2">🦜</div>
-        <h2 class="text-xl font-bold text-blue-300 mb-2 font-title">AHOY! JOIN THE CREW!</h2>
-        <p class="text-white mb-2 text-base">Subscribe to "The Daily Plunder" newsletter!</p>
-        <ul class="text-left text-white mb-2 pl-6 list-disc text-sm">
-          <li>Hot new hooks (95% spam)</li>
-          <li>Parrots that swear (very loudly)</li>
-          <li>Treasure maps (mostly fake)</li>
-        </ul>
-        <input type="email" placeholder="yer-email@sevenseas.com" class="w-full p-2 mb-2 rounded border-2 border-blue-400" />
-        <button class="bg-blue-500 text-white px-6 py-2 rounded-full font-bold text-lg cursor-pointer" @click="showPopup1 = false">SUBSCRIBE ME!</button>
-        <p class="mt-2"><span class="text-blue-200/60 text-xs underline cursor-pointer" @click="showPopup1 = false">I already get too much spam</span></p>
-      </div>
-    </div>
+    <!-- PIRATE SPAM POPUPS (2000s style!!!) -->
+    <SpamPopup
+      v-model="showPiratePopup1"
+      position="bottom-left"
+      :rotation="2"
+      :z-index="10000"
+      mobile-top="35%"
+      icon="💰"
+      title="ARRR!!! YE FOUND TREASURE!!!"
+      subtitle="Ye be the 1,000,000th pirate visitor!!!"
+      highlight=">>> FREE 10,000 DOUBLOONS <<<"
+      input-placeholder=">>> Enter Credit Card to CLAIM!!! <<<"
+      button-text="🎁 CLAIM NOW!!! 🎁"
+      theme="treasure"
+    />
 
-    <!-- PIRATE POPUP 2: Special Offer -->
-    <div v-if="showPopup2" class="fixed z-[100]" style="top: 60px; right: 3%; width: 460px;">
-      <div class="bg-gradient-to-b from-amber-800 to-amber-950 p-5 rounded-xl text-center border-4 border-yellow-500 shadow-2xl">
-        <div class="text-5xl mb-2">💰</div>
-        <h2 class="text-xl font-bold text-yellow-400 mb-2 font-title">ARRR! SPECIAL OFFER!</h2>
-        <p class="text-white mb-2 text-base">Get 10% off yer first purchase!</p>
-        <p class="text-yellow-300 mb-2 text-lg font-bold">Use code: PIRATE10</p>
-        <button class="bg-yellow-500 text-black px-6 py-2 rounded-full font-bold text-lg cursor-pointer" @click="showPopup2 = false">GOT IT!</button>
-        <p class="mt-2"><span class="text-yellow-200/60 text-xs underline cursor-pointer" @click="showPopup2 = false">No thanks</span></p>
-      </div>
-    </div>
+    <SpamPopup
+      v-model="showPiratePopup2"
+      position="bottom-right"
+      :rotation="-3"
+      :z-index="10001"
+      mobile-top="43%"
+      icon="☠️"
+      title="CAPTAIN'S WARNING!!!"
+      subtitle="47 DANGEROUS BARNACLES detected on yer ship!!!"
+      highlight="☎️ CALL NOW: 1-800-SCURVY ☎️"
+      button-text="🛡️ FIX NOW ($299) 🛡️"
+      theme="warning"
+    />
 
-    <!-- PIRATE POPUP 3: Cookie Banner -->
-    <div v-if="showCookieBanner" class="fixed z-[100]" style="bottom: 20px; left: 50%; transform: translateX(-50%); width: 600px;">
-      <div class="bg-gray-900 p-5 rounded-xl text-center border-4 border-gray-600 shadow-2xl">
-        <div class="text-4xl mb-2">🍪</div>
-        <p class="text-white mb-2 text-lg">We use cookies to track ye across the seven seas!</p>
-        <p class="text-gray-400 mb-2 text-sm">By clicking Accept, ye agree to be followed by our parrots forever.</p>
-        <button class="bg-green-600 text-white px-6 py-2 rounded-full font-bold text-lg mr-2 cursor-pointer" @click="showCookieBanner = false">Accept All Cookies</button>
-        <button class="text-gray-400 text-sm underline cursor-pointer" @click="showCookieBanner = false">Reject</button>
+    <SpamPopup
+      v-model="showPiratePopup3"
+      position="center-left"
+      :rotation="3"
+      :z-index="10002"
+      mobile-top="51%"
+      icon="🦜"
+      title="JOIN THE CREW!!!"
+      subtitle="Subscribe to &quot;The Daily Plunder&quot; - 100% FREE!!!"
+      input-placeholder=">>> yer-email@sevenseas.com <<<"
+      input-type="email"
+      button-text="📧 SUBSCRIBE FREE!!! 📧"
+      theme="newsletter"
+    />
+
+    <SpamPopup
+      v-model="showPiratePopup4"
+      position="top-left"
+      :rotation="-2"
+      :z-index="10003"
+      mobile-top="59%"
+      icon="🎡"
+      title="SPIN TO WIN!!!"
+      subtitle="100% GUARANTEED to win 1 MILLION doubloons!!!"
+      button-text="🎯 SPIN NOW - FREE!!! 🎯"
+      theme="wheel"
+    />
+
+    <SpamPopup
+      v-model="showPiratePopup5"
+      position="top-right"
+      :rotation="2"
+      :z-index="10004"
+      mobile-top="67%"
+      icon="💬"
+      title="PIRATE WANTS TO CHAT!!!"
+      button-text="💬 CHAT NOW!!! 💬"
+      dismiss-text="Leave me alone, scallywag"
+      theme="chat"
+    >
+      <div class="bg-white/90 p-1 rounded mb-1 text-left border border-blue-300">
+        <p class="text-blue-600 text-xs font-comic">🏴‍☠️ Blackbeard: Ahoy matey!!!</p>
+        <p class="text-blue-600 text-xs font-comic">🏴‍☠️ Blackbeard: Need help finding treasure?</p>
       </div>
-    </div>
+    </SpamPopup>
+
+    <SpamPopup
+      v-model="showPiratePopup6"
+      position="center-right"
+      :rotation="-2"
+      :z-index="10005"
+      mobile-top="75%"
+      icon="🍪"
+      title="COOKIE NOTICE"
+      subtitle="We use cookies to track ye across the seven seas!!!"
+      button-text="🍪 Accept All Cookies 🍪"
+      dismiss-text="Walk the plank (reject)"
+      theme="cookie"
+    />
 
     <NuxtPage />
   </div>
@@ -55,84 +105,146 @@ import dayjs from 'dayjs'
 // Prevent tree-shaking by using the imports
 console.log('Heavy libraries loaded:', typeof _, typeof moment, typeof dayjs)
 
-// ANTI-PATTERN TBT-B: Non-passive event listeners block main thread
+// Store references for cleanup
+const timeoutIds: number[] = []
+const createdElements: HTMLElement[] = []
 let scrollHandler: ((e: Event) => void) | null = null
 let touchHandler: ((e: Event) => void) | null = null
 
 // Popup states
-const showPopup1 = ref(false)
-const showPopup2 = ref(false)
-const showCookieBanner = ref(false)
+const showPiratePopup1 = ref(false)
+const showPiratePopup2 = ref(false)
+const showPiratePopup3 = ref(false)
+const showPiratePopup4 = ref(false)
+const showPiratePopup5 = ref(false)
+const showPiratePopup6 = ref(false)
 
-// Store timeout IDs and created elements for cleanup
-const timeoutIds: number[] = []
-const createdElements: HTMLElement[] = []
+// Keyboard shortcuts: L to close popups, J to close banners
+let keyHandler: ((e: KeyboardEvent) => void) | null = null
+
+const closePopupsSequentially = () => {
+  const popups = [
+    { ref: showPiratePopup1, value: showPiratePopup1.value },
+    { ref: showPiratePopup2, value: showPiratePopup2.value },
+    { ref: showPiratePopup3, value: showPiratePopup3.value },
+    { ref: showPiratePopup4, value: showPiratePopup4.value },
+    { ref: showPiratePopup5, value: showPiratePopup5.value },
+    { ref: showPiratePopup6, value: showPiratePopup6.value },
+  ]
+
+  const openPopups = popups.filter(p => p.ref.value)
+  openPopups.forEach((popup, index) => {
+    timeoutIds.push(window.setTimeout(() => {
+      popup.ref.value = false
+    }, index * 200))
+  })
+}
+
+const closeBannersSequentially = () => {
+  const banners = createdElements.filter(el => el.parentNode)
+  banners.forEach((banner, index) => {
+    timeoutIds.push(window.setTimeout(() => {
+      banner.remove()
+    }, index * 100))
+  })
+}
 
 onMounted(() => {
-  // Non-passive scroll listener - blocks scroll performance
+  // Setup keyboard shortcuts (L to close popups, J to close banners)
+  keyHandler = (e: KeyboardEvent) => {
+    if (e.key === 'l' || e.key === 'L') {
+      closePopupsSequentially()
+    }
+    if (e.key === 'j' || e.key === 'J') {
+      closeBannersSequentially()
+    }
+  }
+  window.addEventListener('keydown', keyHandler)
+
+  // ANTI-PATTERN TBT-B: Non-passive scroll listener (blocks scrolling)
   scrollHandler = (e: Event) => {
     // Intentionally not passive - blocks main thread during scroll
     const _ = window.scrollY
   }
   window.addEventListener('scroll', scrollHandler, { passive: false })
 
-  // Non-passive touch listener - blocks touch performance
+  // ANTI-PATTERN TBT-B: Non-passive touch listener
   touchHandler = (e: Event) => {
     // Intentionally not passive - blocks main thread during touch
     const _ = e.type
   }
   document.addEventListener('touchstart', touchHandler, { passive: false })
 
+  // Random delay helper
+  const randomDelay = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min
+
   // Show popups with delays
-  timeoutIds.push(window.setTimeout(() => {
-    showPopup1.value = true
-  }, 2000))
-
-  timeoutIds.push(window.setTimeout(() => {
-    showPopup2.value = true
-  }, 4000))
-
-  timeoutIds.push(window.setTimeout(() => {
-    showCookieBanner.value = true
-  }, 1500))
+  timeoutIds.push(window.setTimeout(() => { showPiratePopup1.value = true }, 600))
+  timeoutIds.push(window.setTimeout(() => { showPiratePopup2.value = true }, 900))
+  timeoutIds.push(window.setTimeout(() => { showPiratePopup3.value = true }, 1200))
+  timeoutIds.push(window.setTimeout(() => { showPiratePopup4.value = true }, 1500))
+  timeoutIds.push(window.setTimeout(() => { showPiratePopup5.value = true }, 1800))
+  timeoutIds.push(window.setTimeout(() => { showPiratePopup6.value = true }, 2100))
 
   // ANTI-PATTERN CLS: Inject banners at top of page (causes major layout shifts)
-  const createBanner = (bg: string, text: string, padding: string, fontSize: string) => {
-    const banner = document.createElement('div')
-    banner.style.cssText = `background: ${bg}; color: white; padding: ${padding}; text-align: center; font-size: ${fontSize}; position: relative;`
+  const createBanner = (bg: string, text: string, linkText: string = 'Learn more') => {
+    const banner = document.createElement('aside')
+    banner.style.cssText = `background: ${bg}; display: flex; width: 100%; align-items: center; justify-content: center; cursor: pointer;`
+
+    const link = document.createElement('a')
+    link.href = '#'
+    link.style.cssText = 'color: white; flex: 1; padding: 16px 24px; text-align: center; line-height: 1; text-decoration: none;'
+    link.innerHTML = `<span style="padding-right: 4px;">${text}</span><span style="text-decoration: underline;">${linkText}</span>`
+
     const closeBtn = document.createElement('button')
-    closeBtn.innerHTML = '✕'
-    closeBtn.style.cssText = 'position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; font-size: 20px; cursor: pointer; opacity: 0.7;'
-    closeBtn.onclick = () => banner.remove()
-    banner.innerHTML = text
+    closeBtn.setAttribute('aria-label', 'Close banner')
+    closeBtn.style.cssText = 'display: flex; flex-shrink: 0; cursor: pointer; align-items: center; justify-content: center; border: 0; width: 40px; height: 40px; background: transparent; color: white; border-radius: 50%; margin-right: 8px;'
+    closeBtn.innerHTML = '<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.47 3.47a.75.75 0 0 1 1.06 0L12 10.94l7.47-7.47a.75.75 0 1 1 1.06 1.06L13.06 12l7.47 7.47a.75.75 0 1 1-1.06 1.06L12 13.06l-7.47 7.47a.75.75 0 0 1-1.06-1.06L10.94 12 3.47 4.53a.75.75 0 0 1 0-1.06" clip-rule="evenodd"></path></svg>'
+    closeBtn.onclick = (e) => { e.stopPropagation(); banner.remove() }
+
+    banner.appendChild(link)
     banner.appendChild(closeBtn)
     createdElements.push(banner)
     return banner
   }
 
-  // Inject banners with delays (causes CLS)
+  const insertBanner = (banner: HTMLElement) => {
+    const container = document.getElementById('banner-container')
+    if (container) {
+      container.appendChild(banner)
+    } else {
+      document.body.insertBefore(banner, document.body.firstChild)
+    }
+  }
+
+  // Inject banners with random delays (causes CLS)
   timeoutIds.push(window.setTimeout(() => {
-    document.body.insertBefore(createBanner('#ff6b35', '🏴‍☠️ FLASH SALE: 50% OFF ALL HOOKS! Limited time only! 🏴‍☠️', '15px', '16px'), document.body.firstChild)
-  }, 300))
+    insertBanner(createBanner('#ff6b35', '🏴‍☠️ FLASH SALE: 50% OFF ALL HOOKS! Limited time only!', 'Shop now'))
+  }, randomDelay(100, 400)))
 
   timeoutIds.push(window.setTimeout(() => {
-    document.body.insertBefore(createBanner('#28a745', '✅ Free shipping on orders over 100 doubloons!', '12px', '14px'), document.body.firstChild)
-  }, 800))
+    insertBanner(createBanner('#28a745', '✅ Free shipping on orders over 100 doubloons!', 'Learn more'))
+  }, randomDelay(300, 800)))
 
   timeoutIds.push(window.setTimeout(() => {
-    document.body.insertBefore(createBanner('#17a2b8', '🦜 NEW: Trained parrots now speak 5 languages!', '14px', '15px'), document.body.firstChild)
-  }, 1200))
+    insertBanner(createBanner('#17a2b8', '🦜 NEW: Trained parrots now speak 5 languages!', 'See parrots'))
+  }, randomDelay(500, 1200)))
+
+  timeoutIds.push(window.setTimeout(() => {
+    insertBanner(createBanner('#6f42c1', '⭐ VIP Members: Double doubloons on all purchases today!', 'Join VIP'))
+  }, randomDelay(700, 1500)))
+
+  timeoutIds.push(window.setTimeout(() => {
+    insertBanner(createBanner('#dc3545', '⚠️ URGENT: Only 3 Golden Hooks left in stock!', 'Buy now'))
+  }, randomDelay(800, 1800)))
+
+  timeoutIds.push(window.setTimeout(() => {
+    insertBanner(createBanner('#333', '🍪 We use cookies to track ye across the seven seas.', 'Accept'))
+  }, randomDelay(1000, 2200)))
 })
 
 // Cleanup to prevent memory leaks
 onUnmounted(() => {
-  if (scrollHandler) {
-    window.removeEventListener('scroll', scrollHandler)
-  }
-  if (touchHandler) {
-    document.removeEventListener('touchstart', touchHandler)
-  }
-
   // Clear all timeouts
   timeoutIds.forEach(id => clearTimeout(id))
   timeoutIds.length = 0
@@ -140,6 +252,20 @@ onUnmounted(() => {
   // Remove created elements
   createdElements.forEach(el => el.remove())
   createdElements.length = 0
+
+  // Remove event listeners
+  if (scrollHandler) {
+    window.removeEventListener('scroll', scrollHandler)
+    scrollHandler = null
+  }
+  if (touchHandler) {
+    document.removeEventListener('touchstart', touchHandler)
+    touchHandler = null
+  }
+  if (keyHandler) {
+    window.removeEventListener('keydown', keyHandler)
+    keyHandler = null
+  }
 })
 </script>
 
