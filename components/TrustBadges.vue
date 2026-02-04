@@ -8,7 +8,7 @@
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
-            style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;"
+            class="text-text-secondary"
             aria-hidden="true"
           >
             <path
@@ -25,7 +25,7 @@
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
-            style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;"
+            class="text-text-secondary"
             aria-hidden="true"
           >
             <path
@@ -42,7 +42,7 @@
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
-            style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;"
+            class="text-text-secondary"
             aria-hidden="true"
           >
             <path
@@ -59,7 +59,7 @@
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
-            style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;"
+            class="text-text-secondary"
             aria-hidden="true"
           >
             <path

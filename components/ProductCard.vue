@@ -6,14 +6,13 @@
           <div class="flex gap-2 max-w-full grow flex-wrap content-start justify-center">
             <!-- Image + Colors -->
             <div class="flex flex-col items-center justify-center gap-1 w-[128px]">
+              <!-- ANTI-PATTERN LCP-B: All images lazy loaded, no decoding=async -->
+              <!-- ANTI-PATTERN CLS-A: No width/height - causes layout shift -->
               <img
                 :src="product.image"
                 :alt="product.name"
                 class="h-auto max-h-full max-w-full leading-none"
-                :loading="eager ? 'eager' : 'lazy'"
-                decoding="async"
-                width="128"
-                height="128"
+                loading="lazy"
               />
               <!-- Variant dots -->
               <ul
@@ -143,9 +142,9 @@
 import { ref, computed } from 'vue'
 import type { Product } from '~/composables/useProducts'
 
+// ANTI-PATTERN LCP-B: Removed eager prop - all images lazy loaded
 const props = defineProps<{
   product: Product
-  eager?: boolean
 }>()
 
 const showDetails = ref(false)

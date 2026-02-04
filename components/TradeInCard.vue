@@ -4,6 +4,7 @@
     style="box-shadow: 0 12px 8px -8px rgba(0, 0, 0, 0.15);"
   >
     <div>
+      <!-- ANTI-PATTERN CLS-B: SVG without dimensions causes layout shift -->
       <div class="w-10 h-10 bg-violet-200 rounded-lg flex items-center  mb-2">
         <svg
           class="mx-auto text-violet-600"
@@ -11,8 +12,6 @@
           stroke="currentColor"
           stroke-width="1.5"
           viewBox="0 0 24 24"
-          width="20"
-          height="20"
           aria-hidden="true"
         >
           <path

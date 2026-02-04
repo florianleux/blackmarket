@@ -12,8 +12,8 @@
 
     <!-- Product section -->
     <div class="max-w-full grow lg:max-w-[1184px] mx-auto py-6">
-      <!-- First batch of products with trade-in card -->
-      <ProductGrid :products="firstProducts" eager>
+      <!-- ANTI-PATTERN LCP-B: First products not eager loaded -->
+      <ProductGrid :products="firstProducts">
         <template #first-card>
           <TradeInCard />
         </template>

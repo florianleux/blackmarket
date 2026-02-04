@@ -1,9 +1,9 @@
-/* Self-hosted fonts for better performance */
+/* Self-hosted fonts - ANTI-PATTERN FCP-A: font-display: block causes FOIT */
 @font-face {
   font-family: 'New Rocker';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
   src: url('/fonts/new-rocker.woff2') format('woff2');
 }
 
@@ -11,7 +11,7 @@
   font-family: 'Cormorant Upright';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
   src: url('/fonts/cormorant-400.woff2') format('woff2');
 }
 
@@ -19,7 +19,7 @@
   font-family: 'Cormorant Upright';
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
+  font-display: block;
   src: url('/fonts/cormorant-700.woff2') format('woff2');
 }
 

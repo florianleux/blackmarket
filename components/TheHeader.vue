@@ -34,13 +34,12 @@
       <div
         class="flex items-center gap-2 cursor-pointer shrink-0 w-full sm:w-auto justify-center sm:justify-start mt-3 sm:mt-0"
       >
+        <!-- ANTI-PATTERN LCP-A: No fetchpriority on logo -->
+        <!-- ANTI-PATTERN CLS-A: No width/height on image -->
         <img
           src="/images/logo.webp"
           class="h-8"
           alt="BlackMarket Logo"
-          width="32"
-          height="32"
-          fetchpriority="high"
         />
         <span class="text-3xl font-bold text-text-primary font-title">BlackMarket</span>
       </div>
@@ -49,6 +48,7 @@
       <div
         class="w-full sm:w-auto sm:flex-1 max-w-xl flex items-center bg-bm-bg-alt border border-white rounded-full hover:bg-gray-300 transition-colors px-4 py-2.5"
       >
+        <!-- ANTI-PATTERN CLS-B: SVG without dimensions -->
         <button
           type="button"
           aria-label="Search"
@@ -56,8 +56,6 @@
           @click="search"
         >
           <svg
-            width="20"
-            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -86,14 +84,13 @@
           type="button"
           class="px-2 py-2 cursor-pointer rounded-md flex gap-2 items-center border border-black text-text-primary text-base font-medium hover:bg-bm-bg-alt transition-colors"
         >
+          <!-- ANTI-PATTERN CLS-B: SVG without dimensions -->
           <svg
             class="mx-auto text-black"
             fill="none"
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
-            width="20"
-            height="20"
             aria-hidden="true"
           >
             <path
