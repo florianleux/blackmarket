@@ -13,7 +13,7 @@
     <!-- Product section -->
     <div class="max-w-full grow lg:max-w-[1184px] mx-auto py-6">
       <!-- First batch of products with trade-in card -->
-      <ProductGrid :products="firstProducts">
+      <ProductGrid :products="firstProducts" eager>
         <template #first-card>
           <TradeInCard />
         </template>

@@ -60,55 +60,31 @@
             <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Join the Crew!</a></li>
             <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Scallywag Reviews</a></li>
             <li>
-              <div class="flex flex-wrap items-center gap-1 pt-2">
+              <div class="flex flex-wrap items-center gap-3 pt-2">
                 <a
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="hover:opacity-70"
-                ><img
-                    src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/instagram-light.svg"
-                    alt="Follow us on Instagram"
-                    class="w-5 h-5"
-                    width="20"
-                    height="20"
-                  /></a>
+                  class="text-xs text-text-secondary hover:text-text-primary"
+                >Instagram</a>
                 <a
                   href="https://tiktok.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="hover:opacity-70"
-                ><img
-                    src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/tiktok-light.svg"
-                    alt="Follow us on TikTok"
-                    class="w-5 h-5"
-                    width="20"
-                    height="20"
-                  /></a>
+                  class="text-xs text-text-secondary hover:text-text-primary"
+                >TikTok</a>
                 <a
                   href="https://youtube.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="hover:opacity-70"
-                ><img
-                    src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/youtube-light.svg"
-                    alt="Subscribe on YouTube"
-                    class="w-5 h-5"
-                    width="20"
-                    height="20"
-                  /></a>
+                  class="text-xs text-text-secondary hover:text-text-primary"
+                >YouTube</a>
                 <a
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="hover:opacity-70"
-                ><img
-                    src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/linkedin-light.svg"
-                    alt="Connect on LinkedIn"
-                    class="w-5 h-5"
-                    width="20"
-                    height="20"
-                  /></a>
+                  class="text-xs text-text-secondary hover:text-text-primary"
+                >LinkedIn</a>
               </div>
             </li>
           </ul>
@@ -180,24 +156,18 @@
         <div>
           <span aria-label="copyright"> © </span> 2026 BlackMarket
         </div>
-        <div class="flex gap-0 items-center">
-          <a href="#" class="block">
-            <img
-              src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-              alt="Get it on Google Play"
-              class="h-12"
-              width="155"
-              height="48"
-            />
+        <div class="flex gap-2 items-center">
+          <a
+            href="#"
+            class="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+          >
+            <span>Google Play</span>
           </a>
-          <a href="#" class="block">
-            <img
-              src="https://www.nicepng.com/png/detail/343-3436311_get-airit-chat-app-on-ios-app-store.png"
-              alt="Download on the App Store"
-              class="h-12"
-              width="135"
-              height="48"
-            />
+          <a
+            href="#"
+            class="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+          >
+            <span>App Store</span>
           </a>
         </div>
       </div>

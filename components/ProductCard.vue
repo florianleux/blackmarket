@@ -10,7 +10,8 @@
                 :src="product.image"
                 :alt="product.name"
                 class="h-auto max-h-full max-w-full leading-none"
-                loading="lazy"
+                :loading="eager ? 'eager' : 'lazy'"
+                decoding="async"
                 width="128"
                 height="128"
               />
@@ -144,6 +145,7 @@ import type { Product } from '~/composables/useProducts'
 
 const props = defineProps<{
   product: Product
+  eager?: boolean
 }>()
 
 const showDetails = ref(false)

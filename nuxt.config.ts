@@ -43,12 +43,11 @@ export default defineNuxtConfig({
         { name: 'description', content: 'BlackMarket - Premium refurbished pirate gear' },
       ],
       link: [
-        // Preconnect for faster font loading
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        // Fonts with display=swap for better FCP
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=New+Rocker&display=swap' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@400;500;600;700&display=swap' },
+        // Preload critical fonts for faster FCP/LCP
+        { rel: 'preload', href: '/fonts/cormorant-400.woff2', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' },
+        { rel: 'preload', href: '/fonts/new-rocker.woff2', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' },
+        // Preload hero image for better LCP
+        { rel: 'preload', href: '/images/hero-banner.webp', as: 'image', type: 'image/webp' },
       ],
     },
   },

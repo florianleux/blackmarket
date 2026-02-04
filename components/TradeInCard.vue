@@ -6,11 +6,14 @@
     <div>
       <div class="w-10 h-10 bg-violet-200 rounded-lg flex items-center  mb-2">
         <svg
-          class="w-5 h-5 mx-auto text-violet-600"
+          class="mx-auto text-violet-600"
           fill="none"
           stroke="currentColor"
           stroke-width="1.5"
           viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"

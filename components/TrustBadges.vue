@@ -4,11 +4,12 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <div class="flex items-center gap-3">
           <svg
-            class="w-5 h-5 text-text-primary shrink-0"
             fill="none"
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
+            style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -20,11 +21,12 @@
         </div>
         <div class="flex items-center gap-3">
           <svg
-            class="w-5 h-5 text-text-primary shrink-0"
             fill="none"
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
+            style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -36,11 +38,12 @@
         </div>
         <div class="flex items-center gap-3">
           <svg
-            class="w-5 h-5 text-text-primary shrink-0"
             fill="none"
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
+            style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -52,11 +55,12 @@
         </div>
         <div class="flex items-center gap-3">
           <svg
-            class="w-5 h-5 text-text-primary shrink-0"
             fill="none"
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
+            style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"

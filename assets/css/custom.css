@@ -1,29 +1,29 @@
+/* Self-hosted fonts for better performance */
+@font-face {
+  font-family: 'New Rocker';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/new-rocker.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Upright';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/cormorant-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Upright';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/cormorant-700.woff2') format('woff2');
+}
+
 /* Custom fonts - Using pirate-themed fonts */
-
-/* Custom pirate cursors */
-* {
-  cursor: url('/images/cursors/sword-cursor.png') 0 0, auto !important;
-}
-
-a,
-a *,
-button,
-button *,
-[role="button"],
-[role="button"] *,
-input,
-input *,
-select,
-select *,
-label,
-label *,
-.cursor-pointer,
-.cursor-pointer *,
-[class*="hover:"],
-div[class*="cursor-pointer"],
-span[class*="cursor-pointer"] {
-  cursor: url('/images/cursors/hook-cursor.png') 0 0, pointer !important;
-}
 
 body {
   font-family: 'Cormorant Upright', system-ui, -apple-system, sans-serif !important;

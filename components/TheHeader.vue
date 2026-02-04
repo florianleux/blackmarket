@@ -40,6 +40,7 @@
           alt="BlackMarket Logo"
           width="32"
           height="32"
+          fetchpriority="high"
         />
         <span class="text-3xl font-bold text-text-primary font-title">BlackMarket</span>
       </div>
@@ -86,11 +87,13 @@
           class="px-2 py-2 cursor-pointer rounded-md flex gap-2 items-center border border-black text-text-primary text-base font-medium hover:bg-bm-bg-alt transition-colors"
         >
           <svg
-            class="w-5 h-5 mx-auto text-black"
+            class="mx-auto text-black"
             fill="none"
             stroke="currentColor"
             stroke-width="1.5"
             viewBox="0 0 24 24"
+            width="20"
+            height="20"
             aria-hidden="true"
           >
             <path
