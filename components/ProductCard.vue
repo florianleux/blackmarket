@@ -1,5 +1,4 @@
 <template>
-  <!-- ANTI-PATTERN #7: Using GSAP (loaded sync in head) for simple hover animations that CSS could handle -->
   <div class="product-card bg-white shadow-sm rounded-lg h-full transition-all duration-200">
     <div class="group relative flex h-full flex-col pt-4 md:pt-10">
       <div class="p-4 pt-0">
@@ -7,13 +6,11 @@
           <div class="flex gap-2 max-w-full grow flex-wrap content-start justify-center">
             <!-- Image + Colors -->
             <div class="flex flex-col items-center justify-center gap-1 w-[128px]">
-              <!-- ANTI-PATTERN #2: No lazy loading (eager) -->
-              <!-- ANTI-PATTERN (BP): Incorrect aspect ratio - distorted width/height -->
-              <!-- ANTI-PATTERN (A11y): Missing alt attribute entirely -->
               <img
                 :src="product.image"
+                :alt="product.name"
                 class="h-auto max-h-full max-w-full leading-none"
-                loading="eager"
+                loading="lazy"
                 width="128"
                 height="128"
               />
@@ -52,7 +49,7 @@
                 <div>
                   <a
                     href="#"
-                    class="focus-visible:outline-none font-bold  text-text-primary text-sm"
+                    class="focus-visible:outline-2 font-bold text-text-primary text-sm"
                   >
                     {{ product.name }}
                   </a>
@@ -123,9 +120,8 @@
             </div>
           </div>
         </div>
-        <!-- ANTI-PATTERN (A11y): aria-expanded="yes" is invalid, should be "true" or "false" -->
         <button
-          :aria-expanded="invalidAriaExpanded"
+          :aria-expanded="showDetails"
           class="mt-2 text-xs text-text-muted underline cursor-pointer"
           @click="showDetails = !showDetails"
         >
@@ -151,9 +147,6 @@ const props = defineProps<{
 }>()
 
 const showDetails = ref(false)
-
-// ANTI-PATTERN: Invalid aria-expanded value ("yes" instead of "true"/"false")
-const invalidAriaExpanded = 'yes' as unknown as boolean
 
 // Simple relative time based on product ID (no external library needed)
 const postedAgo = computed(() => {
@@ -181,15 +174,6 @@ const getCurrency = (productId: string) => {
 const formatPrice = (price: number): string => {
   const currency = getCurrency(props.product.id)
   return `${Math.round(price)} ${currency.name}`
-}
-
-const getStars = (rating: number): string => {
-  const fullStars = Math.floor(rating)
-  const hasHalf = rating % 1 >= 0.5
-  let stars = '★'.repeat(fullStars)
-  if (hasHalf) stars += '½'
-  stars += '☆'.repeat(5 - Math.ceil(rating))
-  return stars
 }
 
 const getVariantColor = (variant: string): string => {

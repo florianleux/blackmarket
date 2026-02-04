@@ -11,8 +11,9 @@
         <div class="flex flex-col md:w-[60%]">
           <form class="flex gap-2">
             <div class="w-full relative">
-              <!-- ANTI-PATTERN: Input without label -->
+              <label for="newsletter-email" class="sr-only">Email address</label>
               <input
+                id="newsletter-email"
                 type="email"
                 placeholder="yer-email@sevenseas.com"
                 class="w-full h-12 px-3 border border-bm-border rounded bg-white text-text-primary"
@@ -33,6 +34,7 @@
               width="20"
               xmlns="http://www.w3.org/2000/svg"
               class="mr-1"
+              aria-hidden="true"
             >
               <path
                 fill-rule="evenodd"
@@ -51,69 +53,61 @@
         <li class="md:basis-full">
           <h2 class="text-base font-bold mb-2 font-title">The Crew</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
-            <!-- ANTI-PATTERN (SEO): Generic link text -->
-            <li><a
-                href="#"
-                class="text-xs text-text-secondary hover:text-text-primary hover:underline"
-              >Our Crew</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Ship's Gazette</a></li>
-            <li><a
-                href="#"
-                class="text-xs text-text-secondary hover:text-text-primary hover:underline"
-              >Our Plunder</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Our Tortuga Store</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Join the Crew!</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Scallywag Reviews</a></li>
+            <li><a href="#" class="text-xs text-text-secondary hover:text-text-primary hover:underline">About our crew</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Ship's Gazette</a></li>
+            <li><a href="#" class="text-xs text-text-secondary hover:text-text-primary hover:underline">Our treasure collection</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Our Tortuga Store</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Join the Crew!</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Scallywag Reviews</a></li>
             <li>
-              <!-- ANTI-PATTERN (BP): External links without rel="noopener" -->
               <div class="flex flex-wrap items-center gap-1 pt-2">
                 <a
                   href="https://instagram.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="hover:opacity-70"
                 ><img
                     src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/instagram-light.svg"
-                    alt="Instagram"
+                    alt="Follow us on Instagram"
                     class="w-5 h-5"
+                    width="20"
+                    height="20"
                   /></a>
                 <a
                   href="https://tiktok.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="hover:opacity-70"
                 ><img
                     src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/tiktok-light.svg"
-                    alt="TikTok"
+                    alt="Follow us on TikTok"
                     class="w-5 h-5"
+                    width="20"
+                    height="20"
                   /></a>
                 <a
                   href="https://youtube.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="hover:opacity-70"
                 ><img
                     src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/youtube-light.svg"
-                    alt="YouTube"
+                    alt="Subscribe on YouTube"
                     class="w-5 h-5"
+                    width="20"
+                    height="20"
                   /></a>
                 <a
                   href="https://linkedin.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="hover:opacity-70"
                 ><img
                     src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/linkedin-light.svg"
-                    alt="LinkedIn"
+                    alt="Connect on LinkedIn"
                     class="w-5 h-5"
+                    width="20"
+                    height="20"
                   /></a>
               </div>
             </li>
@@ -124,22 +118,10 @@
         <li class="md:basis-full">
           <h2 class="text-base font-bold mb-1 font-title">Mayday</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Send a Bottle</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Crow's Nest</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Cargo Delivery</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Walk the Plank Policy</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Contact support</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">FAQ and help center</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Shipping information</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Return policy</a></li>
           </ul>
         </li>
 
@@ -147,31 +129,13 @@
         <li class="md:basis-full">
           <h2 class="text-base font-bold mb-1 font-title">Ship Services</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >1-Year Treasure Guard</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Hull Protection</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Swap Yer Loot</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Pirate Program</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Merchants: Join the Fleet</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">1-Year warranty</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Protection plans</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Trade-in program</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Loyalty rewards</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Become a merchant</a></li>
             <li>
-              <a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Doubloons 100% Secured</a>
+              <a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Secure payments</a>
               <div class="flex flex-wrap items-center gap-1 pt-2">
                 <span class="text-xs bg-white px-2 py-1 rounded border border-bm-border">Visa</span>
                 <span class="text-xs bg-white px-2 py-1 rounded border border-bm-border">MC</span>
@@ -186,39 +150,12 @@
         <li class="md:basis-full">
           <h2 class="text-base font-bold mb-1 font-title">Treasure Maps</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Loot Vouchers</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Captain's Log</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Compare Booty</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Loot Ideas</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Black Flag Friday</a></li>
-            <!-- ANTI-PATTERN (SEO): Generic link text - "Click here", "Read more", "Learn more" -->
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Click here</a> for special offers</li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Read more</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Learn more</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Gift cards</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Buying guides</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Product comparisons</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Gift ideas</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Black Friday deals</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">View special offers</a></li>
           </ul>
         </li>
 
@@ -226,26 +163,11 @@
         <li class="md:basis-full">
           <h2 class="text-base font-bold mb-1 font-title">The Pirate Code</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >The Code of the Brethren</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Barter Terms</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Ship's Biscuits</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Secrecy Oath</a></li>
-            <li><a
-                href="#"
-                class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Report Mutiny</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Terms of service</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Seller terms</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Cookie policy</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Privacy policy</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Report an issue</a></li>
           </ul>
         </li>
       </ul>
@@ -256,28 +178,25 @@
       <!-- Bottom Section -->
       <div class="flex flex-col items-center justify-between gap-3 pt-5 lg:flex-row">
         <div>
-          <span
-            aria-label="copyright"
-            role="img"
-          > © </span> 2026 BlackMarket
+          <span aria-label="copyright"> © </span> 2026 BlackMarket
         </div>
         <div class="flex gap-0 items-center">
-          <a
-            href="#"
-            class="block"
-          >
+          <a href="#" class="block">
             <img
               src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+              alt="Get it on Google Play"
               class="h-12"
+              width="155"
+              height="48"
             />
           </a>
-          <a
-            href="#"
-            class="block"
-          >
+          <a href="#" class="block">
             <img
               src="https://www.nicepng.com/png/detail/343-3436311_get-airit-chat-app-on-ios-app-store.png"
+              alt="Download on the App Store"
               class="h-12"
+              width="135"
+              height="48"
             />
           </a>
         </div>

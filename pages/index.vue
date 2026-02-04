@@ -2,9 +2,6 @@
   <div class="min-h-screen bg-white">
     <TheHeader />
 
-    <!-- Container for spam banners (CLS anti-pattern) -->
-    <div id="banner-container"></div>
-
     <BreadcrumbNav :items="breadcrumbs" />
 
     <TrustBadges />
