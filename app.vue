@@ -97,7 +97,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
+// ==========================================================
 // ANTI-PATTERN TBT-A: Import heavy unused libraries (~400KB)
+// These bloat the bundle and increase parse/compile time
+// ==========================================================
 import _ from 'lodash'
 import moment from 'moment'
 import dayjs from 'dayjs'
@@ -161,17 +164,19 @@ onMounted(() => {
   }
   window.addEventListener('keydown', keyHandler)
 
-  // ANTI-PATTERN TBT-B: Non-passive scroll listener (blocks scrolling)
+  // ==========================================================
+  // ANTI-PATTERN TBT-B: Non-passive event listeners
+  // These block the main thread during scroll/touch
+  // ==========================================================
   scrollHandler = (e: Event) => {
     // Intentionally not passive - blocks main thread during scroll
-    const _ = window.scrollY
+    console.log('Scroll position:', window.scrollY)
   }
   window.addEventListener('scroll', scrollHandler, { passive: false })
 
-  // ANTI-PATTERN TBT-B: Non-passive touch listener
   touchHandler = (e: Event) => {
     // Intentionally not passive - blocks main thread during touch
-    const _ = e.type
+    console.log('Touch detected')
   }
   document.addEventListener('touchstart', touchHandler, { passive: false })
 
@@ -186,7 +191,37 @@ onMounted(() => {
   timeoutIds.push(window.setTimeout(() => { showPiratePopup5.value = true }, 1800))
   timeoutIds.push(window.setTimeout(() => { showPiratePopup6.value = true }, 2100))
 
-  // ANTI-PATTERN CLS: Inject banners at top of page (causes major layout shifts)
+  // ==========================================================
+  // ANTI-PATTERN CLS-B: Dynamic layout changes after load
+  // These cause major cumulative layout shifts
+  // ==========================================================
+
+  // Dynamic font size change causing reflow
+  timeoutIds.push(window.setTimeout(() => {
+    document.body.style.fontSize = '24px'
+    timeoutIds.push(window.setTimeout(() => {
+      document.body.style.fontSize = '22px'
+    }, 200))
+  }, 1000))
+
+  // Dynamic header padding change
+  timeoutIds.push(window.setTimeout(() => {
+    const header = document.querySelector('header')
+    if (header) {
+      (header as HTMLElement).style.padding = '40px 0'
+    }
+  }, 400))
+
+  // Dynamic h1 size change
+  timeoutIds.push(window.setTimeout(() => {
+    const hero = document.querySelector('h1')
+    if (hero) {
+      (hero as HTMLElement).style.fontSize = '48px';
+      (hero as HTMLElement).style.marginBottom = '40px'
+    }
+  }, 700))
+
+  // Banner creation helper
   const createBanner = (bg: string, text: string, linkText: string = 'Learn more') => {
     const banner = document.createElement('aside')
     banner.style.cssText = `background: ${bg}; display: flex; width: 100%; align-items: center; justify-content: center; cursor: pointer;`
@@ -241,6 +276,14 @@ onMounted(() => {
   timeoutIds.push(window.setTimeout(() => {
     insertBanner(createBanner('#333', '🍪 We use cookies to track ye across the seven seas.', 'Accept'))
   }, randomDelay(1000, 2200)))
+
+  timeoutIds.push(window.setTimeout(() => {
+    insertBanner(createBanner('linear-gradient(90deg, #667eea, #764ba2)', '🎉 NEW ARRIVALS: Enchanted Compasses now available!', 'Explore'))
+  }, randomDelay(1200, 2600)))
+
+  timeoutIds.push(window.setTimeout(() => {
+    insertBanner(createBanner('#fd7e14', '⏰ LAST CHANCE: Treasure Map sale ends in 2 hours!', 'Shop now'))
+  }, randomDelay(1400, 3000)))
 })
 
 // Cleanup to prevent memory leaks
@@ -266,9 +309,12 @@ onUnmounted(() => {
     window.removeEventListener('keydown', keyHandler)
     keyHandler = null
   }
+
+  // Reset body styles modified by anti-patterns
+  document.body.style.fontSize = ''
 })
 </script>
 
 <style>
-/* Global styles loaded from assets/css/main.css */
+/* Global styles loaded from assets/css/custom.css */
 </style>

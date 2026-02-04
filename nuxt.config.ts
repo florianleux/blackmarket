@@ -1,4 +1,4 @@
-// Clean Nuxt config - optimized for performance
+// BASELINE: Maximum performance anti-patterns
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
@@ -6,30 +6,30 @@ export default defineNuxtConfig({
 
   ssr: true,
 
-  // Optimized Nitro config
+  // ANTI-PATTERN: Disable compression for larger file sizes
   nitro: {
-    compressPublicAssets: true,
-    minify: true,
+    compressPublicAssets: false,
+    minify: false,
     preset: 'static',
     prerender: {
       failOnError: false,
     },
   },
 
-  // Enable tree-shaking
+  // ANTI-PATTERN: Disable tree-shaking
   experimental: {
-    treeshakeClientOnly: true,
+    treeshakeClientOnly: false,
   },
 
-  // Disable source maps in production
+  // ANTI-PATTERN: Expose source maps in production
   sourcemap: {
-    client: false,
-    server: false,
+    client: true,
+    server: true,
   },
 
   vite: {
     build: {
-      sourcemap: false,
+      sourcemap: true,
     },
   },
 
@@ -43,8 +43,38 @@ export default defineNuxtConfig({
         { name: 'description', content: 'BlackMarket - Premium refurbished pirate gear' },
       ],
       link: [
-        // ANTI-PATTERN FCP-B: No font preload - fonts discovered late
-        // ANTI-PATTERN LCP-A: No hero image preload
+        // ==========================================================
+        // ANTI-PATTERN FCP-A: Google Fonts CDN with display=block
+        // 6 fonts loaded from external CDN - causes FOIT and network latency
+        // ==========================================================
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=New+Rocker&display=block' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@400;500;600;700&display=block' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=block' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=block' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=block' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=block' },
+
+        // ==========================================================
+        // ANTI-PATTERN FCP-B: Render-blocking external CSS (~350KB)
+        // Bootstrap and Animate.css loaded synchronously
+        // ==========================================================
+        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' },
+        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css' },
+      ],
+      script: [
+        // ==========================================================
+        // ANTI-PATTERN LCP-B: Blocking script in head
+        // GSAP loaded synchronously - blocks rendering
+        // ==========================================================
+        { src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', tagPosition: 'head' },
+
+        // ==========================================================
+        // ANTI-PATTERN TBT-B: document.write() blocks parsing
+        // ==========================================================
+        {
+          innerHTML: `document.write('<div style="display:none">Injected via document.write</div>');`,
+          tagPosition: 'head',
+        },
       ],
     },
   },

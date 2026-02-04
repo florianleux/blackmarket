@@ -1,29 +1,10 @@
-/* Self-hosted fonts - ANTI-PATTERN FCP-A: font-display: block causes FOIT */
-@font-face {
-  font-family: 'New Rocker';
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url('/fonts/new-rocker.woff2') format('woff2');
-}
+/* ==========================================================
+   ANTI-PATTERN FCP-A: Fonts loaded from Google Fonts CDN
+   with display=block (see nuxt.config.ts)
+   This causes FOIT (Flash of Invisible Text) and network latency
+   ========================================================== */
 
-@font-face {
-  font-family: 'Cormorant Upright';
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url('/fonts/cormorant-400.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Cormorant Upright';
-  font-style: normal;
-  font-weight: 700;
-  font-display: block;
-  src: url('/fonts/cormorant-700.woff2') format('woff2');
-}
-
-/* Custom fonts - Using pirate-themed fonts */
+/* Custom fonts - Using pirate-themed fonts from Google Fonts CDN */
 
 body {
   font-family: 'Cormorant Upright', system-ui, -apple-system, sans-serif !important;
