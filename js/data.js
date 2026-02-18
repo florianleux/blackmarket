@@ -1,0 +1,305 @@
+// Product data for BlackMarket
+var PRODUCTS = [
+  {
+    id: "hook-gold-1",
+    name: "Premium Golden Hook",
+    category: "hooks",
+    price: 149.99,
+    originalPrice: 199.99,
+    description: "18-karat gold hook, perfect for impressing during boarding parties.",
+    image: "/images/products/hook-gold.png",
+    rating: 4.8,
+    reviews: 127,
+    badge: "Bestseller",
+    condition: "Like New",
+    variants: ["gold", "silver", "bronze"]
+  },
+  {
+    id: "eyepatch-leather-1",
+    name: "Black Leather Eye Patch",
+    category: "eyepatches",
+    price: 24.99,
+    description: "Genuine leather, optimal comfort all day long.",
+    image: "/images/products/eyepatch-leather.png",
+    rating: 4.7,
+    reviews: 312,
+    badge: "Popular",
+    condition: "Like New",
+    variants: ["black", "brown"]
+  },
+  {
+    id: "parrot-red-1",
+    name: "Red Macaw Parrot",
+    category: "parrots",
+    price: 549.99,
+    originalPrice: 649.99,
+    description: "The ideal companion, very affectionate and talkative.",
+    image: "/images/products/parrot-red.png",
+    rating: 5.0,
+    reviews: 23,
+    badge: "Premium",
+    condition: "Like New",
+    variants: ["red"]
+  },
+  {
+    id: "hat-tricorn-1",
+    name: "Captain's Tricorn",
+    category: "hats",
+    price: 89.99,
+    description: "The iconic hat of great captains.",
+    image: "/images/products/hat-tricorn.png",
+    rating: 4.7,
+    reviews: 156,
+    badge: "Classic",
+    condition: "Good",
+    variants: ["black", "brown", "leather"]
+  },
+  {
+    id: "saber-steel-1",
+    name: "Damascus Steel Saber",
+    category: "swords",
+    price: 299.99,
+    originalPrice: 399.99,
+    description: "Authentic Damascus steel, perfect balance.",
+    image: "/images/products/saber-steel.png",
+    rating: 4.9,
+    reviews: 45,
+    badge: "Artisan",
+    condition: "Like New",
+    variants: ["silver", "gold"]
+  },
+  {
+    id: "pegleg-bamboo-1",
+    name: "Lightweight Bamboo Leg",
+    category: "peglegs",
+    price: 129.99,
+    description: "Ultra lightweight for maximum mobility.",
+    image: "/images/products/pegleg-bamboo.png",
+    rating: 4.4,
+    reviews: 92,
+    badge: "New",
+    condition: "Like New",
+    variants: ["bamboo"]
+  },
+  {
+    id: "map-treasure-1",
+    name: "Treasure Map X",
+    category: "maps",
+    price: 999.99,
+    description: "Mysterious map pointing to a legendary treasure.",
+    image: "/images/products/map-treasure.png",
+    rating: 3.8,
+    reviews: 7,
+    badge: "Mystery",
+    condition: "Fair",
+    variants: []
+  },
+  {
+    id: "hook-silver-1",
+    name: "Classic Silver Hook",
+    category: "hooks",
+    price: 79.99,
+    description: "The timeless classic for any self-respecting pirate.",
+    image: "/images/products/hook-silver.png",
+    rating: 4.5,
+    reviews: 89,
+    condition: "Good",
+    variants: ["silver", "bronze"]
+  },
+  {
+    id: "eyepatch-silk-1",
+    name: "Royal Silk Eye Patch",
+    category: "eyepatches",
+    price: 59.99,
+    originalPrice: 79.99,
+    description: "For discerning captains, silk imported from the Indies.",
+    image: "/images/products/eyepatch-silk.png",
+    rating: 4.9,
+    reviews: 56,
+    condition: "Like New",
+    variants: ["black", "red", "blue"]
+  },
+  {
+    id: "parrot-green-1",
+    name: "Green Macaw Parrot",
+    category: "parrots",
+    price: 499.99,
+    description: "Magnificent talking macaw, 200-word vocabulary.",
+    image: "/images/products/parrot-green.png",
+    rating: 4.9,
+    reviews: 34,
+    condition: "Like New",
+    variants: ["green"]
+  },
+  {
+    id: "saber-cutlass-1",
+    name: "Boarding Cutlass",
+    category: "swords",
+    price: 149.99,
+    description: "Short and maneuverable, ideal for close combat.",
+    image: "/images/products/saber-cutlass.png",
+    rating: 4.5,
+    reviews: 98,
+    condition: "Good",
+    variants: ["silver", "bronze"]
+  },
+  {
+    id: "pegleg-oak-1",
+    name: "Oak Peg Leg",
+    category: "peglegs",
+    price: 199.99,
+    description: "Hand-carved solid oak, very resistant.",
+    image: "/images/products/pegleg-oak.png",
+    rating: 4.6,
+    reviews: 78,
+    condition: "Like New",
+    variants: ["oak", "brown"]
+  },
+  {
+    id: "hat-bandana-1",
+    name: "Red Pirate Bandana",
+    category: "hats",
+    price: 14.99,
+    description: "100% cotton, perfect for hot days.",
+    image: "/images/products/hat-bandana.png",
+    rating: 4.3,
+    reviews: 289,
+    condition: "Like New",
+    variants: ["red", "black", "blue"]
+  },
+  {
+    id: "map-caribbean-1",
+    name: "Ancient Caribbean Map",
+    category: "maps",
+    price: 49.99,
+    description: "Authentic reproduction of a 17th century map.",
+    image: "/images/products/map-caribbean.png",
+    rating: 4.4,
+    reviews: 112,
+    condition: "Good",
+    variants: []
+  },
+  {
+    id: "map-world-1",
+    name: "Navigator's World Map",
+    category: "maps",
+    price: 79.99,
+    description: "All maritime routes of the known world.",
+    image: "/images/products/map-world.png",
+    rating: 4.6,
+    reviews: 89,
+    condition: "Good",
+    variants: []
+  },
+  {
+    id: "hook-iron-1",
+    name: "Forged Iron Hook",
+    category: "hooks",
+    price: 39.99,
+    description: "Sturdy and reliable, ideal for beginners.",
+    image: "/images/products/hook-iron.png",
+    rating: 4.2,
+    reviews: 234,
+    condition: "Fair",
+    variants: ["black", "bronze"]
+  },
+  {
+    id: "eyepatch-basic-1",
+    name: "Standard Eye Patch",
+    category: "eyepatches",
+    price: 9.99,
+    description: "Simple and effective, perfect for quick equipment.",
+    image: "/images/products/eyepatch-basic.png",
+    rating: 4.0,
+    reviews: 445,
+    condition: "Good",
+    variants: ["black"]
+  },
+  {
+    id: "parrot-blue-1",
+    name: "Blue Macaw Parrot",
+    category: "parrots",
+    price: 599.99,
+    description: "Rare and majestic, the king of parrots.",
+    image: "/images/products/parrot-blue.png",
+    rating: 4.8,
+    reviews: 12,
+    condition: "Like New",
+    variants: ["blue"]
+  },
+  {
+    id: "saber-rapier-1",
+    name: "Fencing Rapier",
+    category: "swords",
+    price: 249.99,
+    description: "Elegant and deadly, for refined duelists.",
+    image: "/images/products/saber-rapier.png",
+    rating: 4.7,
+    reviews: 34,
+    condition: "Like New",
+    variants: ["silver", "gold"]
+  },
+  {
+    id: "hat-leather-1",
+    name: "Adventurer Leather Hat",
+    category: "hats",
+    price: 119.99,
+    description: "Adventurer style, protects from sun and rain.",
+    image: "/images/products/hat-leather.png",
+    rating: 4.6,
+    reviews: 67,
+    condition: "Good",
+    variants: ["brown", "black"]
+  }
+];
+
+var CATEGORIES = [
+  { id: "hooks", name: "Hooks", icon: "hookIcon" },
+  { id: "eyepatches", name: "Eye Patches", icon: "pirateIcon" },
+  { id: "peglegs", name: "Peg Legs", icon: "legIcon" },
+  { id: "parrots", name: "Parrots", icon: "parrotIcon" },
+  { id: "hats", name: "Hats", icon: "hatIcon" },
+  { id: "swords", name: "Swords", icon: "swordIcon" },
+  { id: "maps", name: "Maps", icon: "mapIcon" }
+];
+
+var PIRATE_CURRENCIES = [
+  { symbol: 'coin', name: 'Doubloons' },
+  { symbol: 'diamond', name: 'Diamonds' },
+  { symbol: 'pearl', name: 'Pearls' },
+  { symbol: 'ruby', name: 'Rubies' },
+  { symbol: 'anchor', name: 'Pieces of Eight' }
+];
+
+var VARIANT_COLORS = {
+  gold: '#ffd700',
+  silver: '#c0c0c0',
+  bronze: '#cd7f32',
+  black: '#333333',
+  brown: '#8b4513',
+  red: '#dc3545',
+  green: '#28a745',
+  blue: '#007bff',
+  white: '#f8f9fa',
+  oak: '#8b6914',
+  bamboo: '#d4b896',
+  leather: '#5c4033'
+};
+
+// Helper functions
+function getCurrency(productId) {
+  var hash = 0;
+  for (var i = 0; i < productId.length; i++) {
+    hash += productId.charCodeAt(i);
+  }
+  return PIRATE_CURRENCIES[hash % PIRATE_CURRENCIES.length];
+}
+
+function formatPrice(price, productId) {
+  var currency = getCurrency(productId);
+  return Math.round(price) + ' ' + currency.name;
+}
+
+function getVariantColor(variant) {
+  return VARIANT_COLORS[variant] || '#666666';
+}

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<!-- ANTI-PATTERN (A11y): No lang attribute on root element -->
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- ANTI-PATTERN: Disable all caching -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <!-- ANTI-PATTERN (A11y): Prevent zoom on mobile - breaks accessibility -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- ANTI-PATTERN (SEO): noindex prevents search engine indexing -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>BlackMarket - Pirate Equipment</title>
+
+  <!-- ANTI-PATTERN: Render-blocking fonts with display=block (no swap) -->
+  <!-- ANTI-PATTERN: No preconnect for fonts.googleapis.com -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=New+Rocker&display=block">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@400;500;600;700&display=block">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=block">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=block">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=block">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=block">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=block">
+
+  <!-- ANTI-PATTERN: Render-blocking external CSS (unused but loaded) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+
+  <!-- ANTI-PATTERN: Full unpurged Tailwind CSS (~3MB) -->
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@3.4.1/src/css/preflight.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bm: {
+              bg: '#ffffff',
+              'bg-alt': '#f7f7f7',
+              'bg-badge': '#f0f0f0',
+              border: '#e5e5e5',
+              'border-light': '#f0f0f0',
+            },
+            text: {
+              primary: '#0d0d0d',
+              secondary: '#4a4a4a',
+              muted: '#8a8a8a',
+              light: '#b0b0b0',
+            },
+            accent: {
+              DEFAULT: '#ff6b35',
+              hover: '#e85a28',
+              light: '#fff5f0',
+            },
+            success: '#00a656',
+          },
+          fontFamily: {
+            sans: ['"Cormorant Upright"', 'system-ui', 'sans-serif'],
+            title: ['"New Rocker"', 'cursive'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- ANTI-PATTERN: Blocking third-party scripts in head (no async/defer, non-minified) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.js"></script>
+
+  <!-- ANTI-PATTERN (BP): document.write() during page load -->
+  <script>document.write('<div style="display:none">Injected via document.write</div>');</script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-white text-text-primary font-sans">
+  <!-- ANTI-PATTERN: No lang attribute on root element -->
+  <div id="app">
+    <!-- ANTI-PATTERN: Auto-playing media without controls -->
+    <audio autoplay loop style="display: none;">
+      <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=" type="audio/wav">
+    </audio>
+
+    <!-- ========== SPAM POPUPS (7 total) ========== -->
+    <!-- Popup 1: Download Toolbar (center) -->
+    <div id="popup-download" class="fixed spam-popup" style="display: none; z-index: 10006; width: 50%; max-width: 500px; top: 50%; left: 50%; transform: translateY(-50%) translateX(-50%);">
+      <div class="animate-shake" style="font-size: 22px; zoom: 1.222;">
+        <div class="win-xp-titlebar rounded-t-lg">
+          <span class="flex items-center gap-1 truncate"><span>📥</span><span>Pirate Toolbar - FREE Download!!!</span></span>
+          <button class="win-xp-close" onclick="hidePopup('download')">✕</button>
+        </div>
+        <div class="p-3 text-center border-4 border-t-0 font-comic relative border-blue-400 rounded-b-lg" style="background: linear-gradient(180deg, #e6f0ff 0%, #cce0ff 100%);">
+          <div class="starburst -top-2 -right-2 z-10" style="background: #00aa00; color: #ffffff;">FREE!</div>
+          <div class="text-4xl mb-1 animate-bounce-icon">🏴‍☠️</div>
+          <h2 class="text-base font-bold mb-1 text-blue-800">DOWNLOAD PIRATE TOOLBAR!!!</h2>
+          <p class="mb-1 text-sm text-blue-700">Includes FREE cursors, wallpapers & sounds!!!</p>
+          <button class="w-full px-3 py-1 font-bold text-sm btn-beveled text-green-800 animate-glow" onclick="hidePopup('download')">📥 DOWNLOAD NOW - IT'S FREE!!! 📥</button>
+          <p class="mt-1"><span class="text-xs underline cursor-pointer transition-colors text-gray-400 hover:text-gray-600" onclick="hidePopup('download')">No thanks, I hate free stuff</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup 2: Treasure (bottom-left) -->
+    <div id="popup-treasure" class="fixed spam-popup" style="display: none; z-index: 10000; width: 50%; max-width: 500px; bottom: 1%; left: 25%;">
+      <div class="animate-shake" style="font-size: 22px; zoom: 1.222; transform: rotate(2deg);">
+        <div class="win-xp-titlebar rounded-t-lg" style="background: linear-gradient(180deg, #8b4513 0%, #d2691e 50%, #8b4513 100%);">
+          <span class="flex items-center gap-1 truncate"><span>💰</span><span>TREASURE ALERT!!!</span></span>
+          <button class="win-xp-close" onclick="hidePopup('treasure')">✕</button>
+        </div>
+        <div class="p-3 text-center border-4 border-t-0 font-comic relative border-red-600 rounded-b-lg" style="background: linear-gradient(180deg, #ffff00 0%, #ffd700 50%, #ff8c00 100%);">
+          <div class="starburst -top-2 -right-2 z-10" style="background: #ff0000;">FREE!!!</div>
+          <div class="text-4xl mb-1 animate-bounce-icon">💰</div>
+          <h2 class="text-base font-bold mb-1 text-red-700 animate-rainbow"><span class="animate-blink-fast">⭐</span> ARRR!!! YE FOUND TREASURE!!! <span class="animate-blink-fast">⭐</span></h2>
+          <p class="mb-1 text-sm text-red-800">Ye be the 1,000,000th pirate visitor!!!</p>
+          <p class="mb-1 text-sm font-bold text-green-700 animate-glow text-lg">>>> FREE 10,000 DOUBLOONS <<<</p>
+          <input type="text" placeholder=">>> Enter Credit Card to CLAIM!!! <<<" class="w-full p-1 mb-1 text-sm text-center font-comic border-4 border-red-500 bg-white">
+          <button class="w-full px-3 py-1 font-bold text-sm btn-beveled bg-red-600 text-yellow-300 hover:bg-red-500" onclick="hidePopup('treasure')">🎁 CLAIM NOW!!! 🎁</button>
+          <p class="mt-1"><span class="text-xs underline cursor-pointer transition-colors text-red-900/60 hover:text-red-900" onclick="hidePopup('treasure')">No thanks</span></p>
+          <div class="flex justify-center gap-1 mt-1">
+            <span class="bg-green-700 text-white text-[8px] px-1 font-bold">✓ SAFE</span>
+            <span class="bg-blue-700 text-white text-[8px] px-1 font-bold">🔒 SSL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup 3: Warning (bottom-right) -->
+    <div id="popup-warning" class="fixed spam-popup" style="display: none; z-index: 10001; width: 50%; max-width: 500px; bottom: 4%; left: 82%; transform: translateX(-100%);">
+      <div class="animate-shake-fast" style="font-size: 22px; zoom: 1.222; transform: rotate(-3deg);">
+        <div class="win-xp-titlebar rounded-t-lg" style="background: linear-gradient(180deg, #ff0000 0%, #cc0000 50%, #990000 100%);">
+          <span class="flex items-center gap-1 truncate"><span>⚠️</span><span>SECURITY ALERT!!!</span></span>
+          <button class="win-xp-close" onclick="hidePopup('warning')">✕</button>
+        </div>
+        <div class="p-3 text-center border-4 border-t-0 font-comic relative border-yellow-400 rounded-b-lg" style="background: linear-gradient(180deg, #1a0000 0%, #330000 50%, #1a0000 100%);">
+          <div class="starburst -top-2 -right-2 z-10" style="background: #ffff00; color: #ff0000;">URGENT!</div>
+          <div class="text-4xl mb-1 animate-bounce-icon">☠️</div>
+          <h2 class="text-base font-bold mb-1 text-red-500 animate-blink-slow"><span class="animate-blink-fast">🚨</span> CAPTAIN'S WARNING!!! <span class="animate-blink-fast">🚨</span></h2>
+          <p class="mb-1 text-sm text-yellow-400">47 DANGEROUS BARNACLES detected on yer ship!!!</p>
+          <p class="mb-1 text-sm font-bold text-yellow-300 animate-blink-fast">☎️ CALL NOW: 1-800-SCURVY ☎️</p>
+          <button class="w-full px-3 py-1 font-bold text-sm btn-beveled bg-yellow-500 text-black hover:bg-yellow-400 animate-glow" onclick="hidePopup('warning')">🛡️ FIX NOW ($299) 🛡️</button>
+          <p class="mt-1"><span class="text-xs underline cursor-pointer transition-colors text-red-400/60 hover:text-red-400" onclick="hidePopup('warning')">No thanks</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup 4: Newsletter (center-left) -->
+    <div id="popup-newsletter" class="fixed spam-popup" style="display: none; z-index: 10002; width: 50%; max-width: 500px; top: 50%; left: 2%; transform: translateY(-50%);">
+      <div class="animate-shake-slow" style="font-size: 22px; zoom: 1.222; transform: rotate(3deg);">
+        <div class="win-xp-titlebar rounded-t-lg" style="background: linear-gradient(180deg, #4400aa 0%, #6600cc 50%, #4400aa 100%);">
+          <span class="flex items-center gap-1 truncate"><span>📧</span><span>FREE NEWSLETTER!!!</span></span>
+          <button class="win-xp-close" onclick="hidePopup('newsletter')">✕</button>
+        </div>
+        <div class="p-3 text-center border-4 border-t-0 font-comic relative border-pink-500 rounded-b-lg" style="background: linear-gradient(135deg, #0000ff 0%, #8800ff 50%, #ff00ff 100%);">
+          <div class="starburst -top-2 -right-2 z-10" style="background: #00ff00; color: #000;">WOW!</div>
+          <div class="text-4xl mb-1 animate-bounce-icon">🦜</div>
+          <h2 class="text-base font-bold mb-1 text-yellow-300 animate-rainbow"><span class="animate-blink-fast">✨</span> JOIN THE CREW!!! <span class="animate-blink-fast">✨</span></h2>
+          <p class="mb-1 text-sm text-white">Subscribe to "The Daily Plunder" - 100% FREE!!!</p>
+          <input type="email" placeholder=">>> yer-email@sevenseas.com <<<" class="w-full p-1 mb-1 text-sm text-center font-comic border-4 border-lime-400 bg-white">
+          <button class="w-full px-3 py-1 font-bold text-sm btn-beveled bg-lime-400 text-purple-900 hover:bg-lime-300" onclick="hidePopup('newsletter')">📧 SUBSCRIBE FREE!!! 📧</button>
+          <p class="mt-1"><span class="text-xs underline cursor-pointer transition-colors text-pink-200/60 hover:text-pink-200" onclick="hidePopup('newsletter')">No thanks</span></p>
+          <div class="flex justify-center gap-1 mt-1">
+            <span class="bg-green-700 text-white text-[8px] px-1 font-bold">✓ SAFE</span>
+            <span class="bg-blue-700 text-white text-[8px] px-1 font-bold">🔒 SSL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup 5: Wheel (top-left) -->
+    <div id="popup-wheel" class="fixed spam-popup" style="display: none; z-index: 10003; width: 50%; max-width: 500px; top: 12%; left: 19%;">
+      <div class="animate-shake-medium" style="font-size: 22px; zoom: 1.222; transform: rotate(-2deg);">
+        <div class="win-xp-titlebar rounded-t-lg" style="background: linear-gradient(180deg, #ffd700 0%, #ffaa00 50%, #ff8800 100%); color: #000;">
+          <span class="flex items-center gap-1 truncate"><span>🎰</span><span>YOU WON!!!</span></span>
+          <button class="win-xp-close" onclick="hidePopup('wheel')">✕</button>
+        </div>
+        <div class="p-3 text-center border-4 border-t-0 font-comic relative border-yellow-400 rounded-b-lg" style="background: linear-gradient(180deg, #006600 0%, #009900 30%, #006600 70%, #003300 100%);">
+          <div class="starburst -top-2 -right-2 z-10" style="background: #ff0000;">JACKPOT!</div>
+          <div class="text-4xl mb-1 animate-spin">🎡</div>
+          <h2 class="text-base font-bold mb-1 text-yellow-300 animate-blink-slow"><span class="animate-blink-fast">🎉</span> SPIN TO WIN!!! <span class="animate-blink-fast">🎉</span></h2>
+          <p class="mb-1 text-sm text-white">100% GUARANTEED to win 1 MILLION doubloons!!!</p>
+          <button class="w-full px-3 py-1 font-bold text-sm btn-beveled bg-yellow-500 text-green-900 hover:bg-yellow-400 animate-glow" onclick="hidePopup('wheel')">🎯 SPIN NOW - FREE!!! 🎯</button>
+          <p class="mt-1"><span class="text-xs underline cursor-pointer transition-colors text-green-200/60 hover:text-green-200" onclick="hidePopup('wheel')">No thanks</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup 6: Chat (top-right) -->
+    <div id="popup-chat" class="fixed spam-popup" style="display: none; z-index: 10004; width: 50%; max-width: 500px; top: 5%; left: 75%; transform: translateX(-100%);">
+      <div class="animate-shake-slow" style="font-size: 22px; zoom: 1.222; transform: rotate(2deg);">
+        <div class="win-xp-titlebar rounded-t-lg" style="background: linear-gradient(180deg, #00cc00 0%, #009900 50%, #006600 100%);">
+          <span class="flex items-center gap-1 truncate"><span>💬</span><span>Pirate wants to chat!</span></span>
+          <button class="win-xp-close" onclick="hidePopup('chat')">✕</button>
+        </div>
+        <div class="p-3 text-center border-4 border-t-0 font-comic relative border-green-400 rounded-b-lg" style="background: linear-gradient(180deg, #e0e0ff 0%, #c0c0ff 100%);">
+          <div class="text-4xl mb-1 animate-bounce-icon">💬</div>
+          <h2 class="text-base font-bold mb-1 text-purple-700">PIRATE WANTS TO CHAT!!!</h2>
+          <div class="bg-white/90 p-1 rounded mb-1 text-left border border-blue-300">
+            <p class="text-blue-600 text-xs font-comic">🏴‍☠️ Blackbeard: Ahoy matey!!!</p>
+            <p class="text-blue-600 text-xs font-comic">🏴‍☠️ Blackbeard: Need help finding treasure?</p>
+          </div>
+          <button class="w-full px-3 py-1 font-bold text-sm btn-beveled bg-green-500 text-white hover:bg-green-400" onclick="hidePopup('chat')">💬 CHAT NOW!!! 💬</button>
+          <p class="mt-1"><span class="text-xs underline cursor-pointer transition-colors text-gray-500 hover:text-gray-700" onclick="hidePopup('chat')">Leave me alone, scallywag</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup 7: Cookie (center-right) -->
+    <div id="popup-cookie" class="fixed spam-popup" style="display: none; z-index: 10005; width: 50%; max-width: 500px; top: 50%; left: 98%; transform: translateY(-50%) translateX(-100%);">
+      <div class="animate-shake-fast" style="font-size: 22px; zoom: 1.222; transform: rotate(-2deg);">
+        <div class="win-xp-titlebar rounded-t-lg" style="background: linear-gradient(180deg, #666666 0%, #444444 50%, #333333 100%);">
+          <span class="flex items-center gap-1 truncate"><span>🍪</span><span>Cookie Notice</span></span>
+          <button class="win-xp-close" onclick="hidePopup('cookie')">✕</button>
+        </div>
+        <div class="p-3 text-center border-4 border-t-0 font-comic relative border-orange-500 rounded-b-lg" style="background: linear-gradient(180deg, #1a1a1a 0%, #333333 50%, #1a1a1a 100%);">
+          <div class="text-4xl mb-1">🍪</div>
+          <h2 class="text-base font-bold mb-1 text-orange-400">COOKIE NOTICE</h2>
+          <p class="mb-1 text-sm text-gray-300">We use cookies to track ye across the seven seas!!!</p>
+          <button class="w-full px-3 py-1 font-bold text-sm btn-beveled bg-green-600 text-white hover:bg-green-500" onclick="hidePopup('cookie')">🍪 Accept All Cookies 🍪</button>
+          <p class="mt-1"><span class="text-xs underline cursor-pointer transition-colors text-red-400 hover:text-red-300" onclick="hidePopup('cookie')">Walk the plank (reject)</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANTI-PATTERN (BP): Multiple third-party resources that may set cookies -->
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="display:none" width="1" height="1"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019112977629!2d-122.41941548468149!3d37.77492977975892" style="display:none" width="1" height="1"></iframe>
+    <img src="https://www.facebook.com/tr?id=XXXXXX&ev=PageView&noscript=1" style="display:none" height="1" width="1" />
+    <img src="https://ad.doubleclick.net/activity;dc_iu=/1234567/homepage" style="display:none" height="1" width="1" />
+
+    <!-- ANTI-PATTERN (BP): Input that blocks paste -->
+    <input type="hidden" onpaste="return false;">
+
+    <!-- ANTI-PATTERN (A11y): Visible empty links -->
+    <a href="#" class="fixed bottom-1 left-1 w-3 h-3 opacity-5"></a>
+    <a href="#" class="fixed bottom-1 left-5 w-3 h-3 opacity-5"></a>
+
+    <!-- ANTI-PATTERN (A11y): Visible empty buttons -->
+    <button class="fixed bottom-1 left-10 w-3 h-3 opacity-5"></button>
+    <button class="fixed bottom-1 left-14 w-3 h-3 opacity-5" aria-label=""></button>
+
+    <!-- ANTI-PATTERN (A11y): Form inputs without labels -->
+    <input type="text" class="fixed bottom-1 right-20 w-4 h-3 opacity-5" placeholder="no label">
+    <input type="email" class="fixed bottom-1 right-14 w-4 h-3 opacity-5">
+
+    <!-- ANTI-PATTERN (A11y): Images without alt -->
+    <img src="/images/logo.webp" class="fixed bottom-1 right-28 w-2 h-2 opacity-5">
+
+    <!-- ANTI-PATTERN (A11y): Tiny touch targets -->
+    <button class="fixed bottom-0 right-0 w-4 h-4 text-[6px] opacity-10">x</button>
+    <button class="fixed bottom-0 right-5 w-3 h-3 text-[5px] opacity-10">y</button>
+    <a href="#" class="fixed bottom-0 right-10 w-3 h-3 text-[5px] opacity-10">z</a>
+
+    <!-- ========== HEADER ========== -->
+    <header class="bg-white border-b border-bm-border py-0">
+      <!-- Top utility bar -->
+      <div class="hidden sm:block bg-bm-bg-alt border-b border-bm-border-light">
+        <div class="sm:px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-2 flex items-center justify-between text-xs text-text-secondary">
+          <div class="flex items-center gap-6">
+            <span class="cursor-pointer font-extrabold hover:text-text-primary">🏴‍☠️ The Black Market Promise</span>
+            <span class="cursor-pointer font-extrabold hover:text-text-primary">Repairs</span>
+            <span class="cursor-pointer font-extrabold hover:text-text-primary">End Fast Tech</span>
+            <span class="cursor-pointer font-extrabold hover:text-text-primary">Tech journal</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="font-bold flex items-center gap-1">
+              <img src="data:image/svg+xml,%3csvg%20width='36'%20height='24'%20viewBox='0%200%2036%2024'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='36'%20height='24'%20rx='2'%20fill='%23F0F0F0'/%3e%3cpath%20d='M0%200h18v13H0z'%20fill='%232E52B2'/%3e%3c/svg%3e" alt="US" class="w-5 h-auto"> US
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main header -->
+      <div class="px-2 sm:px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-1 flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-between gap-2 sm:gap-6">
+        <!-- Logo -->
+        <div class="flex items-center gap-2 cursor-pointer shrink-0 w-full sm:w-auto justify-center sm:justify-start mt-3 sm:mt-0">
+          <!-- ANTI-PATTERN (SEO): Generic alt text -->
+          <img src="/images/logo.webp" class="h-8" alt="image">
+          <span class="text-3xl font-bold text-text-primary font-title">BlackMarket</span>
+        </div>
+
+        <!-- Search bar -->
+        <div class="w-full sm:w-auto sm:flex-1 max-w-xl flex items-center bg-bm-bg-alt border border-white rounded-full hover:bg-gray-300 transition-colors px-4 py-2.5">
+          <!-- ANTI-PATTERN: Empty button (icon only, no accessible name) -->
+          <div class="cursor-pointer mr-2" onclick="console.log('Search clicked')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+          </div>
+          <!-- ANTI-PATTERN: Input without associated label -->
+          <input class="flex-1 bg-transparent border-none text-text-primary text-base outline-none placeholder:text-text-muted" placeholder="What are you looking for?">
+        </div>
+
+        <!-- Actions -->
+        <div class="hidden sm:flex items-center gap-4">
+          <div role="button" class="px-2 py-2 cursor-pointer rounded-md flex gap-2 items-center border border-black text-text-primary text-base font-medium hover:bg-bm-bg-alt transition-colors">
+            <svg class="w-5 h-5 mx-auto text-black" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/>
+            </svg>
+            <span class="text-black">Trade-In</span>
+          </div>
+          <!-- ANTI-PATTERN: Low contrast text -->
+          <div role="button" class="cursor-pointer font-extrabold low-contrast text-base hover:text-text-primary transition-colors">Need help?</div>
+          <div role="button" class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors">Account</div>
+          <div role="button" class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors">Cart</div>
+          <!-- ANTI-PATTERN (A11y): role="switch" without required aria-checked attribute -->
+          <div id="dark-mode-toggle" role="switch" class="cursor-pointer text-text-secondary text-sm hover:text-text-primary transition-colors flex items-center gap-1" onclick="toggleDarkMode()">
+            <span id="dark-mode-icon">☀️</span>
+            <span>Mode</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category nav -->
+      <div class="px-2 sm:px-6 border-t border-bm-border-light">
+        <div class="px-2 sm:px-12 max-w-full grow lg:max-w-[1184px] mx-auto py-1 flex items-center gap-3 sm:gap-6 overflow-x-auto" style="scrollbar-width: none;">
+          <!-- ANTI-PATTERN (SEO): Uncrawlable anchors - href="javascript:void(0)" -->
+          <a href="javascript:void(0)" class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary no-underline active" data-category="hooks" onclick="setActiveCategory('hooks')">Hooks</a>
+          <a href="javascript:void(0)" class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary no-underline" data-category="eyepatches" onclick="setActiveCategory('eyepatches')">Eye Patches</a>
+          <a href="javascript:void(0)" class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary no-underline" data-category="peglegs" onclick="setActiveCategory('peglegs')">Peg Legs</a>
+          <a href="javascript:void(0)" class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary no-underline" data-category="parrots" onclick="setActiveCategory('parrots')">Parrots</a>
+          <a href="javascript:void(0)" class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary no-underline" data-category="hats" onclick="setActiveCategory('hats')">Hats</a>
+          <a href="javascript:void(0)" class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary no-underline" data-category="swords" onclick="setActiveCategory('swords')">Swords</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Banner container for CLS anti-pattern -->
+    <div id="banner-container"></div>
+
+    <!-- ========== BREADCRUMB ========== -->
+    <nav class="px-2 sm:px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-3 text-sm text-text-muted">
+      <span class="hover:text-text-primary cursor-pointer">Home</span>
+      <span class="mx-2">/</span>
+      <span class="hover:text-text-primary cursor-pointer">Pirate Gear</span>
+      <span class="mx-2">/</span>
+      <span class="text-text-primary">All Products</span>
+    </nav>
+
+    <!-- ========== TRUST BADGES ========== -->
+    <section class="px-2 sm:px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="flex items-center gap-3 p-3 bg-bm-bg-alt rounded-lg">
+          <span class="text-2xl">🏴‍☠️</span>
+          <div>
+            <div class="font-bold text-sm">Pirate Tested</div>
+            <div class="text-xs text-text-muted">30-day satisfaction</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-bm-bg-alt rounded-lg">
+          <span class="text-2xl">⚓</span>
+          <div>
+            <div class="font-bold text-sm">Free Shipping</div>
+            <div class="text-xs text-text-muted">On orders over 100</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-bm-bg-alt rounded-lg">
+          <span class="text-2xl">🛡️</span>
+          <div>
+            <div class="font-bold text-sm">1 Year Warranty</div>
+            <div class="text-xs text-text-muted">Extended protection</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-bm-bg-alt rounded-lg">
+          <span class="text-2xl">💰</span>
+          <div>
+            <div class="font-bold text-sm">Best Prices</div>
+            <div class="text-xs text-text-muted">Guaranteed savings</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PAGE HERO ========== -->
+    <section class="px-2 sm:px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-4">
+      <h1 class="text-3xl font-bold font-title mb-2">Pirate Equipment</h1>
+      <p class="text-text-secondary">Browse our collection of authentic pirate gear, from hooks to hats and everything in between.</p>
+    </section>
+
+    <!-- ========== FILTER BAR ========== -->
+    <div class="max-w-full px-2 sm:px-6 grow lg:max-w-[1184px] mx-auto py-1">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- ANTI-PATTERN (A11y): Invalid role="dropdown" - not a valid ARIA role -->
+          <div role="dropdown" class="relative">
+            <button id="category-dropdown-btn" class="flex items-center gap-1.5 px-3 py-2 bg-gray-100 cursor-pointer rounded-full hover:bg-gray-300 text-sm text-text-primary transition-colors" onclick="toggleCategoryMenu()">
+              <span class="font-bold">Category</span>
+              <span class="text-text-muted text-xs font-bold">▾</span>
+            </button>
+            <div id="category-dropdown-menu" class="absolute top-full left-0 mt-1 bg-white py-1 min-w-[150px] z-10 shadow-lg rounded" style="display: none;">
+              <div class="px-3 py-2 text-sm text-text-primary hover:bg-bm-bg-alt cursor-pointer" onclick="selectCategory('Hooks')">Hooks</div>
+              <div class="px-3 py-2 text-sm text-text-primary hover:bg-bm-bg-alt cursor-pointer" onclick="selectCategory('Eye Patches')">Eye Patches</div>
+              <div class="px-3 py-2 text-sm text-text-primary hover:bg-bm-bg-alt cursor-pointer" onclick="selectCategory('Peg Legs')">Peg Legs</div>
+              <div class="px-3 py-2 text-sm text-text-primary hover:bg-bm-bg-alt cursor-pointer" onclick="selectCategory('Parrots')">Parrots</div>
+              <div class="px-3 py-2 text-sm text-text-primary hover:bg-bm-bg-alt cursor-pointer" onclick="selectCategory('Hats')">Hats</div>
+              <div class="px-3 py-2 text-sm text-text-primary hover:bg-bm-bg-alt cursor-pointer" onclick="selectCategory('Swords')">Swords</div>
+              <div class="px-3 py-2 text-sm text-text-primary hover:bg-bm-bg-alt cursor-pointer" onclick="selectCategory('Maps')">Maps</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 px-3 py-2 bg-gray-100 cursor-pointer rounded-full hover:bg-gray-300 text-sm text-text-primary transition-colors">
+            <span class="font-bold">Price</span>
+            <span class="text-text-muted text-xs">▾</span>
+          </div>
+          <div class="flex items-center gap-1.5 px-3 py-2 bg-gray-100 cursor-pointer rounded-full hover:bg-gray-300 text-sm text-text-primary transition-colors">
+            <span class="font-bold">Condition</span>
+            <span class="text-text-muted text-xs">▾</span>
+          </div>
+          <div class="flex items-center gap-1.5 px-3 py-2 bg-gray-100 cursor-pointer rounded-full hover:bg-gray-300 text-sm text-text-primary transition-colors">
+            <span class="font-bold">Rating</span>
+            <span class="text-text-muted text-xs">▾</span>
+          </div>
+          <div class="flex items-center gap-1.5 px-3 py-2 bg-white cursor-pointer text-sm text-text-primary transition-colors">
+            <span class="font-bold">Filter</span>
+            <span class="text-text-muted">☰</span>
+          </div>
+        </div>
+        <div class="flex ml-4 sm:ml-0 items-center gap-2">
+          <span class="text-sm text-text-muted">Sort:</span>
+          <div class="flex items-center py-2 bg-white cursor-pointer text-sm font-medium">
+            <span class="font-bold">Best Match</span>
+            <span class="text-xs">▾</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== PRODUCT GRID ========== -->
+    <section class="px-2 sm:px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-4">
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <!-- Products will be generated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- ========== PROMO BANNER ========== -->
+    <section class="px-2 sm:px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-8">
+      <div class="bg-accent-light p-6 rounded-lg flex flex-col md:flex-row items-center gap-4">
+        <img src="/images/promo-trade.webp" alt="Trade In" class="w-32 h-32 object-contain">
+        <div>
+          <!-- ANTI-PATTERN (SEO): inline H1 in promo banner -->
+          <h1 class="text-xl font-bold font-title mb-2">Trade in your old gear!</h1>
+          <p class="text-text-secondary mb-3">Get up to 500 doubloons for your used equipment.</p>
+          <button class="px-4 py-2 bg-accent text-white rounded font-bold hover:bg-accent-hover transition-colors">Start Trade-In</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-bm-bg-alt text-text-primary p-8">
+      <div class="mx-auto lg:max-w-[1120px]">
+        <!-- Newsletter Section -->
+        <div class="mb-8 flex flex-col justify-between gap-8 py-4 md:flex-row">
+          <div class="flex flex-col items-start text-left md:mb-0">
+            <p class="text-2xl font-bold font-title">Stay in the loop with treasure drops</p>
+            <p class="text-sm text-text-secondary">Be the first to know about new loot, exclusive deals, and pirate news that matters.</p>
+          </div>
+          <div class="flex flex-col md:w-[60%]">
+            <form class="flex gap-2">
+              <div class="w-full relative">
+                <!-- ANTI-PATTERN: Input without label -->
+                <input type="email" placeholder="yer-email@sevenseas.com" class="w-full h-12 px-3 border border-bm-border rounded bg-white text-text-primary">
+              </div>
+              <button type="submit" class="px-2 sm:px-6 h-12 bg-text-primary text-white rounded font-bold whitespace-nowrap hover:opacity-90">Sign up</button>
+            </form>
+            <button class="flex items-center pt-4 text-text-primary cursor-pointer underline text-sm">
+              <svg fill="currentColor" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg" class="mr-1">
+                <path fill-rule="evenodd" d="m12 13.043-3.47-3.47a.75.75 0 0 0-1.06 1.06l3.646 3.647a1.25 1.25 0 0 0 1.768 0l3.646-3.646a.75.75 0 0 0-1.06-1.06L12 13.042" clip-rule="evenodd"></path>
+              </svg>
+              Discover more
+            </button>
+          </div>
+        </div>
+
+        <!-- Links Grid -->
+        <ul class="flex p-0 list-none flex-col gap-8 md:flex-row">
+          <li class="md:basis-full">
+            <h2 class="text-base font-bold mb-2 font-title">The Crew</h2>
+            <ul class="flex list-none flex-col p-0 gap-0">
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Our Crew</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Ship's Gazette</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Our Plunder</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Our Tortuga Store</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Join the Crew!</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Scallywag Reviews</a></li>
+              <li>
+                <!-- ANTI-PATTERN (BP): External links without rel="noopener" -->
+                <div class="flex flex-wrap items-center gap-1 pt-2">
+                  <a href="https://instagram.com" target="_blank" class="hover:opacity-70"><img src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/instagram-light.svg" alt="Instagram" class="w-5 h-5"></a>
+                  <a href="https://tiktok.com" target="_blank" class="hover:opacity-70"><img src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/tiktok-light.svg" alt="TikTok" class="w-5 h-5"></a>
+                  <a href="https://youtube.com" target="_blank" class="hover:opacity-70"><img src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/youtube-light.svg" alt="YouTube" class="w-5 h-5"></a>
+                  <a href="https://linkedin.com" target="_blank" class="hover:opacity-70"><img src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/linkedin-light.svg" alt="LinkedIn" class="w-5 h-5"></a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="md:basis-full">
+            <h2 class="text-base font-bold mb-1 font-title">Mayday</h2>
+            <ul class="flex list-none flex-col p-0 gap-0">
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Send a Bottle</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Crow's Nest</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Cargo Delivery</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Walk the Plank Policy</a></li>
+            </ul>
+          </li>
+          <li class="md:basis-full">
+            <h2 class="text-base font-bold mb-1 font-title">Ship Services</h2>
+            <ul class="flex list-none flex-col p-0 gap-0">
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">1-Year Treasure Guard</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Hull Protection</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Swap Yer Loot</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Pirate Program</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Merchants: Join the Fleet</a></li>
+              <li>
+                <a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Doubloons 100% Secured</a>
+                <div class="flex flex-wrap items-center gap-1 pt-2">
+                  <span class="text-xs bg-white px-2 py-1 rounded border border-bm-border">Visa</span>
+                  <span class="text-xs bg-white px-2 py-1 rounded border border-bm-border">MC</span>
+                  <span class="text-xs bg-white px-2 py-1 rounded border border-bm-border">Amex</span>
+                  <span class="text-xs bg-white px-2 py-1 rounded border border-bm-border">PayPal</span>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="md:basis-full">
+            <h2 class="text-base font-bold mb-1 font-title">Treasure Maps</h2>
+            <ul class="flex list-none flex-col p-0 gap-0">
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Loot Vouchers</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Captain's Log</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Compare Booty</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Loot Ideas</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Black Flag Friday</a></li>
+              <!-- ANTI-PATTERN (SEO): Generic link text -->
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Click here</a> for special offers</li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Read more</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Learn more</a></li>
+            </ul>
+          </li>
+          <li class="md:basis-full">
+            <h2 class="text-base font-bold mb-1 font-title">The Pirate Code</h2>
+            <ul class="flex list-none flex-col p-0 gap-0">
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">The Code of the Brethren</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Barter Terms</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Ship's Biscuits</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Secrecy Oath</a></li>
+              <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary hover:underline">Report Mutiny</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <hr class="border-bm-border my-5">
+
+        <!-- Bottom Section -->
+        <div class="flex flex-col items-center justify-between gap-3 pt-5 lg:flex-row">
+          <div><span aria-label="copyright" role="img"> © </span> 2026 BlackMarket</div>
+          <div class="flex gap-0 items-center">
+            <a href="#" class="block"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" class="h-12"></a>
+            <a href="#" class="block"><img src="https://www.nicepng.com/png/detail/343-3436311_get-airit-chat-app-on-ios-app-store.png" class="h-12"></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts (blocking, no async/defer) -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
