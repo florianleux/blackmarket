@@ -1,3 +1,27 @@
+/* === Skyscraper ads spacing === */
+:root {
+  --ad-mx: 58px;
+  /* horizontal margin of each ad */
+  --ad-my: 150px;
+  /* vertical margin of each ad */
+}
+
+.sidebar-promo {
+  margin: var(--ad-my) var(--ad-mx);
+}
+
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* hide on viewports too narrow for side columns */
+@media (max-width: 1200px) {
+  .sidebar-column {
+    display: none !important;
+  }
+}
+
 /* Custom fonts - Using Kings from Google Fonts */
 
 /* Custom pirate cursors */
@@ -31,7 +55,12 @@ body {
   color: #0d0d0d;
 }
 
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .font-title {
   font-family: 'New Rocker', cursive;
 }
@@ -67,7 +96,8 @@ a:hover {
 
 /* ANTI-PATTERN #1: Low contrast text (fails WCAG 4.5:1 ratio) */
 .low-contrast {
-  color: #b0b0b0 !important; /* ~2.5:1 ratio on white */
+  color: #b0b0b0 !important;
+  /* ~2.5:1 ratio on white */
 }
 
 /* ANTI-PATTERN #2: Remove all focus indicators */
@@ -92,51 +122,128 @@ a:hover {
 
 /* Blinking/Flashing Animations */
 @keyframes blink-fast {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes blink-slow {
-  0%, 70% { opacity: 1; }
-  71%, 100% { opacity: 0.3; }
+
+  0%,
+  70% {
+    opacity: 1;
+  }
+
+  71%,
+  100% {
+    opacity: 0.3;
+  }
 }
 
 @keyframes rainbow-text {
-  0% { color: #ff0000; }
-  15% { color: #ff8800; }
-  30% { color: #ffff00; }
-  45% { color: #00ff00; }
-  60% { color: #0088ff; }
-  75% { color: #8800ff; }
-  90% { color: #ff00ff; }
-  100% { color: #ff0000; }
+  0% {
+    color: #ff0000;
+  }
+
+  15% {
+    color: #ff8800;
+  }
+
+  30% {
+    color: #ffff00;
+  }
+
+  45% {
+    color: #00ff00;
+  }
+
+  60% {
+    color: #0088ff;
+  }
+
+  75% {
+    color: #8800ff;
+  }
+
+  90% {
+    color: #ff00ff;
+  }
+
+  100% {
+    color: #ff0000;
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 5px #ff0, 0 0 10px #ff0, 0 0 15px #ff0;
   }
+
   50% {
     box-shadow: 0 0 10px #f0f, 0 0 20px #f0f, 0 0 30px #f0f;
   }
 }
 
 @keyframes shake-popup {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-  20%, 40%, 60%, 80% { transform: translateX(2px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
 }
 
 @keyframes bounce-icon {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.2) rotate(-10deg); }
-  50% { transform: scale(1) rotate(0deg); }
-  75% { transform: scale(1.2) rotate(10deg); }
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  25% {
+    transform: scale(1.2) rotate(-10deg);
+  }
+
+  50% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  75% {
+    transform: scale(1.2) rotate(10deg);
+  }
 }
 
 @keyframes marquee-scroll {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 /* Utility Classes */
@@ -206,7 +313,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
   line-height: 1;
 }
 
@@ -224,7 +331,7 @@ a:hover {
   box-shadow:
     inset 1px 1px 0 #ffffff,
     inset -1px -1px 0 #666666,
-    2px 2px 4px rgba(0,0,0,0.3);
+    2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .btn-beveled:active {
@@ -243,10 +350,8 @@ a:hover {
   font-size: 10px;
   padding: 12px 8px;
   text-align: center;
-  clip-path: polygon(
-    50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
-    50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
-  );
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
+      50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
   transform: rotate(-15deg);
   animation: pulse-glow 1s infinite;
 }
@@ -259,14 +364,12 @@ a:hover {
 
 /* Metallic/Chrome effect */
 .metallic-bg {
-  background: linear-gradient(
-    180deg,
-    #e8e8e8 0%,
-    #ffffff 10%,
-    #c0c0c0 25%,
-    #a0a0a0 50%,
-    #c0c0c0 75%,
-    #ffffff 90%,
-    #e8e8e8 100%
-  );
+  background: linear-gradient(180deg,
+      #e8e8e8 0%,
+      #ffffff 10%,
+      #c0c0c0 25%,
+      #a0a0a0 50%,
+      #c0c0c0 75%,
+      #ffffff 90%,
+      #e8e8e8 100%);
 }

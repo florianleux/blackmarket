@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-full px-2 sm:px-6 grow lg:max-w-[1184px] mx-auto py-1">
+  <div class="py-1 mx-[5%]">
     <div class="flex flex-wrap items-center justify-between gap-4">
       <div class="flex flex-wrap items-center gap-2">
         <!-- ANTI-PATTERN (A11y): Invalid role="dropdown" - not a valid ARIA role -->

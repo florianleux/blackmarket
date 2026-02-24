@@ -4,7 +4,7 @@
     <div class="group relative flex h-full flex-col pt-4 md:pt-10">
       <div class="p-4 pt-0">
         <div class="flex">
-          <div class="flex gap-2 max-w-full grow flex-wrap content-start justify-center">
+          <div class="flex flex-col gap-2 max-w-full grow items-center">
             <!-- Image + Colors -->
             <div class="flex flex-col items-center justify-center gap-1 w-[128px]">
               <!-- ANTI-PATTERN #2: No lazy loading (eager) -->
@@ -123,14 +123,6 @@
             </div>
           </div>
         </div>
-        <!-- ANTI-PATTERN (A11y): aria-expanded="yes" is invalid, should be "true" or "false" -->
-        <button
-          :aria-expanded="invalidAriaExpanded"
-          class="mt-2 text-xs text-text-muted underline cursor-pointer"
-          @click="showDetails = !showDetails"
-        >
-          {{ showDetails ? 'Hide details' : 'Show details' }}
-        </button>
         <div
           v-if="showDetails"
           class="mt-2 text-xs text-text-muted"
