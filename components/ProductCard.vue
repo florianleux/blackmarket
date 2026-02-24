@@ -5,14 +5,14 @@
         <div class="flex">
           <div class="flex flex-row sm:flex-col gap-4 sm:gap-2 max-w-full grow items-center">
             <!-- Image + Colors -->
-            <div class="flex flex-col items-center justify-center gap-1 w-[100px] sm:w-[128px] shrink-0">
+            <div class="flex flex-col items-center justify-center gap-1 w-[100px] sm:w-[180px] shrink-0">
               <img
                 :src="product.image"
                 :alt="product.name"
                 class="h-auto max-h-full max-w-full leading-none"
                 loading="lazy"
-                width="128"
-                height="128"
+                width="180"
+                height="180"
               />
               <!-- Variant dots -->
               <ul
