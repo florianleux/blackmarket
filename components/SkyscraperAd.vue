@@ -5,6 +5,9 @@
     style="width: 160px; min-height: 280px;"
     :style="config.bgStyle"
   >
+    <!-- Ad label (AdSense style) -->
+    <div class="absolute top-0 left-0 text-[10px] text-gray-400 px-1 leading-normal">Ad</div>
+
     <!-- Starburst badge -->
     <div
       v-if="config.starburstText"
@@ -14,10 +17,13 @@
       {{ config.starburstText }}
     </div>
 
-    <div class="px-2 py-4">
-      <!-- Title at top, bold, fills width -->
+    <div
+      class="flex flex-col items-center justify-between h-full px-2 py-6"
+      :class="{ 'pb-10': marqueeText }"
+    >
+      <!-- Title -->
       <div
-        class="text-[15px] font-bold leading-tight mb-4 uppercase"
+        class="text-[15px] font-bold leading-tight uppercase"
         :class="config.titleClass"
       >
         {{ title }}
@@ -25,14 +31,14 @@
 
       <!-- Large icon -->
       <div
-        class="text-6xl mb-4"
+        class="text-7xl"
         :class="config.iconClass"
       >{{ icon }}</div>
 
       <!-- Subtitle -->
       <p
         v-if="subtitle"
-        class="text-[11px] mb-3 leading-snug"
+        class="text-[20px] leading-snug"
         :class="config.subtitleClass"
       >
         {{ subtitle }}
@@ -41,7 +47,7 @@
       <!-- Highlight -->
       <p
         v-if="highlight"
-        class="text-[13px] font-bold mb-4"
+        class="text-[14px] font-bold"
         :class="config.highlightClass"
       >
         {{ highlight }}
@@ -49,13 +55,13 @@
 
       <!-- Arrow -->
       <div
-        class="animate-blink-slow text-xl mb-3"
+        class="animate-blink-slow text-2xl"
         :class="config.arrowClass"
       >▼</div>
 
       <!-- CTA Button -->
       <button
-        class="w-full px-2 py-2.5 font-bold text-[13px] btn-beveled uppercase"
+        class="w-full px-2 py-3 font-bold text-[14px] btn-beveled uppercase"
         :class="config.buttonClass"
       >
         {{ buttonText }}
@@ -64,7 +70,7 @@
       <!-- Small print -->
       <p
         v-if="config.smallPrint"
-        class="text-[8px] mt-3"
+        class="text-[9px]"
         :class="config.smallPrintClass"
       >
         {{ config.smallPrint }}
