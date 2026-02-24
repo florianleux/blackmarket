@@ -1,20 +1,16 @@
 <template>
   <div class="min-h-screen bg-white">
-    <TheHeader />
-
-    <!-- Container for spam banners (CLS anti-pattern) -->
-    <div id="banner-container"></div>
-
     <BreadcrumbNav :items="breadcrumbs" />
 
-    <PromoBanner />
+    <!-- ANTI-PATTERN (CLS): PromoBanner loads with delay, no space reserved -->
+    <PromoBanner v-if="showPromoBanner" />
 
     <PageHero />
 
     <FilterBar />
 
     <!-- Product section -->
-    <div class="max-w-full grow lg:max-w-[1184px] mx-auto py-6">
+    <div class="max-w-full grow py-6 mx-[5%]">
       <!-- First batch of products with trade-in card -->
       <ProductGrid :products="firstProducts">
         <template #first-card>
@@ -31,6 +27,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
 const { getAllProducts } = useProducts()
 
 const products = getAllProducts()
@@ -42,4 +40,13 @@ const breadcrumbs = [
   { label: 'Pirate Gear' },
   { label: 'All Products' },
 ]
+
+// ANTI-PATTERN (CLS): Simulate deferred ad loading - no space reserved
+const showPromoBanner = ref(false)
+onMounted(() => {
+  const delay = Math.floor(Math.random() * (1500 - 800)) + 800
+  setTimeout(() => {
+    showPromoBanner.value = true
+  }, delay)
+})
 </script>

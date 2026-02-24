@@ -13,111 +13,6 @@
       >
     </audio>
 
-    <!-- ANTI-PATTERN #9: Annoying download toolbar popup -->
-    <SpamPopup
-      v-model="showModal"
-      position="center"
-      :show-overlay="false"
-      :z-index="10006"
-      icon="🏴‍☠️"
-      title="DOWNLOAD PIRATE TOOLBAR!!!"
-      subtitle="Includes FREE cursors, wallpapers & sounds!!!"
-      button-text="📥 DOWNLOAD NOW - IT'S FREE!!! 📥"
-      dismiss-text="No thanks, I hate free stuff"
-      theme="download"
-      marquee-text="📥 100% FREE!!! 📥 NO SPYWARE!!! 📥 TRUSTED BY MILLIONS!!! 📥 DOWNLOAD NOW!!! 📥 100% FREE!!!"
-    />
-
-    <!-- PIRATE SPAM POPUPS (2000s style!!!) -->
-    <SpamPopup
-      v-model="showPiratePopup1"
-      position="bottom-left"
-      :rotation="2"
-      :z-index="10000"
-      mobile-top="35%"
-      icon="💰"
-      title="ARRR!!! YE FOUND TREASURE!!!"
-      subtitle="Ye be the 1,000,000th pirate visitor!!!"
-      highlight=">>> FREE 10,000 DOUBLOONS <<<"
-      input-placeholder=">>> Enter Credit Card to CLAIM!!! <<<"
-      button-text="🎁 CLAIM NOW!!! 🎁"
-      theme="treasure"
-    />
-
-    <SpamPopup
-      v-model="showPiratePopup2"
-      position="bottom-right"
-      :rotation="-3"
-      :z-index="10001"
-      mobile-top="43%"
-      icon="☠️"
-      title="CAPTAIN'S WARNING!!!"
-      subtitle="47 DANGEROUS BARNACLES detected on yer ship!!!"
-      highlight="☎️ CALL NOW: 1-800-SCURVY ☎️"
-      button-text="🛡️ FIX NOW ($299) 🛡️"
-      theme="warning"
-    />
-
-    <SpamPopup
-      v-model="showPiratePopup3"
-      position="center-left"
-      :rotation="3"
-      :z-index="10002"
-      mobile-top="51%"
-      icon="🦜"
-      title="JOIN THE CREW!!!"
-      subtitle="Subscribe to &quot;The Daily Plunder&quot; - 100% FREE!!!"
-      input-placeholder=">>> yer-email@sevenseas.com <<<"
-      input-type="email"
-      button-text="📧 SUBSCRIBE FREE!!! 📧"
-      theme="newsletter"
-    />
-
-    <SpamPopup
-      v-model="showPiratePopup4"
-      position="top-left"
-      :rotation="-2"
-      :z-index="10003"
-      mobile-top="59%"
-      icon="🎡"
-      title="SPIN TO WIN!!!"
-      subtitle="100% GUARANTEED to win 1 MILLION doubloons!!!"
-      button-text="🎯 SPIN NOW - FREE!!! 🎯"
-      theme="wheel"
-    />
-
-    <SpamPopup
-      v-model="showPiratePopup5"
-      position="top-right"
-      :rotation="2"
-      :z-index="10004"
-      mobile-top="67%"
-      icon="💬"
-      title="PIRATE WANTS TO CHAT!!!"
-      button-text="💬 CHAT NOW!!! 💬"
-      dismiss-text="Leave me alone, scallywag"
-      theme="chat"
-    >
-      <div class="bg-white/90 p-1 rounded mb-1 text-left border border-blue-300">
-        <p class="text-blue-600 text-xs font-comic">🏴‍☠️ Blackbeard: Ahoy matey!!!</p>
-        <p class="text-blue-600 text-xs font-comic">🏴‍☠️ Blackbeard: Need help finding treasure?</p>
-      </div>
-    </SpamPopup>
-
-    <SpamPopup
-      v-model="showPiratePopup6"
-      position="center-right"
-      :rotation="-2"
-      :z-index="10005"
-      mobile-top="75%"
-      icon="🍪"
-      title="COOKIE NOTICE"
-      subtitle="We use cookies to track ye across the seven seas!!!"
-      button-text="🍪 Accept All Cookies 🍪"
-      dismiss-text="Walk the plank (reject)"
-      theme="cookie"
-    />
-
     <!-- ANTI-PATTERN (BP): Multiple third-party resources that may set cookies -->
     <!-- YouTube embed (sets YouTube cookies) -->
     <iframe
@@ -198,7 +93,62 @@
       class="fixed bottom-0 right-10 w-3 h-3 text-[5px] opacity-10"
     >z</a>
 
-    <NuxtPage />
+    <!-- Full-width: Header + Banners above ads -->
+    <TheHeader />
+    <div id="banner-container"></div>
+
+    <!-- ANTI-PATTERN (CLS): Skyscraper ads in document flow - appear with delay, push content -->
+    <div class="flex">
+      <!-- Left ad column - hidden initially, appears with delay causing CLS -->
+      <aside
+        v-if="showLeftAds"
+        class="sidebar-column shrink-0"
+      >
+        <SkyscraperAd
+          theme="treasure"
+          icon="💰"
+          title="YE FOUND TREASURE!!!"
+          subtitle="1,000,000th visitor!!!"
+          highlight=">>> FREE DOUBLOONS <<<"
+          button-text="🎁 CLAIM!!! 🎁"
+        />
+        <SkyscraperAd
+          theme="warning"
+          icon="☠️"
+          title="CAPTAIN'S WARNING!!!"
+          subtitle="47 BARNACLES detected!!!"
+          highlight="☎️ 1-800-SCURVY ☎️"
+          button-text="🛡️ FIX NOW 🛡️"
+        />
+      </aside>
+
+      <!-- Main content -->
+      <div class="flex-1 min-w-0">
+        <NuxtPage />
+      </div>
+
+      <!-- Right ad column - hidden initially, appears with delay causing CLS -->
+      <aside
+        v-if="showRightAds"
+        class="sidebar-column shrink-0"
+      >
+        <SkyscraperAd
+          theme="wheel"
+          icon="🎡"
+          title="SPIN TO WIN!!!"
+          subtitle="WIN 1 MILLION!!!"
+          button-text="🎯 SPIN NOW!!! 🎯"
+        />
+        <SkyscraperAd
+          theme="download"
+          icon="🏴‍☠️"
+          title="PIRATE TOOLBAR!!!"
+          subtitle="FREE cursors & sounds!!!"
+          button-text="📥 DOWNLOAD!!! 📥"
+          marquee-text="📥 FREE!!! 📥 NO SPYWARE!!! 📥"
+        />
+      </aside>
+    </div>
   </div>
 </template>
 
@@ -232,38 +182,16 @@ let scrollHandler: ((e: Event) => void) | null = null
 let touchHandler: ((e: Event) => void) | null = null
 const pasteHandlers: { element: Element, handler: (e: Event) => void }[] = []
 
-// ANTI-PATTERN #9: Keyboard trap - modal that traps focus
-const showModal = ref(false)
+// ANTI-PATTERN (CLS): Skyscraper ad columns - appear in flow with delay, causing layout shift
+const showLeftAds = ref(false)
+const showRightAds = ref(false)
 
-// ANTI-PATTERN: Annoying pirate-themed spam popups
-const showPiratePopup1 = ref(false)
-const showPiratePopup2 = ref(false)
-const showPiratePopup3 = ref(false)
-const showPiratePopup4 = ref(false)
-const showPiratePopup5 = ref(false)
-const showPiratePopup6 = ref(false)
-
-// Keyboard shortcuts: L to close popups, J to close banners
+// Keyboard shortcuts: L to close ads, J to close banners
 let keyHandler: ((e: KeyboardEvent) => void) | null = null
 
 const closePopupsSequentially = () => {
-  const popups = [
-    { ref: showModal, value: showModal.value },
-    { ref: showPiratePopup1, value: showPiratePopup1.value },
-    { ref: showPiratePopup2, value: showPiratePopup2.value },
-    { ref: showPiratePopup3, value: showPiratePopup3.value },
-    { ref: showPiratePopup4, value: showPiratePopup4.value },
-    { ref: showPiratePopup5, value: showPiratePopup5.value },
-    { ref: showPiratePopup6, value: showPiratePopup6.value },
-  ]
-
-  // Find open popups and close them one by one
-  const openPopups = popups.filter(p => p.ref.value)
-  openPopups.forEach((popup, index) => {
-    timeoutIds.push(setTimeout(() => {
-      popup.ref.value = false
-    }, index * 200))
-  })
+  showLeftAds.value = false
+  showRightAds.value = false
 }
 
 const closeBannersSequentially = () => {
@@ -343,40 +271,16 @@ onMounted(() => {
   // Random delay helper (between min and max ms)
   const randomDelay = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min
 
-  // First popup - quick appearance
+  // ANTI-PATTERN (CLS): Skyscraper ad columns appear in flow with staggered delays
+  // Left column appears first - pushes content right
   timeoutIds.push(setTimeout(() => {
-    showModal.value = true
-  }, 300))
+    showLeftAds.value = true
+  }, randomDelay(500, 1000)))
 
-  // Pirate popup 1
+  // Right column appears second - pushes content left
   timeoutIds.push(setTimeout(() => {
-    showPiratePopup1.value = true
-  }, 600))
-
-  // Pirate popup 2
-  timeoutIds.push(setTimeout(() => {
-    showPiratePopup2.value = true
-  }, 900))
-
-  // Pirate popup 3
-  timeoutIds.push(setTimeout(() => {
-    showPiratePopup3.value = true
-  }, 1200))
-
-  // Pirate popup 4
-  timeoutIds.push(setTimeout(() => {
-    showPiratePopup4.value = true
-  }, 1500))
-
-  // Pirate popup 5
-  timeoutIds.push(setTimeout(() => {
-    showPiratePopup5.value = true
-  }, 1800))
-
-  // Pirate popup 6 (cookie)
-  timeoutIds.push(setTimeout(() => {
-    showPiratePopup6.value = true
-  }, 2100))
+    showRightAds.value = true
+  }, randomDelay(1200, 2000)))
 
   // ========== BEST PRACTICES ANTI-PATTERNS ==========
 
@@ -567,6 +471,7 @@ onUnmounted(() => {
 
   // Reset body styles modified by anti-patterns
   document.body.style.fontSize = ''
+
 })
 </script>
 

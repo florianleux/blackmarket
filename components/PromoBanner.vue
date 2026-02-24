@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="mx-auto px-4 md:px-6 max-w-full grow lg:max-w-[1184px] relative rounded-sm overflow-hidden my-6 bg-gradient-to-r bg-[#E2F87F]"
-  >
+  <div class="relative rounded-sm overflow-hidden my-6 bg-gradient-to-r bg-[#E2F87F] mx-[5%]">
     <div class=" flex items-center justify-between p-8">
       <div>
         <!-- ANTI-PATTERN (SEO): Multiple h1 tags on page -->
