@@ -1,19 +1,16 @@
 <template>
-  <!-- ANTI-PATTERN #7: Using GSAP (loaded sync in head) for simple hover animations that CSS could handle -->
   <div class="product-card bg-white shadow-sm rounded-lg h-full transition-all duration-200">
-    <div class="group relative flex h-full flex-col pt-4 md:pt-10">
+    <div class="group relative flex h-full flex-col pt-4 sm:pt-10">
       <div class="p-4 pt-0">
         <div class="flex">
-          <div class="flex flex-col gap-2 max-w-full grow items-center">
+          <div class="flex flex-row sm:flex-col gap-4 sm:gap-2 max-w-full grow items-center">
             <!-- Image + Colors -->
-            <div class="flex flex-col items-center justify-center gap-1 w-[128px]">
-              <!-- ANTI-PATTERN #2: No lazy loading (eager) -->
-              <!-- ANTI-PATTERN (BP): Incorrect aspect ratio - distorted width/height -->
-              <!-- ANTI-PATTERN (A11y): Missing alt attribute entirely -->
+            <div class="flex flex-col items-center justify-center gap-1 w-[100px] sm:w-[128px] shrink-0">
               <img
                 :src="product.image"
+                :alt="product.name"
                 class="h-auto max-h-full max-w-full leading-none"
-                loading="eager"
+                loading="lazy"
                 width="128"
                 height="128"
               />
@@ -46,7 +43,7 @@
             </div>
 
             <!-- Product info -->
-            <div class="flex min-w-0 mt-2 grow basis-[140px] flex-col items-start">
+            <div class="flex min-w-0 mt-0 sm:mt-2 grow basis-auto sm:basis-[140px] flex-col items-start">
               <!-- Title -->
               <div class="flex flex-col">
                 <div>
@@ -143,9 +140,6 @@ const props = defineProps<{
 }>()
 
 const showDetails = ref(false)
-
-// ANTI-PATTERN: Invalid aria-expanded value ("yes" instead of "true"/"false")
-const invalidAriaExpanded = 'yes' as unknown as boolean
 
 // Simple relative time based on product ID (no external library needed)
 const postedAgo = computed(() => {

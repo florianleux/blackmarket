@@ -92,29 +92,11 @@ a:hover {
   overflow: hidden;
 }
 
-/* ========== ACCESSIBILITY ANTI-PATTERNS ========== */
-
-/* ANTI-PATTERN #1: Low contrast text (fails WCAG 4.5:1 ratio) */
 .low-contrast {
-  color: #b0b0b0 !important;
-  /* ~2.5:1 ratio on white */
-}
-
-/* ANTI-PATTERN #2: Remove all focus indicators */
-*:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-*:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
+  color: #595959 !important;
 }
 
 /* ========== 2000s SPAM POPUP AESTHETIC ========== */
-
-/* Comic Sans for that authentic 2000s feel */
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
 
 .font-comic {
   font-family: 'Comic Neue', 'Comic Sans MS', cursive !important;
