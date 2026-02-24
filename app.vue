@@ -509,10 +509,6 @@ onMounted(() => {
     insertBanner(createBanner('#17a2b8', '🦜 NEW: Trained parrots now speak 5 languages!', 'See parrots'))
   }, randomDelay(500, 1200)))
 
-  timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#6f42c1', '⭐ VIP Members: Double doubloons on all purchases today!', 'Join VIP'))
-  }, randomDelay(700, 1500)))
-
   // ANTI-PATTERN (CLS): Dynamic font size change causing reflow
   timeoutIds.push(setTimeout(() => {
     document.body.style.fontSize = '24px'
@@ -521,23 +517,6 @@ onMounted(() => {
     }, 200)
     timeoutIds.push(nestedId)
   }, 1000))
-
-  // ANTI-PATTERN (CLS): Even more late-injected banners causing major layout shifts (erratic timing)
-  timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#dc3545', '⚠️ URGENT: Only 3 Golden Hooks left in stock!', 'Buy now'))
-  }, randomDelay(800, 1800)))
-
-  timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#333', '🍪 We use cookies to track ye across the seven seas.', 'Accept'))
-  }, randomDelay(1000, 2200)))
-
-  timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('linear-gradient(90deg, #667eea, #764ba2)', '🎉 NEW ARRIVALS: Enchanted Compasses now available!', 'Explore'))
-  }, randomDelay(1200, 2600)))
-
-  timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#fd7e14', '⏰ LAST CHANCE: Treasure Map sale ends in 2 hours!', 'Shop now'))
-  }, randomDelay(1400, 3000)))
 
   // ANTI-PATTERN (CLS): Dynamically resize existing elements
   timeoutIds.push(setTimeout(() => {

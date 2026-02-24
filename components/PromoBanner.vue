@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mx-6 max-w-full grow lg:max-w-[1184px] relative rounded-sm overflow-hidden my-6 bg-gradient-to-r bg-[#E2F87F]"
+    class="mx-auto px-4 md:px-6 max-w-full grow lg:max-w-[1184px] relative rounded-sm overflow-hidden my-6 bg-gradient-to-r bg-[#E2F87F]"
   >
     <div class=" flex items-center justify-between p-8">
       <div>
