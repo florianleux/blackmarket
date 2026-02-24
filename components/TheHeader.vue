@@ -26,26 +26,24 @@
       class="px-2 sm:px-6 max-w-full grow lg:max-w-[1184px] mx-auto py-1 flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-between gap-2 sm:gap-6"
     >
       <!-- Logo -->
-      <!-- ANTI-PATTERN (SEO): Generic alt text -->
       <div
         class="flex items-center gap-2 cursor-pointer shrink-0 w-full sm:w-auto justify-center sm:justify-start mt-3 sm:mt-0"
       >
         <img
           src="/images/logo.webp"
           class="h-8"
-          alt="image"
+          alt="BlackMarket logo"
         />
         <span class="text-3xl font-bold text-text-primary font-title">BlackMarket</span>
       </div>
 
       <!-- Search bar -->
-      <!-- ANTI-PATTERN #3: Input without associated label -->
       <div
         class="w-full sm:w-auto sm:flex-1 max-w-xl flex items-center bg-bm-bg-alt border border-white rounded-full hover:bg-gray-300 transition-colors px-4 py-2.5"
       >
-        <!-- ANTI-PATTERN #4: Empty button (icon only, no accessible name) -->
-        <div
+        <button
           class="cursor-pointer mr-2"
+          aria-label="Search"
           @click="search"
         >
           <svg
@@ -63,17 +61,16 @@
             />
             <path d="m21 21-4.35-4.35" />
           </svg>
-        </div>
+        </button>
         <input
+          aria-label="Search"
           class="flex-1 bg-transparent border-none text-text-primary text-base outline-none placeholder:text-text-muted"
           placeholder="What are you looking for?"
         />
       </div>
 
-      <!-- Actions - ANTI-PATTERN: Using divs with role="button" instead of proper buttons -->
       <div class="hidden sm:flex items-center gap-4">
-        <div
-          role="button"
+        <button
           class="px-2 py-2 cursor-pointer rounded-md flex gap-2 items-center border border-black text-text-primary text-base font-medium hover:bg-bm-bg-alt transition-colors"
         >
           <svg
@@ -90,31 +87,26 @@
             />
           </svg>
           <span class="text-black">Trade-In</span>
-        </div>
-        <!-- ANTI-PATTERN #1: Low contrast text -->
-        <div
-          role="button"
+        </button>
+        <button
           class="cursor-pointer font-extrabold low-contrast text-base hover:text-text-primary transition-colors"
         >
           Need help?
-        </div>
-        <div
-          role="button"
+        </button>
+        <button
           class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors"
         >
           Account
-        </div>
-        <div
-          role="button"
+        </button>
+        <button
           class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors"
         >
           Cart
-        </div>
+        </button>
       </div>
     </div>
 
     <!-- Category nav -->
-    <!-- ANTI-PATTERN (SEO): Uncrawlable anchors - href="javascript:void(0)" instead of real URLs -->
     <div class="px-2 sm:px-6 border-t border-bm-border-light">
       <div
         class="px-2 sm:px-12 max-w-full grow lg:max-w-[1184px] mx-auto py-1 flex items-center gap-3 sm:gap-6 overflow-x-auto scrollbar-hide"
@@ -122,10 +114,10 @@
         <a
           v-for="category in categories"
           :key="category.id"
-          href="javascript:void(0)"
+          href="#"
           class="category-link text-base cursor-pointer whitespace-nowrap text-text-primary hover:text-text-primary no-underline"
           :class="{ 'active': category.id === activeCategory }"
-          @click="navigateToCategory(category.id)"
+          @click.prevent="navigateToCategory(category.id)"
           @mouseenter="hoveredCategory = category.id"
           @mouseleave="hoveredCategory = null"
         >
@@ -154,7 +146,6 @@ const search = () => {
   console.log('Search clicked')
 }
 
-// ANTI-PATTERN (SEO): JS-only navigation instead of proper links
 const navigateToCategory = (categoryId: string) => {
   activeCategory.value = categoryId
   console.log('Navigate to category:', categoryId)
