@@ -142,54 +142,6 @@
       "reviews": 98,
       "condition": "Good",
       "variants": ["silver", "bronze"]
-    },
-    {
-      "id": "pegleg-oak-1",
-      "name": "Oak Peg Leg",
-      "category": "peglegs",
-      "price": 199.99,
-      "description": "Hand-carved solid oak, very resistant.",
-      "image": "/images/products/pegleg-oak.png",
-      "rating": 4.6,
-      "reviews": 78,
-      "condition": "Like New",
-      "variants": ["oak", "brown"]
-    },
-    {
-      "id": "hat-bandana-1",
-      "name": "Red Pirate Bandana",
-      "category": "hats",
-      "price": 14.99,
-      "description": "100% cotton, perfect for hot days.",
-      "image": "/images/products/hat-bandana.png",
-      "rating": 4.3,
-      "reviews": 289,
-      "condition": "Like New",
-      "variants": ["red", "black", "blue"]
-    },
-    {
-      "id": "map-caribbean-1",
-      "name": "Ancient Caribbean Map",
-      "category": "maps",
-      "price": 49.99,
-      "description": "Authentic reproduction of a 17th century map.",
-      "image": "/images/products/map-caribbean.png",
-      "rating": 4.4,
-      "reviews": 112,
-      "condition": "Good",
-      "variants": []
-    },
-    {
-      "id": "map-world-1",
-      "name": "Navigator's World Map",
-      "category": "maps",
-      "price": 79.99,
-      "description": "All maritime routes of the known world.",
-      "image": "/images/products/map-world.png",
-      "rating": 4.6,
-      "reviews": 89,
-      "condition": "Good",
-      "variants": []
     }
   ],
   "categories": [
