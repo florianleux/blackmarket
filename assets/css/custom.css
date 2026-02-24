@@ -2,12 +2,12 @@
 :root {
   --ad-mx: 58px;
   /* horizontal margin of each ad */
-  --ad-my: 150px;
+  --ad-mb: 150px;
   /* vertical margin of each ad */
 }
 
 .sidebar-promo {
-  margin: var(--ad-my) var(--ad-mx);
+  margin: 25px var(--ad-mx) var(--ad-mb) var(--ad-mx);
 }
 
 .sidebar-column {

@@ -23,7 +23,7 @@
     >
       <!-- Title -->
       <div
-        class="text-[15px] font-bold leading-tight uppercase"
+        class="text-[25px] font-bold leading-tight uppercase"
         :class="config.titleClass"
       >
         {{ title }}
@@ -70,7 +70,7 @@
       <!-- Small print -->
       <p
         v-if="config.smallPrint"
-        class="text-[9px]"
+        class="text-[15px]"
         :class="config.smallPrintClass"
       >
         {{ config.smallPrint }}
@@ -83,7 +83,7 @@
       class="absolute bottom-0 left-0 right-0 py-1 overflow-hidden"
       :style="marqueeStyle"
     >
-      <div class="animate-marquee whitespace-nowrap text-[9px] font-bold">
+      <div class="animate-marquee whitespace-nowrap text-[15px] font-bold">
         {{ marqueeText }}
       </div>
     </div>
@@ -99,7 +99,7 @@ const props = defineProps<{
   subtitle?: string
   highlight?: string
   buttonText: string
-  theme: 'treasure' | 'warning' | 'wheel' | 'download'
+  theme: 'treasure' | 'warning' | 'wheel' | 'download' | 'newsletter' | 'chat'
   marqueeText?: string
 }>()
 
@@ -176,6 +176,34 @@ const config = computed((): ThemeConfig => {
       smallPrint: '✓ No spyware ✓ 100% Free',
       smallPrintClass: 'text-green-700',
     },
+    newsletter: {
+      borderClass: 'border-blue-400',
+      bgStyle: 'background: linear-gradient(180deg, #1e3a8a 0%, #581c87 50%, #1e3a8a 100%);',
+      starburstText: 'NEW!',
+      starburstStyle: 'background: #3b82f6; color: #ffffff;',
+      iconClass: 'animate-bounce-icon',
+      titleClass: 'text-blue-300 animate-blink-slow',
+      subtitleClass: 'text-purple-200',
+      highlightClass: 'text-blue-300 animate-glow',
+      arrowClass: 'text-blue-400',
+      buttonClass: 'bg-blue-500 text-white hover:bg-blue-400',
+      smallPrint: '📧 Unsubscribe? NEVER! 📧',
+      smallPrintClass: 'text-blue-200/60',
+    },
+    chat: {
+      borderClass: 'border-purple-400',
+      bgStyle: 'background: linear-gradient(180deg, #6b21a8 0%, #831847 50%, #6b21a8 100%);',
+      starburstText: 'LIVE!',
+      starburstStyle: 'background: #e11d48; color: #ffffff;',
+      iconClass: 'animate-bounce-icon',
+      titleClass: 'text-purple-300 animate-rainbow',
+      subtitleClass: 'text-pink-200',
+      highlightClass: 'text-purple-300 animate-blink-fast',
+      arrowClass: 'text-purple-400',
+      buttonClass: 'bg-purple-500 text-white hover:bg-purple-400 animate-glow',
+      smallPrint: '🦜 Polly is typing...',
+      smallPrintClass: 'text-purple-200/60',
+    },
   }
   return themes[props.theme]
 })
@@ -186,6 +214,8 @@ const marqueeStyle = computed(() => {
     warning: 'background: linear-gradient(90deg, #ff0000, #ff6600, #ff0000); color: white;',
     wheel: 'background: #003300; color: #ffd700;',
     download: 'background: #0a246a; color: #ffff00;',
+    newsletter: 'background: #1e1b4b; color: #93c5fd;',
+    chat: 'background: #4a044e; color: #f0abfc;',
   }
   return styles[props.theme] || 'background: #333; color: white;'
 })
