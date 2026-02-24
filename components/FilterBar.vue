@@ -2,10 +2,8 @@
   <div class="py-1 mx-[5%]">
     <div class="flex flex-wrap items-center justify-between gap-4">
       <div class="flex flex-wrap items-center gap-2">
-        <!-- ANTI-PATTERN (A11y): Invalid role="dropdown" - not a valid ARIA role -->
-        <!-- Should be "menu", "listbox", or use native <select> -->
         <div
-          role="dropdown"
+          role="listbox"
           class="relative"
         >
           <button

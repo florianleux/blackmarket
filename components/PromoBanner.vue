@@ -2,10 +2,9 @@
   <div class="relative rounded-sm overflow-hidden my-6 bg-gradient-to-r bg-[#E2F87F] mx-[5%]">
     <div class=" flex items-center justify-between p-8">
       <div>
-        <!-- ANTI-PATTERN (SEO): Multiple h1 tags on page -->
-        <h1 class="text-3xl md:text-5xl font-bold text-black mb-2 font-title">
+        <h2 class="text-3xl md:text-5xl font-bold text-black mb-2 font-title">
           Mac <em>Hook</em> Pro
-        </h1>
+        </h2>
         <div class="text-black/90 text-base mb-1">
           Plundered once. Polished twice. Priced right.
         </div>

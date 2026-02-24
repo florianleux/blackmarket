@@ -2,7 +2,6 @@
   <div class="min-h-screen bg-white">
     <BreadcrumbNav :items="breadcrumbs" />
 
-    <!-- ANTI-PATTERN (CLS): PromoBanner loads with delay, no space reserved -->
     <PromoBanner v-if="showPromoBanner" />
 
     <PageHero />
@@ -10,7 +9,7 @@
     <FilterBar />
 
     <!-- Product section -->
-    <div class="max-w-full grow py-6 mx-[5%]">
+    <div class="max-w-full grow py-6 mx-2 sm:mx-[5%]">
       <!-- First batch of products with trade-in card -->
       <ProductGrid :products="firstProducts">
         <template #first-card>
@@ -41,7 +40,6 @@ const breadcrumbs = [
   { label: 'All Products' },
 ]
 
-// ANTI-PATTERN (CLS): Simulate deferred ad loading - no space reserved
 const showPromoBanner = ref(false)
 onMounted(() => {
   const delay = Math.floor(Math.random() * (1500 - 800)) + 800

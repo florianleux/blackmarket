@@ -11,9 +11,9 @@
         <div class="flex flex-col md:w-[60%]">
           <form class="flex gap-2">
             <div class="w-full relative">
-              <!-- ANTI-PATTERN: Input without label -->
               <input
                 type="email"
+                aria-label="Email address"
                 placeholder="yer-email@sevenseas.com"
                 class="w-full h-12 px-3 border border-bm-border rounded bg-white text-text-primary"
               />
@@ -51,7 +51,7 @@
         <li class="md:basis-full">
           <h2 class="text-base font-bold mb-2 font-title">The Crew</h2>
           <ul class="flex list-none flex-col p-0 gap-0">
-            <!-- ANTI-PATTERN (SEO): Generic link text -->
+
             <li><a
                 href="#"
                 class="text-xs text-text-secondary hover:text-text-primary hover:underline"
@@ -77,11 +77,11 @@
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
               >Scallywag Reviews</a></li>
             <li>
-              <!-- ANTI-PATTERN (BP): External links without rel="noopener" -->
               <div class="flex flex-wrap items-center gap-1 pt-2">
                 <a
                   href="https://instagram.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="hover:opacity-70"
                 ><img
                     src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/instagram-light.svg"
@@ -91,6 +91,7 @@
                 <a
                   href="https://tiktok.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="hover:opacity-70"
                 ><img
                     src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/tiktok-light.svg"
@@ -100,6 +101,7 @@
                 <a
                   href="https://youtube.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="hover:opacity-70"
                 ><img
                     src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/youtube-light.svg"
@@ -109,6 +111,7 @@
                 <a
                   href="https://linkedin.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="hover:opacity-70"
                 ><img
                     src="https://front-office.statics.backmarket.com/a3fb524610b7b41e32d1bed4941ad5239e190b4a/img/socials/linkedin-light.svg"
@@ -206,19 +209,18 @@
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
               >Black Flag Friday</a></li>
-            <!-- ANTI-PATTERN (SEO): Generic link text - "Click here", "Read more", "Learn more" -->
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Click here</a> for special offers</li>
+              >Special Pirate Offers</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Read more</a></li>
+              >Read the Captain's Log</a></li>
             <li><a
                 href="#"
                 class="text-sm text-text-secondary hover:text-text-primary hover:underline"
-              >Learn more</a></li>
+              >Learn about Black Flag Friday</a></li>
           </ul>
         </li>
 
@@ -268,6 +270,7 @@
           >
             <img
               src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+              alt="Get it on Google Play"
               class="h-12"
             />
           </a>
@@ -277,6 +280,7 @@
           >
             <img
               src="https://www.nicepng.com/png/detail/343-3436311_get-airit-chat-app-on-ios-app-store.png"
+              alt="Download on the App Store"
               class="h-12"
             />
           </a>
