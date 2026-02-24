@@ -17,7 +17,7 @@
           title="YE FOUND TREASURE!!!"
           subtitle="1,000,000th visitor!!!"
           highlight=">>> FREE DOUBLOONS <<<"
-          button-text="🎁 CLAIM!!! 🎁"
+          button-text="CLAIM!!!"
         />
         <SkyscraperAd
           theme="warning"
@@ -25,7 +25,16 @@
           title="CAPTAIN'S WARNING!!!"
           subtitle="47 BARNACLES detected!!!"
           highlight="☎️ 1-800-SCURVY ☎️"
-          button-text="🛡️ FIX NOW 🛡️"
+          button-text="FIX NOW"
+        />
+        <SkyscraperAd
+          theme="newsletter"
+          icon="📜"
+          title="PIRATE GAZETTE!!!"
+          subtitle="Secret treasure maps weekly!!!"
+          highlight="🗺️ EXCLUSIVE LOOT MAPS 🗺️"
+          button-text="SUBSCRIBE!!!"
+          marquee-text="🚨 JOIN 10,000 PIRATES!!! FREE MAPS!!!"
         />
       </aside>
 
@@ -44,15 +53,24 @@
           icon="🎡"
           title="SPIN TO WIN!!!"
           subtitle="WIN 1 MILLION!!!"
-          button-text="🎯 SPIN NOW!!! 🎯"
+          button-text="SPIN NOW!!!"
         />
         <SkyscraperAd
           theme="download"
           icon="🏴‍☠️"
           title="PIRATE TOOLBAR!!!"
           subtitle="FREE cursors & sounds!!!"
-          button-text="📥 DOWNLOAD!!! 📥"
-          marquee-text="📥 FREE!!! 📥 NO SPYWARE!!! 📥"
+          button-text="DOWNLOAD!!!"
+          marquee-text="💀 FREE!!! NO SPYWARE!!!"
+        />
+        <SkyscraperAd
+          theme="chat"
+          icon="🦜"
+          title="LIVE PARROT CHAT!!!"
+          subtitle="A pirate is waiting!!!"
+          highlight="💬 ASK POLLY ANYTHING 💬"
+          button-text="CHAT NOW!!!"
+          marquee-text="☠️ SQUAWK! POLLY WANTS TO HELP!!!"
         />
       </aside>
     </div>
@@ -143,15 +161,15 @@ onMounted(() => {
   }
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#ff6b35', '🏴‍☠️ FLASH SALE: 50% OFF ALL HOOKS! Limited time only!', 'Shop now'))
+    insertBanner(createBanner('linear-gradient(90deg, #ff6b35, #e63946)', '🏴‍☠️ FLASH SALE: 50% OFF ALL HOOKS! Limited time only!', 'Shop now'))
   }, randomDelay(100, 400)))
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#28a745', '✅ Free shipping on orders over 100 doubloons!', 'Learn more'))
+    insertBanner(createBanner('linear-gradient(90deg, #28a745, #20c997)', '✅ Free shipping on orders over 100 doubloons!', 'Learn more'))
   }, randomDelay(300, 800)))
 
   timeoutIds.push(setTimeout(() => {
-    insertBanner(createBanner('#17a2b8', '🦜 NEW: Trained parrots now speak 5 languages!', 'See parrots'))
+    insertBanner(createBanner('linear-gradient(90deg, #17a2b8, #6f42c1)', '🦜 NEW: Trained parrots now speak 5 languages!', 'See parrots'))
   }, randomDelay(500, 1200)))
 })
 
