@@ -7,7 +7,7 @@
 
     <BreadcrumbNav :items="breadcrumbs" />
 
-    <TrustBadges />
+    <PromoBanner />
 
     <PageHero />
 
@@ -21,9 +21,6 @@
           <TradeInCard />
         </template>
       </ProductGrid>
-
-      <!-- Promotional banner in the middle -->
-      <PromoBanner />
 
       <!-- Remaining products -->
       <ProductGrid :products="remainingProducts" />
