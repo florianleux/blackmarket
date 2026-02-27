@@ -10,15 +10,7 @@
 
     <!-- Product section -->
     <div class="max-w-full grow py-6 mx-2 sm:mx-[5%]">
-      <!-- First batch of products with trade-in card -->
-      <ProductGrid :products="firstProducts">
-        <template #first-card>
-          <TradeInCard />
-        </template>
-      </ProductGrid>
-
-      <!-- Remaining products -->
-      <ProductGrid :products="remainingProducts" />
+      <ProductGrid :products="products" />
     </div>
 
     <TheFooter />
@@ -31,8 +23,6 @@ import { ref, onMounted } from 'vue'
 const { getAllProducts } = useProducts()
 
 const products = getAllProducts()
-const firstProducts = products.slice(0, 3)
-const remainingProducts = products.slice(3)
 
 const breadcrumbs = [
   { label: 'Home' },
