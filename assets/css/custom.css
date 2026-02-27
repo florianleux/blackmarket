@@ -15,6 +15,17 @@
   flex-direction: column;
 }
 
+/* Remove outer margins around iframe width (~1100px) */
+@media (max-width: 1250px) {
+  .sidebar-column:first-child .sidebar-promo {
+    margin-left: 0;
+  }
+
+  .sidebar-column:last-child .sidebar-promo {
+    margin-right: 0;
+  }
+}
+
 /* hide on viewports too narrow for side columns */
 @media (max-width: 768px) {
   .sidebar-column {
@@ -72,7 +83,6 @@ html {
 a {
   color: inherit;
   text-decoration: none !important;
-  font-size: 20px !important;
 }
 
 a:hover {
