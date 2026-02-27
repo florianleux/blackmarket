@@ -16,7 +16,7 @@
 }
 
 /* hide on viewports too narrow for side columns */
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
   .sidebar-column {
     display: none !important;
   }
