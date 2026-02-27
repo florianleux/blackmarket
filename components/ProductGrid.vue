@@ -1,5 +1,5 @@
 <template>
-  <div class="px-0 sm:px-6">
+  <div>
     <div
       v-if="title"
       class="flex justify-between items-center mb-4"
@@ -14,7 +14,6 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 sm:gap-4">
-      <slot name="first-card"></slot>
       <ProductCard
         v-for="product in products"
         :key="product.id"

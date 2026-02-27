@@ -1,18 +1,17 @@
 <template>
   <div class="product-card bg-white shadow-sm rounded-lg h-full transition-all duration-200">
-    <div class="group relative flex h-full flex-col pt-4 sm:pt-10">
-      <div class="p-4 pt-0">
+    <div class="group relative flex h-full flex-col">
+      <div class=" pt-0">
         <div class="flex">
           <div class="flex flex-row sm:flex-col gap-4 sm:gap-2 max-w-full grow items-center">
             <!-- Image + Colors -->
-            <div class="flex flex-col items-center justify-center gap-1 w-[100px] sm:w-[180px] shrink-0">
+            <div class="flex flex-col items-center justify-center gap-1 w-[50%] sm:w-full shrink-0">
+
               <img
                 :src="product.image"
                 :alt="product.name"
-                class="h-auto max-h-full max-w-full leading-none"
+                class="h-auto w-full"
                 loading="lazy"
-                width="180"
-                height="180"
               />
               <!-- Variant dots -->
               <ul
@@ -49,7 +48,7 @@
                 <div>
                   <a
                     href="#"
-                    class="focus-visible:outline-none font-bold  text-text-primary text-sm"
+                    class="focus-visible:outline-none font-bold  text-text-primary text-2xl"
                   >
                     {{ product.name }}
                   </a>
@@ -106,7 +105,7 @@
               <div class="mt-1">
                 <div class="text-text-muted text-xs">Starting at</div>
                 <div class="flex flex-col">
-                  <div class="flex flex-col text-text-primary text-sm">
+                  <div class="flex flex-col text-text-primary text-lg">
                     <div class="font-bold">{{ formatPrice(product.price) }}</div>
                     <div
                       v-if="product.originalPrice"

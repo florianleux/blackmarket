@@ -12,7 +12,11 @@
       "reviews": 127,
       "badge": "Bestseller",
       "condition": "Like New",
-      "variants": ["gold", "silver", "bronze"]
+      "variants": [
+        "gold",
+        "silver",
+        "bronze"
+      ]
     },
     {
       "id": "eyepatch-leather-1",
@@ -25,7 +29,10 @@
       "reviews": 312,
       "badge": "Popular",
       "condition": "Like New",
-      "variants": ["black", "brown"]
+      "variants": [
+        "black",
+        "brown"
+      ]
     },
     {
       "id": "parrot-red-1",
@@ -39,7 +46,9 @@
       "reviews": 23,
       "badge": "Premium",
       "condition": "Like New",
-      "variants": ["red"]
+      "variants": [
+        "red"
+      ]
     },
     {
       "id": "hat-tricorn-1",
@@ -52,7 +61,11 @@
       "reviews": 156,
       "badge": "Classic",
       "condition": "Good",
-      "variants": ["black", "brown", "leather"]
+      "variants": [
+        "black",
+        "brown",
+        "leather"
+      ]
     },
     {
       "id": "saber-steel-1",
@@ -66,7 +79,10 @@
       "reviews": 45,
       "badge": "Artisan",
       "condition": "Like New",
-      "variants": ["silver", "gold"]
+      "variants": [
+        "silver",
+        "gold"
+      ]
     },
     {
       "id": "pegleg-bamboo-1",
@@ -79,7 +95,9 @@
       "reviews": 92,
       "badge": "New",
       "condition": "Like New",
-      "variants": ["bamboo"]
+      "variants": [
+        "bamboo"
+      ]
     },
     {
       "id": "map-treasure-1",
@@ -92,7 +110,9 @@
       "reviews": 7,
       "badge": "Mystery",
       "condition": "Fair",
-      "variants": []
+      "variants": [
+        "bamboo"
+      ]
     },
     {
       "id": "hook-silver-1",
@@ -104,7 +124,10 @@
       "rating": 4.5,
       "reviews": 89,
       "condition": "Good",
-      "variants": ["silver", "bronze"]
+      "variants": [
+        "silver",
+        "bronze"
+      ]
     },
     {
       "id": "eyepatch-silk-1",
@@ -117,7 +140,11 @@
       "rating": 4.9,
       "reviews": 56,
       "condition": "Like New",
-      "variants": ["black", "red", "blue"]
+      "variants": [
+        "black",
+        "red",
+        "blue"
+      ]
     },
     {
       "id": "parrot-green-1",
@@ -129,7 +156,9 @@
       "rating": 4.9,
       "reviews": 34,
       "condition": "Like New",
-      "variants": ["green"]
+      "variants": [
+        "green"
+      ]
     },
     {
       "id": "saber-cutlass-1",
@@ -141,16 +170,64 @@
       "rating": 4.5,
       "reviews": 98,
       "condition": "Good",
-      "variants": ["silver", "bronze"]
+      "variants": [
+        "silver",
+        "bronze"
+      ]
+    },
+    {
+      "id": "pegleg-oak-1",
+      "name": "Deluxe Oak Peg Leg",
+      "category": "peglegs",
+      "price": 189.99,
+      "originalPrice": 249.99,
+      "description": "Hand-carved from aged oak, built to last a lifetime at sea.",
+      "image": "/images/products/pegleg-oak.png",
+      "rating": 4.6,
+      "reviews": 64,
+      "badge": "Crafted",
+      "condition": "Like New",
+      "variants": [
+        "oak",
+        "bamboo"
+      ]
     }
   ],
   "categories": [
-    { "id": "hooks", "name": "Hooks", "icon": "🪝" },
-    { "id": "eyepatches", "name": "Eye Patches", "icon": "🏴‍☠️" },
-    { "id": "peglegs", "name": "Peg Legs", "icon": "🦿" },
-    { "id": "parrots", "name": "Parrots", "icon": "🦜" },
-    { "id": "hats", "name": "Hats", "icon": "🎩" },
-    { "id": "swords", "name": "Swords", "icon": "⚔️" },
-    { "id": "maps", "name": "Maps", "icon": "🗺️" }
+    {
+      "id": "hooks",
+      "name": "Hooks",
+      "icon": "🪝"
+    },
+    {
+      "id": "eyepatches",
+      "name": "Eye Patches",
+      "icon": "🏴‍☠️"
+    },
+    {
+      "id": "peglegs",
+      "name": "Peg Legs",
+      "icon": "🦿"
+    },
+    {
+      "id": "parrots",
+      "name": "Parrots",
+      "icon": "🦜"
+    },
+    {
+      "id": "hats",
+      "name": "Hats",
+      "icon": "🎩"
+    },
+    {
+      "id": "swords",
+      "name": "Swords",
+      "icon": "⚔️"
+    },
+    {
+      "id": "maps",
+      "name": "Maps",
+      "icon": "🗺️"
+    }
   ]
 }
