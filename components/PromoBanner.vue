@@ -1,22 +1,9 @@
 <template>
-  <div class="relative rounded-sm overflow-hidden my-6 bg-gradient-to-r bg-[#E2F87F] mx-[5%]">
-    <div class=" flex items-center justify-between p-8">
-      <div>
-        <h2 class="text-3xl md:text-5xl font-bold text-black mb-2 font-title">
-          Mac <em>Hook</em> Pro
-        </h2>
-        <div class="text-black/90 text-base mb-1">
-          Plundered once. Polished twice. Priced right.
-        </div>
-        <div
-          class="inline-block bg-black text-white mt-2 py-2 px-7 rounded-md cursor-pointer text-sm font-medium hover:bg-gray-800 transition-colors"
-        >
-          <span class="text-md font-bold">Loot Now</span>
-        </div>
-      </div>
-      <div class="hidden md:block">
-
-      </div>
-    </div>
+  <div class="mx-[5%] my-6">
+    <img
+      src="/images/banner-hero.png"
+      alt="Mac Hook Pro - Plundered once. Polished twice. Priced right."
+      class="w-full rounded-sm"
+    />
   </div>
 </template>
