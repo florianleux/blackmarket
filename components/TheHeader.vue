@@ -30,11 +30,14 @@
         class="flex items-center gap-2 cursor-pointer shrink-0 w-full sm:w-auto justify-center sm:justify-start mt-3 sm:mt-0"
       >
         <img
-          src="/images/logo.webp"
+          src="/images/logo.png"
           class="h-8"
           alt="BlackMarket logo"
         />
-        <span class="text-3xl font-bold text-text-primary font-title">BlackMarket</span>
+        <span
+          class="text-4xl font-bold text-text-primary"
+          style="font-family: 'Germania One', cursive;"
+        >BlackMarket</span>
       </div>
 
       <!-- Search bar -->
@@ -88,19 +91,13 @@
           </svg>
           <span class="text-black">Trade-In</span>
         </button>
-        <button
-          class="cursor-pointer font-extrabold low-contrast text-base hover:text-text-primary transition-colors"
-        >
+        <button class="cursor-pointer font-extrabold low-contrast text-base hover:text-text-primary transition-colors">
           Need help?
         </button>
-        <button
-          class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors"
-        >
+        <button class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors">
           Account
         </button>
-        <button
-          class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors"
-        >
+        <button class="cursor-pointer text-text-secondary text-base hover:text-text-primary transition-colors">
           Cart
         </button>
       </div>
