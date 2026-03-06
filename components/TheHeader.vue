@@ -36,7 +36,7 @@
         />
         <span
           class="text-4xl font-bold text-text-primary"
-          style="font-family: 'Germania One', cursive;"
+          style="font-family: 'Germania One', 'Comic Sans MS', cursive;"
         >BlackMarket</span>
       </div>
 
