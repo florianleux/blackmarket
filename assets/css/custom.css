@@ -61,7 +61,7 @@ span[class*="cursor-pointer"] {
 }
 
 body {
-  font-family: 'Cormorant Upright', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Cormorant Upright', 'Comic Sans MS', cursive !important;
   background-color: #ffffff;
   color: #0d0d0d;
 }
@@ -73,7 +73,7 @@ h4,
 h5,
 h6,
 .font-title {
-  font-family: 'New Rocker', cursive;
+  font-family: 'New Rocker', 'Comic Sans MS', cursive !important;
 }
 
 html {

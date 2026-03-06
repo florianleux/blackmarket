@@ -1,8 +1,8 @@
 <template>
   <div class="  max-w-full grow lg:max-w-[1184px] py-4 mx-[5%]">
     <h1
-      class="md:text-7xl font-bold text-text-primary mb-1 font-title"
-      style="font-size: 56px;"
+      class="font-bold text-text-primary mb-1 font-title"
+      style="font-size: 56px; line-height: normal;"
     >
       Reconditioned Pirate Gear
     </h1>
