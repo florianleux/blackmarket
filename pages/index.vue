@@ -2,7 +2,9 @@
   <div class="min-h-screen bg-white">
     <BreadcrumbNav :items="breadcrumbs" />
 
-    <PromoBanner v-if="showPromoBanner" />
+    <div class="mx-[5%] my-6" style="aspect-ratio: 1400/343;">
+      <PromoBanner v-if="showPromoBanner" />
+    </div>
 
     <PageHero />
 
