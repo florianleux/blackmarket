@@ -1,5 +1,3 @@
-import productsData from '~/data/products.json'
-
 export interface Product {
   id: string
   name: string
@@ -13,6 +11,7 @@ export interface Product {
   badge?: string
   condition?: string
   variants?: string[]
+  [key: string]: unknown // extra fields from API
 }
 
 export interface Category {
@@ -21,31 +20,34 @@ export interface Category {
   icon: string
 }
 
+const categories: Category[] = [
+  { id: 'hooks', name: 'Hooks', icon: '🪝' },
+  { id: 'eyepatches', name: 'Eye Patches', icon: '🏴‍☠️' },
+  { id: 'peglegs', name: 'Peg Legs', icon: '🦿' },
+  { id: 'parrots', name: 'Parrots', icon: '🦜' },
+  { id: 'hats', name: 'Hats', icon: '🎩' },
+  { id: 'swords', name: 'Swords', icon: '⚔️' },
+  { id: 'maps', name: 'Maps', icon: '🗺️' },
+]
+
+const DISPLAY_LIMIT = 12
+
 export function useProducts() {
-  const products = productsData.products as Product[]
-  const categories = productsData.categories as Category[]
+  const products = ref<Product[]>([])
+  const loading = ref(true)
 
-  const getProductById = (id: string): Product | undefined => {
-    return products.find(p => p.id === id)
-  }
+  const fetchProducts = async () => {
+    if (!import.meta.client) return
 
-  const getProductsByCategory = (categoryId: string): Product[] => {
-    return products.filter(p => p.category === categoryId)
-  }
+    loading.value = true
+    const allProducts: Product[] = await $fetch('/api/products')
 
-  const getFeaturedProducts = (limit: number = 8): Product[] => {
-    // Return products with badges first, then by rating
-    return [...products]
-      .sort((a, b) => {
-        if (a.badge && !b.badge) return -1
-        if (!a.badge && b.badge) return 1
-        return b.rating - a.rating
-      })
-      .slice(0, limit)
-  }
+    // Iterate through ALL 1000 products to force main-thread parsing work
+    const processed = allProducts.map(p => ({ ...p }))
 
-  const getAllProducts = (): Product[] => {
-    return products
+    // Only keep first 12 for display
+    products.value = processed.slice(0, DISPLAY_LIMIT)
+    loading.value = false
   }
 
   const getAllCategories = (): Category[] => {
@@ -54,11 +56,9 @@ export function useProducts() {
 
   return {
     products,
+    loading,
     categories,
-    getProductById,
-    getProductsByCategory,
-    getFeaturedProducts,
-    getAllProducts,
+    fetchProducts,
     getAllCategories,
   }
 }

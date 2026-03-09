@@ -1,21 +1,20 @@
 {
   "products": [
     {
-      "id": "hook-gold-1",
-      "name": "Premium Golden Hook",
-      "category": "hooks",
-      "price": 149.99,
-      "originalPrice": 199.99,
-      "description": "18-karat gold hook, perfect for impressing during boarding parties.",
-      "image": "/images/products/hook-gold.png",
-      "rating": 4.8,
-      "reviews": 127,
-      "badge": "Bestseller",
+      "id": "saber-steel-1",
+      "name": "Damascus Steel Saber",
+      "category": "swords",
+      "price": 299.99,
+      "originalPrice": 399.99,
+      "description": "Authentic Damascus steel, perfect balance.",
+      "image": "/images/products/saber-steel.png",
+      "rating": 4.9,
+      "reviews": 45,
+      "badge": "Artisan",
       "condition": "Like New",
       "variants": [
-        "gold",
         "silver",
-        "bronze"
+        "gold"
       ]
     },
     {
@@ -51,6 +50,21 @@
       ]
     },
     {
+      "id": "pegleg-bamboo-1",
+      "name": "Lightweight Bamboo Leg",
+      "category": "peglegs",
+      "price": 129.99,
+      "description": "Ultra lightweight for maximum mobility.",
+      "image": "/images/products/pegleg-bamboo.png",
+      "rating": 4.4,
+      "reviews": 92,
+      "badge": "New",
+      "condition": "Like New",
+      "variants": [
+        "bamboo"
+      ]
+    },
+    {
       "id": "hat-tricorn-1",
       "name": "Captain's Tricorn",
       "category": "hats",
@@ -68,50 +82,18 @@
       ]
     },
     {
-      "id": "saber-steel-1",
-      "name": "Damascus Steel Saber",
+      "id": "saber-cutlass-1",
+      "name": "Boarding Cutlass",
       "category": "swords",
-      "price": 299.99,
-      "originalPrice": 399.99,
-      "description": "Authentic Damascus steel, perfect balance.",
-      "image": "/images/products/saber-steel.png",
-      "rating": 4.9,
-      "reviews": 45,
-      "badge": "Artisan",
-      "condition": "Like New",
+      "price": 149.99,
+      "description": "Short and maneuverable, ideal for close combat.",
+      "image": "/images/products/saber-cutlass.png",
+      "rating": 4.5,
+      "reviews": 98,
+      "condition": "Good",
       "variants": [
         "silver",
-        "gold"
-      ]
-    },
-    {
-      "id": "pegleg-bamboo-1",
-      "name": "Lightweight Bamboo Leg",
-      "category": "peglegs",
-      "price": 129.99,
-      "description": "Ultra lightweight for maximum mobility.",
-      "image": "/images/products/pegleg-bamboo.png",
-      "rating": 4.4,
-      "reviews": 92,
-      "badge": "New",
-      "condition": "Like New",
-      "variants": [
-        "bamboo"
-      ]
-    },
-    {
-      "id": "map-treasure-1",
-      "name": "Treasure Map X",
-      "category": "maps",
-      "price": 999.99,
-      "description": "Mysterious map pointing to a legendary treasure.",
-      "image": "/images/products/map-treasure.png",
-      "rating": 3.8,
-      "reviews": 7,
-      "badge": "Mystery",
-      "condition": "Fair",
-      "variants": [
-        "bamboo"
+        "bronze"
       ]
     },
     {
@@ -147,6 +129,39 @@
       ]
     },
     {
+      "id": "map-treasure-1",
+      "name": "Treasure Map X",
+      "category": "maps",
+      "price": 999.99,
+      "description": "Mysterious map pointing to a legendary treasure.",
+      "image": "/images/products/map-treasure.png",
+      "rating": 3.8,
+      "reviews": 7,
+      "badge": "Mystery",
+      "condition": "Fair",
+      "variants": [
+        "bamboo"
+      ]
+    },
+    {
+      "id": "hook-gold-1",
+      "name": "Premium Golden Hook",
+      "category": "hooks",
+      "price": 149.99,
+      "originalPrice": 199.99,
+      "description": "18-karat gold hook, perfect for impressing during boarding parties.",
+      "image": "/images/products/hook-gold.png",
+      "rating": 4.8,
+      "reviews": 127,
+      "badge": "Bestseller",
+      "condition": "Like New",
+      "variants": [
+        "gold",
+        "silver",
+        "bronze"
+      ]
+    },
+    {
       "id": "parrot-green-1",
       "name": "Green Macaw Parrot",
       "category": "parrots",
@@ -158,21 +173,6 @@
       "condition": "Like New",
       "variants": [
         "green"
-      ]
-    },
-    {
-      "id": "saber-cutlass-1",
-      "name": "Boarding Cutlass",
-      "category": "swords",
-      "price": 149.99,
-      "description": "Short and maneuverable, ideal for close combat.",
-      "image": "/images/products/saber-cutlass.png",
-      "rating": 4.5,
-      "reviews": 98,
-      "condition": "Good",
-      "variants": [
-        "silver",
-        "bronze"
       ]
     },
     {
