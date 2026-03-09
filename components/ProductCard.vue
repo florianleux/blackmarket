@@ -1,6 +1,6 @@
 <template>
-  <div class="product-card bg-white shadow-sm rounded-lg h-full transition-all duration-200">
-    <div class="group relative flex h-full flex-col">
+  <div class="product-card bg-white shadow-sm rounded-lg transition-all duration-200">
+    <div class="group relative flex flex-col">
       <div class=" pt-0">
         <div class="flex">
           <div class="flex flex-row sm:flex-col gap-4 sm:gap-2 max-w-full grow items-center">
@@ -120,7 +120,7 @@
           </div>
         </div>
         <div
-          v-if="showDetails"
+          v-if="showDetails || expandDescription"
           class="mt-2 text-xs text-text-muted"
         >
           {{ product.description }}
@@ -136,6 +136,7 @@ import type { Product } from '~/composables/useProducts'
 
 const props = defineProps<{
   product: Product
+  expandDescription?: boolean
 }>()
 
 const showDetails = ref(false)

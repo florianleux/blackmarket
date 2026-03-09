@@ -20,9 +20,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const { getAllProducts } = useProducts()
-
-const products = getAllProducts()
+const { products, fetchProducts } = useProducts()
 
 const breadcrumbs = [
   { label: 'Home' },
@@ -32,6 +30,9 @@ const breadcrumbs = [
 
 const showPromoBanner = ref(false)
 onMounted(() => {
+  // Fetch all 1000 products client-side (TBT bad pattern)
+  fetchProducts()
+
   const delay = Math.floor(Math.random() * (1500 - 800)) + 800
   setTimeout(() => {
     showPromoBanner.value = true

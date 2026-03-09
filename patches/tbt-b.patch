@@ -1,0 +1,22 @@
+diff --git a/components/ProductGrid.vue b/components/ProductGrid.vue
+index 9517d1a..a6b2402 100644
+--- a/components/ProductGrid.vue
++++ b/components/ProductGrid.vue
+@@ -13,12 +13,14 @@
+       </div>
+     </div>
+ 
++    <!-- Simple CSS Grid layout (no JS masonry, no ghost elements) -->
+     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 sm:gap-4">
+-      <ProductCard
++      <div
+         v-for="product in products"
+         :key="product.id"
+-        :product="product"
+-      />
++      >
++        <ProductCard :product="product" />
++      </div>
+     </div>
+   </div>
+ </template>
