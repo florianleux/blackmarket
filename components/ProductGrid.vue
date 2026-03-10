@@ -109,8 +109,8 @@ function runMasonryLayout() {
   const containerWidth = container.offsetWidth
   const viewportWidth = window.innerWidth
   let colCount = 1
-  if (viewportWidth >= 1536) colCount = 4
-  else if (viewportWidth >= 1280) colCount = 3
+  if (viewportWidth >= 1280) colCount = 4
+  else if (viewportWidth >= 1024) colCount = 3
   else if (viewportWidth >= 640) colCount = 2
 
   const gap = 16
