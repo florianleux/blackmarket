@@ -1,6 +1,6 @@
 import productsData from '../../data/products.json'
 
-const TOTAL_PRODUCTS = 1000
+const TOTAL_PRODUCTS = 200
 const EXTRA_FIELDS_COUNT = 140
 
 // Generate realistic-sounding field names
