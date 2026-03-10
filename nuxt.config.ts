@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   ssr: true,
 
   nitro: {
-    preset: 'static',
+    preset: 'netlify',
   },
 
   app: {
