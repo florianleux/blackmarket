@@ -6,7 +6,10 @@ export default defineNuxtConfig({
   ssr: true,
 
   nitro: {
-    preset: 'netlify',
+    preset: 'static',
+    prerender: {
+      routes: ['/api/products'],
+    },
   },
 
   app: {
