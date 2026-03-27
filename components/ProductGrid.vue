@@ -27,19 +27,21 @@
         <ProductCard :product="product" />
       </div>
 
-      <!-- Ghost elements for TBT (invisible but in DOM for layout thrashing) -->
-      <div
-        v-for="i in ghostCount"
-        :key="'ghost-' + i"
-        class="masonry-item masonry-ghost"
-      >
-        <div class="p-4">
-          <div style="height: 192px;"></div>
-          <div style="height: 16px; margin-top: 8px;"></div>
-          <div style="height: 16px; margin-top: 4px; width: 66%;"></div>
-          <div style="height: 24px; margin-top: 8px;"></div>
+      <!-- Ghost elements for TBT (client-only to avoid SSR hydration mismatch) -->
+      <template v-if="isClient">
+        <div
+          v-for="i in ghostCount"
+          :key="'ghost-' + i"
+          class="masonry-item masonry-ghost"
+        >
+          <div class="p-4">
+            <div style="height: 192px;"></div>
+            <div style="height: 16px; margin-top: 8px;"></div>
+            <div style="height: 16px; margin-top: 4px; width: 66%;"></div>
+            <div style="height: 24px; margin-top: 8px;"></div>
+          </div>
         </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>
@@ -56,6 +58,7 @@ const props = defineProps<{
 
 const GHOST_COUNT = 988
 const ghostCount = GHOST_COUNT
+const isClient = ref(false)
 const masonryContainer = ref<HTMLElement | null>(null)
 let resizeObserver: ResizeObserver | null = null
 
@@ -81,6 +84,7 @@ watch(() => props.products.length, async (len) => {
 
 // Re-run masonry when container resizes (e.g. when sidebar ads appear)
 onMounted(() => {
+  isClient.value = true
   if (masonryContainer.value) {
     resizeObserver = new ResizeObserver(() => {
       if (props.products.length > 0) {
@@ -105,8 +109,8 @@ function runMasonryLayout() {
   const containerWidth = container.offsetWidth
   const viewportWidth = window.innerWidth
   let colCount = 1
-  if (viewportWidth >= 1536) colCount = 4
-  else if (viewportWidth >= 1280) colCount = 3
+  if (viewportWidth >= 1280) colCount = 4
+  else if (viewportWidth >= 1024) colCount = 3
   else if (viewportWidth >= 640) colCount = 2
 
   const gap = 16

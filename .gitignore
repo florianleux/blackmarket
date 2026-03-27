@@ -39,3 +39,6 @@ scores/
 # Misc
 *.tgz
 .turbo/
+
+# Local Netlify folder
+.netlify
