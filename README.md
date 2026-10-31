@@ -1,51 +1,43 @@
 # BlackMarket
 
-Pirate shop Nuxt 3 app with **31 Git branches** for Lighthouse optimization demo.
+[Voir le site / See the site](https://blackmarket.florianleux.fr) · [La conférence / The talk](https://github.com/florianleux/lighthouse-presentation)
 
-## Overview
+## 🇫🇷 En français
 
-BlackMarket is a fictional pirate accessories e-commerce site intentionally built with anti-patterns. It serves as the demo app for an interactive presentation where the audience votes to fix Lighthouse issues.
+Une fausse boutique pirate, volontairement mal construite. Elle sert de terrain de jeu à ma conférence [Let's build a Lighthouse](https://github.com/florianleux/lighthouse-presentation).
 
-## Branches (31)
+Le site part d'un score Lighthouse catastrophique, avec une cinquantaine d'erreurs courantes : images trop lourdes, polices mal chargées, contrastes illisibles, erreurs dans la console, balises SEO manquantes…
+
+Pendant la conférence, le public vote 4 fois pour choisir quoi corriger. Chaque combinaison de votes correspond à une branche git déjà prête, déployée à sa propre adresse. Ça fait 31 branches au total : 1 de départ, puis 2, 4, 8 et 16.
+
+## 🇬🇧 In English
+
+A fake pirate shop, built badly on purpose. It's the playground for my talk [Let's build a Lighthouse](https://github.com/florianleux/lighthouse-presentation).
+
+The site starts with a terrible Lighthouse score and about fifty common mistakes: heavy images, badly loaded fonts, unreadable contrast, console errors, missing SEO tags…
+
+During the talk, the audience votes 4 times to pick what to fix. Every combination of votes matches a ready-made git branch, deployed at its own address. That's 31 branches in total: 1 starting point, then 2, 4, 8 and 16.
 
 ```
-baseline                    # All anti-patterns (~52)
-├── a                       # Vote 1 → Performance A (Images)
-│   ├── aa                  # + Vote 2 → Accessibility A (Visual)
-│   │   ├── aaa             # + Vote 3 → Best Practices A (Console)
-│   │   │   ├── aaaa        # + Vote 4 → SEO A (Meta)
-│   │   │   └── aaab        # + Vote 4 → SEO B (Links)
+baseline              tout est cassé / everything is broken
+├── a                 vote 1 : Performance A (images)
+│   ├── aa            vote 2 : Accessibilité A
+│   │   ├── aaa       vote 3 : Bonnes pratiques A
+│   │   │   ├── aaaa  vote 4 : SEO A
+│   │   │   └── aaab  vote 4 : SEO B
 │   │   └── aab
 │   └── ab
-└── b                       # Vote 1 → Performance B (Fonts)
-    └── ...
+└── b                 vote 1 : Performance B (polices / fonts)
+    └── …
 ```
 
-**Total: 1 baseline + 2 + 4 + 8 + 16 = 31 branches**
+## Stack
 
-## Tech Stack
+Nuxt 3 · Vue 3 · TypeScript · Tailwind CSS · Netlify (un déploiement par branche / one deploy per branch)
 
-- **Framework**: Nuxt 3 + Vue 3 + TypeScript
-- **Styling**: Tailwind CSS
-- **Deployment**: Netlify with branch deploys
-
-## Development
+## Lancer en local / Run locally
 
 ```bash
 pnpm install
 pnpm dev
 ```
-
-## Deployment
-
-Each branch deploys to its own subdomain:
-- `baseline.blackmarket.com`
-- `a.blackmarket.com`
-- `aaaa.blackmarket.com`
-- ... (31 subdomains)
-
-## Related
-
-This app is displayed in an iframe within [lighthouse-presentation](https://github.com/florianleux/lighthouse-presentation).
-
-See `../specs/` for full documentation.
